@@ -9,25 +9,33 @@ Daniel Marcos Serrano Correo: d.marcos.2024@alumnos.urjc.es Github: jaimebubu
 Jaime Bergad Lario Correo: j.bergad.2024@alumnos.urjc.es Github: daanii03
 
 Héctor Moreno García Correo: h.morenog.2024@alumnos.urjc.es Github: hmogar
----
 
-## ⚡ Funcionalidades  
+# Funcionalidad:
 
-### 📌 Entidad principal: Series y Películas  
-- Imágenes representativas  
-- Buscador para localizar títulos  
+ENTIDAD PRINCIPAL
 
-### 🎬 Series  
-- Listado de capítulos  
-- Resumen de cada episodio  
-- Selección de capítulo  
-- Tráilers e imágenes por capítulo  
+Nombre de la entidad: Serie 
 
-### 🍿 Películas  
-- Tráilers  
-- Duración  
-- Sinopsis  
-- Fecha de estreno  
-- Imágenes y material multimedia  
+Descripición: Selección de catalogo con diferentes series y peliculas
+Atributos
+- Titulo
+- Sinopsis
+- Genero
+- Año de estreno
+- Imagen de la serie/pelicula
 
----
+ENTIDAD SECUNDARIA
+
+Nombre: Capitulo
+
+Descripcion: Listado de los capitulos de la serie
+
+Atributos:
+- Duración
+- Sinopsis
+- Imagen
+
+# IMAGENES
+- Entidad principal: Contará con una Imagen a modo de portada
+- Entidad secundario: Contará con una Imagen del capitulo
+
