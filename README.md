@@ -38,4 +38,6 @@ Atributos:
 # IMAGENES
 - Entidad principal: Contará con una Imagen a modo de portada
 - Entidad secundario: Contará con una Imagen del capitulo
-
+# Barra de busqueda y filtro
+- Busqueda: Permitirá buscar series segun el nombre
+- Filtro: Podrá filtrar segun genero y año.
