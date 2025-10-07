@@ -1,0 +1,17 @@
+html {
+    background-color: black;
+}
+
+header {
+
+    background-color: black;
+    font-size: 68px;
+    margin: auto;
+    text-align: center;
+}
+
+header span {
+    color: red;
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: bold;
+}
