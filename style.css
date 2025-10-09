@@ -13,5 +13,20 @@ header {
 header span {
     color: red;
     font-family: 'Arial Black', Arial, sans-serif;
-    font-weight: bold;
+    
+}
+
+main {
+    background-color: black;
+}
+
+div {
+    margin: auto;
+    padding: 0%;
+}
+
+h1 {
+    color: white;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-align: center;
 }
