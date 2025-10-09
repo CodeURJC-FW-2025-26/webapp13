@@ -63,6 +63,11 @@ footer span {
     padding-top: 20px;
 }
 
+.fixed-img {
+    height: 600px;
+    object-fit: cover;
+}
+
 .genres {
     color: white;
     padding-top: 30px;
@@ -72,23 +77,12 @@ footer span {
     background-color:#141414;
 }
 
-.card {
-    border: none;
-    border-radius: 10px;
-}
-
-.serie-title {
-    color: white;
+.card-text {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
 }
 
-.series-cover {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 10px;
-}
+
 
 .divider {
     border: none;
