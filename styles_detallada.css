@@ -1,0 +1,86 @@
+
+body {
+  background-color: #141414;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.form-select option[value=""] {
+  color: #aaaaaa;
+}
+
+.form-container {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  padding: 40px;
+  width: 500px;
+  box-shadow: 0px 4px 20px #00000080;
+}
+
+.form-container h1 {
+  color: #e50914;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 4 px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.form-control,
+.form-select {  
+  background-color: #2b2b2b;
+  border: 1px solid #444444;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.form-control::placeholder {
+  color: #aaaaaa;
+}
+
+.btn-volver {
+  background-color: #e50914; 
+  color: #ffffff;            
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-default {
+  background-color: #e50914; 
+  color: #ffffff;            
+  border-radius: 5px;
+  font-weight: bold;
+  margin-left: 233px;
+}
+
+.form-container input[type="file"].form-control::file-selector-button {
+  background-color: #e50914;
+  color: #ffffff;
+  border: none;
+  padding: 6px 15px;
+  margin-left: 1px;
+  border-radius: 5px;
+}
+
+.form-container input[type="file"].form-control::file-selector-button:hover {
+  background-color: #f40612;
+}

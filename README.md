@@ -6,7 +6,7 @@ Nombre de la pagina web:
 
 - Daniel Marcos Serrano Correo: d.marcos.2024@alumnos.urjc.es Github: daanii03
 
-- Jaime Bergad Lario Correo: j.bergad.2024@alumnos.urjc.es Github: jaimebubu
+- Jaime Bergad Lario Correo: j.bergad.2024@alumnos.urjc.es Github: jaimebuu
 
 - Héctor Moreno García Correo: h.morenog.2024@alumnos.urjc.es Github: hmogar
 
@@ -20,7 +20,7 @@ Descripición: Las distintas series de la plataforma/The different series on the
 
 Atributos
 - Titulo/Title
-- Sinopsis/synopsis
+- Sinopsis(breve descripción)/synopsis (breif description)
 - Genero(Valor fijo. Opciones: Comedia, drama, terror, acción, ciencia ficción, thiller, crimen. animación, documental.)/Genre (Fixed value. Options: Comedy, drama, horror, action, science fiction, thriller, crime, animation, documentary.)
 - Año de estreno/Year of release
 - Imagen de la serie/ Image of the series
