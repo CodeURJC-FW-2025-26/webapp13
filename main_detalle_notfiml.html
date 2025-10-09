@@ -15,36 +15,37 @@
     </header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6 col-12"><!--Ajustar segun pantalla-->
+        <div class="col-lg-8 col-12"><!--Ajustar segun pantalla-->
             <div class="row">
-                <h1>Titulo de la serie</h1>
+                <h1 id="Titulo">Demon Slayer</h1>
+                <hr class="divider">
             </div>
             <div class="row">
                 <h3>1.Episodio</h3> <!--Posible lista de numeros-->
                 <p>24 minutos </p>
             </div>
             <div class="row">
-                    <div class=col>
-                        <p id="Text_sinopsis">Tanjiro Kamado descubre que su familia fue masacrada por demonios, y que su hermana Nezuko se ha convertido en una de estas criaturas. Aunque transformada, ella muestra rastros de conciencia humana al protegerlo. Un cazador de demonios les da una misión: buscar una cura mientras combaten a las amenazas sobrenaturales.
+                        <h5>Sinopsis:</h5>
+                        <p id="Text_sinopsis">Tras encontrar a su familia masacrada, Tanjiro Kamado descubre que su hermana Nezuko se ha convertido en un demonio, pero conserva parte de su humanidad al protegerlo. Un cazador de demonios les ofrece una oportunidad única: buscar una cura para Nezuko mientras se unen a la lucha contra las criaturas que amenazan a la humanidad
+                            Así comienza su viaje, donde Tanjiro entrena para convertirse en cazador y Nezuko lucha por controlar su naturaleza demoníaca, enfrentándose juntos a peligros sobrenaturales mientras buscan desesperadamente una solución que pueda devolverle su humanidad </p>
                         </p>
-                    </div>
-            </div>
-            <div class="row">
+            </div>      
+            <div id="row_button" class="row">
                 <button type="button" class="btn btn-danger">
                     <i class="bi bi-play-fill"></i>
                 </button> 
             </div>
             <div class="row">
                 <h3>Trailer</h3>
+                <hr class="divider">
             </div>
             <div class="row">
                 <video id="video" src="videos/videoplayback.mp4" controls autoplay loop poster="img/kimetsu.jpg" ></video>
             </div>
-            
         </div> <!--Fin columna izquierda-->
-        <div class="col-lg-6 col-12">
+        <div class="col-lg-4 col-12">
             <div class="form-container">
-                <h1>Crear nuevo episodio</h1> 
+                <h2 id:="Titulo-form">Crear nuevo episodio</h2> 
                 <form>
                 <div class="form-group">
                     <label for="tituloEp" class="form-label">Título del episodio</label>
