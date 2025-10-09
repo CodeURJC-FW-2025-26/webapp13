@@ -35,7 +35,7 @@ Atributos:
 - Duración/Duration
 - Nombre/Name
 - Sinopsis/Synopsis
-- Imagen/Image
+- Trailer/ Trailer
 - Número de cada capítulo/Number of each episode
 
 # IMAGENES
