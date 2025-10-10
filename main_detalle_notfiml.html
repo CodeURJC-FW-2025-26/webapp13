@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-8 col-12"><!--Ajustar segun pantalla-->
             <div class="row">
-                <h1 id="Titulo">Demon Slayer</h1>
+                <h1 id="Titulo" class="card-title">Demon Slayer <span class="badge rounded-pill bg-warning">16+</span></h1>
                 <hr class="divider">
             </div>
             <div class="row">
@@ -43,7 +43,7 @@
                 <video id="video" src="videos/videoplayback.mp4" controls autoplay loop poster="img/kimetsu.jpg" ></video>
             </div>
         </div> <!--Fin columna izquierda-->
-        <div class="col-lg-4 col-12">
+        <div id="ColumnRDerecha" class="col-lg-4 col-12">
             <div class="form-container">
                 <h2 id:="Titulo-form">Crear nuevo episodio</h2> 
                 <form>
@@ -69,14 +69,14 @@
                     <input type="file" class="form-control" id="Episodio" />
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-default">Crear</button>
+                    <button type="button" class="btn-default">Añadir</button>
                 </div>
                 </form>
             </div>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                <button type="button" class="btn btn-primary">Borrar</button>
-                <button type="button" class="btn btn-primary">Editar</button>
-                <button type="button" class="btn btn-primary">Regresar a la pagina principal</button>
+                <button id="BotonS"  type="button" class="btn btn-primary">Borrar</button>
+                <button id="BotonS" type="button" class="btn btn-primary">Editar</button>
+                <button id="BotonS" type="button" class="btn btn-primary">Pagina principal</button>
             </div>
         </div>
     </div>                  
