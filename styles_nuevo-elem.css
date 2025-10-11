@@ -10,35 +10,49 @@ body {
 }
 
 footer {
-    background-color: #1a1a1a;
-    padding: 20px 0;
-    border-top: 2px solid #e50914;
-    width: 100%; 
-    text-align: center;
-    font-size: 12px;
-    color: #cccccc;
-    margin-top: 40px;
-} 
+    background-color:#292929;
+    min-height: 500px;
+}
 
-.footerCt {
+.footer-texto{
+    font-size: 1.5rem;
+    color: white;
+    padding: 20px;
+
+}
+
+.iconos-redes-sociales a{
+    width: 50px;
+    height: 50px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    max-width: 1200px;
-    margin: auto;
+    justify-content: center;
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: all 0.2s ease-in;
 }
 
-.footerTl span {
-    color: #e50914;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Arial Black', Arial, sans-serif;
+.iconos-redes-sociales i {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-in;
 }
 
-.footerTxt {
-    color: #cccccc;
-    text-decoration: none;
-    transition: color 0.3s;
+.iconos-redes-sociales a:hover {
+    background-color: white;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.iconos-redes-sociales a:hover i {
+    color: black;
+}
+
+.derechos-de-autor {
+    font-size: 15px;
+    color: #aeaeae;
+    padding: 20px;
 }
 
 .form-select option[value=""] {
