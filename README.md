@@ -37,10 +37,12 @@ Atributos:
 - Sinopsis/Synopsis
 - Trailer/ Trailer
 - Número de cada capítulo/Number of each episode
+- Botones de Me gusta, Compartir y Descargar/ Like, Share, and Download Buttons
 
 # IMAGENES
 - Entidad principal: Contará con una Imagen a modo de portada
-- Entidad secundario: Contará con una Imagen del capitulo
+# VIDEO
+- Entidad Secudario: Contará con video del trailer.
 # Barra de busqueda y filtro
 - Busqueda: Permitirá buscar series segun el nombre
 - Filtro: Podrá filtrar segun genero y año.
