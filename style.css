@@ -18,11 +18,12 @@ header span {
 }
 
 body {
-    background-color:#141414
+    background-color:#141414;
 }
 
 main {
     padding-top: 20px;
+    padding-bottom: 20px;
     background-color:#141414;
     margin: auto;
     font-weight: bold;
@@ -30,37 +31,65 @@ main {
 }
 
 footer {
-    background-color:#141414;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    padding-left: 20px;
+    background-color:#292929;
+    min-height: 500px;
 }
 
-footer span {
+.footer-texto{
+    font-size: 1.5rem;
     color: white;
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-weight: bold;
+    padding: 20px;
+
 }
 
-#new_serie {
-    background-color: red;
-    color: white;
-    font-size: 30px;
+.iconos-redes-sociales a{
     width: 50px;
     height: 50px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    border: none;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: all 0.2s ease-in;
+}
+
+.iconos-redes-sociales i {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-in;
+}
+
+.iconos-redes-sociales a:hover {
+    background-color: white;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.iconos-redes-sociales a:hover i {
+    color: black;
+}
+
+.derechos-de-autor {
+    font-size: 15px;
+    color: #aeaeae;
+    padding: 20px;
+}
+
+nav{
+    background-color:#141414;
 }
 
 #nav-container {
     background-color: #141414;
     padding-top: 20px;
+}
+
+
+.btn.btn-primary {
+    background-color: red;
+    border: none;
+    
 }
 
 .fixed-img {
@@ -82,7 +111,9 @@ footer span {
     font-weight: bold;
 }
 
-
+.btn{
+    background-color: red;
+}
 
 .divider {
     border: none;
