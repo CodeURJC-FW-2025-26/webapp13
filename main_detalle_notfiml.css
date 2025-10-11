@@ -93,7 +93,7 @@ background-color:#141414;
 color: white
 }
 #video{
-    width: auto;
+    width:100%;
 }
 .form-container {
     background-color: #1f1f1f;
@@ -165,19 +165,63 @@ div h2 {
     border-radius: 5px;
     background-color: #e50914;
 }
-.botones-grupo {
+.botones-grupo1 {
+    display: flex;
+    justify-content: start;
+}
+.botones-grupo2 {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    padding: 20px 0;
 }
 
-.btn-custom {
-    background-color: #e50914; 
-    color: #ffffff;             
-    font-size: 18px;
+.btn-interactivo {
+    background-color: #e50914;
+    color: white;
     border: 1px solid #2b2b2b;
     border-radius: 5px;
-    padding: 8px 20px;
-    width: auto;
+    padding: 15px;
+    display: flex;
+    font-size: 20px;
+    align-items: start;
+    transition: all 0.3s ease; 
+}
+
+.btn-text {
+    max-width: 0;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.btn-interactivo:hover .btn-text {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 8px; 
+    transition: all 0.3s ease; 
+}
+.botones-grupo1 .btn-interactivo {
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    transition: all 0.3s ease; /*Da efecto*/
+}
+
+.botones-grupo1 .btn-interactivo:hover {
+    background-color: #e50914;
+    border: 1px solid #2b2b2b;
+}
+
+.botones-grupo1 .btn-text {
+    max-width: 0;
+    opacity: 0;
+    transition: all 0.3s ease; /*Da efecto*/
+}
+
+.botones-grupo1 .btn-interactivo:hover .btn-text {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 8px;
 }
