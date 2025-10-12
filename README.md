@@ -46,3 +46,24 @@ Atributos:
 # Barra de busqueda y filtro
 - Busqueda: Permitirá buscar series segun el nombre
 - Filtro: Podrá filtrar segun genero y año.
+# PRACTICA 1
+# Capturas de pantalla
+
+# PARTICIPACIÓN
+- # Jaime Bergad Lario
+- # Daniel Marcos Serrano
+- # Héctor Moreno García
+1. Creación y Estilización de la Página de Detalle
+Se diseñó y maquetó completamente la página de detalle para series, implementando una interfaz visual atractiva y funcional. Esto incluyó la creación de CSS personalizado para todos los elementos de la página, la estilización de componentes visuales como botones y formularios, y la adaptación responsive para garantizar una correcta visualización en diferentes dispositivos. Además, se integraron elementos multimedia como videos e imágenes para mejorar la experiencia del usuario.
+
+2. Desarrollo de Componentes Comunes
+Se crearon y configuraron los elementos estructurales compartidos entre todas las páginas del sitio. Esto comprendió el diseño del header, el desarrollo del footer, y la implementación de componentes reutilizables para mantener el estilo.
+
+  - Listado de Commit:
+  1. ADD pd de detalle y css(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/775073fec7e5f00795533e421b42ebf67466b0a9): Añadido la estructura base de la pagina, junto a algunos elementos.
+  2. UPDATE MAIN AN ADD IMG AND VIDEO(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/95215dd20a15595710387a0431f6a30132d84d26): Se añadieron la foto y el video trailer de la pagina.
+  3. UPGRADE main AND css detalle(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/01bdf2a79e173e72ebdb91e7ad21cc3264774cd8): Se continuo añadiendo elementos y estilo a la pagina.
+  4. UPGRADE main AND css detalle button(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/6571823c0c8859ffe3f5f328bd601b8cf303007f): Se algunos botones y se le dieron el estilo.
+  5. 
+
+
