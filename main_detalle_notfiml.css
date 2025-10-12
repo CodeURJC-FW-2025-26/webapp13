@@ -3,7 +3,6 @@ html {
 }
 
 header {
-
     background-color: #141414;
     font-size: 68px;
     margin: auto;
@@ -16,101 +15,113 @@ header span {
     font-family: montserrat;
     font-weight: bold;
 }
-#Titulo{ 
+
+#Title { 
     color:white;
     text-align: start;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 100px;
 }
+
 .badge.bg-warning {
     font-size: 30%;
 }
+
 .divider {
     border: none;
     height: 5px;
     width: 100%;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 5px;
 }
+
 div h3{
     color: white;
     font-size: 60px;
 }
+
 div p{
     color:white;
     font-size:20px;
 }
+
 div h5{
     color:white;
     text-align: start;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 30px;
 }
-#ColumnDerecha{
+
+#Text_synopsis {
+    background-color: #1f1f1f; 
+    border: 1px solid #1f1f1f; 
+    border-radius: 5px; 
+    padding: 15px; 
+}
+
+#PlayButton{
     display: grid;
     justify-content: center;
 }
 
-#Text_sinopsis {
-    background-color: #1f1f1f; 
-    border: 1px solid  #1f1f1f; 
-    border-radius: 5px; 
-    padding: 15px; 
-}
-#FReproducir{
-    display: grid;
-    justify-content: center;
-}
 #row_button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .btn.btn-danger {
     width: 70%;
     background-color: red;
 }
+
 .bi.bi-play-fill{
     font-size: 35px;
     color: white
 }
+
 #Text_box{
     width: 80%;
-    margin: 10PX;
+    margin: 10px;
 }
-#F_sinopsis {
-    width: 80%; /*Texto arriba y caja abajo*/
+
+#Synopsis_box {
+    width: 80%;
     min-height: 30px;
     max-height: 100px;
-    
     border-radius: 12px;    
 }
 
 .row{
-padding: 20px;
-background-color:#141414; 
+    padding: 20px;
+    background-color:#141414; 
 }
+
 .form-label{
-color: white
+    color: white
 }
+
 #video{
     width:100%;
 }
+
 .form-container {
     background-color: #1f1f1f;
     border-radius: 10px;
     padding: 40px;
-    width: 100  px;
+    width: 100%;
     box-shadow: 0px 4px 20px #00000080;
-    }
+}
+
 div h2 {
     color: #e50914;
     text-align: center;
     margin-bottom: 30px;
     font-size: 50px;
     font-weight: bold;
-    letter-spacing: 4 px;
+    letter-spacing: 4px;
 }
+
 .form-container .btn-default {
     color: #ffffff;            
 }
@@ -140,9 +151,6 @@ div h2 {
 .form-control::placeholder {
     color: #aaaaaa;
 }
-.form-container .btn-default {
-    color: #ffffff;            
-}
 
 .form-container .btn-default {
     display: block;
@@ -156,7 +164,6 @@ div h2 {
     margin-right: auto;
 }
 
-
 .form-container input[type="file"].form-control::file-selector-button {
     background-color: #e50914;
     color: #ffffff;
@@ -166,16 +173,18 @@ div h2 {
     border-radius: 5px;
     background-color: #e50914;
 }
-.botones-grupo1 {
+
+.buttons-group1 {
     display: flex;
     justify-content: start;
 }
-.botones-grupo2 {
+
+.buttons-group2 {
     display: flex;
     justify-content: center;
 }
 
-.btn-interactivo {
+.btn-interactive {
     background-color: #e50914;
     color: white;
     border: 1px solid #2b2b2b;
@@ -193,13 +202,14 @@ div h2 {
     white-space: nowrap;
 }
 
-.btn-interactivo:hover .btn-text {
+.btn-interactive:hover .btn-text {
     max-width: 150px;
     opacity: 1;
     margin-left: 8px; 
     transition: all 0.3s ease; 
 }
-.botones-grupo1 .btn-interactivo {
+
+.buttons-group1 .btn-interactive {
     background-color: transparent;
     color: white;
     border: none;
@@ -207,49 +217,124 @@ div h2 {
     display: flex;
     font-size: 20px;
     align-items: center;
-    transition: all 0.3s ease; /*Da efecto*/
+    transition: all 0.3s ease;
 }
 
-.botones-grupo1 .btn-interactivo:hover {
+.buttons-group1 .btn-interactive:hover {
     background-color: #e50914;
     border: 1px solid #2b2b2b;
 }
 
-.botones-grupo1 .btn-text {
+.buttons-group1 .btn-text {
     max-width: 0;
     opacity: 0;
-    transition: all 0.3s ease; /*Da efecto*/
+    transition: all 0.3s ease;
 }
 
-.botones-grupo1 .btn-interactivo:hover .btn-text {
+.buttons-group1 .btn-interactive:hover .btn-text {
     max-width: 150px;
     opacity: 1;
     margin-left: 8px;
 }
+
 footer {
-    background-color: #1a1a1a;
-    padding: 30px 0;
-    border-top: 2px solid #e50914;
+    background-color:#292929;
+    min-height: 500px;
 }
 
-.footerCt {
+.logo-footer {
+    width: 200px;
+    height: auto;
+    margin-top: 20px;
+}
+
+.footer-text{
+    font-size: 1.5rem;
+    color: white;
+    padding: 20px;
+}
+
+.icons-social-networks a{
+    width: 50px;
+    height: 50px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    max-width: 1200px;
-    margin: auto;
+    justify-content: center;
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: all 0.2s ease-in;
 }
 
-.footerTl span {
-    color: #e50914;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Arial Black', Arial, sans-serif;
+.icons-social-networks i {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-in;
 }
 
-.footerTxt {
-    color: #cccccc;
-    text-decoration: none;
-    transition: color 0.3s;
+.icons-social-networks a:hover {
+    background-color: white;
+    border: 2px solid rgb(13, 110, 253);
 }
 
+.icons-social-networks a:hover i {
+    color: black;
+}
+
+.copyright {
+    font-size: 15px;
+    color: #aeaeae;
+    padding: 20px;
+}
+footer {
+    background-color:#292929;
+    min-height: 500px;
+}
+
+.logo-footer {
+    width: 200px;
+    height: auto;
+    margin-top: 20px;
+}
+
+.footer-text{
+    font-size: 1.5rem;
+    color: white;
+    padding: 20px;
+
+}
+
+.icons-social-networks a{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: all 0.2s ease-in;
+}
+
+.icons-social-networks i {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-in;
+}
+
+.icons-social-networks a:hover {
+    background-color: white;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.icons-social-networks a:hover i {
+    color: black;
+}
+
+.copyright {
+    font-size: 15px;
+    color: #aeaeae;
+    padding: 20px;
+}
