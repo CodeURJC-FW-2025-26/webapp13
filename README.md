@@ -1,3 +1,4 @@
+<img width="1727" height="838" alt="image" src="https://github.com/user-attachments/assets/672758d9-544a-4b7f-919c-0161cbba8e83" />
 # Catalogo de series
 Nombre de la pagina web:
 # NOTFILM
@@ -48,6 +49,25 @@ Atributos:
 - Filtro: Podrá filtrar segun genero y año.
 # PRACTICA 1
 # Capturas de pantalla
+- Pagina principal
+<img width="1905" height="936" alt="image" src="https://github.com/user-attachments/assets/cdf6443f-3b81-469f-9564-7e18a20ec11b" />
+<img width="1857" height="859" alt="image" src="https://github.com/user-attachments/assets/ff15ca91-9039-424c-bbd8-ded8e847c677" />
+<img width="1727" height="838" alt="image" src="https://github.com/user-attachments/assets/ccfb4a6b-92d6-4a8e-aeab-0473b5fbc77b" />
+<img width="1842" height="821" alt="image" src="https://github.com/user-attachments/assets/683e1cbf-ed94-4d31-b2a2-8d4e84ef522e" />
+<img width="1795" height="902" alt="image" src="https://github.com/user-attachments/assets/483882ad-8155-4a1b-9694-21ec68f655c8" />
+<img width="1820" height="898" alt="image" src="https://github.com/user-attachments/assets/ebeb2905-91c2-4ea9-8a1c-8d6817ac488f" />
+<img width="1830" height="868" alt="image" src="https://github.com/user-attachments/assets/62e8af2a-f54a-4e50-8772-06ef8d92899a" />
+<img width="1844" height="861" alt="image" src="https://github.com/user-attachments/assets/89b636c3-8ddb-4923-b8a6-5098428938da" />
+<img width="1827" height="841" alt="image" src="https://github.com/user-attachments/assets/6268395b-6cfc-4dfc-bf84-1a8a7db516aa" />
+<img width="1805" height="901" alt="image" src="https://github.com/user-attachments/assets/efd4adc6-bb07-49e0-a876-e78a84d88465" />
+
+- Pagina detalle
+<img width="1906" height="867" alt="image" src="https://github.com/user-attachments/assets/3d1ead68-c6f5-4b43-a26b-bbda6b2cf9cf" />
+<img width="1909" height="906" alt="image" src="https://github.com/user-attachments/assets/45af95be-1c83-4184-85a1-4ebb3294803e" />
+- Pagina de nuevo elemento
+<img width="1863" height="907" alt="image" src="https://github.com/user-attachments/assets/b2bfca50-ad40-4aac-8742-f3fadadec6fc" />
+<img width="1824" height="892" alt="image" src="https://github.com/user-attachments/assets/d0763837-0322-4d76-9f18-6c9eece3a740" />
+
 
 # PARTICIPACIÓN
 - # Jaime Bergad Lario
