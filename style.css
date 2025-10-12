@@ -41,14 +41,14 @@ footer {
     margin-top: 20px;
 }
 
-.footer-texto{
+.footer-text{
     font-size: 1.5rem;
     color: white;
     padding: 20px;
 
 }
 
-.iconos-redes-sociales a{
+.icons-social-networks a{
     width: 50px;
     height: 50px;
     display: flex;
@@ -61,22 +61,22 @@ footer {
     transition: all 0.2s ease-in;
 }
 
-.iconos-redes-sociales i {
+.icons-social-networks i {
     color: white;
     font-size: 1.5rem;
     transition: all 0.2s ease-in;
 }
 
-.iconos-redes-sociales a:hover {
+.icons-social-networks a:hover {
     background-color: white;
     border: 2px solid rgb(13, 110, 253);
 }
 
-.iconos-redes-sociales a:hover i {
+.icons-social-networks a:hover i {
     color: black;
 }
 
-.derechos-de-autor {
+.copyright {
     font-size: 15px;
     color: #aeaeae;
     padding: 20px;
