@@ -72,10 +72,10 @@ Atributos:
 - # Jaime Bergad Lario
 - # Daniel Marcos Serrano
 - # Héctor Moreno García
-1. Creación y Estilización de la Página de Detalle
+1. Creación y Estilización de la Página de Detalle:
 Se diseñó y maquetó completamente la página de detalle para series, implementando una interfaz visual atractiva y funcional. Esto incluyó la creación de CSS personalizado para todos los elementos de la página, la estilización de componentes visuales como botones y formularios, y la adaptación responsive para garantizar una correcta visualización en diferentes dispositivos. Además, se integraron elementos multimedia como videos e imágenes para mejorar la experiencia del usuario.
 
-2. Desarrollo de Componentes Comunes
+2. Desarrollo de Componentes Comunes:
 Se crearon y configuraron los elementos estructurales compartidos entre todas las páginas del sitio. Esto comprendió el diseño del header, el desarrollo del footer, y la implementación de componentes reutilizables para mantener el estilo.
 
   - Listado de Commit:
