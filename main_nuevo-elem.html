@@ -9,51 +9,59 @@
   <title>Notfilm</title>
 </head>
 <body>
-  <div class="form-container">
-    <h1>NOTFILM</h1>
-    <form>
-      <div class="form-group">
-        <label for="titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="titulo" placeholder="Nombre de la serie" required/>
-      </div>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="form-container">
+        <header>
+            <span>NOTFILM</span>
+        </header>
+        <form>
+          <div class="form-group">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" placeholder="Nombre de la serie" required/>
+          </div>
 
-      <div class="form-group">
-        <label for="sinopsis" class="form-label">Sinopsis</label>
-        <textarea class="form-control" id="sinopsis" placeholder="Breve descripción de la serie" rows="3" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="genero" class="form-label">Género</label>
-        <select id="genero" class="form-select" required>
-          <option value="">Selecciona un género</option>
-          <option value="accion">Acción</option>
-          <option value="aventura">Aventura</option>
-          <option value="comedia">Comedia</option>
-          <option value="drama">Drama</option>
-          <option value="fantasia">Fantasía</option>
-          <option value="terror">Terror</option>
-          <option value="ciencia-ficcion">Ciencia Ficción</option>
-          <option value="documental">Documental</option>
-          <option value="romance">Romance</option>
-          <option value="suspenso">Suspenso</option>
-        </select>
-      </div>
+          <div class="form-group">
+            <label for="sinopsis" class="form-label">Sinopsis</label>
+            <textarea class="form-control" id="sinopsis" placeholder="Breve descripción de la serie" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="genero" class="form-label">Género</label>
+            <select id="genero" class="form-select" required>
+              <option value="">Selecciona un género</option>
+              <option value="accion">Acción</option>
+              <option value="aventura">Aventura</option>
+              <option value="comedia">Comedia</option>
+              <option value="drama">Drama</option>
+              <option value="fantasia">Fantasía</option>
+              <option value="terror">Terror</option>
+              <option value="ciencia-ficcion">Ciencia Ficción</option>
+              <option value="documental">Documental</option>
+              <option value="romance">Romance</option>
+              <option value="suspenso">Suspenso</option>
+            </select>
+          </div>
 
-      <div class="form-group">
-        <label for="portada" class="form-label">Portada</label>
-        <input type="file" class="form-control" id="portada" />
-      </div>
+          <div class="form-group">
+            <label for="portada" class="form-label">Portada</label>
+            <input type="file" class="form-control" id="portada" />
+          </div>
 
-      <div class="form-group">
-        <label for="año" class="form-label">Año de estreno</label>
-        <input type="text" class="form-control" id="año" placeholder="Año en el que se estrenó" required />
-      </div>
+          <div class="form-group">
+            <label for="año" class="form-label">Año de estreno</label>
+            <input type="number" class="form-control" id="año" placeholder="Año en el que se estrenó" required />
+          </div>
 
-      <div class="form-actions">
-        <button type="button" class="btn btn-volver" onclick="location.href= main.html">Cancelar</button>
-        <button type="submit" class="btn btn-default">Guardar</button>
+          <div class="form-actions">
+            <button type="button" class="btn btn-volver" onclick="location.href='main.html'">Cancelar</button>
+            <button type="submit" class="btn btn-default">Guardar</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
+</div>
   <footer class="d-flex flex-column align-items-center justify-content-center">
       <p class="footer-texto text-center">Tu dosis diaria de series, siempre a un click.</p>
       <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
@@ -67,7 +75,7 @@
               <i class="bi bi-facebook"></i>
           </a>
       </div>
-      <div class="derechos-de-autor">Creado por: Daniel Marcos Serrano Jaime Bergad Lario Héctor Moreno García (2025) &#169;</div>
+      <div class="derechos-de-autor">Creado por: Daniel Marcos Serrano Jaime Bergad Lario Héctor Moreno García (2025) &#169</div>
   </footer>
 </body>
 </html>
