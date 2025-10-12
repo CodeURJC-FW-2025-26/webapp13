@@ -1,4 +1,3 @@
-<img width="1727" height="838" alt="image" src="https://github.com/user-attachments/assets/672758d9-544a-4b7f-919c-0161cbba8e83" />
 # Catalogo de series
 Nombre de la pagina web:
 # NOTFILM
