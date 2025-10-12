@@ -3,17 +3,18 @@ html {
 }
 
 header {
-    background-color: #141414;
+
+    background-color:#141414;
     font-size: 68px;
     margin: auto;
     text-align: center;
-    border-bottom: 2px solid #e50914;
 }
 
 header span {
     color: red;
-    font-family: montserrat;
+    font-family: 'Arial Black', Arial, sans-serif;
     font-weight: bold;
+    letter-spacing: 4px;
 }
 
 #Title { 
