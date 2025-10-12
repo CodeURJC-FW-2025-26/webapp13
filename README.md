@@ -85,7 +85,7 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
   2. UPDATE MAIN AN ADD IMG AND VIDEO(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/95215dd20a15595710387a0431f6a30132d84d26): Se añadieron la foto y el video trailer de la pagina.
   3. UPGRADE main AND css detalle(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/01bdf2a79e173e72ebdb91e7ad21cc3264774cd8): Se continuo añadiendo elementos y estilo a la pagina.
   4. UPGRADE main AND css detalle button(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/6571823c0c8859ffe3f5f328bd601b8cf303007f): Se algunos botones y se le dieron el estilo.
-  5.UPDATE FINAl detalle(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/bf7e07a9784fda50eef62381651cbaea8d14123b): Se termino de añadir y dar estilo a los elementos. Se añadio el footer y el header definitivo
+  5. UPDATE FINAL detalle(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/bf7e07a9784fda50eef62381651cbaea8d14123b): Se termino de añadir y dar estilo a los elementos. Se añadio el footer y el header definitivo
   - Lista de archivos:
   1. main_detalle_notfiml.html(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_detalle_notfiml.html)
   2. CSS(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_detalle_notfiml.css)
