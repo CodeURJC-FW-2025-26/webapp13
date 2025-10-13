@@ -71,7 +71,24 @@ Atributos:
 
 
 # PARTICIPACIÓN
-- # Jaime Bergad Lario
+# Jaime Bergad Lario
+1. Durante el desarrollo del proyecto, he sido responsable de crear la página “Nuevo Elemento”, incluyendo su estructura en HTML y el diseño de estilos en CSS, asegurando la coherencia visual con el resto del sitio web.He diseñado el formulario con todos sus respectivos campos que permiten la creacion de una entidad.
+
+2. Asimismo, he colaborado sutilmente en la implementación de las demás páginas del proyecto, aportando ideas para ayudar tanto en su funcionamiento como su presentación.A su vez he participado en el diseño y construcción del header y el footer compartidos por todas las páginas de la practica.
+ 
+  - Listado de Commit:
+  1. Adición de la página detallada y ligera aclaración del read.me (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/ceaa633851f1144420135af7555f74c82923fdb9): Adición del prototipo del main y el CSS de la página nuevo-elemento con la estructura principal y varios detalles ya implementados. Además de una corrección en el read.me
+  2. UPDATE main y css added bootstrap grid (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/86e87c06767a18e15fba327e842d4dc10975a9e0): Implementado el Grid system de Bootstrap cambiando así el de CSS y adaptandome a los requisitos de la practica. Además de cambiar el type a uno más especifico para el campo del form. También introducir el Header y personalizarlo con CSS.
+  3. UPDATE footer (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/5e4468422b447f01a83a1debae5e130369f3e216): Adición del footer que se utilizará en todas las páginas.
+  4. UPDATE main and css (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/8a4d73d2ee1eea05a003238e394a5ce5d52c3c03): Ugrade del footer (este acabó siendo el definitivo)
+  5. Update Header (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/0341d179e4b6a4e66b959190f68c200223a12055): Pasar el header fuera del conteiner del form para que sea igual al del resto de páginas.
+
+  - Lista de archivos:
+  1. main_nuevo-elem (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_nuevo-elem.html)
+  2. styles_nuevo-elem(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/styles_nuevo-elem.css)
+  3. main(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main.html)
+  4. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_detalle_notfiml.html)
+  5. Readme(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/README.md)
 - # Daniel Marcos Serrano
 - # Héctor Moreno García
 1. Creación y Estilización de la Página de Detalle:
