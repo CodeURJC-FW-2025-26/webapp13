@@ -90,6 +90,21 @@ Atributos:
   4. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_detalle_notfiml.html)
   5. Readme(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/README.md)
 - # Daniel Marcos Serrano
+1.En este proyecto, mi principal contribución fue el desarrollo de la página principal del sitio web, encargándome tanto de su estructura como de su diseño visual. Además, me aseguré de garantizar el acceso y la correcta navegación hacia las páginas creadas por mis compañeros, integrando todos los apartados del proyecto en un conjunto coherente y funcional.
+
+2.También participé en la asistencia y apoyo a mis compañeros durante el desarrollo de sus respectivas páginas, especialmente en aspectos relacionados con el diseño y la coherencia visual, para mantener una línea estética común en todo el sitio.
+- Listado de Commits:
+ 1. UPDATE main,style,img: Adición de gran parte de las cards con las entidades principales junto con sus estilos y imagenes (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/69c6f83d6926f59ac99d6d833d1af443d74c0461).
+ 2. UPDATE main and img: Adición de series, junto con la consolidación del estilo para hacerlo más responsive y más funcional para la finalidad de la página (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/d3d968e6f8daf052d11c721254fa7a24bf866c8c).
+ 3. UPDATE main, style and img: Desarrollo del footer común en tdoas las páginas del proyecto (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/7b9351dbe010f7cd125b111ef93ca5b22be5041b).
+ 4. UPDATE main, style and img: Finalización del footer + añadir el logo de icono a la página web (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/7b9351dbe010f7cd125b111ef93ca5b22be5041b).
+ 5. UPDATE img, main and style: Consolidación del diseño final, añadiendo estilos y las primeras series del catálogo (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/9638dd424fe8e6f87f770f8484cc7a7faf97401d).
+- Lista de archivos:
+ 1. main (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main.html).
+ 2. style (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/style.css)
+ 3. styles_nuevo-elem (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/styles_nuevo-elem.css)
+ 4. main_detalle_notfiml.css (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_detalle_notfiml.css)
+ 5. README (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/README.md)
 - # Héctor Moreno García
 1. Creación y Estilización de la Página de Detalle:
 Se diseñó y maquetó completamente la página de detalle para series, implementando una interfaz visual atractiva y funcional. Esto incluyó la creación de CSS personalizado para todos los elementos de la página, la estilización de componentes visuales como botones y formularios, y la adaptación responsive para garantizar una correcta visualización en diferentes dispositivos. Además, se integraron elementos multimedia como videos e imágenes para mejorar la experiencia del usuario.
