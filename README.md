@@ -49,7 +49,7 @@ Atributos:
 # PRACTICA 1
 # Capturas de pantalla
 - Pagina principal
-<img width="1905" height="936" alt="image" src="https://github.com/user-attachments/assets/cdf6443f-3b81-469f-9564-7e18a20ec11b" />
+<img width="1848" height="860" alt="image" src="https://github.com/user-attachments/assets/0abe787f-3892-44d6-9702-4c455867f04f" />
 <img width="1857" height="859" alt="image" src="https://github.com/user-attachments/assets/ff15ca91-9039-424c-bbd8-ded8e847c677" />
 <img width="1727" height="838" alt="image" src="https://github.com/user-attachments/assets/ccfb4a6b-92d6-4a8e-aeab-0473b5fbc77b" />
 <img width="1842" height="821" alt="image" src="https://github.com/user-attachments/assets/683e1cbf-ed94-4d31-b2a2-8d4e84ef522e" />
