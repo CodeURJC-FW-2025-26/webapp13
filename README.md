@@ -66,7 +66,7 @@ Atributos:
 <img width="1892" height="561" alt="image" src="https://github.com/user-attachments/assets/42c30eef-8722-4b2e-890f-8e77e1c5d657" />
 
 - Pagina de nuevo elemento
-<img width="1863" height="907" alt="image" src="https://github.com/user-attachments/assets/b2bfca50-ad40-4aac-8742-f3fadadec6fc" />
+<img width="1897" height="885" alt="image" src="https://github.com/user-attachments/assets/e89b5304-b8b1-4d0a-8674-037e2289a3b8" />
 <img width="1824" height="892" alt="image" src="https://github.com/user-attachments/assets/d0763837-0322-4d76-9f18-6c9eece3a740" />
 
 
