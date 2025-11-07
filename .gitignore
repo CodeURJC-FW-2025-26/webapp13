@@ -141,3 +141,6 @@ vite.config.ts.timestamp-*
 # Custom folders to ignore
 /uploads/
 /node_modules/
+
+# macOS system files
+.DS_Store
