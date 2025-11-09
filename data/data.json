@@ -1,14 +1,87 @@
 [
     {
-        "user": "Pepe",
-        "title": "Vendo moto",
-        "text": "Barata, barata",
-        "imageFilename": "post0.jpeg"
+        "title": "",
+        "Premiere": 2019,
+        "age classification": 16,
+        "Seasons": 5,
+        "Gender": "Anime",
+        "Synopsis": "Demon Slayer sigue a Tanjiro Kamado, un joven cuya familia es asesinada por demonios y su hermana Nezuko se convierte en uno de ellos. Decidido a vengarse y hallar una cura, se une a los Cazadores de Demonios. La serie destaca por su espectacular animación, combates intensos y una profunda carga emocional.",
+        "image": "Ejemplo.jpeg"
     },
     {
-        "user": "Juan",
-        "title": "Compro coche",
-        "text": "Pago bien",
-        "imageFilename": "post1.jpeg"
+        "title": "Death Note",
+        "Premiere": 2006,
+        "age classification": 16,
+        "Seasons": 1,
+        "Gender": "Anime",
+        "Synopsis": "Death Note narra la historia de Light Yagami, un estudiante que encuentra un cuaderno capaz de matar a cualquiera cuyo nombre sea escrito en él. Decidido a eliminar a los criminales, se convierte en el misterioso Kira. Su enfrentamiento con el brillante detective L crea un intenso duelo psicológico entre justicia y poder.",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "One Piece",
+        "Premiere": 1999,
+        "age classification": 16,
+        "Seasons": 20,
+        "Gender": "Anime",
+        "Synopsis": "One Piece sigue las aventuras de Monkey D. Luffy, un joven pirata que sueña con encontrar el legendario tesoro One Piece y convertirse en el Rey de los Piratas. Acompañado por su tripulación, viaja por mares peligrosos enfrentando enemigos, gobiernos corruptos y desafíos épicos. Es una historia de amistad, libertad y sueños imposibles.",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "Stranger Things",
+        "Premiere":2016 ,
+        "age classification": 16,
+        "Seasons": 4,
+        "Gender": "Terror",
+        "Synopsis": "Stranger Things es una serie de ciencia ficción y misterio ambientada en los años 80, que sigue a un grupo de niños mientras investigan la desaparición de su amigo. En su búsqueda, descubren a una niña con poderes telequinéticos y un portal hacia un mundo oscuro llamado El Otro Lado. Combina nostalgia, terror y aventuras con un fuerte vínculo de amistad.",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "The Walking Dead",
+        "Premiere": 2010,
+        "age classification": 18,
+        "Seasons": 11,
+        "Gender": "Terror",
+        "Synopsis": "The Walking Dead sigue a un grupo de supervivientes en un mundo postapocalíptico lleno de zombis, conocidos como “caminantes”. Liderados por Rick Grimes, luchan por sobrevivir enfrentando tanto a los muertos como a otros humanos peligrosos. La serie explora la moral, la supervivencia y la transformación de las personas ante el caos",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "American Horror Story",
+        "Premiere": 2011,
+        "age classification":18 ,
+        "Seasons": 12,
+        "Gender": "Terror",
+        "Synopsis": "American Horror Story es una serie de antología en la que cada temporada cuenta una historia de terror diferente, desde casas embrujadas hasta circos macabros y cultos siniestros. Combina horror, misterio y elementos sobrenaturales con personajes complejos y giros inesperados. Destaca por su estilo visual distintivo y su enfoque psicológico del miedo.",
+        "image": "Ejemplo.jpeg"
+    },
+
+        {
+        "title": "Brooklyn Nine-Nine",
+        "Premiere": 2013,
+        "age classification": 12,
+        "Seasons": 8,
+        "Gender": "Comedia",
+        "Synopsis": "Brooklyn Nine-Nine es una comedia policial que sigue al detective Jake Peralta y a su equipo en la comisaría del distrito 99 de Brooklyn. Entre casos criminales y situaciones absurdas, el grupo combina el humor con la amistad y el trabajo en equipo. La serie destaca por su ritmo ágil, personajes carismáticos y tono ligero",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "The Office",
+        "Premiere": 2005,
+        "age classification":12,
+        "Seasons": 9,
+        "Gender": "Comedia",
+        "Synopsis": "The Office es una comedia ambientada en una oficina de venta de papel, presentada en formato de falso documental. Muestra el día a día de los empleados y las situaciones absurdas lideradas por su torpe pero entrañable jefe, Michael Scott. Con humor incómodo y personajes únicos, retrata de forma brillante la vida laboral cotidiana.",
+        "image": "Ejemplo.jpeg"
+    },
+        {
+        "title": "Friends",
+        "Premiere": 1994,
+        "age classification": 12,
+        "Seasons": 10,
+        "Gender": "Comedia",
+        "Synopsis": "Friends es una comedia que sigue la vida de seis amigos que viven en Nueva York mientras enfrentan el amor, el trabajo y las locuras de la vida adulta. Con humor y ternura, muestra su evolución personal y sus vínculos inquebrantables. Es una de las series más icónicas y queridas de la televisió",
+        "image": "Ejemplo.jpeg"
     }
+
+
+
 ]
