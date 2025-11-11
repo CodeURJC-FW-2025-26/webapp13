@@ -17,9 +17,19 @@ router.get('/', async (req, res) => {
     res.render('index', { series });
 });
 
+router.get('/main_detalle',(req,res)=>{
 
-/*
-router.post('/post/new', upload.single('image'), async (req, res) => {
+    res.render('main_detalle_notfilm');
+
+});
+
+router.get('/new_elem',(req,res)=>{
+
+    res.render('main_nuevo-elem');
+
+});
+
+/*router.serie('/serie/new', upload.single('image'), async (req, res) => {
 
     let serie = {
         user: req.body.user,
@@ -28,35 +38,34 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         imageFilename: req.file?.filename
     };
 
-    await board.addPost(post);
+    await catalog.addserie(serie);
 
-    res.render('saved_post', { _id: post._id.toString() });
+    res.render('saved_serie', { _id: serie._id.toString() });
 
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/serie/:id', async (req, res) => {
 
-    let post = await board.getPost(req.params.id);
+    let serie = await catalog.getSerie(req.params.id);
 
-    res.render('show_post', { post });
+    res.render('show_serie', { serie });
 });
 
-router.get('/post/:id/delete', async (req, res) => {
+router.get('/serie/:id/delete', async (req, res) => {
 
-    let post = await board.deletePost(req.params.id);
+    let serie = await catalog.deleteSerie(req.params.id);
 
-    if (post && post.imageFilename) {
-        await fs.rm(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+    if (serie && serie.imageFilename) {
+        await fs.rm(catalog.UPLOADS_FOLDER + '/' + serie.imageFilename);
     }
 
-    res.render('deleted_post');
+    res.render('deleted_serie');
 });
 
-router.get('/post/:id/image', async (req, res) => {
+router.get('/serie/:id/image', async (req, res) => {
 
-    let post = await board.getPost(req.params.id);
+    let serie = await catalog.getSerie(req.params.id);
 
-    res.download(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+    res.download(catalog.UPLOADS_FOLDER + '/' + serie.imageFilename);
 
-});
-*/
+});*/
