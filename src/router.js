@@ -2,23 +2,26 @@ import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
 
-import * as board from './catalog.js';
+import * as catalog from './catalog.js';
 
 const router = express.Router();
 export default router;
 
-const upload = multer({ dest: board.UPLOADS_FOLDER })
+const upload = multer({ dest: catalog.UPLOADS_FOLDER })
+
 
 router.get('/', async (req, res) => {
 
-    let posts = await board.getPosts();
+    let series = await catalog.getSeries();
 
-    res.render('index', { posts });
+    res.render('index', { series });
 });
 
+
+/*
 router.post('/post/new', upload.single('image'), async (req, res) => {
 
-    let post = {
+    let serie = {
         user: req.body.user,
         title: req.body.title,
         text: req.body.text,
@@ -56,4 +59,4 @@ router.get('/post/:id/image', async (req, res) => {
     res.download(board.UPLOADS_FOLDER + '/' + post.imageFilename);
 
 });
-
+*/

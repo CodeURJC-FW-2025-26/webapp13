@@ -10,9 +10,9 @@ const dataString = await fs.readFile(DATA_FOLDER + '/' + dataFile, 'utf8');
 
 const series = JSON.parse(dataString);
 
-await catalog.deleteseries();
+await catalog.deleteSeries();
 for(let serie of series){
-    await catalog.addserie(serie);
+    await catalog.addSerie(serie);
 }
 
 await fs.rm(UPLOADS_FOLDER, { recursive: true, force: true });
