@@ -13,9 +13,8 @@
 </head>
 <body>
     
-    <header>
-        <span>NOTFILM</span>
-    </header>
+    {{>header}}
+
     <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container d-flex justify-content-center">
             <form class="d-flex w-100 justify-content-center" role="search" id="barra_busqueda">
@@ -470,21 +469,8 @@
             </div>
         </div>
     </main>
-    <footer class="d-flex flex-column align-items-center justify-content-center">
-        <img src="/images/image/logo.png" alt="footer" class="logo-footer">
-        <p class="footer-text text-center">Tu dosis diaria de series, siempre a un click.</p>
-        <div class="icons-social-networks d-flex flex-wrap align-items-center justify-content-center">
-            <a href="#">
-                <i class="bi bi-twitter-x"></i>
-            </a>
-            <a href="#">
-                <i class="bi bi-instagram"></i>
-            </a>
-            <a href="#">
-                <i class="bi bi-facebook"></i>
-            </a>
-        </div>
-        <div class="copyright">Creado por: Daniel Marcos Serrano Jaime Bergad Lario Héctor Moreno García (2025) &#169;</div>
-    </footer>
+    
+    {{>footer}}
+
 </body>
 </html>
