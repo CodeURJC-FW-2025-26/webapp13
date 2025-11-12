@@ -29,6 +29,19 @@ router.get('/new_elem',(req,res)=>{
 
 });
 
+router.post('/serie/new', async (req, res) => {
+
+    let serie = { 
+        title: req.body.title,
+        premiere: req.body.premiere,
+        genre: req.body.genre,      
+        synopsis: req.body.synopsis,  
+        image: req.file?.filename
+    };
+    await catalog.addSerie(serie);
+    res.render('saved_serie');
+});
+    
 /*router.serie('/serie/new', upload.single('image'), async (req, res) => {
 
     let serie = {
