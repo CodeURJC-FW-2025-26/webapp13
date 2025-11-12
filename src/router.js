@@ -17,13 +17,16 @@ router.get('/', async (req, res) => {
     res.render('index', { series });
 });
 
-router.get('/main_detalle',(req,res)=>{
+router.get('/main_detalle/:id', async (req,res) =>{
 
+    let serie = await catalog.getSerie(req.params.id);
     res.render('main_detalle_notfilm');
 
 });
 
 router.get('/new_elem',(req,res)=>{
+
+    
 
     res.render('main_nuevo-elem');
 
