@@ -1,407 +1,784 @@
 [
     {
-    "title": "Demon Slayer",
-    "premiere": 2019,
-    "ageClassification": 16,
-    "seasons": 5,
-    "genre": "Anime",
-    "synopsis": "Demon Slayer sigue a Tanjiro Kamado, un joven cuya familia es asesinada por demonios y su hermana Nezuko se convierte en uno de ellos. Decidido a vengarse y hallar una cura, se une a los Cazadores de Demonios. La serie destaca por su espectacular animación, combates intensos y una profunda carga emocional.",
-    "image": "kimetsu.jpg",
-    "episode": {
-        "titleEpisode": "Crueldad",
-        "synopsisEpisode": "Tras encontrar a su familia masacrada, Tanjiro Kamado descubre que su hermana Nezuko se ha convertido en un demonio, pero conserva parte de su humanidad al protegerlo. Un cazador de demonios les ofrece una oportunidad única: buscar una cura para Nezuko mientras se unen a la lucha contra las criaturas que amenazan a la humanidad. Así comienza su viaje, donde Tanjiro entrena para convertirse en cazador y Nezuko lucha por controlar su naturaleza demoníaca, enfrentándose juntos a peligros sobrenaturales mientras buscan desesperadamente una solución que pueda devolverle su humanidad.",
-        "timeEpisode": 24,
-        "trailerEpisode": "videoplayback.mp4"
-    }
+        "title": "Demon Slayer",
+        "premiere": 2019,
+        "ageClassification": 16,
+        "seasons": 5,
+        "genre": "Anime",
+        "synopsis": "Demon Slayer sigue a Tanjiro Kamado, un joven cuya familia es asesinada por demonios y su hermana Nezuko se convierte en uno de ellos. Decidido a vengarse y hallar una cura, se une a los Cazadores de Demonios. La serie destaca por su espectacular animación, combates intensos y una profunda carga emocional.",
+        "image": "demon_slayer.jpq",
+        "episodes": [
+            {
+                "titleEpisode": "Crueldad",
+                "synopsisEpisode": "hola",
+                "trailerEpisode": "trailerDemonSlayer.mp4"
+            },
+            {
+                "titleEpisode": "El Asesino de Demonios",
+                "synopsisEpisode": "Tanjiro comienza su entrenamiento como Cazador de Demonios bajo la tutela de Sakonji Urokodaki y aprende las habilidades básicas de combate mientras su hermana lucha por mantener su humanidad.",
+                "timeEpisode": 24,
+                "trailerEpisode": "trailerDemonSlayer.mp4"
+            },
+            {
+                "titleEpisode": "La Montaña del Entrenamiento",
+                "synopsisEpisode": "Tanjiro enfrenta retos físicos extremos en la Montaña del Entrenamiento, mientras los lazos con otros aprendices se fortalecen y se prepara para enfrentar demonios reales.",
+                "timeEpisode": 24,
+                "trailerEpisode": "trailerDemonSlayer.mp4"
+            }
+        ]
     },
     {
-    "title": "Death Note",
-    "premiere": 2006,
-    "ageClassification": 16,
-    "seasons": 1,
-    "genre": "Anime",
-    "synopsis": "Death Note narra la historia de Light Yagami, un estudiante que encuentra un cuaderno capaz de matar a cualquiera cuyo nombre sea escrito en él. Decidido a eliminar a los criminales, se convierte en el misterioso Kira. Su enfrentamiento con el brillante detective L crea un intenso duelo psicológico entre justicia y poder.",
-    "image": "death_note.jpg",
-    "episode": {
-        "titleEpisode": "Rebirth",
-        "synopsisEpisode": "En el mundo de los Shinigami, uno llamado Ryuk está inquieto. Mientras tanto, el brillante estudiante de bachillerato Light Yagami observa la podredumbre en el mundo humano. Un cuaderno cae a mano de Light: el “Death Note”, que permite matar a quien escribas su nombre (si conoces su rostro). Light primero lo prueba con un criminal en un caso de rehenes; luego experimenta con un matón local y comienza a tomar decisiones sobre “qué hacer con este poder”. Ryuk aparece y explica las reglas del cuaderno, y Light decide asumir que él “limpiará” el mundo y será un nuevo dios.",
-        "timeEpisode": 22,
-        "trailerEpisode": ""
-    }
+        "title": "Death Note",
+        "premiere": 2006,
+        "ageClassification": 16,
+        "seasons": 1,
+        "genre": "Anime",
+        "synopsis": "Death Note narra la historia de Light Yagami, un estudiante que encuentra un cuaderno capaz de matar a cualquiera cuyo nombre sea escrito en él. Decidido a eliminar a los criminales, se convierte en el misterioso Kira. Su enfrentamiento con el brillante detective L crea un intenso duelo psicológico entre justicia y poder.",
+        "image": "death_note.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Rebirth",
+                "synopsisEpisode": "En el mundo de los Shinigami, uno llamado Ryuk está inquieto. Mientras tanto, el brillante estudiante de bachillerato Light Yagami observa la podredumbre en el mundo humano. Un cuaderno cae a mano de Light: el 'Death Note', que permite matar a quien escribas su nombre (si conoces su rostro). Light primero lo prueba con un criminal en un caso de rehenes; luego experimenta con un matón local y comienza a tomar decisiones sobre 'qué hacer con este poder'. Ryuk aparece y explica las reglas del cuaderno, y Light decide asumir que él 'limpiará' el mundo y será un nuevo dios.",
+                "timeEpisode": 22,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Confrontation",
+                "synopsisEpisode": "Light y L se enfrentan por primera vez, comenzando un juego de ingenio y estrategia. Ambos intentan descubrir la identidad del otro mientras se desarrollan los primeros asesinatos mediante el Death Note. La tensión aumenta cuando los dos personajes principales empiezan a manipular situaciones para atrapar al otro.",
+                "timeEpisode": 22,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Dealings",
+                "synopsisEpisode": "Light intenta consolidar su poder mientras forma una alianza con Misa Amane, quien también posee un Death Note. La batalla de inteligencia con L se intensifica, y Light aprende más sobre las reglas del cuaderno y cómo manipular a otros para mantener su identidad en secreto.",
+                "timeEpisode": 22,
+                "trailerEpisode": "trailer.mp4"
+            }
+        ]
     },
     {
-    "title": "One Piece",
-    "premiere": 1999,
-    "ageClassification": 16,
-    "seasons": 20,
-    "genre": "Anime",
-    "synopsis": "One Piece sigue las aventuras de Monkey D. Luffy, un joven pirata que sueña con encontrar el legendario tesoro One Piece y convertirse en el Rey de los Piratas. Acompañado por su tripulación, viaja por mares peligrosos enfrentando enemigos, gobiernos corruptos y desafíos épicos. Es una historia de amistad, libertad y sueños imposibles.",
-    "image": "one_piece.jpg",
-    "episode": {
-        "titleEpisode": "I'm Luffy! The Man Who Will Become the Pirate King!",
-        "synopsisEpisode": "El joven Luffy es encontrado flotando en el mar dentro de un barril por un barco de crucero. Luego un grupo de piratas liderados por Alvida ataca ese barco. Luffy, que ha llegado al mar con un sueño de convertirse en rey de los piratas, se enfrenta a los invasores, y conoce al chico de labores Koby que estaba bajo el yugo de Alvida. Juntos inician la aventura rumbo al mar de East Blue. ",
-        "timeEpisode": 24,
-        "trailerEpisode": ""
-    }
+        "title": "One Piece",
+        "premiere": 1999,
+        "ageClassification": 16,
+        "seasons": 20,
+        "genre": "Anime",
+        "synopsis": "One Piece sigue las aventuras de Monkey D. Luffy, un joven pirata que sueña con encontrar el legendario tesoro One Piece y convertirse en el Rey de los Piratas. Acompañado por su tripulación, viaja por mares peligrosos enfrentando enemigos, gobiernos corruptos y desafíos épicos. Es una historia de amistad, libertad y sueños imposibles.",
+        "image": "one_piece.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "I'm Luffy! The Man Who Will Become the Pirate King!",
+                "synopsisEpisode": "El joven Luffy es encontrado flotando en el mar dentro de un barril por un barco de crucero. Luego un grupo de piratas liderados por Alvida ataca ese barco. Luffy, que ha llegado al mar con un sueño de convertirse en rey de los piratas, se enfrenta a los invasores, y conoce al chico de labores Koby que estaba bajo el yugo de Alvida. Juntos inician la aventura rumbo al mar de East Blue.",
+                "timeEpisode": 24,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Enter the Great Swordsman! Pirate Hunter Roronoa Zoro",
+                "synopsisEpisode": "Luffy llega a la villa y conoce a Roronoa Zoro, un espadachín que ha sido capturado por el capitán local. Luffy lo libera y juntos comienzan a enfrentarse a la injusticia de los marineros corruptos. Este episodio establece la amistad y colaboración entre Luffy y Zoro.",
+                "timeEpisode": 24,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Morgan vs. Luffy! Who's the Mysterious Pretty Girl?",
+                "synopsisEpisode": "Luffy se enfrenta al malvado capitán Morgan mientras se hace amigo de Coby, que sueña con unirse a la Marina. Este episodio muestra la primera gran aventura de Luffy y el comienzo de su tripulación.",
+                "timeEpisode": 24,
+                "trailerEpisode": "trailer.mp4"
+            }
+        ]
     },
     {
-    "title": "Stranger Things",
-    "premiere": 2016,
-    "ageClassification": 16,
-    "seasons": 4,
-    "genre": "Terror",
-    "synopsis": "Stranger Things es una serie de ciencia ficción y misterio ambientada en los años 80, que sigue a un grupo de niños mientras investigan la desaparición de su amigo. En su búsqueda, descubren a una niña con poderes telequinéticos y un portal hacia un mundo oscuro llamado El Otro Lado. Combina nostalgia, terror y aventuras con un fuerte vínculo de amistad.",
-    "image": "stranger_things.jpg",
-    "episode": {
-        "titleEpisode": "Chapter One: The Vanishing of Will Byers",
-        "synopsisEpisode": "En Hawkins, Indiana, el 6 de noviembre de 1983, un científico huye por un pasillo del laboratorio nacional de Hawkins de una fuerza desconocida, intenta entrar a un ascensor, y la fuerza lo ataca; muere. Al mismo tiempo se da la desaparición de un joven, Will Byers, lo que desata alarmas en su grupo de amigos, su madre y el jefe de policía, mientras algo extraño y sobrenatural comienza a emerger en la ciudad. ",
-        "timeEpisode": null,
-        "trailerEpisode": "49"
-    }
+        "title": "Stranger Things",
+        "premiere": 2016,
+        "ageClassification": 16,
+        "seasons": 4,
+        "genre": "Terror",
+        "synopsis": "Stranger Things es una serie de ciencia ficción y misterio ambientada en los años 80, que sigue a un grupo de niños mientras investigan la desaparición de su amigo. En su búsqueda, descubren a una niña con poderes telequinéticos y un portal hacia un mundo oscuro llamado El Otro Lado. Combina nostalgia, terror y aventuras con un fuerte vínculo de amistad.",
+        "image": "stranger_things.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Chapter One: The Vanishing of Will Byers",
+                "synopsisEpisode": "En Hawkins, Indiana, el 6 de noviembre de 1983, un científico huye por un pasillo del laboratorio nacional de Hawkins de una fuerza desconocida, intenta entrar a un ascensor, y la fuerza lo ataca; muere. Al mismo tiempo se da la desaparición de un joven, Will Byers, lo que desata alarmas en su grupo de amigos, su madre y el jefe de policía, mientras algo extraño y sobrenatural comienza a emerger en la ciudad.",
+                "timeEpisode": 47,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Chapter Two: The Weirdo on Maple Street",
+                "synopsisEpisode": "Mike encuentra a Eleven en su casa y la esconde en el sótano. Mientras tanto, la madre de Will continúa la búsqueda de su hijo y la policía investiga pistas extrañas en el bosque. Se empiezan a revelar los poderes especiales de Eleven y la conexión con el mundo paralelo.",
+                "timeEpisode": 55,
+                "trailerEpisode": "trailer.mp4"
+            },
+            {
+                "titleEpisode": "Chapter Three: Holly, Jolly",
+                "synopsisEpisode": "El grupo de amigos sigue buscando a Will mientras se acerca la Navidad. Se intensifican los fenómenos sobrenaturales en Hawkins y la conexión con Eleven y el Otro Lado se hace más evidente, llevando a los niños a planear su primera incursión para descubrir la verdad.",
+                "timeEpisode": 51,
+                "trailerEpisode": "trailer.mp4"
+            }
+        ]
     },
     {
-    "title": "The Walking Dead",
-    "premiere": 2010,
-    "ageClassification": 18,
-    "seasons": 11,
-    "genre": "Terror",
-    "synopsis": "The Walking Dead sigue a un grupo de supervivientes en un mundo postapocalíptico lleno de zombis, conocidos como “caminantes”. Liderados por Rick Grimes, luchan por sobrevivir enfrentando tanto a los muertos como a otros humanos peligrosos. La serie explora la moral, la supervivencia y la transformación de las personas ante el caos.",
-    "image": "the_walking_dead.jpg",
-    "episode": {
-        "titleEpisode": "Days Gone Bye",
-        "synopsisEpisode": "El sheriff adjunto Rick Grimes despierta de un coma para descubrir que el mundo ha sido invadido por zombis (“walkers”). Tras encontrar destrucción en la carretera y un gasolinera abandonada, Rick intenta encontrar supervivientes y adaptarse a la nueva realidad apocalíptica.",
-        "timeEpisode": 67,
-        "trailerEpisode": ""
-    }
+        "title": "The Walking Dead",
+        "premiere": 2010,
+        "ageClassification": 18,
+        "seasons": 11,
+        "genre": "Terror",
+        "synopsis": "The Walking Dead sigue a un grupo de supervivientes en un mundo postapocalíptico lleno de zombis, conocidos como 'caminantes'. Liderados por Rick Grimes, luchan por sobrevivir enfrentando tanto a los muertos como a otros humanos peligrosos. La serie explora la moral, la supervivencia y la transformación de las personas ante el caos.",
+        "image": "the_walking_dead.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Days Gone Bye",
+                "synopsisEpisode": "El sheriff adjunto Rick Grimes despierta de un coma para descubrir que el mundo ha sido invadido por zombi ('walkers'). Tras encontrar destrucción en la carretera y un gasolinera abandonada, Rick intenta encontrar supervivientes y adaptarse a la nueva realidad apocalíptica.",
+                "timeEpisode": 67,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Guts",
+                "synopsisEpisode": "Rick se une a un grupo de supervivientes en Atlanta y debe idear un plan para escapar de una horda de caminantes. El grupo aprende rápidamente que los muertos vivientes no son la única amenaza en este nuevo mundo.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Tell It to the Frogs",
+                "synopsisEpisode": "Rick se reúne con su familia en el campamento, pero la alegría del reencuentro se ve empañada por las tensiones internas. Mientras tanto, Shane lucha por aceptar el regreso de Rick.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "American Horror Story",
-    "premiere": 2011,
-    "ageClassification": 18,
-    "seasons": 12,
-    "genre": "Terror",
-    "synopsis": "American Horror Story es una serie de antología en la que cada temporada cuenta una historia de terror diferente, desde casas embrujadas hasta circos macabros y cultos siniestros. Combina horror, misterio y elementos sobrenaturales con personajes complejos y giros inesperados. Destaca por su estilo visual distintivo y su enfoque psicológico del miedo.",
-    "image": "american_horror_story.jpg",
-    "episode": {
-      "titleEpisode": "Pilot",
-      "synopsisEpisode": "La familia Harmon se muda de Boston a Los Ángeles tras la pérdida de un bebé de Vivien y la infidelidad de Ben. Compran una mansión restaurada sin conocer su oscuro pasado. Constance, la vecina, y otros sucesos inquietantes comienzan a revelar que la casa tiene más de lo que aparenta. ",
-      "timeEpisode": 52,
-      "trailerEpisode": ""
-    }
+        "title": "American Horror Story",
+        "premiere": 2011,
+        "ageClassification": 18,
+        "seasons": 12,
+        "genre": "Terror",
+        "synopsis": "American Horror Story es una serie de antología en la que cada temporada cuenta una historia de terror diferente, desde casas embrujadas hasta circos macabros y cultos siniestros. Combina horror, misterio y elementos sobrenaturales con personajes complejos y giros inesperados.",
+        "image": "american_horror_story.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Pilot",
+                "synopsisEpisode": "La familia Harmon se muda de Boston a Los Ángeles tras la pérdida de un bebé de Vivien y la infidelidad de Ben. Compran una mansión restaurada sin conocer su oscuro pasado. Constance, la vecina, y otros sucesos inquietantes comienzan a revelar que la casa tiene más de lo que aparenta.",
+                "timeEpisode": 52,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Home Invasion",
+                "synopsisEpisode": "Tres intrusos que se hacen pasar por policías invaden la casa de los Harmon, recreando los asesinatos de la Nurse Murder House de 1968. Mientras tanto, Vivien descubre que está embarazada.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Murder House",
+                "synopsisEpisode": "Ben trata de ayudar a una paciente problemática mientras Violet investiga la historia sangrienta de la casa. Tate revela su conexión con la propiedad y los oscuros secretos que esconde.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Brooklyn Nine-Nine",
-    "premiere": 2013,
-    "ageClassification": 12,
-    "seasons": 8,
-    "genre": "Comedia",
-    "synopsis": "Brooklyn Nine-Nine es una comedia policial que sigue al detective Jake Peralta y a su equipo en la comisaría del distrito 99 de Brooklyn. Entre casos criminales y situaciones absurdas, el grupo combina el humor con la amistad y el trabajo en equipo. La serie destaca por su ritmo ágil, personajes carismáticos y tono ligero.",
-    "image": "brooklyn_nine_nine.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "El detective Jake Peralta, un genio policial pero inmaduro, se enfrenta a un cambio cuando la nueva y estricta capitán, Raymond Holt, llega a la comisaría 99, desafiando su forma relajada de hacer las cosas.",
-        "timeEpisode": 22,
-        "trailerEpisode": ""
-    }
+        "title": "Brooklyn Nine-Nine",
+        "premiere": 2013,
+        "ageClassification": 12,
+        "seasons": 8,
+        "genre": "Comedia",
+        "synopsis": "Brooklyn Nine-Nine es una comedia policial que sigue al detective Jake Peralta y a su equipo en la comisaría del distrito 99 de Brooklyn. Entre casos criminales y situaciones absurdas, el grupo combina el humor con la amistad y el trabajo en equipo.",
+        "image": "brooklyn_nine_nine.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "El detective Jake Peralta, un genio policial pero inmaduro, se enfrenta a un cambio cuando la nueva y estricta capitán, Raymond Holt, llega a la comisaría 99, desafiando su forma relajada de hacer las cosas.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Tagger",
+                "synopsisEpisode": "Jake se obsesiona con atrapar a un grafitero que está vandalizando la ciudad, mientras que Holt asigna a Rosa y Charles a un caso de robo aparentemente aburrido que resulta ser más interesante de lo esperado.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Slump",
+                "synopsisEpisode": "Jake atraviesa una mala racha en la resolución de casos y se obsesiona con resolver uno difícil para recuperar su confianza. Mientras tanto, Amy organiza una fiesta de compromiso para una compañera.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "The Office",
-    "premiere": 2005,
-    "ageClassification": 12,
-    "seasons": 9,
-    "genre": "Comedia",
-    "synopsis": "The Office es una comedia ambientada en una oficina de venta de papel, presentada en formato de falso documental. Muestra el día a día de los empleados y las situaciones absurdas lideradas por su torpe pero entrañable jefe, Michael Scott. Con humor incómodo y personajes únicos, retrata de forma brillante la vida laboral cotidiana.",
-    "image": "the_office.jpg",
-    "episode": {
-      "titleEpisode": "Piloto",
-      "synopsisEpisode": "Un equipo de documentales filma la vida cotidiana de los empleados de la oficina de Scranton de Dunder Mifflin, presentando a Michael Scott, el jefe con pocas habilidades sociales, y a sus diversos empleados, incluyendo a Jim, Pam y Dwight.",
-      "timeEpisode": 23,
-      "trailerEpisode": ""
-    }
+        "title": "The Office",
+        "premiere": 2005,
+        "ageClassification": 12,
+        "seasons": 9,
+        "genre": "Comedia",
+        "synopsis": "The Office es una comedia ambientada en una oficina de venta de papel, presentada en formato de falso documental. Muestra el día a día de los empleados y las situaciones absurdas lideradas por su torpe pero entrañable jefe, Michael Scott.",
+        "image": "the_office.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Un equipo de documentales filma la vida cotidiana de los empleados de la oficina de Scranton de Dunder Mifflin, presentando a Michael Scott, el jefe con pocas habilidades sociales, y a sus diversos empleados, incluyendo a Jim, Pam y Dwight.",
+                "timeEpisode": 23,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Diversity Day",
+                "synopsisEpisode": "Michael organiza un día de diversidad después de decir una broma racial inapropiada, lo que lleva a situaciones incómodas y reveladoras entre los empleados de la oficina.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Health Care",
+                "synopsisEpisode": "Michael delega la elección del plan de salud en Dwight, quien abusa de su poder. Mientras tanto, Jim juega una broma pesada a Dwight haciéndole creer que tiene una enfermedad terminal.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Friends",
-    "premiere": 1994,
-    "ageClassification": 12,
-    "seasons": 10,
-    "genre": "Comedia",
-    "synopsis": "Friends es una comedia que sigue la vida de seis amigos que viven en Nueva York mientras enfrentan el amor, el trabajo y las locuras de la vida adulta. Con humor y ternura, muestra su evolución personal y sus vínculos inquebrantables. Es una de las series más icónicas y queridas de la televisión.",
-    "image": "friends.jpg",
-    "episode": {
-        "titleEpisode": "The One Where It All Began",
-        "synopsisEpisode": "Rachel Green llega al Central Perk con su vestido de novia después de huir de su boda, reencontrándose con su amiga de la secundaria Monica Geller. Mientras, el grupo de amigos navega por sus vidas amorosas y profesionales en Nueva York.",
-        "timeEpisode": 22,
-        "trailerEpisode": ""
-    }
+        "title": "Friends",
+        "premiere": 1994,
+        "ageClassification": 12,
+        "seasons": 10,
+        "genre": "Comedia",
+        "synopsis": "Friends es una comedia que sigue la vida de seis amigos que viven en Nueva York mientras enfrentan el amor, el trabajo y las locuras de la vida adulta. Con humor y ternura, muestra su evolución personal y sus vínculos inquebrantables.",
+        "image": "friends.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "The One Where It All Began",
+                "synopsisEpisode": "Rachel Green llega al Central Perk con su vestido de novia después de huir de su boda, reencontrándose con su amiga de la secundaria Monica Geller. Mientras, el grupo de amigos navega por sus vidas amorosas y profesionales en Nueva York.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The One with the Sonogram at the End",
+                "synopsisEpisode": "Ross descubre que su ex esposa Carol está embarazada de su hijo. Mientras tanto, Rachel recibe su primera cheque de pago y se da cuenta de lo difícil que es la vida independiente.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The One with the Thumb",
+                "synopsisEpisode": "Monica sale con el 'hombre perfecto' pero descubre un hábito desagradable. Chandler comienza a fumar nuevamente. Phoebe encuentra un pulgar en una lata de refresco.",
+                "timeEpisode": 22,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Breaking Bad",
-    "premiere": 2013,
-    "ageClassification": 16,
-    "seasons": 5,
-    "genre": "Drama",
-    "synopsis": "Breaking Bad cuenta la historia de Walter White, un profesor de química que, tras ser diagnosticado con cáncer, comienza a fabricar metanfetamina junto a su exalumno Jesse Pinkman. Lo que empieza como un intento de asegurar el futuro de su familia se transforma en una peligrosa espiral de poder y corrupción. Es una intensa serie sobre moral, ambición y consecuencias.",
-    "image": "breaking_bad.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "Walter White, un profesor de química de secundaria con una vida monótona, descubre que tiene cáncer terminal. Para asegurar el futuro económico de su familia, decide asociarse con un exalumno, Jesse Pinkman, para fabricar y vender metanfetamina.",
-        "timeEpisode": 58,
-        "trailerEpisode": ""
-    }
+        "title": "Breaking Bad",
+        "premiere": 2008,
+        "ageClassification": 16,
+        "seasons": 5,
+        "genre": "Drama",
+        "synopsis": "Breaking Bad cuenta la historia de Walter White, un profesor de química que, tras ser diagnosticado con cáncer, comienza a fabricar metanfetamina junto a su exalumno Jesse Pinkman. Lo que empieza como un intento de asegurar el futuro de su familia se transforma en una peligrosa espiral de poder y corrupción.",
+        "image": "breaking_bad.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Walter White, un profesor de química de secundaria con una vida monótona, descubre que tiene cáncer terminal. Para asegurar el futuro económico de su familia, decide asociarse con un exalumno, Jesse Pinkman, para fabricar y vender metanfetamina.",
+                "timeEpisode": 58,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Cat's in the Bag...",
+                "synopsisEpisode": "Walter y Jesse intentan deshacerse de los dos cuerpos en su roulotte, pero las cosas se complican cuando uno de ellos no está realmente muerto. Mientras tanto, Skyler comienza a sospechar del comportamiento de Walter.",
+                "timeEpisode": 48,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "...And the Bag's in the River",
+                "synopsisEpisode": "Walter enfrenta una decisión moral sobre si matar o no a Krazy-8, mientras recuerda momentos de su pasado que influyeron en su vida. Jesse limpia meticulosamente la roulotte.",
+                "timeEpisode": 48,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Peaky Blinders",
-    "premiere": 2013,
-    "ageClassification": 18,
-    "seasons": 6,
-    "genre": "Drama",
-    "synopsis": "Peaky Blinders sigue a la familia Shelby, una poderosa banda criminal en el Birmingham de la posguerra. Liderados por el astuto y ambicioso Tommy Shelby, buscan expandir su imperio mientras enfrentan a rivales, policías y políticos. La serie combina drama, violencia y estilo con una ambientación y banda sonora inconfundibles.",
-    "image": "peaky_blinders.jpg",
-    "episode": {
-        "titleEpisode": "Episodio 1",
-        "synopsisEpisode": "En el Birmingham de 1919, la banda de los Peaky Blinders, liderada por el astuto Tommy Shelby, planea expandir su imperio criminal. Su camino se cruza con un cargamento de armas robado y un feroz inspector de policía irlandés, Chester Campbell.",
-        "timeEpisode": 55,
-        "trailerEpisode": ""
-    }
+        "title": "Peaky Blinders",
+        "premiere": 2013,
+        "ageClassification": 18,
+        "seasons": 6,
+        "genre": "Drama",
+        "synopsis": "Peaky Blinders sigue a la familia Shelby, una poderosa banda criminal en el Birmingham de la posguerra. Liderados por el astuto y ambicioso Tommy Shelby, buscan expandir su imperio mientras enfrentan a rivales, policías y políticos.",
+        "image": "peaky_blinders.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Episodio 1",
+                "synopsisEpisode": "En el Birmingham de 1919, la banda de los Peaky Blinders, liderada por el astuto Tommy Shelby, planea expandir su imperio criminal. Su camino se cruza con un cargamento de armas robado y un feroz inspector de policía irlandés, Chester Campbell.",
+                "timeEpisode": 55,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Episodio 2",
+                "synopsisEpisode": "Tommy busca al responsable de robar las armas del gobierno, mientras Campbell intensifica su investigación sobre los Peaky Blinders. Tommy conoce a Grace, una camarera que trabaja en el pub de la familia.",
+                "timeEpisode": 57,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Episodio 3",
+                "synopsisEpisode": "Los Shelby organizan una carrera de caballos muy importante mientras Campbell planea infiltrarse en la organización. Tommy descubre información crucial sobre el robo de armas.",
+                "timeEpisode": 56,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "The Crown",
-    "premiere": 2016,
-    "ageClassification": 16,
-    "seasons": 6,
-    "genre": "Drama",
-    "synopsis": "The Crown narra la vida de la reina Isabel II desde su juventud hasta las últimas décadas de su reinado. A través de sus decisiones personales y políticas, muestra los desafíos de equilibrar la vida privada con el deber real. La serie destaca por su impecable producción, actuaciones sobresalientes y retrato histórico detallado.",
-    "image": "the_crown.jpg",
-    "episode": {
-        "titleEpisode": "Wolferton Splash",
-        "synopsisEpisode": "La serie comienza con la boda de la princesa Isabel y el príncipe Felipe en 1947. Mientras la salud del rey Jorge VI empeora, Isabel debe prepararse para el inminente deber de asumir el trono, cambiando su vida y su matrimonio para siempre.",
-        "timeEpisode": 58,
-        "trailerEpisode": ""
-    }
+        "title": "The Crown",
+        "premiere": 2016,
+        "ageClassification": 16,
+        "seasons": 6,
+        "genre": "Drama",
+        "synopsis": "The Crown narra la vida de la reina Isabel II desde su juventud hasta las últimas décadas de su reinado. A través de sus decisiones personales y políticas, muestra los desafíos de equilibrar la vida privada con el deber real.",
+        "image": "the_crown.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Wolferton Splash",
+                "synopsisEpisode": "La serie comienza con la boda de la princesa Isabel y el príncipe Felipe en 1947. Mientras la salud del rey Jorge VI empeora, Isabel debe prepararse para el inminente deber de asumir el trono, cambiando su vida y su matrimonio para siempre.",
+                "timeEpisode": 58,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Hyde Park Corner",
+                "synopsisEpisode": "El rey Jorge VI fallece mientras Isabel y Felipe están de viaje en Kenia. Isabel regresa inmediatamente a Londres para asumir sus nuevas responsabilidades como reina, enfrentándose al dolor personal y al deber real.",
+                "timeEpisode": 57,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Windsor",
+                "synopsisEpisode": "Isabel se enfrenta a su primera crisis como reina cuando debe decidir si la familia real mantendrá el nombre de la Casa de Windsor o adoptará el apellido de su esposo, Mountbatten.",
+                "timeEpisode": 57,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "The Mandalorian",
-    "premiere": 2019,
-    "ageClassification": 16,
-    "seasons": 3,
-    "genre": "Ciencia ficción",
-    "synopsis": "The Mandalorian sigue las aventuras de un cazarrecompensas solitario en los confines de la galaxia tras la caída del Imperio. Durante una misión, encuentra a un misterioso ser llamado Grogu, con quien forma un inesperado vínculo. La serie combina acción, emoción y la esencia clásica del universo Star Wars.",
-    "image": "the_mandalorian.jpg",
-    "episode": {
-        "titleEpisode": "Capítulo 1",
-        "synopsisEpisode": "Un pistolero solitario y cazarrecompensas Mandaloriano acepta un lucrativo y misterioso trabajo de un cliente encapuchado. La misión lo lleva a rastrear un activo de 50 años, que resulta ser un pequeño ser de la misma especie que el Maestro Yoda.",
-        "timeEpisode": 39,
-        "trailerEpisode": ""
-    }
+        "title": "The Mandalorian",
+        "premiere": 2019,
+        "ageClassification": 16,
+        "seasons": 3,
+        "genre": "Ciencia ficción",
+        "synopsis": "The Mandalorian sigue las aventuras de un cazarrecompensas solitario en los confines de la galaxia tras la caída del Imperio. Durante una misión, encuentra a un misterioso ser llamado Grogu, con quien forma un inesperado vínculo.",
+        "image": "the_mandalorian.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Capítulo 1",
+                "synopsisEpisode": "Un pistolero solitario y cazarrecompensas Mandaloriano acepta un lucrativo y misterioso trabajo de un cliente encapuchado. La misión lo lleva a rastrear un activo de 50 años, que resulta ser un pequeño ser de la misma especie que el Maestro Yoda.",
+                "timeEpisode": 39,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Capítulo 2: The Child",
+                "synopsisEpisode": "El Mandaloriano debe proteger al niño recién encontrado de varios cazarrecompensas y peligros mientras intenta cumplir su contrato. Descubre que el pequeño tiene habilidades misteriosas de la Fuerza.",
+                "timeEpisode": 32,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Capítulo 3: The Sin",
+                "synopsisEpisode": "El Mandaloriano entrega al Niño a El Cliente y recibe su recompensa, pero pronto se arrepiente de su decisión y regresa para rescatar al pequeño, desatando una batalla contra otros cazarrecompensas.",
+                "timeEpisode": 38,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Black Mirror",
-    "premiere": 2011,
-    "ageClassification": 18,
-    "seasons": 7,
-    "genre": "Ciencia ficción",
-    "synopsis": "Black Mirror es una serie antológica que explora el lado oscuro de la tecnología y su impacto en la sociedad moderna. Cada episodio presenta una historia independiente que mezcla ciencia ficción, drama y crítica social. Con tonos inquietantes y reflexivos, muestra cómo el progreso puede distorsionar la naturaleza humana.",
-    "image": "black_mirror.jpg",
-    "episode": {
-        "titleEpisode": "The National Anthem"	,
-        "synopsisEpisode": "En el Reino Unido moderno, la princesa Susannah es secuestrada. Los captores exigen una demanda inusual y horripilante para su liberación: que el Primer Ministro tenga relaciones sexuales con un cerdo en vivo en televisión nacional.",
-        "timeEpisode": 44,
-        "trailerEpisode": ""
-    }
+        "title": "Black Mirror",
+        "premiere": 2011,
+        "ageClassification": 18,
+        "seasons": 7,
+        "genre": "Ciencia ficción",
+        "synopsis": "Black Mirror es una serie antológica que explora el lado oscuro de la tecnología y su impacto en la sociedad moderna. Cada episodio presenta una historia independiente que mezcla ciencia ficción, drama y crítica social.",
+        "image": "black_mirror.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "The National Anthem",
+                "synopsisEpisode": "En el Reino Unido moderno, la princesa Susannah es secuestrada. Los captores exigen una demanda inusual y horripilante para su liberación: que el Primer Ministro tenga relaciones sexuales con un cerdo en vivo en televisión nacional.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Fifteen Million Merits",
+                "synopsisEpisode": "En un futuro distópico, las personas pedalean bicicletas estacionarias para generar energía y ganar 'méritos'. Un hombre usa todos sus ahorros para ayudar a una mujer con talento musical a participar en un show de talentos.",
+                "timeEpisode": 62,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Entire History of You",
+                "synopsisEpisode": "En un mundo donde las personas pueden grabar y reproducir todo lo que ven y oyen, un hombre obsesivo usa esta tecnología para investigar si su esposa le ha sido infiel.",
+                "timeEpisode": 49,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "The Boys",
-    "premiere": 2019,
-    "ageClassification": 18,
-    "seasons": 4,
-    "genre": "Ciencia ficción",
-    "synopsis": "The Boys presenta un mundo donde los superhéroes son celebridades corruptas controladas por una poderosa corporación. Un grupo de vigilantes decide enfrentarse a ellos para revelar sus abusos y oscuros secretos. La serie combina acción, humor negro y crítica social en una versión violenta y satírica del género de superhéroes.",
-    "image": "the_boys.jpg",
-    "episode": {
-        "titleEpisode": "El nombre de la raza",
-        "synopsisEpisode": "Hughie Campbell ve cómo su novia es asesinada accidentalmente por un superhéroe velocista llamado A-Train. Esto lo lleva a conocer a Billy Butcher, quien le revela la corrupta y violenta verdad detrás de los superhéroes y lo recluta para su equipo, The Boys.",
-        "timeEpisode": 60,
-        "trailerEpisode": ""
-    }
+        "title": "The Boys",
+        "premiere": 2019,
+        "ageClassification": 18,
+        "seasons": 4,
+        "genre": "Ciencia ficción",
+        "synopsis": "The Boys presenta un mundo donde los superhéroes son celebridades corruptas controladas por una poderosa corporación. Un grupo de vigilantes decide enfrentarse a ellos para revelar sus abusos y oscuros secretos.",
+        "image": "the_boys.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "El nombre de la raza",
+                "synopsisEpisode": "Hughie Campbell ve cómo su novia es asesinada accidentalmente por un superhéroe velocista llamado A-Train. Esto lo lleva a conocer a Billy Butcher, quien le revela la corrupta y violenta verdad detrás de los superhéroes y lo recluta para su equipo, The Boys.",
+                "timeEpisode": 60,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Cherry",
+                "synopsisEpisode": "Hughie se infiltra en Vought International mientras Butcher busca a un miembro desaparecido de los Seven. Los Boys descubren un misterioso compuesto que da poderes a los superhéroes.",
+                "timeEpisode": 57,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Get Some",
+                "synopsisEpisode": "Butcher y Hughie intentan chantajear a Translucent, mientras que Starlight se enfrenta a la cruda realidad de ser miembro de los Seven. Annie se da cuenta de lo corrupto que es realmente el mundo de los superhéroes.",
+                "timeEpisode": 55,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Vikings",
-    "premiere": 2013,
-    "ageClassification": 16,
-    "seasons": 6,
-    "genre": "Acción",
-    "synopsis": "Vikings narra las hazañas de Ragnar Lothbrok, un legendario guerrero nórdico que sueña con explorar y conquistar nuevas tierras. A lo largo de la serie, se muestran las batallas, traiciones y ambiciones que marcan el destino de su familia y su pueblo. Combina historia, mitología y drama épico con gran intensidad visual.",
-    "image": "vikings.jpg",
-    "episode": {
-        "titleEpisode": "12:00 p.m. – 1:00 p.m."	,
-        "synopsisEpisode": "El agente federal Jack Bauer tiene exactamente 24 horas para frustrar un complot de asesinato contra el candidato presidencial David Palmer. El primer episodio establece las múltiples tramas y presenta el formato de tiempo real que define la serie.",
-        "timeEpisode": 43,
-        "trailerEpisode": ""
-    }
+        "title": "Vikings",
+        "premiere": 2013,
+        "ageClassification": 16,
+        "seasons": 6,
+        "genre": "Acción",
+        "synopsis": "Vikings narra las hazañas de Ragnar Lothbrok, un legendario guerrero nórdico que sueña con explorar y conquistar nuevas tierras. A lo largo de la serie, se muestran las batallas, traiciones y ambiciones que marcan el destino de su familia y su pueblo.",
+        "image": "vikings.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Rites of Passage",
+                "synopsisEpisode": "En la Escandinavia del siglo VIII, el joven y ambicioso granjero Ragnar Lothbrok sueña con explorar hacia el oeste, desafiando a su jefe Earl Haraldson. Mientras, su esposa Lagertha, una feroz guerrera, protege su hogar.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Wrath of the Northmen",
+                "synopsisEpisode": "Ragnar lidera su primera incursión hacia el oeste, llegando a Inglaterra donde enfrentan a monjes desprevenidos. La batalla revela las diferencias culturales entre vikingos y sajones.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Dispossessed",
+                "synopsisEpisode": "Ragnar regresa a casa como un héroe pero se enfrenta a la envidia y sospechas de Earl Haraldson. Mientras tanto, el monje Athelstan lucha por adaptarse a la vida nórdica.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Prison Break",
-    "premiere": 2005,
-    "ageClassification": 16,
-    "seasons": 5,
-    "genre": "Acción",
-    "synopsis": "Prison Break cuenta la historia de Michael Scofield, un ingeniero que elabora un plan para sacar a su hermano Lincoln de prisión antes de su ejecución injusta. Con ingenio y suspense, la serie sigue su arriesgada fuga y las conspiraciones que la rodean. Destaca por su ritmo trepidante y giros sorprendentes.",
-    "image": "prison_break.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "Steve McGarrett, un oficial de la Armada de EE. UU., regresa a Hawái para investigar el asesinato de su padre. El Gobernador le ofrece liderar una nueva unidad de élite con poder absoluto para limpiar las calles de la isla.",
-        "timeEpisode": 44,
-        "trailerEpisode": ""
-    }
+        "title": "Prison Break",
+        "premiere": 2005,
+        "ageClassification": 16,
+        "seasons": 5,
+        "genre": "Acción",
+        "synopsis": "Prison Break cuenta la historia de Michael Scofield, un ingeniero que elabora un plan para sacar a su hermano Lincoln de prisión antes de su ejecución injusta. Con ingenio y suspense, la serie sigue su arriesgada fuga y las conspiraciones que la rodean.",
+        "image": "prison_break.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Michael Scofield, un ingeniero estructural, se hace tatuar con los planos de la prisión de Fox River y comete un delito a propósito para ser encarcelado. Su objetivo: sacar a su hermano, Lincoln Burrows, quien está en el corredor de la muerte por un crimen que no cometió.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Allen",
+                "synopsisEpisode": "Michael se adapta a la vida en prisión mientras pone en marcha su plan de escape. Comienza a reclutar aliados, incluyendo a Sucre, mientras busca la manera de acceder a la enfermería.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Cell Test",
+                "synopsisEpisode": "Michael logra que lo trasladen a la celda que comparte con Lincoln, pero enfrenta nuevos obstáculos. Mientras tanto, Veronica investiga el caso de Lincoln y descubre pistas inquietantes.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "24",
-    "premiere": 2001,
-    "ageClassification": 16,
-    "seasons": 9,
-    "genre": "Acción",
-    "synopsis": "24 sigue al agente Jack Bauer, quien debe detener amenazas terroristas en misiones contrarreloj, donde cada temporada transcurre en tiempo real durante 24 horas. Con acción constante y tensión creciente, la serie mezcla espionaje, drama y dilemas morales. Es un thriller intenso que redefine el género de suspense televisivo.",
-    "image": "24.jpg",
-    "episode": {
-        "titleEpisode": "Rites of Passage",
-        "synopsisEpisode": "En la Escandinavia del siglo VIII, el joven y ambicioso granjero Ragnar Lothbrok sueña con explorar hacia el oeste, desafiando a su jefe Earl Haraldson. Mientras, su esposa Lagertha, una feroz guerrera, protege su hogar.",
-        "timeEpisode": 44,
-        "trailerEpisode": ""
-    }
+        "title": "24",
+        "premiere": 2001,
+        "ageClassification": 16,
+        "seasons": 9,
+        "genre": "Acción",
+        "synopsis": "24 sigue al agente Jack Bauer, quien debe detener amenazas terroristas en misiones contrarreloj, donde cada temporada transcurre en tiempo real durante 24 horas. Con acción constante y tensión creciente, la serie mezcla espionaje, drama y dilemas morales.",
+        "image": "24.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "12:00 p.m. – 1:00 p.m.",
+                "synopsisEpisode": "El agente federal Jack Bauer tiene exactamente 24 horas para frustrar un complot de asesinato contra el candidato presidencial David Palmer. El primer episodio establece las múltiples tramas y presenta el formato de tiempo real que define la serie.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "1:00 p.m. – 2:00 p.m.",
+                "synopsisEpisode": "Jack interroga a Martin Belkin mientras intenta localizar a los asesinos. La hija de Jack, Kim, se mete en problemas al salir con su amiga Janet.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "2:00 p.m. – 3:00 p.m.",
+                "synopsisEpisode": "Jack sigue la pista de los asesinos mientras descubre que alguien dentro de la CTU está filtrando información. Kim se encuentra en peligro tras aceptar un trabajo de niñera.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Hawaii 5-0",
-    "premiere": 2010,
-    "ageClassification": 16,
-    "seasons": 10,
-    "genre": "Policial",
-    "synopsis": "Hawaii 5-0 sigue a un equipo especial de élite encargado de combatir el crimen en las islas de Hawái. Liderados por Steve McGarrett, enfrentan casos complejos que combinan acción, misterio y paisajes espectaculares. La serie destaca por su dinamismo, camaradería entre los personajes y su toque policial clásico.",
-    "image": "hawaii_5-0.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "Michael Scofield, un ingeniero estructural, se hace tatuar con los planos de la prisión de Fox River y comete un delito a propósito para ser encarcelado. Su objetivo: sacar a su hermano, Lincoln Burrows, quien está en el corredor de la muerte por un crimen que no cometió.",
-        "timeEpisode": 44,
-        "trailerEpisode": ""
-    }
+        "title": "Hawaii Five-0",
+        "premiere": 2010,
+        "ageClassification": 16,
+        "seasons": 10,
+        "genre": "Policial",
+        "synopsis": "Hawaii Five-0 sigue a un equipo especial de élite encargado de combatir el crimen en las islas de Hawái. Liderados por Steve McGarrett, enfrentan casos complejos que combinan acción, misterio y paisajes espectaculares.",
+        "image": "hawaii_5-0.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Steve McGarrett, un oficial de la Armada de EE. UU., regresa a Hawái para investigar el asesinato de su padre. El Gobernador le ofrece liderar una nueva unidad de élite con poder absoluto para limpiar las calles de la isla.",
+                "timeEpisode": 44,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Ohana",
+                "synopsisEpisode": "El equipo investiga el asesinato de un oficial de la marina encontrado en un campo de tiro. McGarrett y Danno aprenden a trabajar juntos a pesar de sus personalidades opuestas.",
+                "timeEpisode": 42,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Malama Ka Aina",
+                "synopsisEpisode": "Five-0 investiga el asesinato de un activista ambiental. Mientras tanto, McGarrett continúa investigando el asesinato de su padre por su cuenta, desobedeciendo las órdenes directas.",
+                "timeEpisode": 42,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "S.W.A.T.",
-    "premiere": 2017,
-    "ageClassification": 16,
-    "seasons": 8,
-    "genre": "Policial",
-    "synopsis": "S.W.A.T. sigue a un equipo de élite del departamento de policía de Los Ángeles especializado en operaciones tácticas y rescates de alto riesgo. Liderados por el sargento Daniel “Hondo” Harrelson, enfrentan criminales peligrosos mientras equilibran la vida personal y profesional. La serie combina acción intensa, drama y trabajo en equipo.",
-    "image": "swat.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "Después de una misión controvertida, el sargento Daniel Hondo Harrelson es ascendido para liderar un equipo de élite del SWAT en Los Ángeles, donde debe equilibrar la lealtad a sus colegas y las demandas de la comunidad a la que sirve.",
-        "timeEpisode": 43,
-        "trailerEpisode": ""
-    }
+        "title": "S.W.A.T.",
+        "premiere": 2017,
+        "ageClassification": 16,
+        "seasons": 8,
+        "genre": "Policial",
+        "synopsis": "S.W.A.T. sigue a un equipo de élite del departamento de policía de Los Ángeles especializado en operaciones tácticas y rescates de alto riesgo. Liderados por el sargento Daniel 'Hondo' Harrelson, enfrentan criminales peligrosos.",
+        "image": "swat.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Después de una misión controvertida, el sargento Daniel 'Hondo' Harrelson es ascendido para liderar un equipo de élite del SWAT en Los Ángeles, donde debe equilibrar la lealtad a sus colegas y las demandas de la comunidad a la que sirve.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Cuchillo",
+                "synopsisEpisode": "El equipo SWAT busca a un peligroso cartel de drogas responsable de múltiples asesinatos. Hondo se enfrenta a la desconfianza de su nuevo equipo mientras intenta demostrar su valía como líder.",
+                "timeEpisode": 42,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Familia",
+                "synopsisEpisode": "El equipo investiga una ola de robos a mano armada cometidos por una banda organizada. Mientras tanto, Hondo debe lidiar con las tensiones raciales en su vecindario.",
+                "timeEpisode": 42,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Sherlock",
-    "premiere": 2010,
-    "ageClassification": 13,
-    "seasons": 4,
-    "genre": "Policial",
-    "synopsis": "Sherlock sigue al detective consultor Sherlock Holmes y a su amigo John Watson mientras resuelven complejos crímenes en el Londres contemporáneo. Con su aguda inteligencia y métodos poco convencionales, Sherlock enfrenta casos que desafían la lógica. La serie destaca por su ingenio, suspenso y dinámico retrato de los personajes.",
-    "image": "sherlock.jpg",
-    "episode": {
-        "titleEpisode": "A Study in Pink"	,
-        "synopsisEpisode": "El detective consultor Sherlock Holmes y su nuevo compañero, el Dr. John Watson, se conocen y se mudan juntos al 221B de Baker Street. Su primer caso juntos implica una serie de misteriosos suicidios que Scotland Yard cree que son asesinatos.",
-        "timeEpisode": 88,
-        "trailerEpisode": ""
-    }
+        "title": "Sherlock",
+        "premiere": 2010,
+        "ageClassification": 13,
+        "seasons": 4,
+        "genre": "Policial",
+        "synopsis": "Sherlock sigue al detective consultor Sherlock Holmes y a su amigo John Watson mientras resuelven complejos crímenes en el Londres contemporáneo. Con su aguda inteligencia y métodos poco convencionales, Sherlock enfrenta casos que desafían la lógica.",
+        "image": "sherlock.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "A Study in Pink",
+                "synopsisEpisode": "El detective consultor Sherlock Holmes y su nuevo compañero, el Dr. John Watson, se conocen y se mudan juntos al 221B de Baker Street. Su primer caso juntos implica una serie de misteriosos suicidios que Scotland Yard cree que son asesinatos.",
+                "timeEpisode": 88,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Blind Banker",
+                "synopsisEpisode": "Sherlock y John investigan una serie de misteriosos asesinatos vinculados a contrabando de antigüedades chinas. Deben descifrar símbolos antiguos para evitar más muertes.",
+                "timeEpisode": 88,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Great Game",
+                "synopsisEpisode": "Sherlock se enfrenta a un criminal anónimo que lo obliga a resolver una serie de casos bajo un límite de tiempo estricto, con terribles consecuencias si falla.",
+                "timeEpisode": 88,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "You",
-    "premiere": 2018,
-    "ageClassification": 16,
-    "seasons": 5,
-    "genre": "Thriller",
-    "synopsis": "You sigue a Joe Goldberg, un hombre obsesionado que utiliza la tecnología y su encanto para acercarse a quienes desea, cruzando límites morales y legales. La serie explora el amor, la obsesión y la psicopatía desde una perspectiva inquietante y contemporánea. Combina suspense, drama psicológico y giros sorprendentes.",
-    "image": "you.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "Joe Goldberg, un encantador pero obsesivo gerente de una librería en Nueva York, conoce a la aspirante a escritora Guinevere Beck. Al instante se enamora y comienza a usar las redes sociales y la tecnología para rastrear cada uno de sus movimientos.",
-        "timeEpisode": 45,
-        "trailerEpisode": ""
-    }
+        "title": "You",
+        "premiere": 2018,
+        "ageClassification": 16,
+        "seasons": 5,
+        "genre": "Thriller",
+        "synopsis": "You sigue a Joe Goldberg, un hombre obsesionado que utiliza la tecnología y su encanto para acercarse a quienes desea, cruzando límites morales y legales. La serie explora el amor, la obsesión y la psicopatía desde una perspectiva inquietante.",
+        "image": "you.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "Joe Goldberg, un encantador pero obsesivo gerente de una librería en Nueva York, conoce a la aspirante a escritora Guinevere Beck. Al instante se enamora y comienza a usar las redes sociales y la tecnología para rastrear cada uno de sus movimientos.",
+                "timeEpisode": 45,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "The Last Nice Guy in New York",
+                "synopsisEpisode": "Joe intenta acercarse más a Beck mientras elimina obstáculos en su camino, incluyendo a su amigo Peach. Comienza a manipular situaciones para ganar su confianza.",
+                "timeEpisode": 45,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Maybe",
+                "synopsisEpisode": "Joe y Beck finalmente se acercan, pero la obsesión de Joe crece cuando conoce más sobre el pasado de Beck y las personas en su vida que podrían representar una amenaza para su relación.",
+                "timeEpisode": 43,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Dexter",
-    "premiere": 2006,
-    "ageClassification": 16,
-    "seasons": 8,
-    "genre": "Thriller",
-    "synopsis": "Dexter sigue a Dexter Morgan, un forense especializado en análisis de sangre que trabaja para la policía de Miami, mientras lleva una vida secreta como asesino en serie que elimina criminales que han escapado de la justicia. La serie combina crimen, suspense y dilemas morales, explorando la dualidad entre su fachada normal y su lado oscuro.",
-    "image": "dexter.jpg",
-    "episode": {
-        "titleEpisode": "Dexter",
-        "synopsisEpisode": "Dexter Morgan es un brillante analista de salpicaduras de sangre para la policía de Miami. También es un asesino en serie que solo mata a otros asesinos que han escapado de la justicia. El episodio lo sigue mientras investiga un caso y planifica su próximo sacrificio.",
-        "timeEpisode": 53,
-        "trailerEpisode": ""
-    }
+        "title": "Dexter",
+        "premiere": 2006,
+        "ageClassification": 16,
+        "seasons": 8,
+        "genre": "Thriller",
+        "synopsis": "Dexter sigue a Dexter Morgan, un forense especializado en análisis de sangre que trabaja para la policía de Miami, mientras lleva una vida secreta como asesino en serie que elimina criminales que han escapado de la justicia.",
+        "image": "dexter.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Dexter",
+                "synopsisEpisode": "Dexter Morgan es un brillante analista de salpicaduras de sangre para la policía de Miami. También es un asesino en serie que solo mata a otros asesinos que han escapado de la justicia. El episodio lo sigue mientras investiga un caso y planifica su próximo sacrificio.",
+                "timeEpisode": 53,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Crocodile",
+                "synopsisEpisode": "Dexter investiga a un asesino en serie que desmiembra a sus víctimas, mientras equilibra su vida personal con su hermanastra Debra, quien quiere ser su compañera en el departamento de homicidios.",
+                "timeEpisode": 50,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Popping Cherry",
+                "synopsisEpisode": "Dexter encuentra a un posible aprendiz mientras investiga las muertes de estudiantes de preparatoria. Mientras tanto, Debra lucha por demostrar su valía en homicidios.",
+                "timeEpisode": 50,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Homeland",
-    "premiere": 2011,
-    "ageClassification": 16,
-    "seasons": 8,
-    "genre": "Thriller",
-    "synopsis": "Homeland sigue a la agente de la CIA Carrie Mathison, quien lucha contra amenazas terroristas mientras lidia con sus propios problemas personales y psicológicos. La serie explora espionaje, intriga y conspiraciones internacionales con giros constantes. Destaca por su tensión narrativa y retrato complejo de la seguridad y la moralidad.",
-    "image": "homeland.jpg",
-    "episode": {
-        "titleEpisode": "Piloto",
-        "synopsisEpisode": "La agente de la CIA Carrie Mathison es reasignada a Langley después de que una fuente en Irak le diga que un prisionero de guerra estadounidense ha sido convertido por Al-Qaeda. Cree que el sargento Nicholas Brody, recién rescatado después de 8 años, es ese soldado.",
-        "timeEpisode": 64,
-        "trailerEpisode": ""
-    }
+        "title": "Homeland",
+        "premiere": 2011,
+        "ageClassification": 16,
+        "seasons": 8,
+        "genre": "Thriller",
+        "synopsis": "Homeland sigue a la agente de la CIA Carrie Mathison, quien lucha contra amenazas terroristas mientras lidia con sus propios problemas personales y psicológicos. La serie explora espionaje, intriga y conspiraciones internacionales.",
+        "image": "homeland.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Piloto",
+                "synopsisEpisode": "La agente de la CIA Carrie Mathison es reasignada a Langley después de que una fuente en Irak le diga que un prisionero de guerra estadounidense ha sido convertido por Al-Qaeda. Cree que el sargento Nicholas Brody, recién rescatado después de 8 años, es ese soldado.",
+                "timeEpisode": 64,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Grace",
+                "synopsisEpisode": "Carrie intensifica su vigilancia sobre Brody mientras él se reajusta a la vida familiar. Las tensiones en el hogar de los Brody aumentan a medida que Nicholas lucha por reconectarse con su esposa e hijos.",
+                "timeEpisode": 55,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Clean Skin",
+                "synopsisEpisode": "Carrie descubre una posible conexión terrorista en Estados Unidos mientras continúa vigilando a Brody. Saul conoce a Aileen, una mujer que podría tener información crucial.",
+                "timeEpisode": 47,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "The Last Dance",
-    "premiere": 2020,
-    "ageClassification": 7,
-    "seasons": 1,
-    "genre": "Documental",
-    "synopsis": "The Last Dance es una serie documental que narra la carrera de Michael Jordan y la histórica temporada 1997-98 de los Chicago Bulls. Combina imágenes de archivo, entrevistas y testimonios para mostrar la determinación, el talento y los desafíos detrás de uno de los equipos más icónicos del baloncesto. Destaca por su profundidad, emoción y enfoque inspirador.",
-    "image": "the_last_dance.jpg",
-    "episode": {
-        "titleEpisode": "Episodio 1",
-        "synopsisEpisode": "El episodio presenta la temporada 1997-98 de los Chicago Bulls, anunciada por el entrenador Phil Jackson como The Last Dance. Establece la dinámica entre Michael Jordan, Scottie Pippen y el gerente general Jerry Krause, mientras el equipo busca su sexto campeonato.",
-        "timeEpisode": 50,
-        "trailerEpisode": ""
-    }
+        "title": "The Last Dance",
+        "premiere": 2020,
+        "ageClassification": 7,
+        "seasons": 1,
+        "genre": "Documental",
+        "synopsis": "The Last Dance es una serie documental que narra la carrera de Michael Jordan y la histórica temporada 1997-98 de los Chicago Bulls. Combina imágenes de archivo, entrevistas y testimonios para mostrar la determinación, el talento y los desafíos detrás de uno de los equipos más icónicos del baloncesto. Destaca por su profundidad, emoción y enfoque inspirador.",
+        "image": "the_last_dance.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Episodio 1",
+                "synopsisEpisode": "El episodio presenta la temporada 1997-98 de los Chicago Bulls, anunciada por el entrenador Phil Jackson como The Last Dance. Establece la dinámica entre Michael Jordan, Scottie Pippen y el gerente general Jerry Krause, mientras el equipo busca su sexto campeonato.",
+                "timeEpisode": 50,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Episodio 2",
+                "synopsisEpisode": "Se explora el difícil camino de Scottie Pippen hacia la NBA y su relación con Michael Jordan. También se muestra cómo Pippen se convirtió en un jugador fundamental para los Bulls y los desafíos que enfrentó durante su carrera.",
+                "timeEpisode": 50,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Episodio 3",
+                "synopsisEpisode": "El episodio se centra en Dennis Rodman y su incorporación a los Bulls. Se muestra su personalidad única, su impacto en el equipo y cómo se convirtió en una pieza crucial para el éxito de Chicago durante la temporada 1997-98.",
+                "timeEpisode": 50,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Our Planet",
-    "premiere": 2019,
-    "ageClassification": 7,
-    "seasons": 2,
-    "genre": "Documental",
-    "synopsis": "Our Planet es una serie documental que explora la belleza y diversidad de la naturaleza en todo el mundo, mostrando ecosistemas, animales y fenómenos naturales impresionantes. Con imágenes de alta calidad y narración cautivadora, también destaca los efectos del cambio climático en el planeta. Combina educación, conciencia ambiental y espectáculo visual.",
-    "image": "our_planet.jpg",
-    "episode": {
-        "titleEpisode": "Un planeta",
-        "synopsisEpisode": "Este episodio introductorio muestra la increíble diversidad de la vida en la Tierra, desde junglas y océanos hasta desiertos y polos. Explica cómo todos estos hábitats están interconectados y cómo el cambio climático los está afectando a todos.",
-        "timeEpisode": 49,
-        "trailerEpisode": ""
-    }
+        "title": "Our Planet",
+        "premiere": 2019,
+        "ageClassification": 7,
+        "seasons": 2,
+        "genre": "Documental",
+        "synopsis": "Our Planet es una serie documental que explora la belleza y diversidad de la naturaleza en todo el mundo, mostrando ecosistemas, animales y fenómenos naturales impresionantes. Con imágenes de alta calidad y narración cautivadora, también destaca los efectos del cambio climático en el planeta. Combina educación, conciencia ambiental y espectáculo visual.",
+        "image": "our_planet.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Un planeta",
+                "synopsisEpisode": "Este episodio introductorio muestra la increíble diversidad de la vida en la Tierra, desde junglas y océanos hasta desiertos y polos. Explica cómo todos estos hábitats están interconectados y cómo el cambio climático los está afectando a todos.",
+                "timeEpisode": 49,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Mundos congelados",
+                "synopsisEpisode": "Explora los hábitats polares de nuestro planeta, mostrando la vida en la Antártida y el Ártico. Revela cómo el calentamiento global está afectando drásticamente a estos ecosistemas y a las especies que los habitan, como pingüinos, osos polares y ballenas.",
+                "timeEpisode": 53,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Junglas",
+                "synopsisEpisode": "Sumérgete en las junglas tropicales del mundo, hogar de una increíble variedad de especies. Desde los bosques de América del Sur hasta las selvas de Asia, este episodio muestra la delicada interdependencia de la vida en estos ecosistemas y las amenazas que enfrentan.",
+                "timeEpisode": 51,
+                "trailerEpisode": ""
+            }
+        ]
     },
     {
-    "title": "Making a Murderer",
-    "premiere": 2015,
-    "ageClassification": 12,
-    "seasons": 2,
-    "genre": "Documental",
-    "synopsis": "Making a Murderer es una serie documental que sigue el caso de Steven Avery, un hombre condenado por asesinato en circunstancias controvertidas. La serie examina el sistema judicial estadounidense, las pruebas, los errores y posibles injusticias. Combina investigación, suspenso y reflexión sobre la verdad y la legalidad.",
-    "image": "making_a_murderer.jpg",
-    "episode": {
-        "titleEpisode": "Eighteen Years Lost",
-        "synopsisEpisode": "Presenta la historia de Steven Avery, un hombre de Wisconsin que fue encarcelado injustamente durante 18 años por un crimen que no cometió. Tras ser liberado, justo cuando presenta una demanda multimillonaria, es arrestado nuevamente por un horrible asesinato.",
-        "timeEpisode": 60,
-        "trailerEpisode": ""
-    }
+        "title": "Making a Murderer",
+        "premiere": 2015,
+        "ageClassification": 12,
+        "seasons": 2,
+        "genre": "Documental",
+        "synopsis": "Making a Murderer es una serie documental que sigue el caso de Steven Avery, un hombre condenado por asesinato en circunstancias controvertidas. La serie examina el sistema judicial estadounidense, las pruebas, los errores y posibles injusticias. Combina investigación, suspenso y reflexión sobre la verdad y la legalidad.",
+        "image": "making_a_murderer.jpg",
+        "episodes": [
+            {
+                "titleEpisode": "Eighteen Years Lost",
+                "synopsisEpisode": "Presenta la historia de Steven Avery, un hombre de Wisconsin que fue encarcelado injustamente durante 18 años por un crimen que no cometió. Tras ser liberado, justo cuando presenta una demanda multimillonaria, es arrestado nuevamente por un horrible asesinato.",
+                "timeEpisode": 60,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Turning the Tables",
+                "synopsisEpisode": "Los abogados defensores de Steven Avery, Dean Strang y Jerry Buting, comienzan a construir su caso, cuestionando las pruebas presentadas por la fiscalía. Se revelan irregularidades en la investigación del asesinato de Teresa Halbach.",
+                "timeEpisode": 67,
+                "trailerEpisode": ""
+            },
+            {
+                "titleEpisode": "Placing the Key",
+                "synopsisEpisode": "La defensa presenta su teoría sobre cómo la evidencia clave contra Avery pudo haber sido plantada. El episodio examina el controvertido descubrimiento de la llave del vehículo de la víctima en la habitación de Avery.",
+                "timeEpisode": 63,
+                "trailerEpisode": ""
+            }
+        ]
     }
 ]

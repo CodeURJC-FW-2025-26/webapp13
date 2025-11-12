@@ -15,11 +15,14 @@
     <div class="row">
         <div class="col-lg-8 col-12">
             <div class="row">
-                <h1 id="Title" class="card-title">Demon Slayer <span class="badge rounded-pill bg-warning">16+</span></h1>
+                <h1 id="Title" class="card-title">{{serie.title}}<span class="badge rounded-pill bg-warning">{{serie.ageClassification}}+</span></h1>
                 <hr class="divider">
             </div>
             <div class="row">
-                <h3>1.Crueldad</h3>
+                <p>Genero: {{serie.genre}}</p>
+                <p>Estreno: {{serie.premiere}}</p>
+                <p>Temporadas: {{serie.seasons}}</P>
+                <h3>{{serie}}</h3>
                 <p>24 minutos </p>
             </div>
             <div id="row_button" class="row">
@@ -40,8 +43,9 @@
             </div>
             <div class="row">
                 <h5>Sinopsis:</h5>
-                <p id="Text_synopsis">Tras encontrar a su familia masacrada, Tanjiro Kamado descubre que su hermana Nezuko se ha convertido en un demonio, pero conserva parte de su humanidad al protegerlo. Un cazador de demonios les ofrece una oportunidad única: buscar una cura para Nezuko mientras se unen a la lucha contra las criaturas que amenazan a la humanidad
-                    Así comienza su viaje, donde Tanjiro entrena para convertirse en cazador y Nezuko lucha por controlar su naturaleza demoníaca, enfrentándose juntos a peligros sobrenaturales mientras buscan desesperadamente una solución que pueda devolverle su humanidad </p>
+                {{#series}}
+                <p id="Text_synopsis">{{episode.synopsisEpisode}} </p>
+                {{/series}}
             </div>      
             <div id="row_button" class="row">
                 <button type="button" class="btn btn-danger">

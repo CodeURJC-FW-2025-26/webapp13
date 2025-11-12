@@ -18,9 +18,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/main_detalle/:id', async (req,res) =>{
-
+    
     let serie = await catalog.getSerie(req.params.id);
-    res.render('main_detalle_notfilm');
+    
+    res.render('main_detalle_notfilm', {serie});
 
 });
 
