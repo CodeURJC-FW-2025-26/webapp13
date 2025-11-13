@@ -22,7 +22,7 @@
                 <p>Genero: {{serie.genre}}</p>
                 <p>Estreno: {{serie.premiere}}</p>
                 <p>Temporadas: {{serie.seasons}}</P>
-                <h3>{{serie}}</h3>
+                <h3>{{episode.titleEpisode}}</h3>
                 <p>24 minutos </p>
             </div>
             <div id="row_button" class="row">
@@ -43,9 +43,7 @@
             </div>
             <div class="row">
                 <h5>Sinopsis:</h5>
-                {{#series}}
-                <p id="Text_synopsis">{{episode.synopsisEpisode}} </p>
-                {{/series}}
+                <p id="Text_synopsis">{{episode.synopsisEpisode}}</p>
             </div>      
             <div id="row_button" class="row">
                 <button type="button" class="btn btn-danger">

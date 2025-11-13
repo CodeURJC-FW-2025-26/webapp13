@@ -17,11 +17,13 @@ router.get('/', async (req, res) => {
     res.render('index', { series });
 });
 
-router.get('/main_detalle/:id', async (req,res) =>{
+router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
     
     let serie = await catalog.getSerie(req.params.id);
     
-    res.render('main_detalle_notfilm', {serie});
+    let episode = await catalog.getEpisode(serie,req.params.numEpisode);
+
+    res.render('main_detalle_notfilm', {serie, episode});
 
 });
 
@@ -32,6 +34,15 @@ router.get('/new_elem',(req,res)=>{
     res.render('main_nuevo-elem');
 
 });
+
+router.get('/serie/:id/image', async (req, res) => {
+
+    let serie = await catalog.getSerie(req.params.id);
+
+    res.download(catalog.UPLOADS_FOLDER + '/' + serie.imageFilename);
+
+})
+
 
 router.post('/serie/new', async (req, res) => {
 
@@ -45,7 +56,8 @@ router.post('/serie/new', async (req, res) => {
     await catalog.addSerie(serie);
     res.render('saved_serie');
 });
-    
+
+
 /*router.serie('/serie/new', upload.single('image'), async (req, res) => {
 
     let serie = {
@@ -61,12 +73,7 @@ router.post('/serie/new', async (req, res) => {
 
 });
 
-router.get('/serie/:id', async (req, res) => {
 
-    let serie = await catalog.getSerie(req.params.id);
-
-    res.render('show_serie', { serie });
-});
 
 router.get('/serie/:id/delete', async (req, res) => {
 
@@ -79,10 +86,4 @@ router.get('/serie/:id/delete', async (req, res) => {
     res.render('deleted_serie');
 });
 
-router.get('/serie/:id/image', async (req, res) => {
-
-    let serie = await catalog.getSerie(req.params.id);
-
-    res.download(catalog.UPLOADS_FOLDER + '/' + serie.imageFilename);
-
-});*/
+;*/

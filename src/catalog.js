@@ -25,7 +25,6 @@ export async function deleteSeries(){
 
     return await series.deleteMany();
 }
-
 export async function getSeries(){
 
     return await series.find().toArray();
@@ -36,3 +35,11 @@ export async function getSerie(id){
     return await series.findOne({ _id: new ObjectId(id) });
 }
 
+export async function getEpisode(serie, numEpisode) {
+
+    //To pass numEpisode to int.
+    const targetEpisodeNum = parseInt(numEpisode);
+
+    //Search for the episode number we passed as a parameter.
+    return await serie.episodes.find(e => e.numEpisode === targetEpisodeNum);
+}
