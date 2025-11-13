@@ -24,10 +24,6 @@ header span {
     font-size: 100px;
 }
 
-.badge.bg-warning {
-    font-size: 30%;
-}
-
 .divider {
     border: none;
     height: 5px;
@@ -71,6 +67,14 @@ div h5{
     align-items: center;
 }
 
+.badge {
+    font-size: 30% !important;
+}
+
+.bg-orange{
+    background-color: orange;
+}
+
 .btn.btn-danger {
     width: 70%;
     background-color: red;
@@ -92,6 +96,7 @@ div h5{
     max-height: 100px;
     border-radius: 12px;    
 }
+
 
 .row{
     padding: 20px;

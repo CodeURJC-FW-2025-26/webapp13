@@ -14,6 +14,17 @@ router.get('/', async (req, res) => {
 
     let series = await catalog.getSeries();
 
+    series.forEach(s => {
+        if (s.ageClassification === 18)
+            s.badgeClass = "bg-danger";
+        else if (s.ageClassification === 16)
+            s.badgeClass = "bg-orange";
+        else if (s.ageClassification === 12)
+            s.badgeClass = "bg-warning";
+        else if (s.ageClassification === 7)
+            s.badgeClass = "bg-info"
+    })
+
     res.render('index', { series });
 });
 
@@ -22,6 +33,15 @@ router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
     let serie = await catalog.getSerie(req.params.id);
     
     let episode = await catalog.getEpisode(serie,req.params.numEpisode);
+
+    if (serie.ageClassification === 18)
+            serie.badgeClass = "bg-danger";
+        else if (serie.ageClassification === 16)
+            serie.badgeClass = "bg-orange";
+        else if (serie.ageClassification === 12)
+            serie.badgeClass = "bg-warning";
+        else if (serie.ageClassification === 7)
+            serie.badgeClass = "bg-info"
 
     res.render('main_detalle_notfilm', {serie, episode});
 

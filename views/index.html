@@ -26,8 +26,6 @@
     </nav>
     <main>
         <div  class="container">
-            <!--<h1 class="genres">{{gender}}</h1>
-            <!--<hr class="divider">-->
             <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {{#series}}
                 <div class="col">
@@ -36,7 +34,7 @@
                             <img src="/serie/{{_id}}/image" class="card-img-top fixed-img" alt="...">
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title">{{title}}<span class="badge rounded-pill bg-warning">{{ageClassification}}</span></h5>
+                            <h5 class="card-title">{{title}}<span class="badge rounded-pill {{badgeClass}}">+{{ageClassification}}</span></h5>
                             <ul>
                                 <li>Genero: {{genre}}</li>
                                 <li>Estreno: {{premiere}}</li>
@@ -52,7 +50,6 @@
         {{^series}}
             <p>Series no disponibles</p>
         {{/series}}
-
 
     </main>
     
