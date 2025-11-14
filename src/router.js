@@ -32,15 +32,36 @@ router.get('/new_elem',(req,res)=>{
 
 });
 
-router.post('/serie/new', async (req, res) => {
+router.post('/serie/new', upload.single('image'), async (req, res) => {
+    
+    const seasons = parseInt(req.body.seasons);
+    const ageClasification = parseInt(req.body.ageClasification);
+    const premiere = parseInt(req.body.premiere);
+    const currentYear = new Date().getFullYear();
+
+    
+    if (isNaN(seasons) || seasons < 1 || seasons > 20) {
+        return res.status(400).send('Error: El número de temporadas debe estar entre 1 y 20.');
+    }
+
+    if (isNaN(ageClasification) || ageClasification < 0 || ageClasification > 18) {
+        return res.status(400).send('Error: La clasificación de edad debe ser un estar entre 0 y 18.');
+    }
+    
+    if (isNaN(premiere) || premiere < 1900 || premiere > currentYear + 1) {
+        return res.status(400).send(`Error: El año de estreno debe estar entre 1900 y 2026.`);
+    }
 
     let serie = { 
         title: req.body.title,
-        premiere: req.body.premiere,
-        genre: req.body.genre,      
-        synopsis: req.body.synopsis,  
-        image: req.file?.filename
+        premiere: premiere, 
+        ageClasification: ageClasification, 
+        seasons: seasons, 
+        genre: req.body.genre,
+        synopsis: req.body.synopsis,
+        image: req.file?.filename,
     };
+    
     await catalog.addSerie(serie);
     res.render('saved_serie');
 });

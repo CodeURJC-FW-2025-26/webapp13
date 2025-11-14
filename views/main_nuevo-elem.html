@@ -16,7 +16,7 @@
   <div class="row justify-content-center"> 
     <div class="col-12 col-md-8 col-lg-6"> 
       <div class="form-container">
-        <form action="/serie/new" method="POST">
+        <form action="/serie/new" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="title" placeholder="Nombre de la serie" required/> 
@@ -44,8 +44,18 @@
           </div>
 
           <div class="form-group">
-            <label for="portada" class="form-label">Portada</label>
+            <label for="portada" class="form-label" enctype="multipart/form-data" >Portada</label>
             <input type="file" name="image" class="form-control" id="portada" /> 
+          </div>
+
+          <div class="form-group">
+            <label for="edad" class="form-label">Edad Requerida</label>
+            <input type="number" class="form-control" name="ageClasification" id="edad" placeholder="Edad requerida" required /> 
+          </div>
+
+          <div class="form-group">
+            <label for="temporadas" class="form-label">Temporadas</label>
+            <input type="number" class="form-control" name="seasons" id="temporadas" placeholder="Número de temporadas" required /> 
           </div>
 
           <div class="form-group">
