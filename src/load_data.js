@@ -11,12 +11,13 @@ const dataString = await fs.readFile(DATA_FOLDER + '/' + dataFile, 'utf8');
 const series = JSON.parse(dataString);
 
 await catalog.deleteSeries();
-for(let serie of series){
+for (let serie of series) {
     await catalog.addSerie(serie);
 }
-
 await fs.rm(UPLOADS_FOLDER, { recursive: true, force: true });
 await fs.mkdir(UPLOADS_FOLDER);
-await fs.cp(DATA_FOLDER + '/images', UPLOADS_FOLDER, { recursive: true });
+await fs.cp(DATA_FOLDER + '/images/.', UPLOADS_FOLDER, { recursive: true });
+await fs.cp(DATA_FOLDER + '/video/.', UPLOADS_FOLDER, { recursive: true });
 
 console.log('Demo data loaded');
+
