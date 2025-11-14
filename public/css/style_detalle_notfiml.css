@@ -42,6 +42,11 @@ div p{
     font-size:20px;
 }
 
+div ul{
+    color:white;
+    font-size: 20px;
+}
+
 div h5{
     color:white;
     text-align: start;
@@ -67,12 +72,12 @@ div h5{
     align-items: center;
 }
 
-.badge {
-    font-size: 30% !important;
+#ageCl{
+    background-color: orange;
 }
 
-.bg-orange{
-    background-color: orange;
+#ageCl{
+    font-size: 40%;
 }
 
 .btn.btn-danger {
@@ -107,7 +112,7 @@ div h5{
     color: white
 }
 
-#video{
+#visual{
     width:100%;
 }
 
@@ -128,8 +133,25 @@ div h2 {
     letter-spacing: 4px;
 }
 
-.form-container .btn-default {
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.form-actions a.btn-default {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e50914; 
     color: #ffffff;            
+    border-radius: 4px;
+    padding: 8px 4px;
+    font-size: 14px;
+    border: none;
+    font-weight: 500;
+    flex: 1;
 }
 
 .form-group {
