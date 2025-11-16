@@ -97,7 +97,6 @@ router.get('/serie_update/:id', async (req,res)=>{
 //new episode
 router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 },{ name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
     const id = req.params.id;
-
     const {numEpisode, titleEpisode, synopsisEpisode, timeEpisode} = req.body;
 
     const epNum = parseInt(numEpisode);
@@ -192,7 +191,47 @@ router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
     let serie = await catalog.getSerie(req.params.id);
     let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
     res.render('update_episode', {serie, episode});
+    
 });
+
+//update episode
+router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 } ]),async (req, res) => {
+    const id = req.params.id;
+    const numEpisode = parseInt(req.params.numEpisode);
+    const { titleEpisode, synopsisEpisode, timeEpisode } = req.body;
+    const epTime = parseInt(timeEpisode);
+//not null
+    if (!titleEpisode || !synopsisEpisode || isNaN(epTime)) {
+        return res.render('error', { message: 'Todos los campos son obligatorios.' });
+    }
+
+    const allEpisodes = await catalog.getEpisodes(id);
+    //not duplicated
+    const duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode &&String(ep.numEpisode) !== String(numEpisode));
+    if (duplicate) {
+        return res.render('error', {
+            message: 'Título del episodio duplicado'
+        });
+    }
+    //select photo and video
+    const serie = await catalog.getSerie(id);
+    const originalEp = serie.episodes.find(ep => ep.numEpisode === numEpisode);
+    const imageFile = req.files?.imageFilenamedetalle?.[0];
+    const trailerFile = req.files?.trailerEpisode?.[0];
+
+    //new_episode
+    const update_ep = {
+        titleEpisode,
+        synopsisEpisode,
+        numEpisode,
+        duration: epTime,
+        imageFilenamedetalle: imageFile ? imageFile.filename : originalEp.imageFilenamedetalle,
+        trailerEpisode: trailerFile ? trailerFile.filename : originalEp.trailerEpisode
+    };
+    await catalog.updateEpisode(id, numEpisode, update_ep);
+    res.render('saved_serie');
+});
+
 //end main_detalle
 
 router.post('/serie/new', upload.single('image'), async (req, res) => {

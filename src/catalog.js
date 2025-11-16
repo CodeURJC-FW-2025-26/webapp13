@@ -44,6 +44,13 @@ export async function getEpisode(serie, numEpisode) {
     //Search for the episode number we passed as a parameter.
     return await serie.episodes.find(e => e.numEpisode === targetEpisodeNum);
 }
+export async function getEpisodes(id) {
+    const serie = await series.findOne(
+        { _id: new ObjectId(id) },
+        { projection: { episodes: 1, _id: 0 } }
+    );
+    return serie.episodes.sort((a, b) => a.numEpisode - b.numEpisode);
+}
 export function getBadgeClass(age) {
     if (age >= 18) {
         return "bg-danger";
@@ -99,8 +106,8 @@ export async function updateSerie (id, update_serie){
         {_id: new ObjectId(id)}, update_serie);
 }
 
+
 export async function addEpisode(id, new_episode) {
-    let serie = await series.findOne({ _id: new ObjectId(id) });
     await series.updateOne(
         { _id: new ObjectId(id) },
         { $push: { episodes: new_episode } }
@@ -108,4 +115,19 @@ export async function addEpisode(id, new_episode) {
     serie.episodes.sort((a,b) => a.numEpisode - b.numEpisode)
     return serie
 }
+
+export async function updateEpisode(id, numEpisode, update_ep) {
+    let serie = await series.findOne({ _id: new ObjectId(id) });
+
+return await series.updateOne(
+        { 
+            _id: new ObjectId(id),
+            "episodes.numEpisode": numEpisode
+        },
+        { 
+            $set: { "episodes.$": update_ep } 
+        }
+    );
+}
+
 
