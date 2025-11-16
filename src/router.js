@@ -201,7 +201,12 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
     const ageClasification = parseInt(req.body.ageClasification);
     const premiere = parseInt(req.body.premiere);
     const currentYear = new Date().getFullYear();
+    const allSeries = await catalog.getSeries();
+    const duplicate = allSeries.find(s => s.title === req.body.title);
 
+    if (duplicate) {
+        return res.render( 'error', { message: 'Titulo duplicado' });
+    }
     
     if (isNaN(seasons) || seasons < 1 || seasons > 20) {
         return res.status(400).send('Error: El número de temporadas debe estar entre 1 y 20.');
@@ -215,6 +220,12 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
         return res.status(400).send(`Error: El año de estreno debe estar entre 1900 y 2026.`);
     }
 
+    let imageFilename = null;
+
+    if (req.file) {
+        imageFilename = req.file.filename;  
+    } 
+
     let serie = { 
         title: req.body.title,
         premiere: premiere, 
@@ -222,7 +233,7 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
         seasons: seasons, 
         genre: req.body.genre,
         synopsis: req.body.synopsis,
-        image: req.file?.filename,
+        imageFilename,
     };
     
     await catalog.addSerie(serie);
