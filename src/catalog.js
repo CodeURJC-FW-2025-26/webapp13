@@ -1,5 +1,6 @@
 import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
+import { symlink } from 'node:fs';
 
 const router = express.Router();
 export default router;
@@ -43,6 +44,17 @@ export async function getEpisode(serie, numEpisode) {
     //Search for the episode number we passed as a parameter.
     return await serie.episodes.find(e => e.numEpisode === targetEpisodeNum);
 }
+export function getBadgeClass(age) {
+    if (age >= 18) {
+        return "bg-danger";
+    } else if (age >= 16) {
+        return "bg-orange";
+    } else if (age >= 12) {
+        return "bg-warning";
+    }
+    return "bg-info"; //default opcion
+}
+
 
 //delete episode
 export async function deleteEpisode(id, numEpisode) {
@@ -58,13 +70,42 @@ export function getNextEpisode(serie, numEpisode) {
 
     const targetEpisodeNum = parseInt(numEpisode);
 
-    // Get index of the current episode
+    // Get index of the episode(index = number)
     const index = serie.episodes.findIndex(e => e.numEpisode === targetEpisodeNum);
     //return to the first episode
     if (index === serie.episodes.length - 1) {
-        return serie.episodes[0]; 
+        return serie.episodes[0];
     }
 
     // Return the next episode in the array
     return serie.episodes[index + 1];
 }
+
+export function getPreviusEpisode(serie, numEpisode){
+    const targetEpisodeNum = parseInt(numEpisode);
+    //get index of the episode
+    const index = serie.episodes.findIndex(e => e.numEpisode === targetEpisodeNum)
+    //return to last episode
+    if (index === 0){
+        return serie.episodes[serie.episodes.length - 1]
+    }
+    //return to the previus episode
+    return serie.episodes[index-1]
+
+}
+
+export async function updateSerie (id, update_serie){
+        await series.replaceOne(
+        {_id: new ObjectId(id)}, update_serie);
+}
+
+export async function addEpisode(id, new_episode) {
+    let serie = await series.findOne({ _id: new ObjectId(id) });
+    await series.updateOne(
+        { _id: new ObjectId(id) },
+        { $push: { episodes: new_episode } }
+    );
+    serie.episodes.sort((a,b) => a.numEpisode - b.numEpisode)
+    return serie
+}
+

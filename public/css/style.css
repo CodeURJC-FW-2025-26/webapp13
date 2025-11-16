@@ -30,9 +30,9 @@ main {
     font-family: 'Arial Black', Arial, sans-serif;
 }
 
-#ageCl{
-    background-color: orange;
-}
+.card-title .badge.bg-danger {background-color: red;}
+.card-title .badge.bg-orange {background-color: orange;}
+.card-title .badge.bg-warning {background-color: yellow;}
 
 footer {
     background-color:#292929;

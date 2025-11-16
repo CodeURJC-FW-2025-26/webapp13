@@ -24,6 +24,23 @@ header span {
     font-size: 100px;
 }
 
+.card-title .badge.bg-danger {
+    background-color: red;
+    font-size: 40%; /* ajusta a tu gusto */
+}
+.card-title .badge.bg-orange {
+    background-color: orange;
+    font-size: 40%;
+}
+.card-title .badge.bg-warning {
+    background-color: yellow;
+    font-size: 40%;
+}
+.card-title .badge.bg-info {
+    font-size: 40%;
+}
+
+
 .divider {
     border: none;
     height: 5px;
@@ -72,13 +89,17 @@ div h5{
     align-items: center;
 }
 
-#ageCl{
-    background-color: orange;
+
+#moveepisode{
+    width: 50%;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
 }
 
-#ageCl{
-    font-size: 40%;
-}
 
 .btn.btn-danger {
     width: 70%;
@@ -140,20 +161,24 @@ div h2 {
     margin-top: 20px;
 }
 
-.form-actions a.btn-default {
-    display: flex;
+.btn-action {
+    display: inline-flex;              
     align-items: center;
     justify-content: center;
-    background-color: #e50914; 
-    color: #ffffff;            
-    border-radius: 4px;
-    padding: 8px 4px;
-    font-size: 14px;
+    background-color: #e50914;
+    color: #ffffff;
     border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
     font-weight: 500;
-    flex: 1;
+    text-decoration: none;          
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
+.btn-action:hover {
+    background-color: #b0060f;
+}
 .form-group {
     display: flex;
     flex-direction: column;
@@ -180,17 +205,7 @@ div h2 {
     color: #aaaaaa;
 }
 
-.form-container .btn-default {
-    display: block;
-    background-color: #e50914; 
-    color: #ffffff;            
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 25px;
-    border: none;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 
 .form-container input[type="file"].form-control::file-selector-button {
     background-color: #e50914;

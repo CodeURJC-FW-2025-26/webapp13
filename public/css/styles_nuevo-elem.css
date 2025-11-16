@@ -27,6 +27,13 @@ header span {
     font-weight: bold;
     letter-spacing: 4px;
 }
+/* add title for the form(edit episode)*/
+h1{
+    color: red;
+    font-family: 'Arial Black', Arial, sans-serif;
+    letter-spacing: 4px;
+    text-align: center;
+}
 .footer-text{
     font-size: 1.5rem;
     color: white;

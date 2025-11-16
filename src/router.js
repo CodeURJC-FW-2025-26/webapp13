@@ -11,21 +11,14 @@ const upload = multer({ dest: catalog.UPLOADS_FOLDER })
 
 
 router.get('/', async (req, res) => {
+let series = await catalog.getSeries();
 
-    let series = await catalog.getSeries();
+series.forEach(serie => {
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+});
 
-    series.forEach(s => {
-        if (s.ageClassification === 18)
-            s.badgeClass = "bg-danger";
-        else if (s.ageClassification === 16)
-            s.badgeClass = "bg-orange";
-        else if (s.ageClassification === 12)
-            s.badgeClass = "bg-warning";
-        else if (s.ageClassification === 7)
-            s.badgeClass = "bg-info"
-    })
+res.render('index', { series });
 
-    res.render('index', { series });
 });
 
 router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
@@ -34,14 +27,7 @@ router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
     
     let episode = await catalog.getEpisode(serie,req.params.numEpisode);
 
-    if (serie.ageClassification === 18)
-            serie.badgeClass = "bg-danger";
-        else if (serie.ageClassification === 16)
-            serie.badgeClass = "bg-orange";
-        else if (serie.ageClassification === 12)
-            serie.badgeClass = "bg-warning";
-        else if (serie.ageClassification === 7)
-            serie.badgeClass = "bg-info"
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
 
     res.render('main_detalle_notfilm', {serie, episode});
 
@@ -60,6 +46,7 @@ router.get('/serie/:id/image', async (req, res) => {
 
 });
 
+//main_detalle_notfilm
 router.get('/episode/:id/:numEpisode/image', async (req, res) => {
     let serie = await catalog.getSerie(req.params.id);
     let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
@@ -73,10 +60,11 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
     
     res.download(catalog.UPLOADS_FOLDER + '/' + episode.trailerEpisode);
 });
+
 router.get('/borrarserie/:id', async(req,res) => {
     let serie = await catalog.getSerie(req.params.id);
     await catalog.deleteSerie(req.params.id)
-    res.render('saved_serie');
+    res.render('saved_serie');  //Change html
 });
 
 router.get('/borrarepisode/:id/:numEpisode', async(req,res) => {
@@ -90,8 +78,122 @@ router.get('/borrarepisode/:id/:numEpisode', async(req,res) => {
 router.get('/next/:id/:numEpisode', async(req, res) => {
     let serie = await catalog.getSerie(req.params.id);
     let episode = await catalog.getNextEpisode(serie, req.params.numEpisode);
-    res.render('main_detalle_notfilm', {serie, episode})
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    res.render('main_detalle_notfilm', {serie,episode})
 })
+
+router.get('/previus/:id/:numEpisode' , async(req,res) =>{
+    let serie = await catalog.getSerie(req.params.id);
+    let episode = await catalog.getPreviusEpisode(serie, req.params.numEpisode);
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    res.render('main_detalle_notfilm', {serie, episode})
+});
+
+router.get('/serie_update/:id', async (req,res)=>{
+    let serie = await catalog.getSerie(req.params.id);
+    res.render('update_serie', {serie});
+});
+
+//new episode
+router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 },{ name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
+    const id = req.params.id;
+
+    const {numEpisode, titleEpisode, synopsisEpisode, timeEpisode} = req.body;
+
+    const epNum = parseInt(numEpisode);
+    const epTime = parseInt(timeEpisode);
+
+    //not null
+    if (!titleEpisode || !synopsisEpisode || isNaN(epNum) || isNaN(epTime)) {
+        return res.render('error', { message: 'Todos los campos del episodio son obligatorios.' });
+    }
+    //not duplicated
+    const serie = await catalog.getSerie(id);
+    let duplicateEp = serie.episodes.find(ep => ep.numEpisode === epNum);
+    if (duplicateEp) {
+        return res.render('error', { message: 'Ese número de episodio ya existe.' });
+    }
+    duplicateEp = serie.episodes.find(ep => ep.titleEpisode === titleEpisode);
+    if (duplicateEp) {
+        return res.render('error', { message: 'Ese titulo de episodio ya existe.' });
+    }
+    
+    if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
+        return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios.' });
+    }
+    //new episode
+    const new_Episode = {
+        numEpisode: epNum,
+        titleEpisode,
+        synopsisEpisode,
+        timeEpisode: epTime,
+        imageFilenamedetalle: req.files['imageFilenamedetalle'][0].filename,
+        trailerEpisode: req.files['trailerEpisode'][0].filename
+    };
+    
+    await catalog.addEpisode(id, new_Episode)
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+
+    res.render('saved_serie');
+});
+
+router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
+    
+    const id = req.params.id;
+    const { title, genre, synopsis, ageClasification, seasons, premiere} = req.body;
+
+    const age = parseInt(ageClasification);
+    const numSeasons = parseInt(seasons);
+    const year = parseInt(premiere);
+
+    //not null
+    if (!title || !genre || !synopsis || isNaN(age) || isNaN(numSeasons) || isNaN(year)) {
+        return res.render( 'error', { message: 'Todos los campos del formulario son obligatorios .' });
+    }
+
+    const allSeries = await catalog.getSeries();
+    //duplicated title
+    const duplicate = allSeries.find(s => s.title === title && String(s._id) !== String(id));
+
+    if (duplicate) {
+        return res.render( 'error', { message: 'Titulo duplicado' });
+    }
+
+    //get the image of the serie
+    const current_serie = await catalog.getSerie(id);
+    const existingImage = current_serie.imageFilename;
+
+    //get the new image
+    let imageFilename;
+
+    if (req.file) {
+        imageFilename = req.file.filename;  //new image
+    } else {
+        imageFilename = existingImage;
+    }
+
+    //update serie
+    const update_serie = {
+        title,
+        genre,
+        synopsis,
+        ageClassification: age,
+        seasons: numSeasons,
+        premiere: year,
+        imageFilename,
+        episodes: current_serie.episodes,
+    };
+
+    await catalog.updateSerie(id, update_serie);
+    res.render('saved_serie');
+});
+
+router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
+    let serie = await catalog.getSerie(req.params.id);
+    let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
+    res.render('update_episode', {serie, episode});
+});
+//end main_detalle
 
 router.post('/serie/new', upload.single('image'), async (req, res) => {
     
