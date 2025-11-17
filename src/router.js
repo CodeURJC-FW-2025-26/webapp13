@@ -64,15 +64,15 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
 router.get('/borrarserie/:id', async(req,res) => {
     let serie = await catalog.getSerie(req.params.id);
     await catalog.deleteSerie(req.params.id)
-    res.render('saved_serie');  //Change html
+    res.render('saved_serie', { message: 'Se ha borrado la serie correctamente', boolean_serie1: true,});  
 });
 
 router.get('/borrarepisode/:id/:numEpisode', async(req,res) => {
-    console.log("Se ha ejecutado")
     let serie = await catalog.getSerie(req.params.id);
     let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
+    let nextepisode = await catalog.getNextEpisode(serie, req.params.numEpisode);
     await catalog.deleteEpisode(req.params.id, req.params.numEpisode)
-    res.render('saved_serie');
+    res.render('saved_serie',{ message: 'Se ha borrado el episodio correctamente', boolean_episode0: true, serie, episode: nextepisode});
 });
 
 router.get('/next/:id/:numEpisode', async(req, res) => {
@@ -97,6 +97,7 @@ router.get('/serie_update/:id', async (req,res)=>{
 //new episode
 router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 },{ name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
     const id = req.params.id;
+    const serie = await catalog.getSerie(id);
     const {numEpisode, titleEpisode, synopsisEpisode, timeEpisode} = req.body;
 
     const epNum = parseInt(numEpisode);
@@ -104,21 +105,21 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
 
     //not null
     if (!titleEpisode || !synopsisEpisode || isNaN(epNum) || isNaN(epTime)) {
-        return res.render('error', { message: 'Todos los campos del episodio son obligatorios.' });
+        return res.render('error', { message: 'Todos los campos del episodio son obligatorios.' , boolean_episode1: true,serie});
     }
     //not duplicated
-    const serie = await catalog.getSerie(id);
+    
     let duplicateEp = serie.episodes.find(ep => ep.numEpisode === epNum);
     if (duplicateEp) {
-        return res.render('error', { message: 'Ese número de episodio ya existe.' });
+        return res.render('error', { message: 'Ese número de episodio ya existe.',boolean_episode1: true,serie});
     }
     duplicateEp = serie.episodes.find(ep => ep.titleEpisode === titleEpisode);
     if (duplicateEp) {
-        return res.render('error', { message: 'Ese titulo de episodio ya existe.' });
+        return res.render('error', { message: 'Ese titulo de episodio ya existe.', boolean_episode1: true,serie});
     }
     
     if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
-        return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios.' });
+        return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios',boolean_episode1: true,serie });
     }
     //new episode
     const new_Episode = {
@@ -133,21 +134,21 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
     await catalog.addEpisode(id, new_Episode)
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
 
-    res.render('saved_serie');
+res.render('saved_serie',{message: 'Se ha creado el episodio correctamente con existo', boolean_episode1: true,serie,episode: new_Episode});
 });
 
+//update serie
 router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
-    
     const id = req.params.id;
+    let serie = await catalog.getSerie(id);
     const { title, genre, synopsis, ageClasification, seasons, premiere} = req.body;
-
     const age = parseInt(ageClasification);
     const numSeasons = parseInt(seasons);
     const year = parseInt(premiere);
 
     //not null
     if (!title || !genre || !synopsis || isNaN(age) || isNaN(numSeasons) || isNaN(year)) {
-        return res.render( 'error', { message: 'Todos los campos del formulario son obligatorios .' });
+        return res.render( 'error', { message: 'Todos los campos del formulario son obligatorios .' , boolean_serie1: true, serie});
     }
 
     const allSeries = await catalog.getSeries();
@@ -155,7 +156,7 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     const duplicate = allSeries.find(s => s.title === title && String(s._id) !== String(id));
 
     if (duplicate) {
-        return res.render( 'error', { message: 'Titulo duplicado' });
+        return res.render( 'error', { message: 'Titulo duplicado.', boolean_serie1: true, serie});
     }
 
     //get the image of the serie
@@ -184,7 +185,7 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     };
 
     await catalog.updateSerie(id, update_serie);
-    res.render('saved_serie');
+    res.render('saved_serie',{ message: 'Se ha actualizado la serie correctamente',boolean_serie1: true, serie});
 });
 
 router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
@@ -194,42 +195,49 @@ router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
     
 });
 
-//update episode
+    //update episode
 router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 } ]),async (req, res) => {
     const id = req.params.id;
-    const numEpisode = parseInt(req.params.numEpisode);
-    const { titleEpisode, synopsisEpisode, timeEpisode } = req.body;
+    const { titleEpisode, synopsisEpisode, timeEpisode, numEpisode } = req.body;
     const epTime = parseInt(timeEpisode);
-//not null
+    const newNumEpisode = parseInt(numEpisode);
+    const originalNumEpisode = parseInt(req.params.numEpisode);
+
+    const serie = await catalog.getSerie(id);
+    const episode = await catalog.getEpisode(serie, originalNumEpisode);
+
+    //not null
     if (!titleEpisode || !synopsisEpisode || isNaN(epTime)) {
-        return res.render('error', { message: 'Todos los campos son obligatorios.' });
+        return res.render('error', { message: 'Todos los campos son obligatorios.' , boolean_episode2: true,serie, episode});
     }
 
     const allEpisodes = await catalog.getEpisodes(id);
-    //not duplicated
-    const duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode &&String(ep.numEpisode) !== String(numEpisode));
+    //not duplicated title
+    let duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode && ep.numEpisode !== originalNumEpisode);
     if (duplicate) {
-        return res.render('error', {
-            message: 'Título del episodio duplicado'
-        });
+        return res.render('error', { message: 'Título del episodio duplicado.' ,boolean_episode2: true, serie, episode});
     }
-    //select photo and video
-    const serie = await catalog.getSerie(id);
-    const originalEp = serie.episodes.find(ep => ep.numEpisode === numEpisode);
+    //not duplicated number
+    duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
+    if (duplicate) {
+    return res.render('error', { message: 'Ese número de episodio ya existe.' ,boolean_episode2: true, serie, episode});
+    }
+    //select photo and video      
     const imageFile = req.files?.imageFilenamedetalle?.[0];
     const trailerFile = req.files?.trailerEpisode?.[0];
+    const originalEp = serie.episodes.find(ep => ep.numEpisode === originalNumEpisode);
 
     //new_episode
     const update_ep = {
-        titleEpisode,
+        titleEpisode, 
         synopsisEpisode,
-        numEpisode,
-        duration: epTime,
+        numEpisode: newNumEpisode,
+        timeEpisode: epTime,
         imageFilenamedetalle: imageFile ? imageFile.filename : originalEp.imageFilenamedetalle,
         trailerEpisode: trailerFile ? trailerFile.filename : originalEp.trailerEpisode
     };
     await catalog.updateEpisode(id, numEpisode, update_ep);
-    res.render('saved_serie');
+    res.render('saved_serie',{message: 'Se ha actualizado el episodio correctamente' , boolean_episode2: true, serie, episode: update_ep});
 });
 
 //end main_detalle
@@ -249,38 +257,38 @@ const requiredFields = ['title', 'seasons', 'ageClasification', 'premiere', 'gen
     for (const field of requiredFields) {
         if (!req.body[field]) {
         
-            return res.render('error', { message: `Error:Todos los campos son obligatorios` });
+            return res.render('error', { message: `Todos los campos son obligatorios`,boolean_serie2: true });
         }
     } 
     //synopsis length
     const characterSynopsis = req.body.synopsis.trim();
 
     if (characterSynopsis.length > 300) {
-        return res.render('error', { message: `Error: La sinopsis no puede exceder los 300 caracteres (actual: ${characterSynopsis.length}).` });
+        return res.render('error', { message: `La sinopsis no puede exceder los 300 caracteres (actual: ${characterSynopsis.length}).`,boolean_serie2: true });
     }
 
     // Check if the first character is uppercase
     const firstChar = req.body.title.charAt(0);
 
     if (firstChar !== firstChar.toUpperCase()) { 
-        return res.render('error', { message: 'Error: El título debe comenzar con una letra mayúscula.' });
+        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.',boolean_serie2: true });
     }
     //duplicated title
     if (duplicate) {
-        return res.render( 'error', { message: 'Error: Ya hay un título igual en el catálogo' });
+        return res.render( 'error', { message: 'Ya hay un título igual en el catálogo',boolean_serie2: true });
     }
     //validations
     
     if (isNaN(seasons) || seasons < 1 || seasons > 20) {
-        return res.render('error', { message: 'Error: El número de temporadas debe estar entre 1 y 20.'});
+        return res.render('error', { message: 'El número de temporadas debe estar entre 1 y 20.', boolean_serie2: true});
     }
 
     if (isNaN(ageClasification) || ageClasification < 0 || ageClasification > 18) {
-        return res.render('error', { message: 'Error: La clasificación de edad debe ser un estar entre 0 y 18.'});
+        return res.render('error', { message: 'La clasificación de edad debe ser un estar entre 0 y 18.', boolean_serie2: true});
     }
     
     if (isNaN(premiere) || premiere < 1900 || premiere > currentYear + 1) {
-        return res.render('error', { message: `Error: El año de estreno debe estar entre 1900 y 2026.` });
+        return res.render('error', { message: `El año de estreno debe estar entre 1900 y 2026.`, boolean_serie2: true});
     }
 
     //get image
@@ -304,7 +312,7 @@ const requiredFields = ['title', 'seasons', 'ageClasification', 'premiere', 'gen
     };
     
     await catalog.addSerie(serie);
-    res.render('saved_serie');
+    res.render('saved_serie', {boolean_serie1: true});
 });
 
 /*router.serie('/serie/new', upload.single('image'), async (req, res) => {
