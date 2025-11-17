@@ -2,21 +2,6 @@ html {
     background-color: #141414
 }
 
-header {
-
-    background-color:#141414;
-    font-size: 68px;
-    margin: auto;
-    text-align: center;
-}
-
-header span {
-    color: red;
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-weight: bold;
-    letter-spacing: 4px;
-}
-
 #Title { 
     color:white;
     text-align: start;
@@ -278,56 +263,5 @@ div h2 {
     max-width: 150px;
     opacity: 1;
     margin-left: 8px;
-}
-
-footer {
-    background-color:#292929;
-    min-height: 500px;
-}
-
-.logo-footer {
-    width: 200px;
-    height: auto;
-    margin-top: 20px;
-}
-
-.footer-text{
-    font-size: 1.5rem;
-    color: white;
-    padding: 20px;
-}
-
-.icons-social-networks a{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px;
-    margin: 10px;
-    border: 2px solid white;
-    border-radius: 50%;
-    transition: all 0.2s ease-in;
-}
-
-.icons-social-networks i {
-    color: white;
-    font-size: 1.5rem;
-    transition: all 0.2s ease-in;
-}
-
-.icons-social-networks a:hover {
-    background-color: white;
-    border: 2px solid rgb(13, 110, 253);
-}
-
-.icons-social-networks a:hover i {
-    color: black;
-}
-
-.copyright {
-    font-size: 15px;
-    color: #aeaeae;
-    padding: 20px;
 }
 
