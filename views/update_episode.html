@@ -16,7 +16,7 @@
     <div class="col-12 col-md-8 col-lg-6"> 
     <div class="form-container">
         <form action="/form_update_episode/{{serie._id}}/{{episode.numEpisode}}" method="POST" enctype="multipart/form-data">
-            <h1>Editar serie</h1>
+            <h1>Editar episodio</h1>
         <div class="form-group">
             <label for="titulo" class="form-label">Título del episodio</label>
             <input type="text" class="form-control" id="titulo" name="titleEpisode" placeholder="Titulo del episodio" value = "{{episode.titleEpisode}}"> 
@@ -29,7 +29,7 @@
 
         <div class="form-group">
             <label for="edad" class="form-label">Número del episodio</label>
-            <input type="number" class="form-control" name="numEpisode" id="edad" placeholder="1" value="{{episode.NumEpisode}}" /> 
+            <input type="number" class="form-control" name="numEpisode" id="edad" placeholder="1" value="{{episode.numEpisode}}" /> 
         </div>
 
         <div class="form-group">
@@ -39,12 +39,12 @@
 
         <div class="form-group">
             <label for="portada" class="form-label" enctype="multipart/form-data">Portada</label>
-            <input type="file" name="image" class="form-control" id="Episodio" value="{{episode.imageFilenamedetalle}}" /> 
+            <input type="file" name="imageFilenamedetalle" class="form-control" id="Episodio" value="{{episode.imageFilenamedetalle}}" /> 
         </div>
 
         <div class="form-group">
             <label for="portada" class="form-label" enctype="multipart/form-data">Trailer</label>
-            <input type="file" name="image" class="form-control" id="Trailer" value="{{episode.imageFilenamedetalle}}" /> 
+            <input type="file" name="trailerEpisode" class="form-control" id="Trailer" value="{{episode.imageFilenamedetalle}}" /> 
         </div>
 
         <div class="form-actions">

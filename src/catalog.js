@@ -108,26 +108,25 @@ export async function updateSerie (id, update_serie){
 
 
 export async function addEpisode(id, new_episode) {
+    let serie = await series.findOne({ _id: new ObjectId(id) });
     await series.updateOne(
         { _id: new ObjectId(id) },
         { $push: { episodes: new_episode } }
     );
     serie.episodes.sort((a,b) => a.numEpisode - b.numEpisode)
-    return serie
 }
 
 export async function updateEpisode(id, numEpisode, update_ep) {
-    let serie = await series.findOne({ _id: new ObjectId(id) });
-
-return await series.updateOne(
+    const targetEpisodeNum = parseInt(numEpisode);
+    
+    const result = await series.updateOne(
         { 
             _id: new ObjectId(id),
-            "episodes.numEpisode": numEpisode
+            "episodes.numEpisode": targetEpisodeNum
         },
-        { 
-            $set: { "episodes.$": update_ep } 
-        }
+        { $set: { "episodes.$": update_ep } }
     );
+    return result;
 }
 
 

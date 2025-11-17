@@ -140,7 +140,6 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     
     const id = req.params.id;
     const { title, genre, synopsis, ageClasification, seasons, premiere} = req.body;
-
     const age = parseInt(ageClasification);
     const numSeasons = parseInt(seasons);
     const year = parseInt(premiere);
@@ -194,37 +193,41 @@ router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
     
 });
 
-//update episode
+    //update episode
 router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 } ]),async (req, res) => {
     const id = req.params.id;
-    const numEpisode = parseInt(req.params.numEpisode);
-    const { titleEpisode, synopsisEpisode, timeEpisode } = req.body;
+    const { titleEpisode, synopsisEpisode, timeEpisode, numEpisode } = req.body;
     const epTime = parseInt(timeEpisode);
+    const newNumEpisode = parseInt(numEpisode);
+    const originalNumEpisode = parseInt(req.params.numEpisode);
 //not null
     if (!titleEpisode || !synopsisEpisode || isNaN(epTime)) {
         return res.render('error', { message: 'Todos los campos son obligatorios.' });
     }
 
     const allEpisodes = await catalog.getEpisodes(id);
-    //not duplicated
-    const duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode &&String(ep.numEpisode) !== String(numEpisode));
+    //not duplicated title
+    let duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode && ep.numEpisode !== originalNumEpisode);
     if (duplicate) {
-        return res.render('error', {
-            message: 'Título del episodio duplicado'
-        });
+        return res.render('error', { message: 'Título del episodio duplicado.' });
     }
-    //select photo and video
-    const serie = await catalog.getSerie(id);
-    const originalEp = serie.episodes.find(ep => ep.numEpisode === numEpisode);
+    //not duplicated number
+    duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
+    if (duplicate) {
+    return res.render('error', { message: 'Ese número de episodio ya existe.' });
+    }
+    //select photo and video      
     const imageFile = req.files?.imageFilenamedetalle?.[0];
     const trailerFile = req.files?.trailerEpisode?.[0];
+    const serie = await catalog.getSerie(id);
+    const originalEp = serie.episodes.find(ep => ep.numEpisode === originalNumEpisode);
 
     //new_episode
     const update_ep = {
-        titleEpisode,
+        titleEpisode, 
         synopsisEpisode,
-        numEpisode,
-        duration: epTime,
+        numEpisode: newNumEpisode,
+        timeEpisode: epTime,
         imageFilenamedetalle: imageFile ? imageFile.filename : originalEp.imageFilenamedetalle,
         trailerEpisode: trailerFile ? trailerFile.filename : originalEp.trailerEpisode
     };
@@ -240,12 +243,7 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
     const ageClasification = parseInt(req.body.ageClasification);
     const premiere = parseInt(req.body.premiere);
     const currentYear = new Date().getFullYear();
-    const allSeries = await catalog.getSeries();
-    const duplicate = allSeries.find(s => s.title === req.body.title);
 
-    if (duplicate) {
-        return res.render( 'error', { message: 'Titulo duplicado' });
-    }
     
     if (isNaN(seasons) || seasons < 1 || seasons > 20) {
         return res.status(400).send('Error: El número de temporadas debe estar entre 1 y 20.');
@@ -253,17 +251,11 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
 
     if (isNaN(ageClasification) || ageClasification < 0 || ageClasification > 18) {
         return res.status(400).send('Error: La clasificación de edad debe ser un estar entre 0 y 18.');
-    }
+    } 
     
     if (isNaN(premiere) || premiere < 1900 || premiere > currentYear + 1) {
         return res.status(400).send(`Error: El año de estreno debe estar entre 1900 y 2026.`);
     }
-
-    let imageFilename = null;
-
-    if (req.file) {
-        imageFilename = req.file.filename;  
-    } 
 
     let serie = { 
         title: req.body.title,
@@ -272,7 +264,7 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
         seasons: seasons, 
         genre: req.body.genre,
         synopsis: req.body.synopsis,
-        imageFilename,
+        image: req.file?.filename,
     };
     
     await catalog.addSerie(serie);
