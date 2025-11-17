@@ -19,16 +19,16 @@
         <form action="/serie/new" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="title" placeholder="Nombre de la serie" required/> 
+            <input type="text" class="form-control" id="titulo" name="title" placeholder="Nombre de la serie" /> 
           </div>
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required></textarea> 
+            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" ></textarea> 
           </div>
           <div class="form-group">
             <label for="genero" class="form-label">Género</label>
-            <select id="genero" name="genre" class="form-select" required> 
+            <select id="genero" name="genre" class="form-select" > 
               <option value="">Selecciona un género</option>
               <option value="accion">Acción</option>
               <option value="aventura">Aventura</option>
@@ -45,24 +45,24 @@
 
           <div class="form-group">
             <label for="portada" class="form-label" enctype="multipart/form-data" >Portada</label>
-            <input type="file" name="image" class="form-control" id="portada" required /> 
+            <input type="file" name="image" class="form-control" id="portada"  /> 
           </div>
 
           <div class="form-group">
             <label for="edad" class="form-label">Edad Requerida</label>
-            <input type="number" class="form-control" name="ageClasification" id="edad" placeholder="Edad requerida" required /> 
+            <input type="number" class="form-control" name="ageClasification" id="edad" placeholder="Edad requerida" /> 
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
-            <input type="number" class="form-control" name="seasons" id="temporadas" placeholder="Número de temporadas" required /> 
+            <input type="number" class="form-control" name="seasons" id="temporadas" placeholder="Número de temporadas" /> 
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
-            <input type="number" class="form-control" name="premiere" id="año" placeholder="Año en el que se estrenó" required /> 
+            <input type="number" class="form-control" name="premiere" id="año" placeholder="Año en el que se estrenó"  /> 
           </div>
-
+          
           <div class="form-actions">
             <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
             <button type="submit" value="Send" class="btn btn-default">Guardar</button>   
