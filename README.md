@@ -125,4 +125,51 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
   4. main_nuevo-elem(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/main_nuevo-elem.html)
   5. Readme(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/README.md)
 
+# PRACTICA 2
 
+-Descripcion de ficheros
+   1. Imagen: Contine las imagenes que se usan al iniciar la web.
+   2. Video: Contiene los videos que se usan al inicial la web.
+   3. data: Contiene la informacion que se sube a la base de datos al iniciar la aplicacion
+   4. Los css: Encargados de dar estilo a la pagina.
+   5. Imagen( en public ): Contiene el logo de la pagina web
+   6. app.js: Este fichero se encarga de inicializar y configurar la aplicación web.
+   7. catalog: Este fichero se encarga de gestionar la colección de series de la base de datos y provee funciones para interactuar con los datos.
+   8. load_data.js: Este fichero se encarga de cargar datos de demostración en la aplicación.
+   9. router: Este fichero se encarga de definir y gestionar todas las rutas de la aplicación web y de manejar la interacción del usuario con los datos.
+   10. uploads: Carpeta donde se suben las imagenes y videos que se utilizaran al iniciar la aplicacion. Ademas, todas las nuevas fotos se guardan en esta carpeta.
+   11. error.html: Plantilla de vista para mostrar mensajes de error cometidos en los formularios.
+   12. footer: Es el footer de la pagina web.
+   13. header: Es el header de la pagina web.
+   14. index: Vista principal del catálogo de series.
+   15. main_detalle_notfilm: Vista de detalle de serie y episodio en la web.
+   16. main_nuevo-elem.html: Vista para crear una nueva serie en la aplicación web.
+   17. saved_serie: Vista de confirmación de operaciones en la aplicación web.
+   18. update_episode.: Vista para editar un episodio existente en la aplicación web.
+   19. update_serie: Vista para editar una serie existente en la aplicación web.
+
+# PARTICIPACIÓN
+
+- # Héctor Moreno García
+  - Desarrollo de la Funcionalidad de la Página de Detalle:
+Se implementó toda la funcionalidad de la página de detalle de series, incluyendo la creación de los archivos HTML correspondientes para la visualización de la información de cada serie y sus episodios, así como los formularios necesarios para crear, editar y eliminar episodios. Se integraron interacciones dinámicas para la navegación entre episodios (siguiente y anterior), la reproducción de trailers y la descarga de contenidos multimedia. Además, se manejaron correctamente las acciones de actualización y eliminación de series y episodios, garantizando una experiencia de usuario fluida y coherente con el resto de la aplicación.
+
+  - Colaboración en el Proyecto:
+Se brindó apoyo al equipo en la implementación de la página de detalle, ayudando en la creación de los formularios HTML y en la integración de la funcionalidad para gestionar series y episodios.
+
+  - Listado de Commit:
+  1. UPDATE catalog, all css, main_detalle and index ADD html error, update_serie and update_episode(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/4610100d2fdbbc4f7716bb86f8ae301b2161b7c6): Añadido el html error, update_serie y update_episode. Además, se actualizao el routerm css, main_detalle, index y el catalog para implemetar gran parte de la funcionalidad de la web.
+  2. UPDATE error, saved_serie ADD style_confirmacion(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/95215dd20a15595710387a0431f6a30132d84d26): Se arreglor los fallos de los formularios y se mejoro el funcionamiento de error.html y saved_serie.html
+  3. ADD trailers to json and UPDATE router and ctalog.(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/e2a07e4c403cbefb81e554234f7f5562b436c3e8): se añadieron los trailer al json y se actualizo el router y el catalog.
+  4. UPGRADE index, main_detalle, data and ADD photos and videos(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/56b56ab020a2e9b7618eedc1c8de99d7b1ec3c42): Se actualizo el index el main_detalle, el data y se añadieron las fotos y algunos videos.
+  5. UPGRADE update_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/85551c2c36b43779caff4bf2dce7d2c7e9360dea): Se añadio la funcionalidada por primera vez a un formulario
+
+  - Lista de archivos:
+  1. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  2. Catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/catalog.js)
+  3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
+  4. saved_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/saved_serie.html)
+  5. error(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/error.html)
+
+
+ 
