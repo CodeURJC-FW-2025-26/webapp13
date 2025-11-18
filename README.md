@@ -170,5 +170,28 @@ Se brindó apoyo al equipo en la implementación de la página de detalle, ayuda
   4. saved_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/saved_serie.html)
   5. error(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/error.html)
 
+ - # Jaime Bergad Lario
 
- 
+  - Desarrollo de la Funcionalidad de la Página de Nuevo Elemento:
+Se desarrolló la página de nuevo elemento de series, centrada en la implementación del botón Guardar para que al hacer clic, los datos del formulario se envíen al servidor para crear el nuevo elemento de la entidad principal y almacenarlo en la base de datos. Se implementó una validación de campos tanto en el servidor como en el navegador (con HTML), verificando que el título sea único y comience con letra mayúscula, que los campos obligatorios no estén vacíos, que los datos tengan formatos y rangos adecuados, y que la descripción cumpla con los límites de caracteres. En caso de exito al enviar el elemento se mostrará una página intermedia de validación, y lo mismo si se tiene un error se mostrará en otra página intermedia.
+
+- Colaboración en el Proyecto:
+Se implementó la página de nuevo elemento de forma que todas las series mostradas en la página principal puedan ser creadas, además de que toda la información rellenada en el formulario sea guardada en la base de datos.
+
+- Listado de Commit:
+  1. Added form functionality (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/2ca5b6df66508d525a0c53b6e2728002d5f6a6d2), este commit concecto el boton Guardar con la base de datos para que se pidan los datos que se rellenan en el form. Además de crear una página experimental de error.
+
+  2. Upgrade Main and Router (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/8b5389e182e57c38c1dee71ee54f9234602320ef), este commit realiza las validaciones de los campos y muestra los errores, además de añadir los campos necesarios para la entidad secundaria.
+
+  3. Update form (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/7529789160ab95508d5040ca60b1831c478b826d), se valida que el título sea único además de añadir validaciones en html para el form
+
+  4. Added form functionalities (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/0a2acf7832359fccb01e848e46280b6c4c438807) optimización del código y adición de más validaciones a los campos.
+
+  5. Update Main (https://github.com/CodeURJC-FW-2025-26/webapp13/commit/cef0dc00c159dc386e91c229f42fce594e0803e5) Actualización del main con comentarios.
+
+  - Lista de archivos:
+  1. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  2. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/catalog.js)
+  3. main_nuevo-elem (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_nuevo-elem.html)
+  4. saved_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/saved_serie.html)
+  5. error(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/error.html)
