@@ -15,43 +15,81 @@
 <div class="row justify-content-center"> 
     <div class="col-12 col-md-8 col-lg-6"> 
     <div class="form-container">
-        <form action="/form_update_episode/{{serie._id}}/{{episode.numEpisode}}" method="POST" enctype="multipart/form-data">
-            <h1>Editar episodio</h1>
-        <div class="form-group">
-            <label for="titulo" class="form-label">Título del episodio</label>
-            <input type="text" class="form-control" id="titulo" name="titleEpisode" placeholder="Titulo del episodio" value = "{{episode.titleEpisode}}"> 
-        </div>
+        <form action="{{#updatemode}}/form_update_episode/{{serie._id}}/{{episode.numEpisode}}{{/updatemode}}{{#addmode}}/add_episode/{{serie._id}}{{/addmode}}" method="POST" enctype="multipart/form-data">
+    
+    <h1>
+        {{#updatemode}}Editar Episodio{{/updatemode}}
+        {{#addmode}}Crear Episodio{{/addmode}}
+    </h1>
 
-        <div class="form-group">
-            <label for="sinopsis" class="form-label">Sinopsis del episodio</label>
-            <textarea class="form-control" id="sinopsis" name="synopsisEpisode" placeholder="Breve descripción del episodio" rows="3" >{{episode.synopsisEpisode}}</textarea> 
+    <div class="form-group">
+        <label for="titleEpisode" class="form-label">Título del episodio</label>
+        <input type="text" class="form-control" name="titleEpisode" 
+            value="{{#updatemode}}{{episode.titleEpisode}}{{/updatemode}}" 
+            placeholder="Ingresa el título del episodio" required /> 
+    </div>
+    <div class="form-group">
+            <label for="numEpisode" class="form-label">Número del episodio</label>
+            <input type="number" class="form-control" name="numEpisode" 
+                value="{{#updatemode}}{{episode.numEpisode}}{{/updatemode}}" 
+                placeholder="Número del episodio (ej: 1, 2, 3...)" required /> 
         </div>
+    <div class="form-group">
+        <label for="synopsisEpisode" class="form-label">Sinopsis del episodio</label>
+        <textarea class="form-control" name="synopsisEpisode" rows="3" 
+                placeholder="Describe la trama del episodio..." required>{{#updatemode}}{{episode.synopsisEpisode}}{{/updatemode}}</textarea> 
+    </div>
 
-        <div class="form-group">
-            <label for="edad" class="form-label">Número del episodio</label>
-            <input type="number" class="form-control" name="numEpisode" id="edad" placeholder="1" value="{{episode.numEpisode}}" /> 
-        </div>
+    <div class="form-group">
+        <label for="timeEpisode" class="form-label">Duración (minutos)</label>
+        <input type="number" class="form-control" name="timeEpisode" 
+            value="{{#updatemode}}{{episode.timeEpisode}}{{/updatemode}}" 
+            placeholder="Duración en minutos (ej: 24, 45...)" required /> 
+    </div>
 
-        <div class="form-group">
-            <label for="temporadas" class="form-label">Duración del episodio</label>
-            <input type="number" class="form-control" name="timeEpisode" id="temporadas" placeholder="24 minutos" value= "{{episode.timeEpisode}}"  /> 
-        </div>
+    <div class="form-group">
+        <label for="imageFilenamedetalle" class="form-label">Portada del episodio</label>
+        {{#addmode}}
+        <input type="file" name="imageFilenamedetalle" class="form-control" 
+            placeholder="Selecciona una imagen para el episodio" required /> 
+        {{/addmode}}
+        {{#updatemode}}
+        <input type="file" name="imageFilenamedetalle" class="form-control"
+            placeholder="Selecciona una nueva imagen (opcional)" /> 
+        {{/updatemode}}
+        {{#updatemode}}
+        <small class="form-text text-muted">
+            Archivo actual: {{episode.imageFilenamedetalle}}
+        </small>
+        {{/updatemode}}
+    </div>
 
-        <div class="form-group">
-            <label for="portada" class="form-label" enctype="multipart/form-data">Portada</label>
-            <input type="file" name="imageFilenamedetalle" class="form-control" id="Episodio" value="{{episode.imageFilenamedetalle}}" /> 
-        </div>
+    <div class="form-group">
+        <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+        {{#addmode}}
+        <input type="file" name="trailerEpisode" class="form-control" 
+            placeholder="Selecciona el trailer del episodio" required/> 
+        {{/addmode}}
+        {{#updatemode}}
+        <input type="file" name="trailerEpisode" class="form-control"
+            placeholder="Selecciona un nuevo trailer (opcional)"/> 
+        {{/updatemode}}
+        {{#updatemode}}
+        <small class="form-text text-muted">
+            Archivo actual: {{episode.trailerEpisode}}
+        </small>
+        {{/updatemode}}
+    </div>
 
-        <div class="form-group">
-            <label for="portada" class="form-label" enctype="multipart/form-data">Trailer</label>
-            <input type="file" name="trailerEpisode" class="form-control" id="Trailer" value="{{episode.imageFilenamedetalle}}" /> 
-        </div>
 
-        <div class="form-actions">
-            <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
-            <button type="submit" value="Send" class="btn btn-default">Guardar</button>   
-        </div>
-        </form>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">
+            {{#updatemode}}Actualizar Episodio{{/updatemode}}
+            {{#addmode}}Crear Episodio{{/addmode}}
+        </button>
+        <a href="/" class="btn btn-volver">Cancelar</a>
+    </div>
+</form>
     </div>
     </div>
 </div>

@@ -16,62 +16,85 @@
   <div class="row justify-content-center"> 
     <div class="col-12 col-md-8 col-lg-6"> 
       <div class="form-container">
-        <form action="/serie/new" method="POST" enctype="multipart/form-data">
+        <form action="{{#updatemode}}/update_serie/{{serie._id}}{{/updatemode}}{{#addmode}}/serie/new{{/addmode}}" method="POST" enctype="multipart/form-data">
+          <h1>
+              {{#updatemode}}Editar Serie{{/updatemode}}
+              {{#addmode}}Crear Serie{{/addmode}}
+          </h1>
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="title" placeholder="Nombre de la serie" /> 
+            <input type="text" class="form-control" id="titulo" name="title" 
+                  value="{{#updatemode}}{{serie.title}}{{/updatemode}}" 
+                  placeholder="Nombre de la serie" /> 
           </div>
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" ></textarea> 
+            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3">{{#updatemode}}{{serie.synopsis}}{{/updatemode}}</textarea> 
           </div>
+
           <div class="form-group">
             <label for="genero" class="form-label">Género</label>
-            <select id="genero" name="genre" class="form-select" > 
+            <select id="genero" name="genre" class="form-select">
               <option value="">Selecciona un género</option>
-              <option value="accion">Acción</option>
-              <option value="aventura">Aventura</option>
-              <option value="comedia">Comedia</option>
-              <option value="drama">Drama</option>
-              <option value="fantasia">Fantasía</option>
-              <option value="terror">Terror</option>
-              <option value="ciencia-ficcion">Ciencia Ficción</option>
-              <option value="documental">Documental</option>
-              <option value="romance">Romance</option>
-              <option value="suspenso">Suspenso</option>
+              <option value="Acción">Acción</option>
+              <option value="Anime">Anime</option>
+              <option value="Policial" >Policial</option>
+              <option value="Comedia">Comedia</option>
+              <option value="Drama" >Drama</option>
+              <option value="Thriller" >Thriller</option>
+              <option value="Terror">Terror</option>
+              <option value="Ciencia ficción" >Ciencia Ficción</option>
+              <option value="Documental" >Documental</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="portada" class="form-label" enctype="multipart/form-data" >Portada</label>
-            <input type="file" name="image" class="form-control" id="portada"  /> 
+            <label for="portada" class="form-label">Portada</label>
+            {{#addmode}}
+            <input type="file" name="image" class="form-control" id="portada" required /> 
+            {{/addmode}}
+            {{#updatemode}}
+            <input type="file" name="image" class="form-control" id="portada" /> 
+            <small class="form-text text-muted">
+                Archivo actual: {{serie.imageFilename}}
+            </small>
+            {{/updatemode}}
           </div>
 
           <div class="form-group">
             <label for="edad" class="form-label">Edad Requerida</label>
-            <input type="number" class="form-control" name="ageClasification" id="edad" placeholder="Edad requerida" /> 
+            <input type="number" class="form-control" name="ageClasification" id="edad" 
+                  value="{{#updatemode}}{{serie.ageClassification}}{{/updatemode}}"
+                  placeholder="Edad requerida" /> 
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
-            <input type="number" class="form-control" name="seasons" id="temporadas" placeholder="Número de temporadas" /> 
+            <input type="number" class="form-control" name="seasons" id="temporadas" 
+                  value="{{#updatemode}}{{serie.seasons}}{{/updatemode}}"
+                  placeholder="Número de temporadas" /> 
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
-            <input type="number" class="form-control" name="premiere" id="año" placeholder="Año en el que se estrenó"  /> 
+            <input type="number" class="form-control" name="premiere" id="año" 
+                  value="{{#updatemode}}{{serie.premiere}}{{/updatemode}}"
+                  placeholder="Año en el que se estrenó" /> 
           </div>
           
           <div class="form-actions">
             <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
-            <button type="submit" value="Send" class="btn btn-default">Guardar</button>   
+            <button type="submit" class="btn btn-default">
+                {{#updatemode}}Actualizar Serie{{/updatemode}}
+                {{#addmode}}Crear Serie{{/addmode}}
+            </button>   
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-  {{>footer}}
+{{>footer}}
 </body>
 </html>

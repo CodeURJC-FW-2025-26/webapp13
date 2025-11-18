@@ -66,9 +66,25 @@ router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
 
 });
 
-router.get('/new_elem',(req,res)=>{
-    res.render('main_nuevo-elem');
+router.get('/serie_action/:id/:mode', async (req, res) => {
+        const id = req.params.id;
+        const mode = req.params.mode;
 
+        if (mode === "true"){  // Modo edición
+            const serie = await catalog.getSerie(id);         
+            return res.render('main_nuevo-elem', {
+                serie: serie,
+                addmode: false,
+                updatemode: true
+            });
+        }
+
+        // Modo creación (mode === "false")
+        return res.render('main_nuevo-elem', {
+            serie: null,
+            addmode: true,
+            updatemode: false
+        });
 });
 
 router.get('/serie/:id/image', async (req, res) => {
@@ -115,18 +131,30 @@ router.get('/next/:id/:numEpisode', async(req, res) => {
     res.render('main_detalle_notfilm', {serie,episode})
 })
 
-router.get('/previus/:id/:numEpisode' , async(req,res) =>{
-    let serie = await catalog.getSerie(req.params.id);
-    let episode = await catalog.getPreviusEpisode(serie, req.params.numEpisode);
-    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-    res.render('main_detalle_notfilm', {serie, episode})
-});
 
-router.get('/serie_update/:id', async (req,res)=>{
-    let serie = await catalog.getSerie(req.params.id);
-    res.render('update_serie', {serie});
-});
+router.get('/update_episode/:id/:numEpisode', async (req, res) => {
+    const id = req.params.id;
+    const serie = await catalog.getSerie(id);
+    const numEpisode = parseInt(req.params.numEpisode);
 
+    // Si edit es "true" Y numEpisode es mayor que 0, es edición
+    if (numEpisode > 0){
+        const episode = await catalog.getEpisode(serie, numEpisode);
+        return res.render('update_episode', {
+            serie: serie,
+            episode: episode,
+            updatemode: true,
+            addmode: false,
+        }); 
+    }
+
+    // Si no, es creación
+    return res.render('update_episode', {
+        serie: serie,
+        updatemode: false,
+        addmode: true,
+    });
+});
 //new episode
 router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 },{ name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
     const id = req.params.id;
@@ -141,7 +169,7 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
         return res.render('error', { message: 'Todos los campos del episodio son obligatorios.' , boolean_episode1: true,serie});
     }
     //not duplicated
-    
+
     let duplicateEp = serie.episodes.find(ep => ep.numEpisode === epNum);
     if (duplicateEp) {
         return res.render('error', { message: 'Ese número de episodio ya existe.',boolean_episode1: true,serie});
@@ -221,13 +249,6 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     res.render('saved_serie',{ message: 'Se ha actualizado la serie correctamente',boolean_serie1: true, serie});
 });
 
-router.get('/update_episode/:id/:numEpisode', async (req,res)=>{
-    let serie = await catalog.getSerie(req.params.id);
-    let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
-    res.render('update_episode', {serie, episode});
-    
-});
-
     //update episode
 router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 } ]),async (req, res) => {
     const id = req.params.id;
@@ -272,8 +293,6 @@ router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'image
     await catalog.updateEpisode(id, numEpisode, update_ep);
     res.render('saved_serie',{message: 'Se ha actualizado el episodio correctamente' , boolean_episode2: true, serie, episode: update_ep});
 });
-
-//end main_detalle
 
 router.post('/serie/new', upload.single('image'), async (req, res) => {
     
@@ -347,33 +366,3 @@ const requiredFields = ['title', 'seasons', 'ageClasification', 'premiere', 'gen
     await catalog.addSerie(serie);
     res.render('saved_serie', {boolean_serie1: true});
 });
-
-/*router.serie('/serie/new', upload.single('image'), async (req, res) => {
-
-    let serie = {
-        user: req.body.user,
-        title: req.body.title,
-        text: req.body.text,
-        imageFilename: req.file?.filename
-    };
-
-    await catalog.addserie(serie);
-
-    res.render('saved_serie', { _id: serie._id.toString() });
-
-});
-
-
-
-router.get('/serie/:id/delete', async (req, res) => {
-
-    let serie = await catalog.deleteSerie(req.params.id);
-
-    if (serie && serie.imageFilename) {
-        await fs.rm(catalog.UPLOADS_FOLDER + '/' + serie.imageFilename);
-    }
-
-    res.render('deleted_serie');
-});
-
-;*/
