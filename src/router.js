@@ -105,7 +105,7 @@ router.get('/serie_action/:id/:mode', async (req, res) => {
             return res.render('main_nuevo-elem', {
                 serie: serie,
                 addmode: false,
-                updatemode: true,
+                updatemode: true, //update true
                 genreOptions: genreOptions, //sent the lines of html
             });
         }
@@ -162,7 +162,7 @@ router.get('/borrarepisode/:id/:numEpisode', async(req,res) => {
     let episode = await catalog.getEpisode(serie, req.params.numEpisode); 
     let nextepisode = await catalog.getNextEpisode(serie, req.params.numEpisode);
     await catalog.deleteEpisode(req.params.id, req.params.numEpisode)
-    res.render('saved_serie',{ message: 'Se ha borrado el episodio correctamente', boolean_episode0: true, serie, episode: nextepisode});
+    res.render('saved_serie',{ message: 'Se ha borrado el episodio correctamente', boolean: true, serie, episode: nextepisode});
 });
 
 //get next episode
@@ -245,7 +245,7 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
     await catalog.addEpisode(id, new_Episode)
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
 
-res.render('saved_serie',{message: 'Se ha creado el episodio correctamente correctamente', boolean_episode1: true,serie,episode: new_Episode});
+res.render('saved_serie',{message: 'Se ha creado el episodio correctamente correctamente', boolean: true,serie,episode: new_Episode});
 });
 
 //update serie
@@ -364,7 +364,7 @@ router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'image
     
     res.render('saved_serie',{
         message: 'Se ha actualizado el episodio correctamente', 
-        boolean_episode2: true, 
+        boolean: true, 
         serie, 
         episode: update_ep,
         originalNumEpisode: originalNumEpisode 

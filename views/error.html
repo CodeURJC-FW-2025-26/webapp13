@@ -18,19 +18,19 @@
             <h1>¡Error!</h1>
             <p>Ha ocurrido un error.</p>
             <p>{{message}}</p>
-
+            <!--Send back to create-->
             {{#boolean_episode1}}
-            <a href="/update_episode/{{serie._id}}/{episode.numEpisode}" class="btn mt-3">Volver al episodio</a>
+            <a href="/update_episode/{{serie._id}}/¨{{episode.numEpisode}}" class="btn mt-3">Volver</a>
             {{/boolean_episode1}}
-
+            <!--Send back to create-->
             {{#boolean_episode2}}
             <a href="/update_episode/{{serie._id}}/{{episode.numEpisode}}" class="btn mt-3">Volver al formulario</a>
             {{/boolean_episode2}}
-
+            <!--Send back to form create serie-->
             {{#boolean_serie1}}
-            <a href="/serie_update/{{serie._id}}" class="btn mt-3">Volver al formulario</a>
+            <a href="/serie_action/{{serie._id}}/true" class="btn mt-3">Volver al formulario</a>
             {{/boolean_serie1}}
-
+            <!--Send back to form -->
             {{#boolean_serie2}}
             <a href="/serie_action/0/false" class="btn mt-3">Volver al formulario</a>
             {{/boolean_serie2}}

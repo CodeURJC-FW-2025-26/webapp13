@@ -24,17 +24,12 @@
         {{#boolean_serie2}}
         <a href="/" class="btn btn-primary mt-3">Volver al catalogo</a>
         {{/boolean_serie2}}
-        {{#boolean_episode1}}
-        <a href="/main_detalle/{{serie._id}}/{{episode.numEpisode}}" class="btn btn-primary mt-3">Volver al episodio</a>
-        {{/boolean_episode1}}
 
-        {{#boolean_episode0}}
-        <a href="/main_detalle/{{serie._id}}/{{episode.numEpisode}}" class="btn btn-primary mt-3">Volver al la pagina de detalle</a>
-        {{/boolean_episode0}}
-
-        {{#boolean_episode2}}
+        {{#boolean}}
         <a href="/main_detalle/{{serie._id}}/{{episode.numEpisode}}" class="btn btn-primary mt-3">Volver al episodio</a>
-        {{/boolean_episode2}}
+        {{/boolean}}
+
+
     </div>
 </div>
     {{>footer}} 
