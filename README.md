@@ -145,8 +145,7 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
    15. main_detalle_notfilm: Vista de detalle de serie y episodio en la web.
    16. main_nuevo-elem.html: Vista para crear una nueva serie en la aplicación web.
    17. saved_serie: Vista de confirmación de operaciones en la aplicación web.
-   18. update_episode.: Vista para editar un episodio existente en la aplicación web.
-   19. update_serie: Vista para editar una serie existente en la aplicación web.
+   18. update_episode.: Vista para editar un episodio existente en la aplicación web. 
 
 # PARTICIPACIÓN
 
