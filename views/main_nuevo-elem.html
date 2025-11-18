@@ -34,19 +34,10 @@
           </div>
 
           <div class="form-group">
-            <label for="genero" class="form-label">Género</label>
-            <select id="genero" name="genre" class="form-select" required>
-              <option value="">Selecciona un género</option>
-              <option value="Acción">Acción</option>
-              <option value="Anime">Anime</option>
-              <option value="Policial" >Policial</option>
-              <option value="Comedia">Comedia</option>
-              <option value="Drama" >Drama</option>
-              <option value="Thriller" >Thriller</option>
-              <option value="Terror">Terror</option>
-              <option value="Ciencia ficción" >Ciencia Ficción</option>
-              <option value="Documental" >Documental</option>
-            </select>
+              <label for="genero" class="form-label">Género</label>
+              <select id="genero" name="genre" class="form-select" required>
+                  {{{genreOptions}}}
+              </select>
           </div>
 
           <div class="form-group">
