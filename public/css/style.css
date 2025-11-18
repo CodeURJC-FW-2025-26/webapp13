@@ -64,3 +64,20 @@ nav{
 .btn{
     background-color: red;
 }
+.pagination .page-link {
+    color: white;
+    background-color: red;
+    border-color:#141414;
+}
+
+.pagination .page-item.active .page-link {
+    color: white;
+    background-color:red;
+    border-color:#141414;
+}
+
+.pagination .page-link:hover {
+    background-color: darkred;
+    border-color:#141414;
+    color: white;
+}

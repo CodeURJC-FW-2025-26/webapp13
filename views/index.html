@@ -29,11 +29,15 @@
         </div>
     </nav>
 
-    <div class="d-flex justify-content-center flex-wrap gap-2 genre-buttons">
-        {{#genres}}
-        <a href="/?genre={{.}}" class="btn btn-outline-danger">{{.}}</a>
-        {{/genres}}
-        <a href="/" class="btn btn-outline-danger">Todos</a>
+    <div class="d-flex justify-content-center flex-wrap gap-2 genre-buttons"> 
+        {{#genres}} 
+        <a href="/?genre={{name}}" class="btn btn-outline-danger {{#selected}}active{{/selected}}">
+            {{name}}
+        </a> 
+        {{/genres}} 
+        <a href="/" class="btn btn-outline-danger {{^notSelected}}active{{/notSelected}}">
+            Todos
+        </a> 
     </div>
 
 
@@ -43,7 +47,7 @@
                 {{#series}}
                 <div class="col">
                     <div class="card h-100 bg-dark text-white">
-                        <a href="main_detalle/{{_id}}/1">
+                        <a href="main_detalle/{{_id}}/{{firstEpisode}}">
                             <img src="/serie/{{_id}}/image" class="card-img-top fixed-img" alt="...">
                         </a>
                         <div class="card-body">

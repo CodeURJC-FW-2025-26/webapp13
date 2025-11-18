@@ -42,18 +42,26 @@ router.get('/', async (req, res) => {
 
     series.forEach(serie => {
         serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+        serie.firstEpisode = serie.episodes?.at(0).numEpisode;
     });
 
 
     let allGenres = await catalog.getGenres();
+    let genreSelected =allGenres.map(genre => ({
+        name:genre,
+        selected:selectedGenres === genre
+    }));
 
-    res.render('index', { series, genres: allGenres, searchTitle, 
-        hasNext, hasPrevious, currentPage, totalItems,previousLink, nextLink,pages});
+    let notSelected = selectedGenres;
+
+
+    res.render('index', { series, genres: genreSelected,searchTitle, 
+        hasNext, hasPrevious, currentPage, totalItems,previousLink, nextLink,pages,notSelected});
 });
 
 
 // End index
-//
+
 router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
     
     let serie = await catalog.getSerie(req.params.id);
