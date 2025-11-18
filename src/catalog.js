@@ -1,6 +1,8 @@
 import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
+import { count } from 'node:console';
 import { symlink } from 'node:fs';
+import { title } from 'node:process';
 
 const router = express.Router();
 export default router;
@@ -11,6 +13,8 @@ const db = client.db('catalog');
 const series = db.collection('series');
 
 export const UPLOADS_FOLDER = './uploads';
+
+export const ITEMS_PER_PAGE = 6;
 
 export async function addSerie(serie) {
 
@@ -127,6 +131,46 @@ export async function updateEpisode(id, numEpisode, update_ep) {
         { $set: { "episodes.$": update_ep } }
     );
     return result;
+};
+
+//genre-buttons
+
+export async function getGenres() {
+    return await series.distinct("genre");
+};
+
+
+//pagination
+    
+export  function buildQuery(selectedGenres, searchTitle) {
+    let query = {};
+
+    if (selectedGenres){
+        query.genre = selectedGenres;
+    }
+
+    if (searchTitle){
+        query.title = {$regex: new RegExp(searchTitle, 'i')};
+    }
+
+    return query;
 }
 
+export async function getSeriesContext(query, currentPage) {
 
+    const skipCount = (currentPage -1) * ITEMS_PER_PAGE;
+    const limitCount = ITEMS_PER_PAGE;
+
+    const totalItems = await series.countDocuments(query);
+
+    const paginatedItems = await series.find(query).skip(skipCount).limit(limitCount).toArray();
+
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return{
+        series: paginatedItems,
+        totalItems,
+        totalPages
+    };
+    
+}

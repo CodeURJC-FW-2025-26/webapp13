@@ -9,17 +9,50 @@ export default router;
 
 const upload = multer({ dest: catalog.UPLOADS_FOLDER })
 
-
+// Index
 router.get('/', async (req, res) => {
-let series = await catalog.getSeries();
+    let selectedGenres = req.query.genre;
 
-series.forEach(serie => {
-    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    let searchTitle = req.query.title;
+
+
+    let currentPage = parseInt(req.query.page) || 1;
+
+    const query = catalog.buildQuery(selectedGenres,searchTitle);
+    const {series, totalItems, totalPages} = await catalog.getSeriesContext(query,currentPage);
+
+    const filterQueryString = `${selectedGenres ? `&genre=${selectedGenres}` : ''}` + `${searchTitle ? `&title=${searchTitle}` : ''}`;
+
+    const hasPrevious = currentPage > 1;
+    const hasNext = currentPage < totalPages;
+
+    let prevPage = currentPage -1;
+
+    let nextPage = currentPage +1;
+
+    let previousLink = hasPrevious ? `/?page=${prevPage}${filterQueryString}`: '#';
+    let nextLink = hasNext ? `/?page=${nextPage}${filterQueryString}`: '#';
+
+    const pages = Array.from({length: totalPages}, (_,i) => ({
+        num: i +1,
+        current: (i+1) === currentPage,
+        link: `/?page=${i+1}${filterQueryString}`
+    }));
+
+
+    series.forEach(serie => {
+        serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    });
+
+
+    let allGenres = await catalog.getGenres();
+
+    res.render('index', { series, genres: allGenres, searchTitle, 
+        hasNext, hasPrevious, currentPage, totalItems,previousLink, nextLink,pages});
 });
 
-res.render('index', { series });
 
-});
+// End index
 
 router.get('/main_detalle/:id/:numEpisode', async (req,res) =>{
     

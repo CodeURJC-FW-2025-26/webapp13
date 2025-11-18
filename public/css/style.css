@@ -17,6 +17,10 @@ header span {
     letter-spacing: 4px;
 }
 
+.genre-buttons{
+    background-color: #141414;
+}
+
 body {
     background-color:#141414;
 }
