@@ -21,7 +21,9 @@
         {{#boolean_serie1}}
         <a href="/main_detalle/{{serie._id}}/1" class="btn btn-primary mt-3">Ir a la serie</a>
         {{/boolean_serie1}}
-
+        {{#boolean_serie2}}
+        <a href="/" class="btn btn-primary mt-3">Volver al catalogo</a>
+        {{/boolean_serie2}}
         {{#boolean_episode1}}
         <a href="/main_detalle/{{serie._id}}/{{episode.numEpisode}}" class="btn btn-primary mt-3">Volver al episodio</a>
         {{/boolean_episode1}}

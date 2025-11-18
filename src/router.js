@@ -70,7 +70,7 @@ router.get('/serie_action/:id/:mode', async (req, res) => {
         const id = req.params.id;
         const mode = req.params.mode;
 
-        if (mode === "true"){  // Modo edición
+        if (mode === "true"){  
             const serie = await catalog.getSerie(id);         
             return res.render('main_nuevo-elem', {
                 serie: serie,
@@ -79,7 +79,7 @@ router.get('/serie_action/:id/:mode', async (req, res) => {
             });
         }
 
-        // Modo creación (mode === "false")
+        
         return res.render('main_nuevo-elem', {
             serie: null,
             addmode: true,
@@ -113,7 +113,7 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
 router.get('/borrarserie/:id', async(req,res) => {
     let serie = await catalog.getSerie(req.params.id);
     await catalog.deleteSerie(req.params.id)
-    res.render('saved_serie', { message: 'Se ha borrado la serie correctamente', boolean_serie1: true,});  
+    res.render('saved_serie', { message: 'Se ha borrado la serie correctamente', boolean_serie2: true,});  
 });
 
 router.get('/borrarepisode/:id/:numEpisode', async(req,res) => {
@@ -130,14 +130,18 @@ router.get('/next/:id/:numEpisode', async(req, res) => {
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
     res.render('main_detalle_notfilm', {serie,episode})
 })
-
+router.get('/previus/:id/:numEpisode', async(req, res) => {
+    let serie = await catalog.getSerie(req.params.id);
+    let episode = await catalog.getPreviusEpisode(serie, req.params.numEpisode);
+    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    res.render('main_detalle_notfilm', {serie,episode})
+})
 
 router.get('/update_episode/:id/:numEpisode', async (req, res) => {
     const id = req.params.id;
     const serie = await catalog.getSerie(id);
     const numEpisode = parseInt(req.params.numEpisode);
 
-    // Si edit es "true" Y numEpisode es mayor que 0, es edición
     if (numEpisode > 0){
         const episode = await catalog.getEpisode(serie, numEpisode);
         return res.render('update_episode', {
@@ -147,8 +151,6 @@ router.get('/update_episode/:id/:numEpisode', async (req, res) => {
             addmode: false,
         }); 
     }
-
-    // Si no, es creación
     return res.render('update_episode', {
         serie: serie,
         updatemode: false,
@@ -172,13 +174,15 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
 
     let duplicateEp = serie.episodes.find(ep => ep.numEpisode === epNum);
     if (duplicateEp) {
-        return res.render('error', { message: 'Ese número de episodio ya existe.',boolean_episode1: true,serie});
-    }
-    duplicateEp = serie.episodes.find(ep => ep.titleEpisode === titleEpisode);
-    if (duplicateEp) {
         return res.render('error', { message: 'Ese titulo de episodio ya existe.', boolean_episode1: true,serie});
     }
-    
+        // Check if the first character is uppercase
+    const firstChar = req.body.titleEpisode.charAt(0);
+
+    if (firstChar !== firstChar.toUpperCase()) { 
+        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.',boolean_episode1: true ,serie});
+    }
+
     if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
         return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios',boolean_episode1: true,serie });
     }
@@ -195,7 +199,7 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
     await catalog.addEpisode(id, new_Episode)
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
 
-res.render('saved_serie',{message: 'Se ha creado el episodio correctamente con existo', boolean_episode1: true,serie,episode: new_Episode});
+res.render('saved_serie',{message: 'Se ha creado el episodio correctamente correctamente', boolean_episode1: true,serie,episode: new_Episode});
 });
 
 //update serie
@@ -220,6 +224,12 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
         return res.render( 'error', { message: 'Titulo duplicado.', boolean_serie1: true, serie});
     }
 
+        // Check if the first character is uppercase
+    const firstChar = req.body.title.charAt(0);
+
+    if (firstChar !== firstChar.toUpperCase()) { 
+        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.',boolean_serie1: true, serie});
+    } 
     //get the image of the serie
     const current_serie = await catalog.getSerie(id);
     const existingImage = current_serie.imageFilename;
@@ -264,7 +274,12 @@ router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'image
     if (!titleEpisode || !synopsisEpisode || isNaN(epTime)) {
         return res.render('error', { message: 'Todos los campos son obligatorios.' , boolean_episode2: true,serie, episode});
     }
+        // Check if the first character is uppercase
+    const firstChar = req.body.titleEpisode.charAt(0);
 
+    if (firstChar !== firstChar.toUpperCase()) { 
+        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_episode2: true,serie,episode });
+    }
     const allEpisodes = await catalog.getEpisodes(id);
     //not duplicated title
     let duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode && ep.numEpisode !== originalNumEpisode);
@@ -274,7 +289,7 @@ router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'image
     //not duplicated number
     duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
     if (duplicate) {
-    return res.render('error', { message: 'Ese número de episodio ya existe.' ,boolean_episode2: true, serie, episode});
+        return res.render('error', { message: 'Ese número de episodio ya existe.' ,boolean_episode2: true, serie, episode});
     }
     //select photo and video      
     const imageFile = req.files?.imageFilenamedetalle?.[0];
@@ -290,9 +305,16 @@ router.post('/form_update_episode/:id/:numEpisode',upload.fields([{ name: 'image
         imageFilenamedetalle: imageFile ? imageFile.filename : originalEp.imageFilenamedetalle,
         trailerEpisode: trailerFile ? trailerFile.filename : originalEp.trailerEpisode
     };
-    await catalog.updateEpisode(id, numEpisode, update_ep);
-    res.render('saved_serie',{message: 'Se ha actualizado el episodio correctamente' , boolean_episode2: true, serie, episode: update_ep});
-});
+        await catalog.updateEpisode(id, originalNumEpisode, update_ep);
+    
+    res.render('saved_serie',{
+        message: 'Se ha actualizado el episodio correctamente', 
+        boolean_episode2: true, 
+        serie, 
+        episode: update_ep,
+        originalNumEpisode: originalNumEpisode // ← Añade esto
+    });
+})
 
 router.post('/serie/new', upload.single('image'), async (req, res) => {
     
@@ -313,7 +335,7 @@ const requiredFields = ['title', 'seasons', 'ageClasification', 'premiere', 'gen
         }
     } 
     //synopsis length
-    const characterSynopsis = req.body.synopsis.trim();
+    const characterSynopsis = req.body.synopsis.trim(); //delete spaces between words
 
     if (characterSynopsis.length > 300) {
         return res.render('error', { message: `La sinopsis no puede exceder los 300 caracteres (actual: ${characterSynopsis.length}).`,boolean_serie2: true });
@@ -363,6 +385,11 @@ const requiredFields = ['title', 'seasons', 'ageClasification', 'premiere', 'gen
         episodes: episodios,
     };
     
-    await catalog.addSerie(serie);
-    res.render('saved_serie', {boolean_serie1: true});
-});
+    const result = await catalog.addSerie(serie);
+res.render('saved_serie', {
+            boolean_serie1: true,
+            serie: {
+                _id: result.insertedId, 
+                serie
+            }
+})});

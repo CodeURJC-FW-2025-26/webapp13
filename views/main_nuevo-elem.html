@@ -25,17 +25,17 @@
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="title" 
                   value="{{#updatemode}}{{serie.title}}{{/updatemode}}" 
-                  placeholder="Nombre de la serie" /> 
+                  placeholder="Nombre de la serie" required /> 
           </div>
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3">{{#updatemode}}{{serie.synopsis}}{{/updatemode}}</textarea> 
+            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required>{{#updatemode}}{{serie.synopsis}}{{/updatemode}}</textarea> 
           </div>
 
           <div class="form-group">
             <label for="genero" class="form-label">Género</label>
-            <select id="genero" name="genre" class="form-select">
+            <select id="genero" name="genre" class="form-select" required>
               <option value="">Selecciona un género</option>
               <option value="Acción">Acción</option>
               <option value="Anime">Anime</option>
@@ -66,21 +66,21 @@
             <label for="edad" class="form-label">Edad Requerida</label>
             <input type="number" class="form-control" name="ageClasification" id="edad" 
                   value="{{#updatemode}}{{serie.ageClassification}}{{/updatemode}}"
-                  placeholder="Edad requerida" /> 
+                  placeholder="Edad requerida" required /> 
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
             <input type="number" class="form-control" name="seasons" id="temporadas" 
                   value="{{#updatemode}}{{serie.seasons}}{{/updatemode}}"
-                  placeholder="Número de temporadas" /> 
+                  placeholder="Número de temporadas" required /> 
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
             <input type="number" class="form-control" name="premiere" id="año" 
                   value="{{#updatemode}}{{serie.premiere}}{{/updatemode}}"
-                  placeholder="Año en el que se estrenó" /> 
+                  placeholder="Año en el que se estrenó" required /> 
           </div>
           
           <div class="form-actions">
