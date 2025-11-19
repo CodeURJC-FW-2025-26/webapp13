@@ -126,6 +126,29 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
   5. Readme(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/README.md)
 
 # PRACTICA 2
+- Requisitos
+
+  - Node.js v22.21.0
+  
+  - MongoDB v8.2.1
+
+-Instalación y ejecución
+
+  1. Ve a la sección Releases del repositorio en GitHub y descarga el release “Práctica 2”.
+  
+  2. Descarga el archivo .zip y extrae su contenido en la carpeta que desees.
+  
+  3. Abre una terminal y accede al directorio del proyecto: cd ruta/del/proyecto
+  
+  4. Si aún no tienes Node.js o MongoDB instalados, instálalos.
+  
+  5. Instala las dependencias del proyecto: npm install
+  
+  6. Ejecuta la aplicación: npm run watch
+     
+Si todo va bien, verás un mensaje similar a: Web ready in http://localhost:3000/
+Abre tu navegador y entra en http://localhost:3000/
+La aplicación estará lista para usar.
 
 -Descripcion de ficheros
    1. Imagen: Contine las imagenes que se usan al iniciar la web.
