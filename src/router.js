@@ -54,7 +54,9 @@ router.get('/', async (req, res) => {
     //In this loop, we select the color of the age label for each series and the number of the first available episode.
     series.forEach(serie => {
         serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-        serie.firstEpisode = serie.episodes?.at(0).numEpisode;
+        
+        //In the variable, we save the episode number, if there is one. To prevent errors, we add at(0)? and if there are no episodes, we set a default value of 1 so that you can enter the series to create episodes.
+        serie.firstEpisode = serie.episodes?.at(0)?.numEpisode ?? 1;
     });
 
     //We obtain all genres.
