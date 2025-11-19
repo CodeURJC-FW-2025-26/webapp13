@@ -147,6 +147,10 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
    17. saved_serie: Vista de confirmación de operaciones en la aplicación web.
    18. update_episode.: Vista para editar un episodio existente en la aplicación web. 
 
+# VIDEO DE LA DEMO
+
+https://www.youtube.com/watch?v=Wxm8rEiXNHI
+
 # PARTICIPACIÓN
 - # Daniel Marcos Serrano
   -Desarrollo de la funcionalidad de la Página Principal:
