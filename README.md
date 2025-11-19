@@ -148,6 +148,25 @@ Se crearon y configuraron los elementos estructurales compartidos entre todas la
    18. update_episode.: Vista para editar un episodio existente en la aplicación web. 
 
 # PARTICIPACIÓN
+- # Daniel Marcos Serrano
+  -Desarrollo de la funcionalidad de la Página Principal:
+Mi principal contribución al proyecto fue el desarrollo completo e implementación de la Página Principal, la cual actúa como punto de entrada y núcleo de navegación de la aplicación. Esta página es esencial para permitir a los usuarios visualizar, filtrar y explorar el catálogo de series de manera eficiente.
+  -Colaboración en el proyecto:
+Se brindó apoyo al equipo en la implementación de la página principal, colaborando en la definición de rutas, la construcción de consultas en el catálogo y la integración de datos para asegurar una navegación coherente y un funcionamiento unificado entre las distintas vistas de la aplicación.
+
+  - Listado de Commit:
+  1. Add pagination, genre-buttons and funcionality search-bar(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/03f8f12554f1166432e37b07a75d66ce4555c2dd): En este commit se realizó toda la lógica de paginación y el filtrado por genero y texto además de darle estilo.
+  2. Fix image, create getEpisode and update data(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/cd0f89a5b4dab8014e5ac1cfdb97716f65cbe52a): Se arregló la vista de las imagenes, se añadió la función getEpisode y se actualizaron los datos de la base de datos.
+  3. Update data, fix router and views(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/c65a0045ea80315827a4986693f1b20de454a0e0): Se empezó a trabajar con el proyecto adaptando el router para que fuera útil para la página y se actualizaron los datos de la base de datos.
+  4. Update style, fix router and index(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/34d4bfeec214895b7788423d18ef60d5081f006d): Se actualiza el estilo adaptando los botones de la paginación al estilo de la página, además de mediante el router adaptar los botones para que quede marcado el botón pulsado por el usuario del filtro de generos.
+  5. Change footer, header and change name of folder logo(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/3497de63b0f7c1ea50f03f7ebef2386ac01a41e3): Adaptamos el footer y header para que use partials de mustache y se cambiaron archivos y nombres de carpetas.
+
+  - Lista de archivos:
+  1. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  2. Catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/catalog.js)
+  3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
+  4. index(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/index.html)
+  5. styles(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/public/css/style.css)
 
 - # Héctor Moreno García
   - Desarrollo de la Funcionalidad de la Página de Detalle:

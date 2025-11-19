@@ -35,7 +35,7 @@
             {{name}}
         </a> 
         {{/genres}} 
-        <a href="/" class="btn btn-outline-danger {{^notSelected}}active{{/notSelected}}">
+        <a href="/" class="btn btn-outline-danger {{#notSelected}}active{{/notSelected}}">
             Todos
         </a> 
     </div>
@@ -64,10 +64,10 @@
                 </div>
                 {{/series}}
             </div>
+            {{^series}}
+                <h1 class="text-white text-center display-1">SERIES NO DISPONIBLES</h1>
+            {{/series}}
         </div>
-        {{^series}}
-        <p>Series no disponibles</p>
-        {{/series}}
 
         <div class="d-flex justify-content-center my-4">
             <nav>

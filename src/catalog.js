@@ -134,14 +134,28 @@ export async function updateEpisode(id, numEpisode, update_ep) {
 };
 
 //genre-buttons
-
+/**
+ * 
+ * Returns all genres in each series that are different.
+ * @returns {obPromise<Array<string>>ject} A promise that returns an array with the genres of the series contained in the database.
+ * @throws {Error} Throws an error if the database connection or query fails.
+ */
 export async function getGenres() {
     return await series.distinct("genre");
 };
 
 
 //pagination
-    
+
+/**
+ * 
+ * Returns the query with the filters.
+ * @param {String} selectedGenres These are the genders selected by the user. If there are no genders, the string is empty.
+ * @param {String} searchTitle The text the user types in the search bar.
+ * @returns {object}> An object containing the filter for the genre and text in the search bar.
+ * @throws {Error} Throws an error if the database connection or query fails.
+ */
+
 export  function buildQuery(selectedGenres, searchTitle) {
     let query = {};
 
@@ -156,15 +170,29 @@ export  function buildQuery(selectedGenres, searchTitle) {
     return query;
 }
 
+/**
+ * 
+ * Returns the number of series, the number of pages, and the series we will display.
+ * @param {object} query The MongoDB query object used to filter the series.
+ * @param {number} currentPage The current page number.
+ * @returns {Promise<{series: Array<object>, totalItems: number, totalPages: number}>} An object ontaining the paginated series, the total number of items, and the total page count.
+ * @throws {Error} Throws an error if the database connection or query fails.
+ */
 export async function getSeriesContext(query, currentPage) {
 
+    //We calculate the jump in the database to display the series that belong to it.
     const skipCount = (currentPage -1) * ITEMS_PER_PAGE;
+
+    //The limit of series per page in this case is 6.
     const limitCount = ITEMS_PER_PAGE;
 
+    //The total number of series.
     const totalItems = await series.countDocuments(query);
 
+    //The series we return from the database with the respective filters.
     const paginatedItems = await series.find(query).skip(skipCount).limit(limitCount).toArray();
 
+    //The number of pages in which the series are found in this case is 5 because we have 27 series, 4 pages with 6 and the fifth with 3.
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
     return{

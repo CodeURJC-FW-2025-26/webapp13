@@ -4,6 +4,8 @@ html {
 
 .genre-buttons{
     background-color: #141414;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 body {
@@ -72,7 +74,7 @@ nav{
 
 .pagination .page-item.active .page-link {
     color: white;
-    background-color:red;
+    background-color:darkred;
     border-color:#141414;
 }
 
