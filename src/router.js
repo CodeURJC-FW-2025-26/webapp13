@@ -250,7 +250,12 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
     if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
         return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios', boolean_episode1: true, serie });
     }
+     //synopsis length
+    const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
 
+    if (characterSynopsis.length > 800) {
+        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode1: true, serie }, );
+    }
     //new episode
     const new_Episode = {
         numEpisode: epNum,
@@ -295,7 +300,12 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     if (firstChar !== firstChar.toUpperCase()) {
         return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_serie1: true, serie });
     }
+    //synopsis length
+    const characterSynopsis = synopsis.trim(); //delete spaces between words
 
+    if (characterSynopsis.length > 800) {
+        return res.render('error', { message: `La sinopsis no puede exceder los 600 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie1: true,serie } );
+    }
     //get the image of the serie
     const current_serie = await catalog.getSerie(id);
     const existingImage = current_serie.imageFilename;
@@ -353,12 +363,20 @@ router.post('/form_update_episode/:id/:numEpisode', upload.fields([{ name: 'imag
     if (duplicate) {
         return res.render('error', { message: 'Título del episodio duplicado.', boolean_episode2: true, serie, episode });
     }
-
+    
     //not duplicated number
     duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
     if (duplicate) {
         return res.render('error', { message: 'Ese número de episodio ya existe.', boolean_episode2: true, serie, episode });
     }
+    
+    //synopsis length
+    const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
+
+    if (characterSynopsis.length > 800) {
+        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode2: true, serie, episode });
+    }
+
     //select photo, video and original epsiode(to select the image and video)    
     //if req.file don't exist then imageFile = false. 
     //If req.files exists BUT imageFilenamedetalle does NOT exist → imageFile = undefined
@@ -411,8 +429,8 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
     //synopsis length
     const characterSynopsis = req.body.synopsis.trim(); //delete spaces between words
 
-    if (characterSynopsis.length > 300) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 300 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie2: true });
+    if (characterSynopsis.length > 800) {
+        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie2: true });
     }
 
     // Check if the first character is uppercase
