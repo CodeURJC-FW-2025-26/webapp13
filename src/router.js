@@ -12,7 +12,7 @@ const upload = multer({ dest: catalog.UPLOADS_FOLDER })
 // Index
 router.get('/', async (req, res) => {
 
-    // We retrieve the selected gender; if there is no gender, nothing is returned.
+    // We retrieve the selected genre; if there is no genre, nothing is returned.
     let selectedGenres = req.query.genre;
 
     //We recovered the search.
@@ -62,7 +62,7 @@ router.get('/', async (req, res) => {
     //We obtain all genres.
     let allGenres = await catalog.getGenres();
 
-    //We assign each gender a selected value if it is selected and the name to appear on the buttons.
+    //We assign each genre a selected value if it is selected and the name to appear on the buttons.
     let genreSelected = allGenres.map(genre => ({
         name: genre,
         selected: selectedGenres === genre

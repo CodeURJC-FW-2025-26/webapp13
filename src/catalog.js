@@ -150,7 +150,7 @@ export async function getGenres() {
 /**
  * 
  * Returns the query with the filters.
- * @param {String} selectedGenres These are the genders selected by the user. If there are no genders, the string is empty.
+ * @param {String} selectedGenres These are the genres selected by the user. If there are no genres, the string is empty.
  * @param {String} searchTitle The text the user types in the search bar.
  * @returns {object}> An object containing the filter for the genre and text in the search bar.
  * @throws {Error} Throws an error if the database connection or query fails.
