@@ -56,6 +56,7 @@ nav{
 
 .container {
     background-color:#141414;
+    overflow-y: auto;
 }
 
 .card-text {
