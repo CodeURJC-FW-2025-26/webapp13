@@ -30,9 +30,12 @@ export async function deleteSeries(){
 
     return await series.deleteMany();
 }
-export async function getSeries(){
+export async function getSeries(from,to){
 
-    return await series.find().toArray();
+    if (from !== undefined)
+        return await series.find().skip(from).limit(to).toArray();
+    else
+        return await series.find().toArray();
 }
 
 export async function getSerie(id){

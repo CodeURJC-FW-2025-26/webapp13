@@ -78,6 +78,16 @@ router.get('/', async (req, res) => {
 });
 
 
+router.get('/moreSeries', async (req, res) => {
+    const from = parseInt(req.query.from);
+    const to = parseInt(req.query.to);
+
+    let moreSeries = await catalog.getSeries(from, to);
+
+
+    res.render("moreSeries", { series: moreSeries });
+});
+
 // End index
 
 router.get('/main_detalle/:id/:numEpisode', async (req, res) => {

@@ -1,0 +1,19 @@
+{{#series}}
+<div class="col">
+    <div class="card h-100 bg-dark text-white">
+        <a href="main_detalle/{{_id}}/{{firstEpisode}}">
+            <img src="/serie/{{_id}}/image" class="card-img-top fixed-img" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{title}} <span
+                    class="badge rounded-pill {{badgeClass}}">+{{ageClassification}}</span></h5>
+            <ul>
+                <li>Genero: {{genre}}</li>
+                <li>Estreno: {{premiere}}</li>
+                <li>Temporadas: {{seasons}}</li>
+            </ul>
+            <p class="card-text">{{synopsis}}</p>
+        </div>
+    </div>
+</div>
+{{/series}}
