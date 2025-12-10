@@ -93,12 +93,10 @@ router.get('/moreSeries', async (req, res) => {
 router.get('/main_detalle/:id/:numEpisode', async (req, res) => {
 
     let serie = await catalog.getSerie(req.params.id);
-
-    let episode = await catalog.getEpisode(serie, req.params.numEpisode);
-
+    let listEpisode = await catalog.getEpisodes(req.params.id);
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-
-    res.render('main_detalle_notfilm', { serie, episode });
+    res.render('main_detalle_notfilm', { serie, listEpisode });
+    
 
 });
 
@@ -194,20 +192,6 @@ router.get('/borrarepisode/:id/:numEpisode', async (req, res) => {
     res.render('saved_serie', { message: 'Se ha borrado el episodio correctamente', boolean: true, serie, episode: nextepisode });
 });
 
-//get next episode
-router.get('/next/:id/:numEpisode', async (req, res) => {
-    let serie = await catalog.getSerie(req.params.id);
-    let episode = await catalog.getNextEpisode(serie, req.params.numEpisode);
-    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-    res.render('main_detalle_notfilm', { serie, episode })
-})
-//get previus episode
-router.get('/previus/:id/:numEpisode', async (req, res) => {
-    let serie = await catalog.getSerie(req.params.id);
-    let episode = await catalog.getPreviusEpisode(serie, req.params.numEpisode);
-    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-    res.render('main_detalle_notfilm', { serie, episode })
-})
 //update the episode. Call the html
 router.get('/update_episode/:id/:numEpisode', async (req, res) => {
     const id = req.params.id;
