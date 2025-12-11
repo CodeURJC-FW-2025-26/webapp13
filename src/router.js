@@ -3,6 +3,7 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 import * as catalog from './catalog.js';
+import { title } from 'node:process';
 
 const router = express.Router();
 export default router;
@@ -180,21 +181,29 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
 });
 
 //delete serie
-router.get('/borrarserie/:id', async (req, res) => {
+router.get('/deleteSerie/:id', async (req, res) => {
     let serie = await catalog.getSerie(req.params.id);
     await catalog.deleteSerie(req.params.id)
     res.render('saved_serie', { message: 'Se ha borrado la serie correctamente', boolean_serie2: true, });
 });
 
 //delete episode
-router.get('/borrarepisode/:id/:numEpisode', async (req, res) => {
-    let serie = await catalog.getSerie(req.params.id);
-    let episode = await catalog.getEpisode(serie, req.params.numEpisode);
-    let nextepisode = await catalog.getNextEpisode(serie, req.params.numEpisode);
-    await catalog.deleteEpisode(req.params.id, req.params.numEpisode)
-    res.render('saved_serie', { message: 'Se ha borrado el episodio correctamente', boolean: true, serie, episode: nextepisode });
+router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
+    const numEpisode = req.params.numEpisode;
+    if (numEpisode !== "1"){
+        res.json({data: true})
+        await catalog.deleteEpisode(req.params.id, req.params.numEpisode);
+    }
+    else{
+        res.json({data:false})
+    }
 });
-
+router.get('/modal', async (req,res) =>{
+    const Content_title = req.query.title;
+    const Content_body = req.query.body
+    console.log(Content_body)
+    res.render('modal', {Content_title, Content_body});
+})
 //update the episode. Call the html
 router.get('/update_episode/:id/:numEpisode', async (req, res) => {
     const id = req.params.id;

@@ -180,8 +180,10 @@ div h2 {
 }
 
 .buttons-group2 {
+    margin-top: auto; 
     display: flex;
     justify-content: center;
+    gap: 10px
 }
 
 .btn-interactive {
@@ -320,4 +322,27 @@ h1{
 
 .form-container .btn-default:hover {
     background-color: #f40612;
+}
+
+/*spinner*/
+.spinner {
+    margin: 30px auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    animation: spin 1.0s linear infinite;
+    border-bottom-color: red;
+    text-align: center;
+    display: none;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
