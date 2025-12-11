@@ -21,24 +21,24 @@ export async function addSerie(serie) {
     return await series.insertOne(serie);
 }
 
-export async function deleteSerie(id){
+export async function deleteSerie(id) {
 
     return await series.findOneAndDelete({ _id: new ObjectId(id) });
 }
 
-export async function deleteSeries(){
+export async function deleteSeries() {
 
     return await series.deleteMany();
 }
-export async function getSeries(from,to){
+export async function getSeries(from, count) {
 
     if (from !== undefined)
-        return await series.find().skip(from).limit(to).toArray();
+        return await series.find().skip(from).limit(count).toArray();
     else
         return await series.find().toArray();
 }
 
-export async function getSerie(id){
+export async function getSerie(id) {
 
     return await series.findOne({ _id: new ObjectId(id) });
 }
@@ -73,7 +73,7 @@ export function getBadgeClass(age) {
 //delete episode
 export async function deleteEpisode(id, numEpisode) {
     const targetEpisodeNum = parseInt(numEpisode);
-    
+
     return await series.updateOne(
         { _id: new ObjectId(id) },
         { $pull: { episodes: { numEpisode: targetEpisodeNum } } }
@@ -95,22 +95,22 @@ export function getNextEpisode(serie, numEpisode) {
     return serie.episodes[index + 1];
 }
 
-export function getPreviusEpisode(serie, numEpisode){
+export function getPreviusEpisode(serie, numEpisode) {
     const targetEpisodeNum = parseInt(numEpisode);
     //get index of the episode
     const index = serie.episodes.findIndex(e => e.numEpisode === targetEpisodeNum)
     //return to last episode
-    if (index === 0){
+    if (index === 0) {
         return serie.episodes[serie.episodes.length - 1]
     }
     //return to the previus episode
-    return serie.episodes[index-1]
+    return serie.episodes[index - 1]
 
 }
 
-export async function updateSerie (id, update_serie){
-        await series.replaceOne(
-        {_id: new ObjectId(id)}, update_serie);
+export async function updateSerie(id, update_serie) {
+    await series.replaceOne(
+        { _id: new ObjectId(id) }, update_serie);
 }
 
 
@@ -120,14 +120,14 @@ export async function addEpisode(id, new_episode) {
         { _id: new ObjectId(id) },
         { $push: { episodes: new_episode } }
     );
-    serie.episodes.sort((a,b) => a.numEpisode - b.numEpisode)
+    serie.episodes.sort((a, b) => a.numEpisode - b.numEpisode)
 }
 
 export async function updateEpisode(id, numEpisode, update_ep) {
     const targetEpisodeNum = parseInt(numEpisode);
-    
+
     const result = await series.updateOne(
-        { 
+        {
             _id: new ObjectId(id),
             "episodes.numEpisode": targetEpisodeNum
         },
@@ -159,15 +159,15 @@ export async function getGenres() {
  * @throws {Error} Throws an error if the database connection or query fails.
  */
 
-export  function buildQuery(selectedGenres, searchTitle) {
+export function buildQuery(selectedGenres, searchTitle) {
     let query = {};
 
-    if (selectedGenres){
+    if (selectedGenres) {
         query.genre = selectedGenres;
     }
 
-    if (searchTitle){
-        query.title = {$regex: new RegExp(searchTitle, 'i')};
+    if (searchTitle) {
+        query.title = { $regex: new RegExp(searchTitle, 'i') };
     }
 
     return query;
@@ -181,28 +181,25 @@ export  function buildQuery(selectedGenres, searchTitle) {
  * @returns {Promise<{series: Array<object>, totalItems: number, totalPages: number}>} An object ontaining the paginated series, the total number of items, and the total page count.
  * @throws {Error} Throws an error if the database connection or query fails.
  */
-export async function getSeriesContext(query, currentPage) {
-
-    //We calculate the jump in the database to display the series that belong to it.
-    const skipCount = (currentPage -1) * ITEMS_PER_PAGE;
+export async function getSeriesContext(query, from) {
 
     //The limit of series per page in this case is 6.
     const limitCount = ITEMS_PER_PAGE;
 
-    //The total number of series.
-    const totalItems = await series.countDocuments(query);
 
     //The series we return from the database with the respective filters.
-    const paginatedItems = await series.find(query).skip(skipCount).limit(limitCount).toArray();
 
-    //The number of pages in which the series are found in this case is 5 because we have 27 series, 4 pages with 6 and the fifth with 3.
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    let paginatedItems;
 
-    return{
+    if (from === undefined)
+        paginatedItems = await series.find(query).limit(limitCount).toArray();
+    else
+        paginatedItems = await series.find(query).skip(from).limit(limitCount).toArray();
+
+
+    return {
         series: paginatedItems,
-        totalItems,
-        totalPages
     };
-    
+
 }
 

@@ -18,45 +18,19 @@ router.get('/', async (req, res) => {
     //We recovered the search.
     let searchTitle = req.query.title;
 
-    //We retrieve the page number, which is 1 by default on the first page.
-    let currentPage = parseInt(req.query.page) || 1;
 
     //In query, we combine requests of the same type and the search.
     const query = catalog.buildQuery(selectedGenres, searchTitle);
-    
+
     //We provide context to the server so that it maintains the filters when changing pages.
-    const { series, totalItems, totalPages } = await catalog.getSeriesContext(query, currentPage);
+    const { series } = await catalog.getSeriesContext(query);
 
     //We provide context to the server so that it can retrieve the series we need. It also organizes the pages with six elements per page and calculates the number of pages based on the series in the database.
     const filterQueryString = `${selectedGenres ? `&genre=${selectedGenres}` : ''}` + `${searchTitle ? `&title=${searchTitle}` : ''}`;
 
-    //Both hasPrevious and hasNext return true or false depending on the page we are on.
-    const hasPrevious = currentPage > 1;
-    const hasNext = currentPage < totalPages;
-
-    let prevPage = currentPage - 1;
-
-    let nextPage = currentPage + 1;
-
-    //Prepare the link for the previous page and if we have any filters, they are maintained.
-    let previousLink = hasPrevious ? `/?page=${prevPage}${filterQueryString}` : '#';
-
-    //The same, but for the next one.
-    let nextLink = hasNext ? `/?page=${nextPage}${filterQueryString}` : '#';
-
-    //Generate the pages in the pagination section.
-    const pages = Array.from({ length: totalPages }, (_, i) => ({
-        num: i + 1,
-        current: (i + 1) === currentPage,
-        link: `/?page=${i + 1}${filterQueryString}`
-    }));
-
     //In this loop, we select the color of the age label for each series and the number of the first available episode.
     series.forEach(serie => {
         serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
-        
-        //In the variable, we save the episode number, if there is one. To prevent errors, we add at(0)? and if there are no episodes, we set a default value of 1 so that you can enter the series to create episodes.
-        serie.firstEpisode = serie.episodes?.at(0)?.numEpisode ?? 1;
     });
 
     //We obtain all genres.
@@ -72,31 +46,60 @@ router.get('/', async (req, res) => {
     let notSelected = !selectedGenres;
 
     res.render('index', {
-        series, genres: genreSelected, searchTitle,
-        hasNext, hasPrevious, currentPage, totalItems, previousLink, nextLink, pages, notSelected
+        series, genres: genreSelected, searchTitle, notSelected
     });
 });
 
 
 router.get('/moreSeries', async (req, res) => {
-    const from = parseInt(req.query.from);
-    const to = parseInt(req.query.to);
-
-    let moreSeries = await catalog.getSeries(from, to);
 
 
-    res.render("moreSeries", { series: moreSeries });
+    let from = parseInt(req.query.from);
+
+    // We retrieve the selected genre; if there is no genre, nothing is returned.
+    let selectedGenres = req.query.genre;
+
+    //We recovered the search.
+    let searchTitle = req.query.title;
+
+
+    //In query, we combine requests of the same type and the search.
+    const query = catalog.buildQuery(selectedGenres, searchTitle);
+
+    //We provide context to the server so that it maintains the filters when changing pages.
+    const { series } = await catalog.getSeriesContext(query, from);
+
+    series.forEach(serie => {
+        serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+    });
+
+    //We provide context to the server so that it can retrieve the series we need. It also organizes the pages with six elements per page and calculates the number of pages based on the series in the database.
+    const filterQueryString = `${selectedGenres ? `&genre=${selectedGenres}` : ''}` + `${searchTitle ? `&title=${searchTitle}` : ''}`;
+
+    //We obtain all genres.
+    let allGenres = await catalog.getGenres();
+
+    //We assign each genre a selected value if it is selected and the name to appear on the buttons.
+    let genreSelected = allGenres.map(genre => ({
+        name: genre,
+        selected: selectedGenres === genre
+    }));
+
+    //NotSelected returns True if no genre is selected and False if there is one selected, so that the “Todos” button is not selected.
+    let notSelected = !selectedGenres;
+
+
+    res.render("moreSeries", { series, genres: genreSelected, searchTitle, notSelected });
 });
 
 // End index
 
-router.get('/main_detalle/:id/:numEpisode', async (req, res) => {
+router.get('/main_detalle/:id', async (req, res) => {
 
     let serie = await catalog.getSerie(req.params.id);
     let listEpisode = await catalog.getEpisodes(req.params.id);
     serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
     res.render('main_detalle_notfilm', { serie, listEpisode });
-    
 
 });
 
@@ -244,11 +247,11 @@ router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', m
     if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
         return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios', boolean_episode1: true, serie });
     }
-     //synopsis length
+    //synopsis length
     const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
 
     if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode1: true, serie }, );
+        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode1: true, serie },);
     }
     //new episode
     const new_Episode = {
@@ -298,7 +301,7 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     const characterSynopsis = synopsis.trim(); //delete spaces between words
 
     if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 600 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie1: true,serie } );
+        return res.render('error', { message: `La sinopsis no puede exceder los 600 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie1: true, serie });
     }
     //get the image of the serie
     const current_serie = await catalog.getSerie(id);
@@ -357,13 +360,13 @@ router.post('/form_update_episode/:id/:numEpisode', upload.fields([{ name: 'imag
     if (duplicate) {
         return res.render('error', { message: 'Título del episodio duplicado.', boolean_episode2: true, serie, episode });
     }
-    
+
     //not duplicated number
     duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
     if (duplicate) {
         return res.render('error', { message: 'Ese número de episodio ya existe.', boolean_episode2: true, serie, episode });
     }
-    
+
     //synopsis length
     const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
 

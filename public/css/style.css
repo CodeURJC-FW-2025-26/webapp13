@@ -1,32 +1,36 @@
-html {
-    background-color:#141414
-}
-
-.genre-buttons{
+.genre-buttons {
     background-color: #141414;
     padding-top: 30px;
     padding-bottom: 30px;
 }
 
 body {
-    background-color:#141414;
+    background-color: #141414;
 }
 
 main {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color:#141414;
+    background-color: #141414;
     margin: auto;
     font-weight: bold;
     font-family: 'Arial Black', Arial, sans-serif;
 }
 
-.card-title .badge.bg-danger {background-color: red;}
-.card-title .badge.bg-orange {background-color: orange;}
-.card-title .badge.bg-warning {background-color: yellow;}
+.card-title .badge.bg-danger {
+    background-color: red;
+}
 
-nav{
-    background-color:#141414;
+.card-title .badge.bg-orange {
+    background-color: orange;
+}
+
+.card-title .badge.bg-warning {
+    background-color: yellow;
+}
+
+nav {
+    background-color: #141414;
 }
 
 #nav-container {
@@ -38,7 +42,7 @@ nav{
 .btn.btn-primary {
     background-color: red;
     border: none;
-    
+
 }
 
 .btn.btn-primary:hover {
@@ -55,7 +59,7 @@ nav{
 }
 
 .container {
-    background-color:#141414;
+    background-color: #141414;
     overflow-y: auto;
 }
 
@@ -64,23 +68,46 @@ nav{
     font-weight: bold;
 }
 
-.btn{
+.btn {
     background-color: red;
 }
+
 .pagination .page-link {
     color: white;
     background-color: red;
-    border-color:#141414;
+    border-color: #141414;
 }
 
 .pagination .page-item.active .page-link {
     color: white;
-    background-color:darkred;
-    border-color:#141414;
+    background-color: darkred;
+    border-color: #141414;
 }
 
 .pagination .page-link:hover {
     background-color: darkred;
-    border-color:#141414;
+    border-color: #141414;
     color: white;
+}
+
+
+.spinner {
+    margin: 30px auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    animation: spin 1.0s linear infinite;
+    border-bottom-color: red;
+    text-align: center;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

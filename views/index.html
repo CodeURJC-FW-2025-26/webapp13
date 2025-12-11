@@ -21,23 +21,25 @@
 
     <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container d-flex justify-content-center">
-            <form class="d-flex w-100 justify-content-center" role="search"  id="barra_busqueda" method="get" action="/">
-                <input class="form-control me-2" type="search" placeholder="Search" name="title"aria-label="Search" value="{{searchTitle}}"/>
+            <form class="d-flex w-100 justify-content-center" role="search" id="search-bar" method="get" action="/">
+                <input id="search-bar-input" class="form-control me-2" type="search" placeholder="Search" name="title"
+                    aria-label="Search" value="{{searchTitle}}" />
                 <button class="btn btn-outline-danger" type="submit">Search</button>
                 <a class="btn btn-primary ms-2" href="/serie_action/0/false" role="button">+</a>
             </form>
         </div>
     </nav>
 
-    <div class="d-flex justify-content-center flex-wrap gap-2 genre-buttons"> 
-        {{#genres}} 
-        <a href="/?genre={{name}}" class="btn btn-outline-danger {{#selected}}active{{/selected}}">
+    <div class="d-flex justify-content-center flex-wrap gap-2 genre-buttons">
+        {{#genres}}
+        <a href="/?genre={{name}}" class="btn btn-outline-danger {{#selected}}active{{/selected}}"
+            {{#selected}}id="current-genre" {{/selected}} id="{{name}}">
             {{name}}
-        </a> 
-        {{/genres}} 
+        </a>
+        {{/genres}}
         <a href="/" class="btn btn-outline-danger {{#notSelected}}active{{/notSelected}}">
             Todos
-        </a> 
+        </a>
     </div>
 
 
@@ -47,7 +49,7 @@
                 {{#series}}
                 <div class="col">
                     <div class="card h-100 bg-dark text-white">
-                        <a href="main_detalle/{{_id}}/{{firstEpisode}}">
+                        <a href="main_detalle/{{_id}}">
                             <img src="/serie/{{_id}}/image" class="card-img-top fixed-img" alt="...">
                         </a>
                         <div class="card-body">
@@ -65,43 +67,16 @@
                 {{/series}}
 
             </div>
-            <button onclick="isEnd()">Más elementos</button>
 
             {{^series}}
-                <h1 class="text-white text-center display-1">SERIES NO DISPONIBLES</h1>
+            <h1 class="text-white text-center display-1">SERIES NO DISPONIBLES</h1>
             {{/series}}
         </div>
-
-        <div class="d-flex justify-content-center my-4">
-            <nav>
-
-                <ul class="pagination">
-                    <li class="page-item">
-                        {{#hasPrevious}}
-                            <a href="{{previousLink}}" class="page-link">
-                                &laquo; 
-                            </a>
-                        {{/hasPrevious}}
-                    </li>
-
-                    {{#pages}}
-                        <li class="page-item {{#current}}active{{/current}}">
-                            <a class="page-link" href="{{link}}">{{num}}</a>
-                        </li>
-                    {{/pages}}
-
-                    <li class="page-item">
-                        {{#hasNext}}
-                            <a href="{{nextLink}}" class="page-link" >&raquo;</a>
-                        {{/hasNext}}
-                    </li>
-                </ul>
-
-            </nav>
-        </div>
+        <div class="spinner" id="spinner-loader"></div>
 
     </main>
     <script src="/app.js"></script>
 </body>
-    {{>footer}}
+{{>footer}}
+
 </html>
