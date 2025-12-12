@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,114 +14,134 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Notfilm</title>
 </head>
+
 <body>
     {{>header}}
     <div class="row">
-    <div class="col-lg-8 col-12">
-        <div class="row">
-            <h1 class="Title_card-title">{{serie.title}} <span  class="badge rounded-pill {{serie.badgeClass}}">{{serie.ageClassification}}+</span></h1>
-            <hr class="divider">
-        </div>
-        <div class="row">
-            <ul>
-                <li>Género: {{serie.genre}}</li>
-                <li>Estreno: {{serie.premiere}}</li>
-                <li>Temporadas: {{serie.seasons}}</li>
-            </ul>
+        <div class="col-lg-8 col-12">
+            <div class="row">
+                <h1 class="Title_card-title">{{serie.title}} <span
+                        class="badge rounded-pill {{serie.badgeClass}}">{{serie.ageClassification}}+</span></h1>
+                <hr class="divider">
+            </div>
+            <div class="row">
+                <ul>
+                    <li>Género: {{serie.genre}}</li>
+                    <li>Estreno: {{serie.premiere}}</li>
+                    <li>Temporadas: {{serie.seasons}}</li>
+                </ul>
+                <div id="episodes">
+                    {{#listEpisode}}
+                    <div class="row episode-row" id="episode_{{numEpisode}}">
+                        <div class="col-12">
+                            <h3>{{numEpisode}} {{titleEpisode}}</h3>
+                            <p>{{timeEpisode}} minutos</p>
+                            <h5>Sinopsis:</h5>
+                            <p class="Text_synopsis">{{synopsisEpisode}}</p>
 
-            {{#listEpisode}}
-            <div class="row episode-row" id="episode_{{numEpisode}}">
-                <div class="col-12">
-                    <h3>{{numEpisode}} {{titleEpisode}}</h3>
-                    <p>{{timeEpisode}} minutos</p>
-                    <h5>Sinopsis:</h5>
-                    <p class="Text_synopsis">{{synopsisEpisode}}</p>
+                            <div class="row_button row">
+                                <div class="buttons-group1">
+                                    <!-- botones -->
+                                </div>
+                            </div>
 
-                    <div class="row_button row">
-                        <div class="buttons-group1">
-                            <!-- botones -->
+                            <img class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/image">
+                            <br></br>
+                            <video class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/video" controls
+                                loop></video>
+
+                            <div class="spinner" id="spinner-loader_{{numEpisode}}"></div>
+
+                            <div class="form-actions">
+                                <a href="/update_episode/{{../serie._id}}/{{numEpisode}}" class="btn-action">Editar
+                                    episodio</a>
+                                <button class="btn-action"
+                                    onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar
+                                    episodio</button>
+                            </div>
                         </div>
                     </div>
-
-                    <img class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/image">
-                    <br></br>
-                    <video class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/video" controls loop></video>
-
-                    <div class="spinner" id="spinner-loader_{{numEpisode}}"></div>
-
-                    <div class="form-actions">
-                        <a href="/update_episode/{{../serie._id}}/{{numEpisode}}" class="btn-action">Editar episodio</a>
-                            <button class="btn-action" onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar episodio</button>
+                    {{/listEpisode}}
+                </div>
+                <div class="row_button" class="row">
+                    <div class="buttons-group2">
+                        <a href="/borrarserie/{{serie._id}}" class="btn-interactive">
+                            <i class="bi bi-trash"></i>
+                            <span class="btn-text">Borrar</span>
+                        </a>
+                        <a href="/serie_action/{{serie._id}}/true" class="btn-interactive">
+                            <i class="bi bi-pencil-fill"></i>
+                            <span class="btn-text">Editar</span>
+                        </a>
+                        <a href="/" class="btn-interactive">
+                            <i class="bi bi-arrow-left-circle-fill"></i>
+                            <span class="btn-text">Pagina principal</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            {{/listEpisode}}
+        </div>
 
-            <div class="row_button" class="row">
-                <div class="buttons-group2">
-                    <a href="/borrarserie/{{serie._id}}" class="btn-interactive">
-                        <i class="bi bi-trash"></i>
-                        <span class="btn-text">Borrar</span>
-                    </a>
-                    <a href="/serie_action/{{serie._id}}/true" class="btn-interactive">
-                        <i class="bi bi-pencil-fill"></i>
-                        <span class="btn-text">Editar</span>
-                    </a>
-                    <a href="/" class="btn-interactive"> 
-                        <i class="bi bi-arrow-left-circle-fill"></i>
-                        <span class="btn-text" >Pagina principal</span>
-                    </a> 
-                </div> 
-            </div> 
+        <div class="col-lg-4 col-12">
+            <div class="form-container">
+                <form enctype="multipart/form-data" onsubmit="addEpisode(event,'{{serie._id}}')">
+                    <h3>Crear Episodio</h3>
+
+                    <div class="form-group" id="title">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
+                            oninput="checkTitle()" id="titleInput" required />
+                        <div id="messageTitle"></div>
+                    </div>
+
+                    <div class="form-group" id="synopsis">
+                        <label for="synopsis" class="form-label">Sinopsis</label>
+                        <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
+                            rows="3" id="synopsisInput" oninput="checkSynopsis()" required></textarea>
+                        <div id="messageSynopsis"></div>
+                    </div>
+
+                    <div class="form-group" id="numEpisode">
+                        <label for="numEpisode" class="form-label">Número de episodio</label>
+                        <input type="number" class="form-control" name="numEpisode" required id="numEpisode" />
+                        <div id="messageNumEpisode"></div>
+                    </div>
+
+                    <div class="form-group" id="timeEpisode">
+                        <label for="timeEpisode" class="form-label">Duración del episodio</label>
+                        <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
+                            required id="timeEpisodeInput" />
+                        <div id="messageTimeEpisode"></div>
+                    </div>
+
+                    <div class="form-group" id="cover">
+                        <label for="cover" class="form-label">Portada</label>
+                        <input type="file" name="image" class="form-control" id="coverInput" required />
+                        <div id="messageCover"></div>
+                    </div>
+
+                    <div class="form-group" id="trailerEpisode">
+                        <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+                        <input type="file" name="trailerEpisode" class="form-control"
+                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput" required />
+                        <div id="messageTrailerEpisode"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-default">
+                            Crear Episodio
+                        </button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
+    <!--Modal-->
+    {{>modal}}
+    <script src="/app.js"></script>
 
-    <div class="col-lg-4 col-12">
-        <div class="form-container">
-    <form enctype="multipart/form-data">
-        <h3>Crear Episodio</h3>
+</body>
+{{>footer}}
 
-        <div class="form-group">
-            <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="title" 
-                placeholder="Nombre del episodio" required /> 
-        </div>
-
-        <div class="form-group">
-            <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción del episodio" rows="3" required></textarea> 
-        </div>
-
-        <div class="form-group">
-            <label for="temporadas" class="form-label">Duración del episodio</label>
-            <input type="number" class="form-control" name="seasons" id="temporadas"
-                placeholder="Ejemplo: 18 minutos" required /> 
-        </div>
-
-        <div class="form-group">
-            <label for="portada" class="form-label">Portada</label>
-            <input type="file" name="image" class="form-control" id="portada" required /> 
-        </div>
-
-        <div class="form-group">
-            <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
-            <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" required/> 
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn-default">
-                    Crear Episodio
-                </button>   
-            </div>
-
-    </form>
-</div> 
-</div>
-</div>
-<!--Modal-->
-<div id="modal_page"></div>
-<script src="/app.js"></script>
-
-</body> 
-{{>footer}}   
-</html> 
+</html>

@@ -74,23 +74,9 @@ router.get('/moreSeries', async (req, res) => {
         serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
     });
 
-    //We provide context to the server so that it can retrieve the series we need. It also organizes the pages with six elements per page and calculates the number of pages based on the series in the database.
-    const filterQueryString = `${selectedGenres ? `&genre=${selectedGenres}` : ''}` + `${searchTitle ? `&title=${searchTitle}` : ''}`;
 
-    //We obtain all genres.
-    let allGenres = await catalog.getGenres();
+    res.render("moreSeries", { series });
 
-    //We assign each genre a selected value if it is selected and the name to appear on the buttons.
-    let genreSelected = allGenres.map(genre => ({
-        name: genre,
-        selected: selectedGenres === genre
-    }));
-
-    //NotSelected returns True if no genre is selected and False if there is one selected, so that the “Todos” button is not selected.
-    let notSelected = !selectedGenres;
-
-
-    res.render("moreSeries", { series, genres: genreSelected, searchTitle, notSelected });
 });
 
 // End index
@@ -190,19 +176,19 @@ router.get('/deleteSerie/:id', async (req, res) => {
 //delete episode
 router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
     const numEpisode = req.params.numEpisode;
-    if (numEpisode !== "1"){
-        res.json({data: true})
+    if (numEpisode !== "1") {
+        res.json({ data: true })
         await catalog.deleteEpisode(req.params.id, req.params.numEpisode);
     }
-    else{
-        res.json({data:false})
+    else {
+        res.json({ data: false })
     }
 });
-router.get('/modal', async (req,res) =>{
+router.get('/modal', async (req, res) => {
     const Content_title = req.query.title;
     const Content_body = req.query.body
     console.log(Content_body)
-    res.render('modal', {Content_title, Content_body});
+    res.render('modal', { Content_title, Content_body });
 })
 //update the episode. Call the html
 router.get('/update_episode/:id/:numEpisode', async (req, res) => {
@@ -229,53 +215,34 @@ router.get('/update_episode/:id/:numEpisode', async (req, res) => {
 });
 
 //new episode
-router.post('/add_episode/:id', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
-    //select params
+router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
+    const { title, synopsis, timeEpisode, numEpisode } = req.body;
     const id = req.params.id;
     const serie = await catalog.getSerie(id);
-    const { numEpisode, titleEpisode, synopsisEpisode, timeEpisode } = req.body;
-    const epNum = parseInt(numEpisode);
-    const epTime = parseInt(timeEpisode);
 
-    //not null
-    if (!titleEpisode || !synopsisEpisode || isNaN(epNum) || isNaN(epTime)) {
-        return res.render('error', { message: 'Todos los campos del episodio son obligatorios.', boolean_episode1: true, serie });
-    }
+    let errorMesagge;
 
-    //not duplicated
-    let duplicateEp = serie.episodes.find(ep => ep.numEpisode === epNum);
-    if (duplicateEp) {
-        return res.render('error', { message: 'Ese titulo de episodio ya existe.', boolean_episode1: true, serie });
+    if (!title || title.trim() === "") {
+        errorMesagge = "El título no puede estar vacío";
+        res.status(400).json({ error: true, message: errorMesagge });
     }
-    // Check if the first character is uppercase
-    const firstChar = req.body.titleEpisode.charAt(0);
-    if (firstChar !== firstChar.toUpperCase()) {
-        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_episode1: true, serie });
-    }
-    // Error if not image and video in the form 
-    if (!req.files['imageFilenamedetalle'] || !req.files['trailerEpisode']) {
-        return res.render('error', { message: 'La imagen y el trailer del episodio son obligatorios', boolean_episode1: true, serie });
-    }
-    //synopsis length
-    const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
+    if (!errorMesagge) {
+        let epNum = parseInt(numEpisode);
+        let epTime = parseInt(timeEpisode);
 
-    if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode1: true, serie },);
-    }
-    //new episode
-    const new_Episode = {
-        numEpisode: epNum,
-        titleEpisode,
-        synopsisEpisode,
-        timeEpisode: epTime,
-        imageFilenamedetalle: req.files['imageFilenamedetalle'][0].filename,
-        trailerEpisode: req.files['trailerEpisode'][0].filename
-    };
-    //function add episode
-    await catalog.addEpisode(id, new_Episode)
-    serie.badgeClass = catalog.getBadgeClass(serie.ageClassification);
+        let newEpisode = {
+            numEpisode: epNum,
+            titleEpisode: title,
+            synopsisEpisode: synopsis,
+            timeEpisode: epTime,
+            imageFilenamedetalle: req.files['image'][0].filename,
+            trailerEpisode: req.files['trailerEpisode'][0].filename
+        };
 
-    res.render('saved_serie', { message: 'Se ha creado el episodio correctamente correctamente', boolean: true, serie, episode: new_Episode });
+        await catalog.addEpisode(id, newEpisode);
+
+        res.json(newEpisode)
+    }
 });
 
 //update serie
