@@ -168,28 +168,34 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
 
 //delete serie
 router.get('/deleteSerie/:id', async (req, res) => {
-    let serie = await catalog.getSerie(req.params.id);
-    await catalog.deleteSerie(req.params.id)
-    res.render('saved_serie', { message: 'Se ha borrado la serie correctamente', boolean_serie2: true, });
+    const idSerie = req.params.id;
+    const result = await catalog.getSerie(idSerie);
+    if (result){
+        await catalog.deleteSerie(idSerie);
+        res.json({error: false})
+        
+    }
+    else{
+        res.status(404).json({title: "Error",message: "Ha ocurrido un error. El objeto no existe."})
+    }
 });
 
 //delete episode
 router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
     const numEpisode = req.params.numEpisode;
-    if (numEpisode !== "1") {
-        res.json({ data: true })
-        await catalog.deleteEpisode(req.params.id, req.params.numEpisode);
+    const idSerie = req.params.id;
+    const serie = await catalog.getSerie(idSerie);
+    const result = await catalog.getEpisode(serie, numEpisode);
+    if (result){
+        await catalog.deleteEpisode(idSerie, numEpisode);
+        res.json({error: false})
+        
     }
-    else {
-        res.json({ data: false })
+    else{
+        res.status(404).json({title: "Error",message: "Ha ocurrido un error. El objeto no existe."})
     }
 });
-router.get('/modal', async (req, res) => {
-    const Content_title = req.query.title;
-    const Content_body = req.query.body
-    console.log(Content_body)
-    res.render('modal', { Content_title, Content_body });
-})
+
 //update the episode. Call the html
 router.get('/update_episode/:id/:numEpisode', async (req, res) => {
     const id = req.params.id;

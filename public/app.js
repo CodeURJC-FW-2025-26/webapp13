@@ -77,8 +77,6 @@ function checkTitle() {
 }
 
 function checkSynopsis() {
-
-
     const validationLogic = () => {
 
         let synopsisMessage = document.getElementById("messageSynopsis");
@@ -105,7 +103,7 @@ function checkSynopsis() {
 
 
 
-async function addEpisode(event, id) {
+async function addEpisode(event, id) { 
     event.preventDefault();
     const formData = new FormData(event.target);
     const response = await fetch(`/processNewEpisode/${id}`, {
@@ -173,38 +171,77 @@ async function addEpisode(event, id) {
 
 
 //delete Episode
-async function deleteEpisode(idSerie, numEpisode) {
+async function deleteEpisode(idSerie,numEpisode) {
     const response = await fetch(`/deleteEpisode/${idSerie}/${numEpisode}`);
-    const data = await response.json();
     let spinner = document.getElementById('spinner-loader_' + numEpisode);
     spinner.style.display = 'block';
+    
+    setTimeout(async()=>{ 
+    if (response.ok){ // response.ok will be true when there is no error(not send.status(400))
+        let element = document.getElementById('episode_' + numEpisode);
+        element.style.display = 'none'
+        spinner.style.display = 'none';
+    }
+    else{
+        spinner.style.display = 'none';
+        /*Show modal */
+        const error = await response.json();
+        let modal = document.getElementById("modal");
+        let modalText = document.getElementById("modal-text");
+        let modalTitle = document.getElementById("modalHead-text")
 
-    setTimeout(async () => {
-        if (data.data) { // first data is a JSON object that contains the variable data(second), which is a boolean.
-            let element = document.getElementById('episode_' + numEpisode);
-            element.style.display = 'none'
-            spinner.style.display = 'none';
-            console.log(data);
-        }
-        else {
-            spinner.style.display = 'none';
-            /*Show modal */
-            let container = document.getElementById('modal_page');
-            const title = "Error"
-            const body = "Ha ocurrido un problema al intentar borrar el elemento"
-            const content = await fetch(`/modal?title=${title}&body=${body}`);
-            const pagePart = await content.text();
-            container.innerHTML = pagePart;
-            const modalElement = document.getElementById('modal');
-            const errorModal = new bootstrap.Modal(modalElement);
-            errorModal.show();
-        }
-    }, 1000);
+        modalTitle.textContent = error.title
+        modalText.textContent = error.message;
+
+        const errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }}, 1000);
 }
 
 //delete Serie
 
+    //Show confirmation modal before deleting 
+async function confirmDeleteSerie(idSerie) {
+    let modal = document.getElementById("modal");
+    let modalText = document.getElementById("modal-text");
+    let modalTitle = document.getElementById("modalHead-text");
+    let modalButton = document.getElementById("modal-button");
+
+    modalTitle.textContent = "Confirmación";
+    modalText.textContent = "¿Está seguro de que desea eliminar esta serie? Esta acción es irreversible y no se puede deshacer.";
+
+    modalButton.innerHTML = `<button class='btn btn-secondary' data-bs-dismiss='modal' onclick='deleteSerie("${idSerie}")'>Confirmar</button>`;
+
+    const confirmModal = new bootstrap.Modal(modal);
+    confirmModal.show();
+}
+
+    
 async function deleteSerie(idSerie) {
-    const response = await fetch('/deleteSerie/${idSerie}')
-    console.log(response)
+    console.log(idSerie);
+    const response = await fetch(`/deleteSerie/${idSerie}`);
+    let spinner = document.getElementById('spinner-loader');
+    spinner.style.display = 'block';
+    
+    setTimeout(async()=>{ 
+    if (response.ok){ // response.ok will be true when there is no error(not send.status(400))
+        const data = await response.json();
+        spinner.style.display = 'none';
+        window.location.href = "/";
+    }
+    else{
+        spinner.style.display = 'none';
+        /*Show modal */
+        const error = await response.json();
+        let modal = document.getElementById("modal");
+        let modalText = document.getElementById("modal-text");
+        let modalTitle = document.getElementById("modalHead-text")
+        let modalButton = document.getElementById("modal-button");
+
+        modalTitle.textContent = error.title
+        modalText.textContent = error.message;
+        modalButton.innerHTML = "";
+        const errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }}, 1000);
 }

@@ -39,12 +39,6 @@
                             <h5>Sinopsis:</h5>
                             <p class="Text_synopsis">{{synopsisEpisode}}</p>
 
-                            <div class="row_button row">
-                                <div class="buttons-group1">
-                                    <!-- botones -->
-                                </div>
-                            </div>
-
                             <img class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/image">
                             <br></br>
                             <video class="visual" src="/episode/{{serie._id}}/{{numEpisode}}/video" controls
@@ -65,10 +59,10 @@
                 </div>
                 <div class="row_button" class="row">
                     <div class="buttons-group2">
-                        <a href="/borrarserie/{{serie._id}}" class="btn-interactive">
+                        <button class="btn-interactive" onclick="confirmDeleteSerie('{{serie._id}}')">
                             <i class="bi bi-trash"></i>
-                            <span class="btn-text">Borrar</span>
-                        </a>
+                            <span class="btn-text">Borrar Serie</span>
+                        </button>
                         <a href="/serie_action/{{serie._id}}/true" class="btn-interactive">
                             <i class="bi bi-pencil-fill"></i>
                             <span class="btn-text">Editar</span>
@@ -80,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            <div class="spinner" id="spinner-loader"></div>
         </div>
 
         <div class="col-lg-4 col-12">
