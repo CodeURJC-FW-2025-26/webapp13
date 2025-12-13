@@ -47,12 +47,11 @@
                             <div class="spinner" id="spinner-loader_{{numEpisode}}"></div>
 
                             <div class="form-actions">
+                                <a href="/update_episode/{{../serie._id}}/{{numEpisode}}" class="btn-action">Editar
+                                    episodio</a>
                                 <button class="btn-action"
-                                    onclick="showFormUpdateEpisode('{{numEpisode}}','{{titleEpisode}}','{{synopsisEpisode}}','{{timeEpisode}}')">Editar episodio
-                                </button>
-                                <button class="btn-action"
-                                    onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar episodio
-                                </button>
+                                    onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar
+                                    episodio</button>
                             </div>
                         </div>
                     </div>
@@ -86,28 +85,28 @@
                     <div class="form-group" id="title">
                         <label for="titulo" class="form-label">Título</label>
                         <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
-                            oninput="checkTitle('{{serie._id}}', 'titleInput', 'messageTitle')" id="titleInput" required />
+                            oninput="checkTitle('{{serie._id}}')" id="titleInput" required />
                         <div id="messageTitle"></div>
                     </div>
 
                     <div class="form-group" id="synopsis">
                         <label for="synopsis" class="form-label">Sinopsis</label>
                         <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
-                            rows="3" id="synopsisInput" oninput="checkSynopsis('synopsisInput', 'messageSynopsis')" required></textarea>
+                            rows="3" id="synopsisInput" oninput="checkSynopsis()" required></textarea>
                         <div id="messageSynopsis"></div>
                     </div>
 
                     <div class="form-group" id="numEpisode">
                         <label for="numEpisode" class="form-label">Número de episodio</label>
                         <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput"
-                            oninput="checkNumEpisode('{{serie._id}}','numEpisodeInput','messageNumEpisode')" required />
+                            oninput="checkNumEpisode('{{serie._id}}')" required />
                         <div id="messageNumEpisode"></div>
                     </div>
 
                     <div class="form-group" id="timeEpisode">
                         <label for="timeEpisode" class="form-label">Duración del episodio</label>
                         <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-                            oninput="checkTimeEpisode('timeEpisodeInput','messageTimeEpisode')" required id="timeEpisodeInput" />
+                            oninput="checkTimeEpisode()" required id="timeEpisodeInput" />
                         <div id="messageTimeEpisode"></div>
                     </div>
 
@@ -116,9 +115,9 @@
                         <img id="coverPreview" src="#" alt="..."
                             style="display: none; max-width: 200px; max-height: 200px;">
                         <br>
-                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover('coverInput','messageCover','coverPreview','deleteCoverButton');"
+                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"
                             required />
-                        <button class="btn-action" onclick="deleteCover('coverInput','coverPreview','deleteCoverButton','messageCover')" style="display: none;" type="reset"
+                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
                             id="deleteCoverButton">
                             Borrar imagen
                         </button>
@@ -128,12 +127,12 @@
                     <div class="form-group" id="trailerEpisode">
                         <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
                         <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
-                            oninput="checkTrailer('trailerEpisodeInput','messageTrailerEpisode','trailerPreview','deleteTrailerButton')" controls loop></video>
+                            oninput="checkTrailer()" controls loop></video>
                         <br>
                         <input type="file" name="trailerEpisode" class="form-control"
                             placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
-                            onchange="checkTrailer('trailerEpisodeInput','messageTrailerEpisode','trailerPreview','deleteTrailerButton')" required />
-                        <button class="btn-action" type="reset" onclick="deleteTrailer('trailerEpisodeInput','messageTrailerEpisode','trailerPreview','deleteTrailerButton')" style="display: none;"
+                            onchange="checkTrailer(event)" required />
+                        <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
                             id="deleteTrailerButton">
                             Borrar trailer
                         </button>
