@@ -3,6 +3,15 @@ const ITEMS_PER_PAGE = 6;
 
 let loadMoreRequest = 1;
 
+let errorStates = {
+    title: { error: true, errorMessage: "El título no puede estar vacío." },
+    synopsis: { error: true, errorMessage: "La sinopsis no puede estar vacía." },
+    numEpisode: { error: true, errorMessage: "El número de episodio no puede estar vacío." },
+    timeEpisode: { error: true, errorMessage: "El tiempo de episodio no puede estar vacío." },
+    cover: { error: true, errorMessage: "La imagen no puede estar vacía." },
+    trailer: { error: true, errorMessage: "El video no puede estar vacío." },
+}
+
 const spinner = document.getElementById("spinner-loader")
 
 async function moreSeries() {
@@ -206,14 +215,14 @@ function checkTimeEpisode() {
         if (timeEpisodeInput.value === "") {
             timeEpisodeInput.classList.add("is-invalid");
             timeEpisodeMessage.classList.add("invalid-feedback");
-            timeEpisodeMessage.textContent = "La sinopsis no puede estar vacía"
+            timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
             errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
         }
 
         else if (isNaN(timeEpisodeInput.value)) {
             timeEpisodeInput.classList.add("is-invalid");
             timeEpisodeMessage.classList.add("invalid-feedback");
-            timeEpisodeMessage.textContent = "El número de episodio debe ser un número";
+            timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
             errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
         }
 
@@ -352,7 +361,7 @@ async function checkForm(event, id) {
 
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
-    let modalTitle = document.getElementById("modal-title");
+    let modalTitle = document.getElementById("modalHead-text");
     modalTitle.textContent = "Error";
     modalText.textContent = "";
     await checkTitle(id);
