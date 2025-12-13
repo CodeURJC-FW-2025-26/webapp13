@@ -79,13 +79,13 @@
 
         <div class="col-lg-4 col-12">
             <div class="form-container">
-                <form enctype="multipart/form-data" onsubmit="addEpisode(event,'{{serie._id}}')">
+                <form enctype="multipart/form-data" onsubmit="checkForm(event,'{{serie._id}}')" novalidate>
                     <h3>Crear Episodio</h3>
 
                     <div class="form-group" id="title">
                         <label for="titulo" class="form-label">Título</label>
                         <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
-                            oninput="checkTitle()" id="titleInput" required />
+                            oninput="checkTitle('{{serie._id}}')" id="titleInput" required />
                         <div id="messageTitle"></div>
                     </div>
 
@@ -98,27 +98,36 @@
 
                     <div class="form-group" id="numEpisode">
                         <label for="numEpisode" class="form-label">Número de episodio</label>
-                        <input type="number" class="form-control" name="numEpisode" required id="numEpisode" />
+                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput"
+                            oninput="checkNumEpisode('{{serie._id}}')" required />
                         <div id="messageNumEpisode"></div>
                     </div>
 
                     <div class="form-group" id="timeEpisode">
                         <label for="timeEpisode" class="form-label">Duración del episodio</label>
                         <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-                            required id="timeEpisodeInput" />
+                            oninput="checkTimeEpisode()" required id="timeEpisodeInput" />
                         <div id="messageTimeEpisode"></div>
                     </div>
 
                     <div class="form-group" id="cover">
                         <label for="cover" class="form-label">Portada</label>
-                        <input type="file" name="image" class="form-control" id="coverInput" required />
+                        <img id="coverPreview" src="#" alt="..."
+                            style="display: none; max-width: 200px; max-height: 200px;">
+                        <br>
+                        <input type="file" name="image" class="form-control" id="coverInput"
+                            onchange="checkCover(event)" required />
                         <div id="messageCover"></div>
                     </div>
 
                     <div class="form-group" id="trailerEpisode">
                         <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+                        <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
+                            onchange="checkTrailer(event)" controls loop></video>
+                        <br>
                         <input type="file" name="trailerEpisode" class="form-control"
-                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput" required />
+                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
+                            onchange="checkTrailer(event)" required />
                         <div id="messageTrailerEpisode"></div>
                     </div>
 

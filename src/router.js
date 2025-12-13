@@ -170,13 +170,13 @@ router.get('/episode/:id/:numEpisode/video', async (req, res) => {
 router.get('/deleteSerie/:id', async (req, res) => {
     const idSerie = req.params.id;
     const result = await catalog.getSerie(idSerie);
-    if (result){
+    if (result) {
         await catalog.deleteSerie(idSerie);
-        res.json({error: false})
-        
+        res.json({ error: false })
+
     }
-    else{
-        res.status(404).json({title: "Error",message: "Ha ocurrido un error. El objeto no existe."})
+    else {
+        res.status(404).json({ title: "Error", message: "Ha ocurrido un error. El objeto no existe." })
     }
 });
 
@@ -186,13 +186,13 @@ router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
     const idSerie = req.params.id;
     const serie = await catalog.getSerie(idSerie);
     const result = await catalog.getEpisode(serie, numEpisode);
-    if (result){
+    if (result) {
         await catalog.deleteEpisode(idSerie, numEpisode);
-        res.json({error: false})
-        
+        res.json({ error: false })
+
     }
-    else{
-        res.status(404).json({title: "Error",message: "Ha ocurrido un error. El objeto no existe."})
+    else {
+        res.status(404).json({ title: "Error", message: "Ha ocurrido un error. El objeto no existe." })
     }
 });
 
@@ -250,6 +250,34 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
         res.json(newEpisode)
     }
 });
+
+//Check title
+router.get('/checkTitle/:id/:title', async (req, res) => {
+
+    const id = req.params.id;
+
+    const title = req.params.title;
+
+    // 409 means Conflic
+    if (await catalog.checkDuplicatedTitleEpisode(id, title))
+        res.status(409).json({ error: "El título del episodio ya existe para esta serie." });
+    else
+        res.json({ error: "Título disponible." })
+})
+
+//Check numEpisode
+router.get('/checkNumberEpisode/:id/:numEpisode', async (req, res) => {
+    const id = req.params.id;
+    const num = req.params.numEpisode;
+
+    if (await catalog.checkDuplicatedNumEpisode(id, parseInt(num))) {
+        res.status(409).json({ error: "El número de episodio coincide con otro episodio." })
+    }
+    else
+        res.json({ error: "Número de episodio disponible." })
+
+})
+
 
 //update serie
 router.post('/update_serie/:id', upload.single('image'), async (req, res) => {

@@ -148,6 +148,19 @@ export async function getGenres() {
 };
 
 
+export async function checkDuplicatedTitleEpisode(id, title) {
+
+    let query = await series.findOne({ _id: new ObjectId(id), "episodes.titleEpisode": title });
+
+    return !!query;
+}
+
+export async function checkDuplicatedNumEpisode(id, numEpisode) {
+    let query = await series.findOne({ _id: new ObjectId(id), "episodes.numEpisode": numEpisode })
+    return !!query;
+}
+
+
 //pagination
 
 /**
