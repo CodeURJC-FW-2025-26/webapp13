@@ -61,10 +61,11 @@ window.addEventListener('scroll', () => {
 // Add more episodes
 
 
-async function checkTitle(id) {
+async function checkTitle(id, inputID, messageID) {
 
-    let titleMessage = document.getElementById("messageTitle");
-    let titleInput = document.getElementById("titleInput");
+    let titleInput = document.getElementById(inputID);
+    let titleMessage = document.getElementById(messageID);
+
 
     const firstChar = titleInput.value[0];
 
@@ -115,10 +116,9 @@ async function checkTitle(id) {
     setTimeout(validationLogic, 2000);
 }
 
-function checkSynopsis() {
-
-    let synopsisMessage = document.getElementById("messageSynopsis");
-    let synopsisInput = document.getElementById("synopsisInput");
+function checkSynopsis(inputID, messageID) {
+    let synopsisInput = document.getElementById(inputID);
+    let synopsisMessage = document.getElementById(messageID);
     const firstChar = synopsisInput.value[0];
 
     const validationLogic = () => {
@@ -162,10 +162,9 @@ function checkSynopsis() {
 }
 
 
-async function checkNumEpisode(id) {
-
-    let numEpisodeMessage = document.getElementById("messageNumEpisode");
-    let numEpisodeInput = document.getElementById("numEpisodeInput");
+async function checkNumEpisode(id, inputID, messageID) {
+    let numEpisodeInput = document.getElementById(inputID);
+    let numEpisodeMessage = document.getElementById(messageID);
     const validationLogic = async () => {
 
 
@@ -213,10 +212,9 @@ async function checkNumEpisode(id) {
     setTimeout(validationLogic, 2000);
 }
 
-function checkTimeEpisode() {
-
-    let timeEpisodeMessage = document.getElementById("messageTimeEpisode");
-    let timeEpisodeInput = document.getElementById("timeEpisodeInput");
+function checkTimeEpisode(inputID, messageID) {
+    let timeEpisodeInput = document.getElementById(inputID);
+    let timeEpisodeMessage = document.getElementById(messageID);
 
     const validationLogic = () => {
 
@@ -251,12 +249,11 @@ function checkTimeEpisode() {
     setTimeout(validationLogic, 2000);
 }
 
-function checkCover() {
-
-    let coverInput = document.getElementById("coverInput");
-    let coverMessage = document.getElementById("messageCover");
-    let deleteButton = document.getElementById("deleteCoverButton");
-    let output = document.getElementById("coverPreview");
+function checkCover(inputID, messageID, previewID, deleteButtonID) {
+    let coverInput = document.getElementById(inputID);
+    let coverMessage = document.getElementById(messageID);
+    let output = document.getElementById(previewID);
+    let deleteButton = document.getElementById(deleteButtonID);
 
 
     const file = coverInput.files[0];
@@ -295,22 +292,21 @@ function checkCover() {
 
 }
 
-function deleteCover() {
-    let coverInput = document.getElementById("coverInput");
-    let output = document.getElementById("coverPreview");
+function deleteCover(inputID, previewID, deleteButtonID, messageID) {
+    let coverInput = document.getElementById(inputID);
+    let output = document.getElementById(previewID);
 
     coverInput.value = "";
     output.src = "";
     output.style.display = 'none';
-    checkCover();
+    checkCover(inputID, messageID, previewID, deleteButtonID);
 }
 
-function checkTrailer() {
-
-    let trailerInput = document.getElementById("trailerEpisodeInput");
-    let trailerMessage = document.getElementById("messageTrailerEpisode");
-    let deleteButton = document.getElementById("deleteTrailerButton");
-    let output = document.getElementById("trailerPreview");
+function checkTrailer(inputID, messageID, previewID, deleteButtonID) {
+    let trailerInput = document.getElementById(inputID);
+    let trailerMessage = document.getElementById(messageID);
+    let output = document.getElementById(previewID);
+    let deleteButton = document.getElementById(deleteButtonID);
 
 
     let file = trailerInput.files[0];
@@ -347,14 +343,14 @@ function checkTrailer() {
     }
 }
 
-function deleteTrailer() {
-    let trailerInput = document.getElementById("trailerEpisodeInput");
-    let output = document.getElementById("trailerPreview");
+function deleteTrailer(inputID, messageID, previewID, deleteButtonID){
+let trailerInput = document.getElementById(inputID);
+    let output = document.getElementById(previewID);
 
     trailerInput.value = "";
     output.src = "";
     output.style.display = 'none';
-    checkTrailer();
+    checkTrailer(inputID, messageID, previewID, deleteButtonID);
 }
 
 async function addEpisode(event, id) {
@@ -404,6 +400,186 @@ async function addEpisode(event, id) {
 }
 
 async function checkForm(event, id) {
+
+    event.preventDefault();
+
+    let modal = document.getElementById("modal");
+    let modalText = document.getElementById("modal-text");
+    let modalTitle = document.getElementById("modalHead-text");
+    let spinner = document.getElementById("spinner-loader-episode");
+
+    spinner.style.display = "block";
+    modalTitle.textContent = "Error";
+    modalText.textContent = "";
+    await checkTitle(id,"titleInput" ,"messageTitle");
+    checkSynopsis('synopsisInput', 'messageSynopsis');
+    await checkNumEpisode(id,'numEpisodeInput','messageNumEpisode');
+    checkTimeEpisode('timeEpisodeInput','messageTimeEpisode');
+    checkCover('coverInput','messageCover','coverPreview','deleteCoverButton');
+    checkTrailer('trailerEpisodeInput','messageTrailerEpisode','trailerPreview','deleteTrailerButton');
+
+    let hasErrors = Object.values(errorStates).some(status => status.error === true);
+
+    if (hasErrors) {
+        if (errorStates.title.error) {
+
+            modalText.innerHTML += errorStates.title.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.synopsis.error) {
+            modalText.innerHTML += errorStates.synopsis.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.numEpisode.error) {
+            modalText.innerHTML += errorStates.numEpisode.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.timeEpisode.error) {
+            modalText.innerHTML += errorStates.timeEpisode.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.cover.error) {
+            modalText.innerHTML += errorStates.cover.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.trailer.error) {
+            modalText.innerHTML += errorStates.trailer.errorMessage + "<br></br>";
+        }
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }
+
+    else {
+        await addEpisode(event, id);
+        let inputs = document.getElementsByTagName("input");
+        document.getElementById("synopsisInput").value = "";
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+
+        checkCover('coverInput','messageCover','coverPreview','deleteCoverButton');
+        checkTrailer('trailerEpisodeInput','messageTrailerEpisode','trailerPreview','deleteTrailerButton');
+
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+    }
+
+}
+
+//delete Episode
+async function deleteEpisode(idSerie, numEpisode) {
+    const response = await fetch(`/deleteEpisode/${idSerie}/${numEpisode}`);
+    let spinner = document.getElementById('spinner-loader_' + numEpisode);
+    spinner.style.display = 'block';
+
+    setTimeout(async () => {
+        if (response.ok) { // response.ok will be true when there is no error(not send.status(400))
+            let element = document.getElementById('episode_' + numEpisode);
+            element.style.display = 'none'
+            spinner.style.display = 'none';
+        }
+        else {
+            spinner.style.display = 'none';
+            /*Show modal */
+            const error = await response.json();
+            let modal = document.getElementById("modal");
+            let modalText = document.getElementById("modal-text");
+            let modalTitle = document.getElementById("modalHead-text")
+
+            modalTitle.textContent = error.title
+            modalText.textContent = error.message;
+
+            const errorModal = new bootstrap.Modal(modal);
+            errorModal.show();
+        }
+    }, 1000);
+}
+
+
+//update episode
+
+async function showFormUpdateEpisode(numEpisode, titleEpisode, synopsisEpisode, timeEpisode) {
+    let content = document.getElementById("episode_"+ numEpisode)
+    content.innerHTML = `<div class="form-container">
+                <form enctype="multipart/form-data" onsubmit="checkFormUpdateEpisode(event,'{{serie._id}}')" novalidate>
+                    <h3>Editar Episodio</h3>
+
+                    <div class="form-group" id="title">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
+                            oninput="checkTitle('{{serie._id}}')" id="titleInputUpdate" value="${titleEpisode}" required />
+                        <div id="messageTitleUpdate"></div>
+                    </div>
+
+                    <div class="form-group" id="synopsis">
+                        <label for="synopsis" class="form-label">Sinopsis</label>
+                        <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
+                            rows="3" id="synopsisInputUpdate" oninput="checkSynopsis()" required>${synopsisEpisode}</textarea>
+                        <div id="messageSynopsis"></div>
+                    </div>
+
+                    <div class="form-group" id="numEpisode">
+                        <label for="numEpisode" class="form-label">Número de episodio</label>
+                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInputUpdate"
+                            oninput="checkNumEpisode('{{serie._id}}')"value="${numEpisode}" required />
+                        <div id="messageNumEpisode"></div>
+                    </div>
+
+                    <div class="form-group" id="timeEpisode">
+                        <label for="timeEpisode" class="form-label">Duración del episodio</label>
+                        <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
+                            oninput="checkTimeEpisode()" value="${timeEpisode}" id="timeEpisodeInputUpdate" required/>
+                        <div id="messageTimeEpisode"></div>
+                    </div>
+
+                    <div class="form-group" id="cover">
+                        <label for="cover" class="form-label">Portada</label>
+                        <img id="coverPreview" src="#" alt="..."
+                            style="display: none; max-width: 200px; max-height: 200px;">
+                        <br>
+                        <input type="file" name="image" class="form-control" id="coverInputUpdate" oninput="checkCover()"/>
+                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
+                            id="deleteCoverButton">
+                            Borrar imagen
+                        </button>
+                        <div id="messageCover"></div>
+                    </div>
+
+                    <div class="form-group" id="trailerEpisode">
+                        <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+                        <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
+                            oninput="checkTrailer()" controls loop></video>
+                        <br>
+                        <input type="file" name="trailerEpisode" class="form-control"
+                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdate"
+                            onchange="checkTrailer(event)" />
+                        <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
+                            id="deleteTrailerButton">
+                            Borrar trailer
+                        </button>
+                        <div id="messageTrailerEpisode"></div>
+                    </div>
+
+                        <div class="form-actions">
+                        <button type="submit" class="btn-default">
+                            Actualizar Episodio
+                        </button>
+                    </div>
+
+                    <div class="spinner" id="spinner-loader-episode"></div>
+                </form>
+            </div>`
+}
+
+async function checkFormUpdateEpisode(event, id) {
 
     event.preventDefault();
 
@@ -478,34 +654,7 @@ async function checkForm(event, id) {
 
 }
 
-//delete Episode
-async function deleteEpisode(idSerie, numEpisode) {
-    const response = await fetch(`/deleteEpisode/${idSerie}/${numEpisode}`);
-    let spinner = document.getElementById('spinner-loader_' + numEpisode);
-    spinner.style.display = 'block';
 
-    setTimeout(async () => {
-        if (response.ok) { // response.ok will be true when there is no error(not send.status(400))
-            let element = document.getElementById('episode_' + numEpisode);
-            element.style.display = 'none'
-            spinner.style.display = 'none';
-        }
-        else {
-            spinner.style.display = 'none';
-            /*Show modal */
-            const error = await response.json();
-            let modal = document.getElementById("modal");
-            let modalText = document.getElementById("modal-text");
-            let modalTitle = document.getElementById("modalHead-text")
-
-            modalTitle.textContent = error.title
-            modalText.textContent = error.message;
-
-            const errorModal = new bootstrap.Modal(modal);
-            errorModal.show();
-        }
-    }, 1000);
-}
 
 //delete Serie
 
