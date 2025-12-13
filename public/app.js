@@ -73,14 +73,16 @@ async function checkTitle(id) {
         if (titleInput.value === "") {
             titleInput.classList.add("is-invalid");
             titleMessage.classList.add("invalid-feedback");
-            titleMessage.textContent = "El título no puede estar vacío"
+            titleMessage.textContent = "El título no puede estar vacío";
+            errorStates.title.error = true;
             errorStates.title.errorMessage = titleMessage.textContent;
         }
 
         else if (firstChar !== firstChar.toUpperCase()) {
             titleInput.classList.add("is-invalid");
             titleMessage.classList.add("invalid-feedback");
-            titleMessage.textContent = "El título debe empezar por mayuscula"
+            titleMessage.textContent = "El título debe empezar por mayúscula";
+            errorStates.title.error = true;
             errorStates.title.errorMessage = titleMessage.textContent;
         }
 
@@ -104,6 +106,7 @@ async function checkTitle(id) {
                 titleInput.classList.add("is-invalid");
                 titleMessage.classList.add("invalid-feedback");
                 titleMessage.textContent = errorMessage.error;
+                errorStates.title.error = true;
                 errorStates.title.errorMessage = titleMessage.textContent;
             }
         }
@@ -126,12 +129,14 @@ function checkSynopsis() {
             synopsisMessage.classList.add("invalid-feedback");
             synopsisMessage.textContent = "La sinopsis no puede estar vacía";
             errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+            errorStates.synopsis.error = true;
         }
 
         else if (firstChar !== firstChar.toUpperCase()) {
             synopsisInput.classList.add("is-invalid");
             synopsisMessage.classList.add("invalid-feedback");
-            synopsisMessage.textContent = "La sinopsis debe empezar por mayuscula"
+            synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
+            errorStates.synopsis.error = true;
             errorStates.synopsis.errorMessage = synopsisMessage.textContent;
         }
 
@@ -139,6 +144,7 @@ function checkSynopsis() {
             synopsisInput.classList.add("is-invalid");
             synopsisMessage.classList.add("invalid-feedback");
             synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
+            errorStates.synopsis.error = true;
             errorStates.synopsis.errorMessage = synopsisMessage.textContent;
         }
         else {
@@ -168,6 +174,7 @@ async function checkNumEpisode(id) {
             numEpisodeInput.classList.add("is-invalid");
             numEpisodeMessage.classList.add("invalid-feedback");
             numEpisodeMessage.textContent = "El número de episodio no puede estar vacío";
+            errorStates.numEpisode.error = true;
             errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
         }
 
@@ -175,6 +182,7 @@ async function checkNumEpisode(id) {
             numEpisodeInput.classList.add("is-invalid");
             numEpisodeMessage.classList.add("invalid-feedback");
             numEpisodeMessage.textContent = "El número de episodio debe ser un número";
+            errorStates.numEpisode.error = true;
             errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
         }
         else {
@@ -196,6 +204,7 @@ async function checkNumEpisode(id) {
                 numEpisodeInput.classList.add("is-invalid")
                 numEpisodeMessage.classList.add("invalid-feedback")
                 numEpisodeMessage.textContent = messageError.error;
+                errorStates.numEpisode.error = true;
                 errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
             }
         }
@@ -216,6 +225,7 @@ function checkTimeEpisode() {
             timeEpisodeInput.classList.add("is-invalid");
             timeEpisodeMessage.classList.add("invalid-feedback");
             timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
+            errorStates.timeEpisode.error = true;
             errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
         }
 
@@ -223,6 +233,7 @@ function checkTimeEpisode() {
             timeEpisodeInput.classList.add("is-invalid");
             timeEpisodeMessage.classList.add("invalid-feedback");
             timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
+            errorStates.timeEpisode.error = true;
             errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
         }
 
@@ -244,14 +255,17 @@ function checkCover() {
 
     let coverInput = document.getElementById("coverInput");
     let coverMessage = document.getElementById("messageCover");
+    let deleteButton = document.getElementById("deleteCoverButton");
+    let output = document.getElementById("coverPreview");
+
 
     const file = coverInput.files[0];
     const reader = new FileReader()
 
 
-    if (file) {
+    if (coverInput.value !== "") {
         reader.onload = function () {
-            let output = document.getElementById("coverPreview");
+
             output.src = reader.result;
             output.style.display = 'block';
         }
@@ -263,6 +277,7 @@ function checkCover() {
         coverMessage.classList.remove("invalid-feedback")
         coverMessage.classList.add("valid-feedback")
         coverMessage.textContent = "La imagen se ha subido correctamente.";
+        deleteButton.style.display = "block";
         errorStates.cover.error = false;
         errorStates.cover.errorMessage = coverMessage.textContent;
     }
@@ -270,24 +285,40 @@ function checkCover() {
     else {
         coverInput.classList.add("is-invalid");
         coverMessage.classList.add("invalid-feedback");
+        output.src = "";
+        output.style.display = 'none';
         coverMessage.textContent = "La foto no se ha subido correctamente";
+        deleteButton.style.display = "none";
+        errorStates.cover.error = true;
         errorStates.cover.errorMessage = coverMessage.textContent;
     }
 
+}
+
+function deleteCover() {
+    let coverInput = document.getElementById("coverInput");
+    let output = document.getElementById("coverPreview");
+
+    coverInput.value = "";
+    output.src = "";
+    output.style.display = 'none';
+    checkCover();
 }
 
 function checkTrailer() {
 
     let trailerInput = document.getElementById("trailerEpisodeInput");
     let trailerMessage = document.getElementById("messageTrailerEpisode");
+    let deleteButton = document.getElementById("deleteTrailerButton");
+    let output = document.getElementById("trailerPreview");
+
 
     let file = trailerInput.files[0];
     const reader = new FileReader()
 
-    if (file) {
+    if (trailerInput.value !== "") {
 
         reader.onload = function () {
-            let output = document.getElementById("trailerPreview");
             output.src = reader.result;
             output.style.display = 'block';
         }
@@ -299,6 +330,7 @@ function checkTrailer() {
         trailerMessage.classList.remove("invalid-feedback");
         trailerMessage.classList.add("valid-feedback");
         trailerMessage.textContent = "El video se ha subido correctamente.";
+        deleteButton.style.display = "block";
         errorStates.trailer.error = false;
         errorStates.trailer.errorMessage = trailerMessage.textContent;
     }
@@ -306,10 +338,23 @@ function checkTrailer() {
     else {
         trailerMessage.classList.add("invalid-feedback");
         trailerInput.classList.add("is-invalid");
-        trailerMessage.textContent = "El video no se ha subido correctamente"
+        trailerMessage.textContent = "El video no se ha subido correctamente";
+        output.src = "";
+        output.style.display = 'none';
+        deleteButton.style.display = "none";
+        errorStates.trailer.error = true;
         errorStates.trailer.errorMessage = trailerMessage.textContent;
     }
+}
 
+function deleteTrailer() {
+    let trailerInput = document.getElementById("trailerEpisodeInput");
+    let output = document.getElementById("trailerPreview");
+
+    trailerInput.value = "";
+    output.src = "";
+    output.style.display = 'none';
+    checkTrailer();
 }
 
 async function addEpisode(event, id) {
@@ -346,13 +391,6 @@ async function addEpisode(event, id) {
         </div>        
         `
 
-    let inputs = document.getElementsByTagName("input");
-    document.getElementById("synopsisInput").value = "";
-
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = "";
-
-    }
 }
 
 async function checkForm(event, id) {
@@ -362,6 +400,9 @@ async function checkForm(event, id) {
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
+    let spinner = document.getElementById("spinner-loader-episode");
+
+    spinner.style.display = "block";
     modalTitle.textContent = "Error";
     modalText.textContent = "";
     await checkTitle(id);
@@ -371,48 +412,60 @@ async function checkForm(event, id) {
     checkCover();
     checkTrailer();
 
-    console.log(errorStates);
+    let hasErrors = Object.values(errorStates).some(status => status.error === true);
 
-    if (errorStates.title.error) {
+    if (hasErrors) {
+        if (errorStates.title.error) {
 
-        modalText.textContent += errorStates.title.errorMessage + "\n";
+            modalText.innerHTML += errorStates.title.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.synopsis.error) {
+            modalText.innerHTML += errorStates.synopsis.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.numEpisode.error) {
+            modalText.innerHTML += errorStates.numEpisode.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.timeEpisode.error) {
+            modalText.innerHTML += errorStates.timeEpisode.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.cover.error) {
+            modalText.innerHTML += errorStates.cover.errorMessage + "<br></br>";
+        }
+
+        if (errorStates.trailer.error) {
+            modalText.innerHTML += errorStates.trailer.errorMessage + "<br></br>";
+        }
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
-    else if (errorStates.synopsis.error) {
-        modalText.textContent += errorStates.title.errorMessage + "\n";
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else if (errorStates.numEpisode.error) {
-        modalText.textContent += errorStates.title.errorMessage + "\n";
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else if (errorStates.timeEpisode.error) {
-        modalText.textContent += errorStates.title.errorMessage + "\n";
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else if (errorStates.cover.error) {
-        modalText.textContent += errorStates.title.errorMessage + "\n";
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else if (errorStates.trailer.error) {
-        modalText.textContent += errorStates.title.errorMessage + "\n";
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else
+    else {
         await addEpisode(event, id);
-    console.log(modalText.textContent);
+        let inputs = document.getElementsByTagName("input");
+        document.getElementById("synopsisInput").value = "";
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+
+        checkCover();
+        checkTrailer();
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+    }
+
+
 }
 
 //delete Episode

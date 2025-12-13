@@ -115,19 +115,27 @@
                         <img id="coverPreview" src="#" alt="..."
                             style="display: none; max-width: 200px; max-height: 200px;">
                         <br>
-                        <input type="file" name="image" class="form-control" id="coverInput"
-                            onchange="checkCover(event)" required />
+                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"
+                            required />
+                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
+                            id="deleteCoverButton">
+                            Borrar imagen
+                        </button>
                         <div id="messageCover"></div>
                     </div>
 
                     <div class="form-group" id="trailerEpisode">
                         <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
                         <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
-                            onchange="checkTrailer(event)" controls loop></video>
+                            oninput="checkTrailer()" controls loop></video>
                         <br>
                         <input type="file" name="trailerEpisode" class="form-control"
                             placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
                             onchange="checkTrailer(event)" required />
+                        <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
+                            id="deleteTrailerButton">
+                            Borrar trailer
+                        </button>
                         <div id="messageTrailerEpisode"></div>
                     </div>
 
@@ -137,6 +145,7 @@
                         </button>
                     </div>
 
+                    <div class="spinner" id="spinner-loader-episode"></div>
                 </form>
             </div>
         </div>
