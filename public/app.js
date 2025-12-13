@@ -375,37 +375,37 @@ async function checkForm(event, id) {
 
     if (errorStates.title.error) {
 
-        modalText.textContent += errorStates.title.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
     else if (errorStates.synopsis.error) {
-        modalText.textContent += errorStates.synopsis.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
     else if (errorStates.numEpisode.error) {
-        modalText.textContent += errorStates.numEpisode.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
     else if (errorStates.timeEpisode.error) {
-        modalText.textContent += errorStates.timeEpisode.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
     else if (errorStates.cover.error) {
-        modalText.textContent += errorStates.cover.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
 
     else if (errorStates.trailer.error) {
-        modalText.textContent += errorStates.trailer.messageError + "\n";
+        modalText.textContent += errorStates.title.errorMessage + "\n";
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
     }
@@ -414,37 +414,6 @@ async function checkForm(event, id) {
         await addEpisode(event, id);
     console.log(modalText.textContent);
 }
-
-//delete Episode
-async function deleteEpisode(idSerie, numEpisode) {
-    const response = await fetch(`/deleteEpisode/${idSerie}/${numEpisode}`);
-    const data = await response.json();
-    let spinner = document.getElementById('spinner-loader_' + numEpisode);
-    spinner.style.display = 'block';
-
-    setTimeout(async () => {
-        if (data.data) { // first data is a JSON object that contains the variable data(second), which is a boolean.
-            let element = document.getElementById('episode_' + numEpisode);
-            element.style.display = 'none'
-            spinner.style.display = 'none';
-            console.log(data);
-        }
-        else {
-            spinner.style.display = 'none';
-            /*Show modal */
-            let container = document.getElementById('modal_page');
-            const title = "Error"
-            const body = "Ha ocurrido un problema al intentar borrar el elemento"
-            const content = await fetch(`/modal?title=${title}&body=${body}`);
-            const pagePart = await content.text();
-            container.innerHTML = pagePart;
-            const modalElement = document.getElementById('modal');
-            const errorModal = new bootstrap.Modal(modalElement);
-            errorModal.show();
-        }
-    }, 1000);
-}
-
 
 //delete Episode
 async function deleteEpisode(idSerie, numEpisode) {
