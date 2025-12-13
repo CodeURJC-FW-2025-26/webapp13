@@ -367,10 +367,20 @@ async function addEpisode(event, id) {
     });
 
     let data = await response.json();
+    if (data.error) {
+        let modal = document.getElementById("modal");
+        let modalText = document.getElementById("modal-text");
+        let modalTitle = document.getElementById("modalHead-text");
+        modalTitle.textContent = "Error";
+        modalText.innerHTML = `${data.message}`;
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }
 
-    const episodes = document.getElementById("episodes");
+    else {
+        const episodes = document.getElementById("episodes");
 
-    episodes.innerHTML += `
+        episodes.innerHTML += `
         <div class="row episode-row" id="episode_${data.numEpisode}">
             <div class="col-12">
                 <h3>${data.numEpisode} ${data.titleEpisode}</h3>
@@ -390,7 +400,7 @@ async function addEpisode(event, id) {
             </div>
         </div>        
         `
-
+    }
 }
 
 async function checkForm(event, id) {

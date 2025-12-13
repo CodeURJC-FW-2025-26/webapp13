@@ -225,16 +225,20 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
     const { title, synopsis, timeEpisode, numEpisode } = req.body;
     const id = req.params.id;
     const serie = await catalog.getSerie(id);
+    let epNum = parseInt(numEpisode);
+    let epTime = parseInt(timeEpisode);
 
     let errorMesagge;
 
-    if (!title || title.trim() === "") {
-        errorMesagge = "El título no puede estar vacío";
-        res.status(400).json({ error: true, message: errorMesagge });
+    if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
+        errorMesagge = "El título está duplicado.";
+        if (await catalog.checkDuplicatedNumEpisode(id, epNum))
+            errorMesagge += "<br>El número de episodio está duplicado."
+        res.status(409).json({ error: true, message: errorMesagge });
     }
+
+
     if (!errorMesagge) {
-        let epNum = parseInt(numEpisode);
-        let epTime = parseInt(timeEpisode);
 
         let newEpisode = {
             numEpisode: epNum,
