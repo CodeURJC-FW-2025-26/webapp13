@@ -124,39 +124,39 @@ function checkSynopsis(inputID, messageID) {
 
 
 
-        if (synopsisInput.value === "") {
-            synopsisInput.classList.add("is-invalid");
-            synopsisMessage.classList.add("invalid-feedback");
-            synopsisMessage.textContent = "La sinopsis no puede estar vacía";
-            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-            errorStates.synopsis.error = true;
-        }
+    if (synopsisInput.value === "") {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis no puede estar vacía";
+        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+        errorStates.synopsis.error = true;
+    }
 
-        else if (firstChar !== firstChar.toUpperCase()) {
-            synopsisInput.classList.add("is-invalid");
-            synopsisMessage.classList.add("invalid-feedback");
-            synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
-            errorStates.synopsis.error = true;
-            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-        }
+    else if (firstChar !== firstChar.toUpperCase()) {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
+        errorStates.synopsis.error = true;
+        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+    }
 
-        else if (synopsisInput.value.length > 800) {
-            synopsisInput.classList.add("is-invalid");
-            synopsisMessage.classList.add("invalid-feedback");
-            synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
-            errorStates.synopsis.error = true;
-            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-        }
-        else {
-            synopsisInput.classList.remove("is-invalid");
-            synopsisInput.classList.add("is-valid");
-            synopsisMessage.classList.remove("invalid-feedback")
-            synopsisMessage.classList.add("valid-feedback")
-            synopsisMessage.textContent = "La sinopsis es válida.";
-            errorStates.synopsis.error = false;
-            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-        }
-    };
+    else if (synopsisInput.value.length > 800) {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
+        errorStates.synopsis.error = true;
+        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+    }
+    else {
+        synopsisInput.classList.remove("is-invalid");
+        synopsisInput.classList.add("is-valid");
+        synopsisMessage.classList.remove("invalid-feedback")
+        synopsisMessage.classList.add("valid-feedback")
+        synopsisMessage.textContent = "La sinopsis es válida.";
+        errorStates.synopsis.error = false;
+        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+    }
+};
 
 
 
@@ -217,32 +217,32 @@ function checkTimeEpisode(inputID, messageID) {
 
 
 
-        if (timeEpisodeInput.value === "") {
-            timeEpisodeInput.classList.add("is-invalid");
-            timeEpisodeMessage.classList.add("invalid-feedback");
-            timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
-            errorStates.timeEpisode.error = true;
-            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-        }
+    if (timeEpisodeInput.value === "") {
+        timeEpisodeInput.classList.add("is-invalid");
+        timeEpisodeMessage.classList.add("invalid-feedback");
+        timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
+        errorStates.timeEpisode.error = true;
+        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+    }
 
-        else if (isNaN(timeEpisodeInput.value)) {
-            timeEpisodeInput.classList.add("is-invalid");
-            timeEpisodeMessage.classList.add("invalid-feedback");
-            timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
-            errorStates.timeEpisode.error = true;
-            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-        }
+    else if (isNaN(timeEpisodeInput.value)) {
+        timeEpisodeInput.classList.add("is-invalid");
+        timeEpisodeMessage.classList.add("invalid-feedback");
+        timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
+        errorStates.timeEpisode.error = true;
+        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+    }
 
-        else {
-            timeEpisodeInput.classList.remove("is-invalid");
-            timeEpisodeInput.classList.add("is-valid");
-            timeEpisodeMessage.classList.remove("invalid-feedback")
-            timeEpisodeMessage.classList.add("valid-feedback")
-            timeEpisodeMessage.textContent = "El tiempo de episodio es correcto.";
-            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-            errorStates.timeEpisode.error = false;
-        }
-    };
+    else {
+        timeEpisodeInput.classList.remove("is-invalid");
+        timeEpisodeInput.classList.add("is-valid");
+        timeEpisodeMessage.classList.remove("invalid-feedback")
+        timeEpisodeMessage.classList.add("valid-feedback")
+        timeEpisodeMessage.textContent = "El tiempo de episodio es correcto.";
+        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+        errorStates.timeEpisode.error = false;
+    }
+};
 
 
 
@@ -300,30 +300,7 @@ function deleteCover() {
     output.style.display = 'none';
     checkCover();
 }
-//Drag image
-let coverInput = document.getElementById("coverInput");
 
-coverInput.addEventListener('dragenter', (e) => {
-
-    coverInput.classList.add('highlighted');
-});
-
-coverInput.addEventListener('dragover', (e) => {
-    e.preventDefault();
-});
-
-coverInput.addEventListener('drop', (e) => {
-    e.preventDefault();
-    coverInput.classList.remove('highlighted');
-
-    coverInput.files = e.dataTransfer.files;
-
-    checkCover();
-})
-
-coverInput.addEventListener('dragleave', (e) => {
-    coverInput.classList.remove('highlighted');
-});
 
 function checkTrailer() {
 
@@ -376,28 +353,38 @@ function deleteTrailer() {
     output.style.display = 'none';
     checkTrailer();
 }
-//drag video
-let trailerInput = document.getElementById("trailerEpisodeInput");
+//drag
 
-trailerInput.addEventListener('dragenter', (e) => {
-    trailerInput.classList.add('highlighted');
-});
+const fileInputs = document.querySelectorAll('input[type="file"]')
 
-trailerInput.addEventListener('dragover', (e) => {
-    e.preventDefault();
-});
+fileInputs.forEach(input => {
+    input.addEventListener('dragenter', (e) => {
+        e.preventDefault();
+        input.classList.add('highlighted');
+    });
 
-trailerInput.addEventListener('drop', (e) => {
-    e.preventDefault();
-    trailerInput.classList.remove('highlighted');
+    input.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
 
-    trailerInput.files = e.dataTransfer.files;
+    input.addEventListener('drop', (e) => {
+        e.preventDefault();
+        input.classList.remove('highlighted');
 
-    checkTrailer();
-})
+        input.files = e.dataTransfer.files;
 
-trailerInput.addEventListener('dragleave', (e) => {
-    trailerInput.classList.remove('highlighted');
+        if (input.name === 'video') {
+            checkTrailer();
+        }
+
+        else {
+            checkCover();
+        }
+    });
+
+    input.addEventListener('dragleave', () => {
+        input.classList.remove('highlighted');
+    })
 });
 
 async function addEpisode(event, id) {
@@ -468,7 +455,7 @@ async function checkForm(event, id) {
     await checkTitle(id);
     checkSynopsis('synopsisInput', 'messageSynopsis');
     await checkNumEpisode(id);
-    checkTimeEpisode('timeEpisodeInput','messageTimeEpisode');
+    checkTimeEpisode('timeEpisodeInput', 'messageTimeEpisode');
     checkCover();
     checkTrailer();
 
@@ -532,7 +519,7 @@ async function checkForm(event, id) {
 
 //show the form in main_detalle
 async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsisEpisode, timeEpisode) {
-    let content = document.getElementById("episode_"+ numEpisode)
+    let content = document.getElementById("episode_" + numEpisode)
     content.innerHTML = `<div class="form-container">
                 <form enctype="multipart/form-data" onsubmit="checkFormUpdateEpisode(event,'${serieId}',${numEpisode})" novalidate>
                     <h3>Editar Episodio</h3>
@@ -579,7 +566,7 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
                     </div>
 
                     <div class="form-group" id="trailerEpisode">
-                        <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+                        <label for="trailer" class="form-label">Trailer del episodio</label>
                         <video id="trailerPreviewUpdateEp" src="#" style="display: none; max-width: 200px; max-height: 200px;" controls loop></video>
                         <br>
                         <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdateEp" onchange="previewTrailerUpdateEp()" />
@@ -601,7 +588,7 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
                 </form>
             </div>`;
 
-            addDragUpdate();
+    addDragUpdate();
 }
 //Drag image and video update
 function addDragUpdate() {
@@ -687,107 +674,105 @@ function previewTrailerUpdateEp() {
     }
 }
 //VALIDATIONS FOR EDITING AN EPISODE
-async function checkTitleUpdateEp(id,numEpisode){
+async function checkTitleUpdateEp(id, numEpisode) {
     let titleInput = document.getElementById("titleInputUpdateEp")
     let titleMessage = document.getElementById("messageTitleUpdateEp")
 
     const firstChar = titleInput.value[0]
 
-    
-        if (titleInput.value === "") {
-            titleInput.classList.add("is-invalid");
-            titleMessage.classList.add("invalid-feedback");
-            titleMessage.textContent = "El título no puede estar vacío";
-            errorStates.title.error = true;
-            errorStates.title.errorMessage = titleMessage.textContent;
-        }
 
-        else if (firstChar !== firstChar.toUpperCase()) {
-            titleInput.classList.add("is-invalid");
-            titleMessage.classList.add("invalid-feedback");
-            titleMessage.textContent = "El título debe empezar por mayúscula";
-            errorStates.title.error = true;
-            errorStates.title.errorMessage = titleMessage.textContent;
-        }
+    if (titleInput.value === "") {
+        titleInput.classList.add("is-invalid");
+        titleMessage.classList.add("invalid-feedback");
+        titleMessage.textContent = "El título no puede estar vacío";
+        errorStates.title.error = true;
+        errorStates.title.errorMessage = titleMessage.textContent;
+    }
 
-    
+    else if (firstChar !== firstChar.toUpperCase()) {
+        titleInput.classList.add("is-invalid");
+        titleMessage.classList.add("invalid-feedback");
+        titleMessage.textContent = "El título debe empezar por mayúscula";
+        errorStates.title.error = true;
+        errorStates.title.errorMessage = titleMessage.textContent;
+    }
+
+
     else {
 
-            const response = await fetch(`/checkTitleUpdateEp/${id}/${titleInput.value}/${numEpisode}`);
+        const response = await fetch(`/checkTitleUpdateEp/${id}/${titleInput.value}/${numEpisode}`);
 
-            if (response.ok) {
-                let okMessage = await response.json();
-                titleInput.classList.remove("is-invalid");
-                titleInput.classList.add("is-valid");
-                titleMessage.classList.remove("invalid-feedback")
-                titleMessage.classList.add("valid-feedback")
-                titleMessage.textContent = okMessage.error
-                errorStates.title.errorMessage = titleMessage.textContent;
-                errorStates.title.error = false;
-            }
-
-            else {
-                let errorMessage = await response.json();
-                titleInput.classList.add("is-invalid");
-                titleMessage.classList.add("invalid-feedback");
-                titleMessage.textContent = errorMessage.error;
-                errorStates.title.error = true;
-                errorStates.title.errorMessage = titleMessage.textContent;
-            }
+        if (response.ok) {
+            let okMessage = await response.json();
+            titleInput.classList.remove("is-invalid");
+            titleInput.classList.add("is-valid");
+            titleMessage.classList.remove("invalid-feedback")
+            titleMessage.classList.add("valid-feedback")
+            titleMessage.textContent = okMessage.error
+            errorStates.title.errorMessage = titleMessage.textContent;
+            errorStates.title.error = false;
         }
+
+        else {
+            let errorMessage = await response.json();
+            titleInput.classList.add("is-invalid");
+            titleMessage.classList.add("invalid-feedback");
+            titleMessage.textContent = errorMessage.error;
+            errorStates.title.error = true;
+            errorStates.title.errorMessage = titleMessage.textContent;
+        }
+    }
 }
 
 
 //check numEpisode UpdateEpisode
-async function checkNumEpisodeUpdateEp(id,originalNum) {
+async function checkNumEpisodeUpdateEp(id, originalNum) {
 
     let numEpisodeMessage = document.getElementById("messageNumEpisodeUpdateEp");
     let numEpisodeInput = document.getElementById("numEpisodeInputUpdateEp");
-    
 
-        if (numEpisodeInput.value === "") {
-            numEpisodeInput.classList.add("is-invalid");
-            numEpisodeMessage.classList.add("invalid-feedback");
-            numEpisodeMessage.textContent = "El número de episodio no puede estar vacío";
-            errorStates.numEpisode.error = true;
-            errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
 
-        }
+    if (numEpisodeInput.value === "") {
+        numEpisodeInput.classList.add("is-invalid");
+        numEpisodeMessage.classList.add("invalid-feedback");
+        numEpisodeMessage.textContent = "El número de episodio no puede estar vacío";
+        errorStates.numEpisode.error = true;
+        errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
 
-        else if (isNaN(numEpisodeInput.value)) {
-            numEpisodeInput.classList.add("is-invalid");
-            numEpisodeMessage.classList.add("invalid-feedback");
-            numEpisodeMessage.textContent = "El número de episodio debe ser un número";
-            errorStates.numEpisode.error = true;
-            errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
+    }
 
+    else if (isNaN(numEpisodeInput.value)) {
+        numEpisodeInput.classList.add("is-invalid");
+        numEpisodeMessage.classList.add("invalid-feedback");
+        numEpisodeMessage.textContent = "El número de episodio debe ser un número";
+        errorStates.numEpisode.error = true;
+        errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
+
+    }
+    else {
+
+        const response = await fetch(`/checkNumberEpisodeUpdateEp/${id}/${numEpisodeInput.value}/${originalNum}`);
+
+        if (response.ok) {
+            let okMessage = await response.json();
+            numEpisodeInput.classList.remove("is-invalid");
+            numEpisodeInput.classList.add("is-valid");
+            numEpisodeMessage.classList.remove("invalid-feedback")
+            numEpisodeMessage.classList.add("valid-feedback")
+            numEpisodeMessage.textContent = okMessage.error;
+            errorStates.numEpisode.error = false;
+            errorStates.numEpisode.errorMessage = okMessage.error;
         }
         else {
-
-            const response = await fetch(`/checkNumberEpisodeUpdateEp/${id}/${numEpisodeInput.value}/${originalNum}`);
-
-            if (response.ok) {
-                let okMessage = await response.json();
-                numEpisodeInput.classList.remove("is-invalid");
-                numEpisodeInput.classList.add("is-valid");
-                numEpisodeMessage.classList.remove("invalid-feedback")
-                numEpisodeMessage.classList.add("valid-feedback")
-                numEpisodeMessage.textContent = okMessage.error;
-                errorStates.numEpisode.error = false;
-                errorStates.numEpisode.errorMessage = okMessage.error;
-            }
-            else {
-                let messageError = await response.json();
-                numEpisodeInput.classList.add("is-invalid")
-                numEpisodeMessage.classList.add("invalid-feedback")
-                numEpisodeMessage.textContent = messageError.error;
-                errorStates.numEpisode.error = true;
-                errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
-            }
+            let messageError = await response.json();
+            numEpisodeInput.classList.add("is-invalid")
+            numEpisodeMessage.classList.add("invalid-feedback")
+            numEpisodeMessage.textContent = messageError.error;
+            errorStates.numEpisode.error = true;
+            errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
         }
-    };
-
-
+    }
+};
 
 
 
@@ -806,13 +791,13 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     spinner.style.display = "block";
     modalTitle.textContent = "Error";
     modalText.textContent = "";
-    await checkTitleUpdateEp(id,numEpisode);
+    await checkTitleUpdateEp(id, numEpisode);
     checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp'); //reused function
-    await checkNumEpisodeUpdateEp(id,numEpisode)
-    checkTimeEpisode('timeEpisodeInputUpdateEp','messageTimeEpisodeUpdateEp');//reused function
+    await checkNumEpisodeUpdateEp(id, numEpisode)
+    checkTimeEpisode('timeEpisodeInputUpdateEp', 'messageTimeEpisodeUpdateEp');//reused function
     previewCoverUpdateEp();
     previewTrailerUpdateEp();
-    
+
     let hasErrors = Object.values(errorStates).some(status => status.error === true);
     if (hasErrors) {
         if (errorStates.title.error) {
@@ -841,7 +826,7 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     }
 
     else {
-        await updateEpisode(event, id,numEpisode);
+        await updateEpisode(event, id, numEpisode);
         let inputs = document.getElementsByTagName("input");
         document.getElementById("synopsisInput").value = "";
 
@@ -876,9 +861,9 @@ async function updateEpisode(event, id, originalNum) {
 
     else {
         // Generamos un timestamp único en el momento de la actualización
-        const timestamp = Date.now(); 
+        const timestamp = Date.now();
 
-        const content = document.getElementById("episode_"+ originalNum);
+        const content = document.getElementById("episode_" + originalNum);
 
         content.innerHTML = `
         <div class="row episode-row" id="episode_${data.numEpisode}">
@@ -1011,4 +996,14 @@ async function deleteSerie(idSerie) {
             errorModal.show();
         }
     }, 1000);
+}
+
+function deleteCoverSerie() {
+    let coverInput = document.getElementById("inputSerieCover");
+    let output = document.getElementById("coverPreview");
+
+    coverInput.value = "";
+    output.src = "";
+    output.style.display = 'none';
+    checkCover();
 }

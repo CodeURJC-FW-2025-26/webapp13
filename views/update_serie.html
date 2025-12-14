@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/styles_nuevo-elem.css" />
+    <link rel="stylesheet" href="/css/style_footer.css">
+    <link rel="stylesheet" href="/css/style_header.css">
+    <link rel="stylesheet" href="/css/style_modal.css">
+    <link rel="shortcut icon" href="/images/logo/logo.ico" type="image/x-icon">
+    <title>Notfilm</title>
+</head>
+{{>header}}
+
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="form-container">
+                    <form onsubmit="updateSerie()" enctype="multipart/form-data" novalidate>
+                        <h1>
+                            Editar Serie
+                        </h1>
+                        <div class="form-group">
+                            <label for="title" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titleInputSerie" name="title" value="{{serie.title}}
+                                placeholder=" Nombre de la serie" required />
+                            <div id="messageTitleSerie"></div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="synopsis" class="form-label">Sinopsis</label>
+                            <textarea class="form-control" id="synopsis" name="synopsis"
+                                placeholder="Breve descripción de la serie" rows="3" oninput="checkSynopis()"
+                                required>{{serie.synopsis}}</textarea>
+                            <div id="messageSynopsisSerie"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="genre" class="form-label">Género</label>
+                            <select id="inputGenreSerie" name="genre" class="form-select" required>
+                                {{{genreOptions}}}
+                            </select>
+                            <div id="messageGenreSerie"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cover" class="form-label">Portada</label>
+                            <img id="coverPreview" src="#" alt="..."
+                                style="display: none; max-width: 200px; max-height: 200px;">
+                            <input type="file" name="image" class="form-control" id="inputSerieCover" required />
+                            <button type="reset" id="deleteImageSerie" onclick="deleteCoverSerie()"></button>
+                            <div id="messageCoverSerie"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age" class="form-label">Edad Requerida</label>
+                            <input type="number" class="form-control" name="ageClasification"
+                                id="inputAgeClassification" placeholder="Edad requerida"
+                                value="{{serie.ageClassification}}" required />
+                            <div id="messageAgeClassificationSerie"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="seasons" class="form-label">Temporadas</label>
+                            <input type="number" class="form-control" name="seasons" id="inputSeasons"
+                                value="{{serie.seasons}}" placeholder="Número de temporadas" required />
+                            <div id="messageSeasonsSerie"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="year" class="form-label">Año de estreno</label>
+                            <input type="number" class="form-control" name="premiere" id="inputPremiere"
+                                value="{{serie.premiere}}" placeholder="Año en el que se estrenó" required />
+                            <div id="messagePremiereSerie"></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button>
+                            <button type="submit" class="btn btn-default">
+                                Actualizar Serie
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>footer}}
+</body>
+
+</html>

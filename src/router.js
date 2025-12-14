@@ -90,9 +90,9 @@ router.get('/main_detalle/:id', async (req, res) => {
 
 });
 
-router.get('/serie_action/:id/:mode', async (req, res) => {
+router.get('/serie_action/:id/', async (req, res) => {
     const id = req.params.id;
-    const mode = req.params.mode;
+
     //genres
     const genres = [
         { value: "Acción", label: "Acción" },
@@ -106,38 +106,20 @@ router.get('/serie_action/:id/:mode', async (req, res) => {
         { value: "Documental", label: "Documental" }
     ];
 
-    if (mode === "true") {
-        //
-        let genreOptions = '<option value="">Selecciona un género</option>';
-        const serie = await catalog.getSerie(id);
-
-        //loop through the array
-        genres.forEach(genre => {
-            //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
-            const selected = serie.genre === genre.value ? 'selected' : '';
-            //genreOptions is the lines of the html
-            genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
-        }); //+= means ‘concatenate and assign’
-
-        return res.render('main_nuevo-elem', {
-            serie: serie,
-            addmode: false,
-            updatemode: true, //update true
-            genreOptions: genreOptions, //sent the lines of html
-        });
-    }
-
     let genreOptions = '<option value="">Selecciona un género</option>';
+    const serie = await catalog.getSerie(id);
+
+    //loop through the array
     genres.forEach(genre => {
         //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
-        genreOptions += `<option value="${genre.value}">${genre.label}</option>`; //+= means ‘concatenate and assign’
-    });
+        const selected = serie.genre === genre.value ? 'selected' : '';
+        //genreOptions is the lines of the html
+        genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
+    }); //+= means ‘concatenate and assign’
 
-    return res.render('main_nuevo-elem', {
-        serie: null,
-        addmode: true,
-        updatemode: false,
-        genreOptions: genreOptions //sent the lines of html
+    res.render('update_serie', {
+        serie: serie,
+        genreOptions: genreOptions, //send the lines of html
     });
 });
 
@@ -215,9 +197,9 @@ router.get('/checkTitleUpdateEp/:id/:title/:originalNum', async (req, res) => {
 router.get('/checkNumberEpisodeUpdateEp/:id/:numEpisode/:originalNum', async (req, res) => {
     const { id, numEpisode, originalNum } = req.params;
     if (await catalog.checkDuplicatedNumEpisodeUpdate(id, parseInt(numEpisode), parseInt(originalNum))) {
-        res.status(409).json({error: "El número de episodio coincide con otro episodio."});
+        res.status(409).json({ error: "El número de episodio coincide con otro episodio." });
     } else {
-        res.json({error: "Número de episodio disponible."});
+        res.json({ error: "Número de episodio disponible." });
     }
 });
 
@@ -229,7 +211,7 @@ router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'im
     const epNum = parseInt(numEpisode);
     const epNumog = parseInt(originalNum);
     const epTime = parseInt(timeEpisode);
-    
+
     const serie = await catalog.getSerie(id);
 
     let errorMessage = "";
@@ -244,29 +226,29 @@ router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'im
     if (errorMessage) {
         return res.status(409).json({ error: true, message: errorMessage });
     } else if (!errorMessage) {
-        
+
         const episodeIndex = serie.episodes.findIndex(ep => ep.numEpisode === epNumog);
-    
+
         let updatedEpisode = {
-        titleEpisode: title,
-        synopsisEpisode: synopsis,
-        numEpisode: epNum,
-        timeEpisode: epTime,
-        imageFilenamedetalle: serie.episodes[episodeIndex].imageFilenamedetalle,
-        trailerEpisode: serie.episodes[episodeIndex].trailerEpisode 
-    };
+            titleEpisode: title,
+            synopsisEpisode: synopsis,
+            numEpisode: epNum,
+            timeEpisode: epTime,
+            imageFilenamedetalle: serie.episodes[episodeIndex].imageFilenamedetalle,
+            trailerEpisode: serie.episodes[episodeIndex].trailerEpisode
+        };
 
-    // If a new image or trailer is uploaded, update them
-    if (req.files['image'] && req.files['image'][0]) {
-        updatedEpisode.imageFilenamedetalle = req.files['image'][0].filename;
-    }
+        // If a new image or trailer is uploaded, update them
+        if (req.files['image'] && req.files['image'][0]) {
+            updatedEpisode.imageFilenamedetalle = req.files['image'][0].filename;
+        }
 
-    if (req.files['trailerEpisode'] && req.files['trailerEpisode'][0]) {
-        updatedEpisode.trailerEpisode = req.files['trailerEpisode'][0].filename;
-    }
+        if (req.files['trailerEpisode'] && req.files['trailerEpisode'][0]) {
+            updatedEpisode.trailerEpisode = req.files['trailerEpisode'][0].filename;
+        }
 
-    await catalog.updateEpisode(id, epNumog, updatedEpisode);   
-    res.json(updatedEpisode)
+        await catalog.updateEpisode(id, epNumog, updatedEpisode);
+        res.json(updatedEpisode)
     }
 
 });
@@ -282,17 +264,17 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
 
     let errorMesagge = "";
 
-        if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
-            errorMesagge = "El título está duplicado.";
-        }
+    if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
+        errorMesagge = "El título está duplicado.";
+    }
 
-        if (await catalog.checkDuplicatedNumEpisode(id, epNum)) {
-            errorMesagge += (errorMesagge ? "<br>" : "") + "El número de episodio está duplicado.";
-        }
+    if (await catalog.checkDuplicatedNumEpisode(id, epNum)) {
+        errorMesagge += (errorMesagge ? "<br>" : "") + "El número de episodio está duplicado.";
+    }
 
-        if (errorMesagge) {
-            return res.status(409).json({ error: true, message: errorMesagge });
-        } else if (!errorMesagge) {
+    if (errorMesagge) {
+        return res.status(409).json({ error: true, message: errorMesagge });
+    } else if (!errorMesagge) {
 
         let newEpisode = {
             numEpisode: epNum,
