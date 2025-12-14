@@ -220,6 +220,24 @@ router.get('/update_episode/:id/:numEpisode', async (req, res) => {
     });
 });
 
+router.get('/checkSerieTitle/:title', async (req, res) => {
+    const { title } = req.params;
+    const { id } = req.query; 
+
+    const allSeries = await catalog.getSeries();
+    
+    const duplicate = allSeries.find(s => 
+        s.title.toLowerCase() === title.toLowerCase() && 
+        String(s._id) !== String(id)
+    );
+
+    if (duplicate) {
+        return res.status(400).json({ error: "El título de la serie ya existe" });
+    }
+    
+    return res.status(200).json({ message: "Título disponible" });
+});
+
 //new episode
 router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
     const { title, synopsis, timeEpisode, numEpisode } = req.body;
