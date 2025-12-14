@@ -196,29 +196,78 @@ router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
     }
 });
 
-//update the episode. Call the html
-router.get('/update_episode/:id/:numEpisode', async (req, res) => {
-    const id = req.params.id;
-    const serie = await catalog.getSerie(id);
-    const numEpisode = parseInt(req.params.numEpisode);
 
-    //if numEpisode > 0 then update episode
-    if (numEpisode > 0) {
-        const episode = await catalog.getEpisode(serie, numEpisode);
-        return res.render('update_episode', {
-            serie: serie,
-            episode: episode,
-            updatemode: true, //update
-            addmode: false, //add
-        });
+
+//check title Update Episode
+router.get('/checkTitleUpdateEp/:id/:title/:originalNum', async (req, res) => {
+    const { id, title, originalNum } = req.params;
+
+    const allEpisodes = await catalog.getEpisodes(id);
+
+    const duplicate = allEpisodes.find(ep => ep.titleEpisode === title && ep.numEpisode !== parseInt(originalNum));
+
+    if (duplicate) {
+        res.status(409).json({ error: "El título del episodio ya existe en otro episodio" });
+    } else {
+        res.json({ error: "Título disponible." });
     }
-    //if not then create episode
-    return res.render('update_episode', {
-        serie: serie,
-        updatemode: false, //update
-        addmode: true, //add
-    });
 });
+router.get('/checkNumberEpisodeUpdateEp/:id/:numEpisode/:originalNum', async (req, res) => {
+    const { id, numEpisode, originalNum } = req.params;
+    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, parseInt(numEpisode), parseInt(originalNum))) {
+        res.status(409).json({error: "El número de episodio coincide con otro episodio."});
+    } else {
+        res.json({error: "Número de episodio disponible."});
+    }
+});
+
+//updateEpisode
+router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
+
+    const { title, synopsis, timeEpisode, numEpisode } = req.body;
+    const { id, originalNum } = req.params;
+    const epNum = parseInt(numEpisode);
+    const epTime = parseInt(timeEpisode);
+    
+    const serie = await catalog.getSerie(id);
+
+    let errorMessage = "";
+
+    if (await catalog.checkDuplicatedTitleEpisodeUpdate(id, title, epNum)) {
+        errorMessage = "El título está duplicado.";
+    }
+
+    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, epNum, originalNum)) {
+        errorMessage += (errorMessage ? "<br>" : "") + "El número de episodio está duplicado.";
+    }
+    console.log(errorMessage)
+    if (errorMessage) {
+        return res.status(409).json({ error: true, message: errorMessage });
+    } else if (!errorMessage) {
+        
+        const episodeIndex = serie.episodes.findIndex(ep => ep.numEpisode === parseInt(originalNum));
+    
+        let updatedEpisode = {
+        titleEpisode: title,
+        synopsisEpisode: synopsis,
+        timeEpisode: epTime,
+        imageFilenamedetalle: serie.episodes[episodeIndex].imageFilenamedetalle,
+        trailerEpisode: serie.episodes[episodeIndex].trailerEpisode 
+    };
+    // If a new image or trailer is uploaded, update them
+    if (req.files['image'] && req.files['image'][0]) {
+        updatedEpisode.imageFilenamedetalle = req.files['image'][0].filename;
+    }
+
+    if (req.files['trailerEpisode'] && req.files['trailerEpisode'][0]) {
+        updatedEpisode.trailerEpisode = req.files['trailerEpisode'][0].filename;
+    }
+    await catalog.updateEpisode(id, numEpisode, updatedEpisode);   
+    res.json(updatedEpisode)
+    }
+
+});
+
 
 //new episode
 router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
@@ -228,17 +277,19 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
     let epNum = parseInt(numEpisode);
     let epTime = parseInt(timeEpisode);
 
-    let errorMesagge;
+    let errorMesagge = "";
 
-    if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
-        errorMesagge = "El título está duplicado.";
-        if (await catalog.checkDuplicatedNumEpisode(id, epNum))
-            errorMesagge += "<br>El número de episodio está duplicado."
-        res.status(409).json({ error: true, message: errorMesagge });
-    }
+        if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
+            errorMesagge = "El título está duplicado.";
+        }
 
+        if (await catalog.checkDuplicatedNumEpisode(id, epNum)) {
+            errorMesagge += (errorMesagge ? "<br>" : "") + "El número de episodio está duplicado.";
+        }
 
-    if (!errorMesagge) {
+        if (errorMesagge) {
+            return res.status(409).json({ error: true, message: errorMesagge });
+        } else if (!errorMesagge) {
 
         let newEpisode = {
             numEpisode: epNum,
@@ -256,7 +307,7 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
 });
 
 //Check title
-router.get('/checkTitle/:id/:title', async (req, res) => {
+router.get('/checkTitleEpisode/:id/:title', async (req, res) => {
 
     const id = req.params.id;
 
@@ -346,78 +397,7 @@ router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
     res.render('saved_serie', { message: 'Se ha actualizado la serie correctamente', boolean_serie1: true, serie });
 });
 
-//update episode
-router.post('/form_update_episode/:id/:numEpisode', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
-    //select params
-    const id = req.params.id;
-    const { titleEpisode, synopsisEpisode, timeEpisode, numEpisode } = req.body;
-    const epTime = parseInt(timeEpisode);
-    const newNumEpisode = parseInt(numEpisode);
-    const originalNumEpisode = parseInt(req.params.numEpisode);
 
-    const serie = await catalog.getSerie(id);
-    const episode = await catalog.getEpisode(serie, originalNumEpisode);
-
-    //not null
-    if (!titleEpisode || !synopsisEpisode || isNaN(epTime)) {
-        return res.render('error', { message: 'Todos los campos son obligatorios.', boolean_episode2: true, serie, episode });
-    }
-    // Check if the first character is uppercase
-    const firstChar = req.body.titleEpisode.charAt(0);
-    if (firstChar !== firstChar.toUpperCase()) {
-        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_episode2: true, serie, episode });
-    }
-
-    const allEpisodes = await catalog.getEpisodes(id);
-    //not duplicated title
-    let duplicate = allEpisodes.find(ep => ep.titleEpisode === titleEpisode && ep.numEpisode !== originalNumEpisode);
-    if (duplicate) {
-        return res.render('error', { message: 'Título del episodio duplicado.', boolean_episode2: true, serie, episode });
-    }
-
-    //not duplicated number
-    duplicate = allEpisodes.find(ep => ep.numEpisode === newNumEpisode && ep.numEpisode !== originalNumEpisode);
-    if (duplicate) {
-        return res.render('error', { message: 'Ese número de episodio ya existe.', boolean_episode2: true, serie, episode });
-    }
-
-    //synopsis length
-    const characterSynopsis = synopsisEpisode.trim(); //delete spaces between words
-
-    if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_episode2: true, serie, episode });
-    }
-
-    //select photo, video and original epsiode(to select the image and video)    
-    //if req.file don't exist then imageFile = false. 
-    //If req.files exists BUT imageFilenamedetalle does NOT exist → imageFile = undefined
-    //If req.files exists AND imageFilenamedetalle exists → imageFile = new image
-    const imageFile = req.files?.imageFilenamedetalle?.[0]; //.? = avoid mistakes if req.files or imageFilenamedetalle don't exist
-    const trailerFile = req.files?.trailerEpisode?.[0]; //.? = avoid mistakes if req.files or trailerEpisode don't exist
-    //get values of episode original(to use in the )
-    const originalEp = serie.episodes.find(ep => ep.numEpisode === originalNumEpisode);
-
-    //new_episode
-    const update_ep = {
-        titleEpisode,
-        synopsisEpisode,
-        numEpisode: newNumEpisode,
-        timeEpisode: epTime,
-        //If imageFile exists (uploaded new image) → use imageFile.filename (new image)
-        //If imageFile does NOT exist (no image uploaded) → use originalEp.imageFilenamedetalle (original image)
-        imageFilenamedetalle: imageFile ? imageFile.filename : originalEp.imageFilenamedetalle,
-        trailerEpisode: trailerFile ? trailerFile.filename : originalEp.trailerEpisode // ? is like a "if" (¿imageFile exist?)
-    };
-    await catalog.updateEpisode(id, originalNumEpisode, update_ep);
-
-    res.render('saved_serie', {
-        message: 'Se ha actualizado el episodio correctamente',
-        boolean: true,
-        serie,
-        episode: update_ep,
-        originalNumEpisode: originalNumEpisode
-    });
-})
 
 router.post('/serie/new', upload.single('image'), async (req, res) => {
 

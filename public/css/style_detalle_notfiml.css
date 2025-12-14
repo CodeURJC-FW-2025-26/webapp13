@@ -346,3 +346,30 @@ h1{
         transform: rotate(360deg);
     }
 }
+/*video and image*/
+#coverInput.highlighted {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 20px rgba(0, 123, 256, 0.5);
+    transform: scale(1.1);
+}
+
+#trailerEpisodeInput.highlighted {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 20px rgba(0, 123, 256, 0.5);
+    transform: scale(1.1);
+}
+#coverInputUpdateEp.highlighted {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 20px rgba(0, 123, 256, 0.5);
+    transform: scale(1.1);
+}
+
+#trailerEpisodeInputUpdateEp.highlighted {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 20px rgba(0, 123, 256, 0.5);
+    transform: scale(1.1);
+}

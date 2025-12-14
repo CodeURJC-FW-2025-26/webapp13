@@ -47,8 +47,9 @@
                             <div class="spinner" id="spinner-loader_{{numEpisode}}"></div>
 
                             <div class="form-actions">
-                                <a href="/update_episode/{{../serie._id}}/{{numEpisode}}" class="btn-action">Editar
-                                    episodio</a>
+                                <button class="btn-action"
+                                    onclick="showFormUpdateEpisode('{{serie._id}}','{{numEpisode}}','{{titleEpisode}}','{{synopsisEpisode}}','{{timeEpisode}}')">Editar episodio
+                                </button>
                                 <button class="btn-action"
                                     onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar
                                     episodio</button>
@@ -79,74 +80,74 @@
 
         <div class="col-lg-4 col-12">
             <div class="form-container">
-                <form enctype="multipart/form-data" onsubmit="checkForm(event,'{{serie._id}}')" novalidate>
-                    <h3>Crear Episodio</h3>
+                    <form enctype="multipart/form-data" onsubmit="checkForm(event,'{{serie._id}}')" novalidate>
+                        <h3>Crear Episodio</h3>
 
-                    <div class="form-group" id="title">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
-                            oninput="checkTitle('{{serie._id}}')" id="titleInput" required />
-                        <div id="messageTitle"></div>
-                    </div>
+                        <div class="form-group" id="title">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
+                                oninput="checkTitle('{{serie._id}}')" id="titleInput" required />
+                            <div id="messageTitle"></div>
+                        </div>
 
-                    <div class="form-group" id="synopsis">
-                        <label for="synopsis" class="form-label">Sinopsis</label>
-                        <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
-                            rows="3" id="synopsisInput" oninput="checkSynopsis()" required></textarea>
-                        <div id="messageSynopsis"></div>
-                    </div>
+                        <div class="form-group" id="synopsis">
+                            <label for="synopsis" class="form-label">Sinopsis</label>
+                            <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
+                                rows="3" id="synopsisInput" oninput="checkSynopsis('synopsisInput', 'messageSynopsis')" required></textarea>
+                            <div id="messageSynopsis"></div>
+                        </div>
 
-                    <div class="form-group" id="numEpisode">
-                        <label for="numEpisode" class="form-label">Número de episodio</label>
-                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput"
-                            oninput="checkNumEpisode('{{serie._id}}')" required />
-                        <div id="messageNumEpisode"></div>
-                    </div>
+                        <div class="form-group" id="numEpisode">
+                            <label for="numEpisode" class="form-label">Número de episodio</label>
+                            <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput"
+                                oninput="checkNumEpisode('{{serie._id}}')" required />
+                            <div id="messageNumEpisode"></div>
+                        </div>
 
-                    <div class="form-group" id="timeEpisode">
-                        <label for="timeEpisode" class="form-label">Duración del episodio</label>
-                        <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-                            oninput="checkTimeEpisode()" required id="timeEpisodeInput" />
-                        <div id="messageTimeEpisode"></div>
-                    </div>
+                        <div class="form-group" id="timeEpisode">
+                            <label for="timeEpisode" class="form-label">Duración del episodio</label>
+                            <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
+                                oninput="checkTimeEpisode('timeEpisodeInput','messageTimeEpisode')" required id="timeEpisodeInput" />
+                            <div id="messageTimeEpisode"></div>
+                        </div>
 
-                    <div class="form-group" id="cover">
-                        <label for="cover" class="form-label">Portada</label>
-                        <img id="coverPreview" src="#" alt="..."
-                            style="display: none; max-width: 200px; max-height: 200px;">
-                        <br>
-                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"
-                            required />
-                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
-                            id="deleteCoverButton">
-                            Borrar imagen
-                        </button>
-                        <div id="messageCover"></div>
-                    </div>
+                        <div class="form-group" id="cover">
+                            <label for="cover" class="form-label">Portada</label>
+                            <img id="coverPreview" src="#" alt="..."
+                                style="display: none; max-width: 200px; max-height: 200px;">
+                            <br>
+                            <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"
+                                required />
+                            <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
+                                id="deleteCoverButton">
+                                Borrar imagen
+                            </button>
+                            <div id="messageCover"></div>
+                        </div>
 
-                    <div class="form-group" id="trailerEpisode">
-                        <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
-                        <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
-                            oninput="checkTrailer()" controls loop></video>
-                        <br>
-                        <input type="file" name="trailerEpisode" class="form-control"
-                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
-                            onchange="checkTrailer(event)" required />
-                        <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
-                            id="deleteTrailerButton">
-                            Borrar trailer
-                        </button>
-                        <div id="messageTrailerEpisode"></div>
-                    </div>
+                        <div class="form-group" id="trailerEpisode">
+                            <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
+                            <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
+                                controls loop></video>
+                            <br>
+                            <input type="file" name="trailerEpisode" class="form-control"
+                                placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
+                                oninput="checkTrailer()" required />
+                            <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
+                                id="deleteTrailerButton">
+                                Borrar trailer
+                            </button>
+                            <div id="messageTrailerEpisode"></div>
+                        </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn-default">
-                            Crear Episodio
-                        </button>
-                    </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-default">
+                                Crear Episodio
+                            </button>
+                        </div>
 
-                    <div class="spinner" id="spinner-loader-episode"></div>
-                </form>
+                        <div class="spinner" id="spinner-loader-episode"></div>
+                    </form>
             </div>
         </div>
     </div>
