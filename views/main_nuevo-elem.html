@@ -18,21 +18,20 @@
   <div class="row justify-content-center"> 
     <div class="col-12 col-md-8 col-lg-6"> 
       <div class="form-container">
-        <form action="{{#updatemode}}/update_serie/{{serie._id}}{{/updatemode}}{{#addmode}}/serie/new{{/addmode}}" method="POST" enctype="multipart/form-data">
+        <form action="/serie/new" method="POST" enctype="multipart/form-data">
           <h1>
-              {{#updatemode}}Editar Serie{{/updatemode}}
-              {{#addmode}}Crear Serie{{/addmode}}
+              Crear Serie
           </h1>
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="title" 
-                  value="{{#updatemode}}{{serie.title}}{{/updatemode}}" 
+                  value=""
                   placeholder="Nombre de la serie" required /> 
           </div>
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required>{{#updatemode}}{{serie.synopsis}}{{/updatemode}}</textarea> 
+            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required></textarea> 
           </div>
 
           <div class="form-group">
@@ -44,43 +43,34 @@
 
           <div class="form-group">
             <label for="portada" class="form-label">Portada</label>
-            {{#addmode}}
             <input type="file" name="image" class="form-control" id="portada" required /> 
-            {{/addmode}}
-            {{#updatemode}}
-            <input type="file" name="image" class="form-control" id="portada" /> 
-            <small class="form-text text-muted">
-                Archivo actual: {{serie.imageFilename}}
-            </small>
-            {{/updatemode}}
           </div>
 
           <div class="form-group">
             <label for="edad" class="form-label">Edad Requerida</label>
             <input type="number" class="form-control" name="ageClasification" id="edad" 
-                  value="{{#updatemode}}{{serie.ageClassification}}{{/updatemode}}"
+                  value=""
                   placeholder="Edad requerida" required /> 
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
             <input type="number" class="form-control" name="seasons" id="temporadas" 
-                  value="{{#updatemode}}{{serie.seasons}}{{/updatemode}}"
+                  value=""
                   placeholder="Número de temporadas" required /> 
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
             <input type="number" class="form-control" name="premiere" id="año" 
-                  value="{{#updatemode}}{{serie.premiere}}{{/updatemode}}"
+                  value=""
                   placeholder="Año en el que se estrenó" required /> 
           </div>
           
           <div class="form-actions">
             <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
             <button type="submit" class="btn btn-default">
-                {{#updatemode}}Actualizar Serie{{/updatemode}}
-                {{#addmode}}Crear Serie{{/addmode}}
+                Crear Serie
             </button>   
           </div>
         </form>
