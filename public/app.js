@@ -597,7 +597,7 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
                         </button>
                     </div>
 
-                    <div class="spinner" id="spinner-loader-episode"></div>
+                    <div class="spinner" id="spinner-loader-UpdateEpisode"></div>
                 </form>
             </div>`;
 
@@ -801,7 +801,7 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
-    let spinner = document.getElementById("spinner-loader-episode");
+    let spinner = document.getElementById("spinner-loader-UpdateEpisode");
 
     spinner.style.display = "block";
     modalTitle.textContent = "Error";
