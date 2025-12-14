@@ -227,33 +227,35 @@ router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'im
     const { title, synopsis, timeEpisode, numEpisode } = req.body;
     const { id, originalNum } = req.params;
     const epNum = parseInt(numEpisode);
+    const epNumog = parseInt(originalNum);
     const epTime = parseInt(timeEpisode);
     
     const serie = await catalog.getSerie(id);
 
     let errorMessage = "";
 
-    if (await catalog.checkDuplicatedTitleEpisodeUpdate(id, title, epNum)) {
+    if (await catalog.checkDuplicatedTitleEpisodeUpdate(id, title, epNumog)) {
         errorMessage = "El título está duplicado.";
     }
 
-    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, epNum, originalNum)) {
+    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, epNum, epNumog)) {
         errorMessage += (errorMessage ? "<br>" : "") + "El número de episodio está duplicado.";
     }
-    console.log(errorMessage)
     if (errorMessage) {
         return res.status(409).json({ error: true, message: errorMessage });
     } else if (!errorMessage) {
         
-        const episodeIndex = serie.episodes.findIndex(ep => ep.numEpisode === parseInt(originalNum));
+        const episodeIndex = serie.episodes.findIndex(ep => ep.numEpisode === epNumog);
     
         let updatedEpisode = {
         titleEpisode: title,
         synopsisEpisode: synopsis,
+        numEpisode: epNum,
         timeEpisode: epTime,
         imageFilenamedetalle: serie.episodes[episodeIndex].imageFilenamedetalle,
         trailerEpisode: serie.episodes[episodeIndex].trailerEpisode 
     };
+
     // If a new image or trailer is uploaded, update them
     if (req.files['image'] && req.files['image'][0]) {
         updatedEpisode.imageFilenamedetalle = req.files['image'][0].filename;
@@ -262,7 +264,8 @@ router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'im
     if (req.files['trailerEpisode'] && req.files['trailerEpisode'][0]) {
         updatedEpisode.trailerEpisode = req.files['trailerEpisode'][0].filename;
     }
-    await catalog.updateEpisode(id, numEpisode, updatedEpisode);   
+
+    await catalog.updateEpisode(id, epNumog, updatedEpisode);   
     res.json(updatedEpisode)
     }
 

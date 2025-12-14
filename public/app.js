@@ -435,8 +435,15 @@ async function addEpisode(event, id) {
                 <video class="visual" src="/episode/${id}/${data.numEpisode}/video" controls loop></video>
                 <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
                 <div class="form-actions">
-                    <a href="/update_episode/${id}/${data.numEpisode}" class="btn-action">Editar
-                        episodio</a>
+                    <button class="btn-action"
+                                    onclick="showFormUpdateEpisode(
+                                        '${id}',
+                                        '${data.numEpisode}',
+                                        '${data.titleEpisode}',
+                                        '${data.synopsisEpisode}', 
+                                        '${data.timeEpisode}'
+                                    )">Editar episodio
+                                </button>
                     <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar
                         episodio</button>
                 </div>
@@ -563,9 +570,9 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
                         <img id="coverPreviewUpdateEp" src="#" alt="..."
                             style="display: none; max-width: 200px; max-height: 200px;">
                         <br>
-                        <input type="file" name="image" class="form-control" id="coverInputUpdateEp"/>
+                        <input type="file" name="image" class="form-control" id="coverInputUpdateEp" oninput="previewCoverUpdateEp()"/>
                         <button class="btn-action" onclick="deleteCoverUpdateEp()" style="display: none;" type="reset"
-                            id="deleteCoverButtonUpdateEp">
+                            id="deleteCoverButtonUpdateEp" >
                             Borrar imagen
                         </button>
                         <div id="messageCoverUpdateEp"></div>
@@ -575,7 +582,7 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
                         <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
                         <video id="trailerPreviewUpdateEp" src="#" style="display: none; max-width: 200px; max-height: 200px;" controls loop></video>
                         <br>
-                        <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdateEp" />
+                        <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdateEp" onchange="previewTrailerUpdateEp()" />
 
                         <button class="btn-action" type="reset" onclick="deleteTrailerUpdateEp()" style="display: none;"
                             id="deleteTrailerButtonUpdateEp">
@@ -598,7 +605,6 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
 }
 //Drag image and video update
 function addDragUpdate() {
-        //drag image
     let coverInputUpdateEp = document.getElementById("coverInputUpdateEp");
 
     coverInputUpdateEp.addEventListener('dragenter', (e) => {
@@ -611,12 +617,12 @@ function addDragUpdate() {
         e.preventDefault();
         coverInputUpdateEp.classList.remove('highlighted');
         coverInputUpdateEp.files = e.dataTransfer.files;
+        previewCoverUpdateEp();
     })
     coverInputUpdateEp.addEventListener('dragleave', (e) => {
         coverInputUpdateEp.classList.remove('highlighted');
     });
 
-    //drag video
     let trailerInputUpdateEp = document.getElementById("trailerEpisodeInputUpdateEp");
 
     trailerInputUpdateEp.addEventListener('dragenter', (e) => {
@@ -631,13 +637,55 @@ function addDragUpdate() {
         e.preventDefault();
         trailerInputUpdateEp.classList.remove('highlighted');
         trailerInputUpdateEp.files = e.dataTransfer.files;
+        previewTrailerUpdateEp();
     })
 
     trailerInputUpdateEp.addEventListener('dragleave', (e) => {
         trailerInputUpdateEp.classList.remove('highlighted');
     });
+}
+function previewCoverUpdateEp() {
+    let coverInput = document.getElementById("coverInputUpdateEp");
+    let output = document.getElementById("coverPreviewUpdateEp");
+
+    const file = coverInput.files[0];
+    const reader = new FileReader();
+
+    if (coverInput.value !== "") {
+        reader.onload = function () {
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+    } else {
+        output.src = "";
+        output.style.display = 'none';
     }
-    
+}
+
+function previewTrailerUpdateEp() {
+    let trailerInput = document.getElementById("trailerEpisodeInputUpdateEp");
+    let output = document.getElementById("trailerPreviewUpdateEp");
+
+    let file = trailerInput.files[0];
+    const reader = new FileReader();
+
+    // 💡 CORRECCIÓN: Comprobar la longitud del array 'files'
+    if (trailerInput.files.length > 0) {
+
+        reader.onload = function () {
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+    }
+    else {
+        output.src = "";
+        output.style.display = 'none';
+    }
+}
 //VALIDATIONS FOR EDITING AN EPISODE
 async function checkTitleUpdateEp(id,numEpisode){
     let titleInput = document.getElementById("titleInputUpdateEp")
@@ -749,6 +797,7 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     event.preventDefault();
     errorStates.cover.error = false;
     errorStates.trailer.error = false;
+    errorStates.title.error = false;
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
@@ -761,12 +810,10 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp'); //reused function
     await checkNumEpisodeUpdateEp(id,numEpisode)
     checkTimeEpisode('timeEpisodeInputUpdateEp','messageTimeEpisodeUpdateEp');//reused function
-
-    //
+    previewCoverUpdateEp();
+    previewTrailerUpdateEp();
     
-    console.log(errorStates)
     let hasErrors = Object.values(errorStates).some(status => status.error === true);
-    console.log("hashError:",hasErrors)
     if (hasErrors) {
         if (errorStates.title.error) {
 
@@ -794,7 +841,7 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     }
 
     else {
-        await updateEpisode(event, id);
+        await updateEpisode(event, id,numEpisode);
         let inputs = document.getElementsByTagName("input");
         document.getElementById("synopsisInput").value = "";
 
@@ -803,15 +850,15 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
         }
         setTimeout(() => {
             spinner.style.display = "none";
-        }, 2000)
+        }, 4000)
     }
 }
-async function updateEpisode(event, id) {
-
+//update_serie
+async function updateEpisode(event, id, originalNum) {
 
     const formData = new FormData(event.target);
     const numEpisodeValue = document.getElementById("numEpisodeInputUpdateEp").value;
-    const response = await fetch(`/processUpdateEpisode/${id}/${numEpisodeValue}`, {
+    const response = await fetch(`/processUpdateEpisode/${id}/${originalNum}`, {
         method: "POST",
         body: formData,
     });
@@ -828,28 +875,35 @@ async function updateEpisode(event, id) {
     }
 
     else {
-        const episodes = document.getElementById("episodes");
+        // Generamos un timestamp único en el momento de la actualización
+        const timestamp = Date.now(); 
 
-        episodes.innerHTML += `
+        const content = document.getElementById("episode_"+ originalNum);
+
+        content.innerHTML = `
         <div class="row episode-row" id="episode_${data.numEpisode}">
-            <div class="col-12">
-                <h3>${data.numEpisode} ${data.titleEpisode}</h3>
-                <p>${data.timeEpisode} minutos</p>
-                <h5>Sinopsis:</h5>
-                <p class="Text_synopsis">${data.synopsisEpisode}</p>
-                <img class="visual" src="/episode/${id}/${data.numEpisode}/image">
-                <br></br>
-                <video class="visual" src="/episode/${id}/${data.numEpisode}/video" controls loop></video>
-                <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
-                <div class="form-actions">
-                    <a href="/update_episode/${id}/${data.numEpisode}" class="btn-action">Editar
-                        episodio</a>
-                    <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar
-                        episodio</button>
-                </div>
+        <div class="col-12">
+            <h3>${data.numEpisode} ${data.titleEpisode}</h3>
+            <p>${data.timeEpisode} minutos</p>
+            <h5>Sinopsis:</h5>
+            <p class="Text_synopsis">${data.synopsisEpisode}</p>
+            
+            <img class="visual" src="/episode/${id}/${data.numEpisode}/image?t=${timestamp}"> 
+            
+            <br></br>
+            
+            <video class="visual" src="/episode/${id}/${data.numEpisode}/video?t=${timestamp}" controls loop></video>
+            
+            <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
+            <div class="form-actions">
+                <button class="btn-action"
+                    onclick="showFormUpdateEpisode('${id}','${data.numEpisode}','${data.titleEpisode}','${data.synopsisEpisode}','${data.timeEpisode}')">Editar episodio
+                </button>
+                <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar episodio</button>
             </div>
-        </div>        
-        `
+        </div>
+        </div>
+        `;
     }
 }
 //delete image update 
@@ -870,6 +924,8 @@ function deleteTrailer() {
     output.src = "";
     output.style.display = 'none';
 }
+
+
 //delete Episode
 async function deleteEpisode(idSerie, numEpisode) {
     const response = await fetch(`/deleteEpisode/${idSerie}/${numEpisode}`);

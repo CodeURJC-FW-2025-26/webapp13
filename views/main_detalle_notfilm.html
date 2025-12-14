@@ -48,7 +48,13 @@
 
                             <div class="form-actions">
                                 <button class="btn-action"
-                                    onclick="showFormUpdateEpisode('{{serie._id}}','{{numEpisode}}','{{titleEpisode}}','{{synopsisEpisode}}','{{timeEpisode}}')">Editar episodio
+                                    onclick="showFormUpdateEpisode(
+                                        '{{serie._id}}',
+                                        '{{numEpisode}}',
+                                        '{{titleEpisode}}',
+                                        '{{synopsisEpisode}}', 
+                                        '{{timeEpisode}}'
+                                    )">Editar episodio
                                 </button>
                                 <button class="btn-action"
                                     onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar
