@@ -2,6 +2,16 @@ const ITEMS_PER_PAGE = 6;
 
 let loadMoreRequest = 1;
 
+let errorStatesSerie = {
+    title: { error: true, errorMessage: "El título no puede estar vacío." },
+    synopsis: { error: true, errorMessage: "La sinopsis no puede estar vacía." },
+    genre: { error: true, errorMessage: "Debe seleccionar un género." },
+    age: { error: true, errorMessage: "La edad es obligatoria." },
+    seasons: { error: true, errorMessage: "El número de temporadas es obligatorio." },
+    premiere: { error: true, errorMessage: "El año de estreno es obligatorio." },
+    cover: { error: false, errorMessage: "La imagen es obligatoria." }
+};
+
 let errorStates = {
     title: { error: true, errorMessage: "El título no puede estar vacío." },
     synopsis: { error: true, errorMessage: "La sinopsis no puede estar vacía." },
@@ -54,6 +64,250 @@ window.addEventListener('scroll', () => {
     }
 
 })
+//main_nuevo-elem
+
+async function checkSerieTitle(id) {
+    let titleMessage = document.getElementById("messageSerieTitle");
+    let titleInput = document.getElementById("titulo");
+
+    const serieId = id;
+
+    const firstChar = titleInput.value.length > 0 ? titleInput.value[0] : "";
+
+    const validationLogic = async () => {
+        if (titleInput.value === "") {
+            titleInput.classList.add("is-invalid");
+            titleMessage.classList.add("invalid-feedback");
+            titleMessage.textContent = "El título no puede estar vacío";
+            errorStatesSerie.title.error = true;
+        } 
+        else if (firstChar !== firstChar.toUpperCase()) {
+            titleInput.classList.add("is-invalid");
+            titleMessage.classList.add("invalid-feedback");
+            titleMessage.textContent = "El título debe empezar por mayúscula";
+            errorStatesSerie.title.error = true;
+        } 
+        else {
+            const response = await fetch(`/checkSerieTitle/${titleInput.value}?id=${serieId}`);
+            
+            if (response.ok) {
+                let okMessage = await response.json();
+                titleInput.classList.remove("is-invalid");
+                titleInput.classList.add("is-valid");
+                titleMessage.classList.remove("invalid-feedback");
+                titleMessage.classList.add("valid-feedback");
+                titleMessage.textContent = okMessage.message;
+                errorStatesSerie.title.error = false;
+            } else {
+                let errorMessage = await response.json();
+                titleInput.classList.add("is-invalid");
+                titleMessage.classList.add("invalid-feedback");
+                titleMessage.textContent = errorMessage.error;
+                errorStatesSerie.title.error = true;
+            }
+        }
+    };
+    await validationLogic();
+}
+
+function checkSerieGenre() {
+    let genreMessage = document.getElementById("messageSerieGenre");
+    let genreInput = document.getElementById("genero");
+
+    if (genreInput.value === "") {
+        genreInput.classList.add("is-invalid");
+        genreMessage.classList.add("invalid-feedback");
+        genreMessage.textContent = "Selecciona un género";
+        errorStatesSerie.genre.error = true;
+    } else {
+        genreInput.classList.remove("is-invalid");
+        genreInput.classList.add("is-valid");
+        genreMessage.textContent = "";
+        errorStatesSerie.genre.error = false;
+    }
+}
+
+function checkSerieAge() {
+    let ageMessage = document.getElementById("messageSerieAge");
+    let ageInput = document.getElementById("edad");
+    let value = parseInt(ageInput.value);
+
+    if (ageInput.value === "" || isNaN(value)) {
+        ageInput.classList.add("is-invalid");
+        ageMessage.classList.add("invalid-feedback");
+        ageMessage.textContent = "La edad es obligatoria";
+        errorStatesSerie.age.error = true;
+    } else if (value < 1 || value > 18) {
+        ageInput.classList.add("is-invalid");
+        ageMessage.classList.add("invalid-feedback");
+        ageMessage.textContent = "La edad debe estar entre 0 y 18";
+        errorStatesSerie.age.error = true;
+    } else {
+        ageInput.classList.remove("is-invalid");
+        ageInput.classList.add("is-valid");
+        ageMessage.textContent = "";
+        errorStatesSerie.age.error = false;
+    }
+}
+
+function checkSerieSeasons() {
+    let seasonMessage = document.getElementById("messageSerieSeasons");
+    let seasonInput = document.getElementById("temporadas");
+    let value = parseInt(seasonInput.value);
+
+    if (seasonInput.value === "" || isNaN(value)) {
+        seasonInput.classList.add("is-invalid");
+        seasonMessage.classList.add("invalid-feedback");
+        seasonMessage.textContent = "El campo es obligatorio";
+        errorStatesSerie.seasons.error = true;
+    } else if (value < 1 || value > 20) {
+        seasonInput.classList.add("is-invalid");
+        seasonMessage.classList.add("invalid-feedback");
+        seasonMessage.textContent = "Temporadas entre 1 y 20";
+        errorStatesSerie.seasons.error = true;
+    } else {
+        seasonInput.classList.remove("is-invalid");
+        seasonInput.classList.add("is-valid");
+        seasonMessage.textContent = "";
+        errorStatesSerie.seasons.error = false;
+    }
+}
+
+function checkSeriePremiere() {
+    let yearMessage = document.getElementById("messageSeriePremiere");
+    let yearInput = document.getElementById("año");
+    let value = parseInt(yearInput.value);
+    const currentYear = new Date().getFullYear();
+
+    if (yearInput.value === "" || isNaN(value)) {
+        yearInput.classList.add("is-invalid");
+        yearMessage.classList.add("invalid-feedback");
+        yearMessage.textContent = "El año es obligatorio";
+        errorStatesSerie.premiere.error = true;
+    } else if (value < 1900 || value > currentYear + 1) {
+        yearInput.classList.add("is-invalid");
+        yearMessage.classList.add("invalid-feedback");
+        yearMessage.textContent = `Año entre 1900 y ${currentYear + 1}`;
+        errorStatesSerie.premiere.error = true;
+    } else {
+        yearInput.classList.remove("is-invalid");
+        yearInput.classList.add("is-valid");
+        yearMessage.textContent = "";
+        errorStatesSerie.premiere.error = false;
+    }
+}
+
+function checkSerieSynopsis() {
+    let synopsisMessage = document.getElementById("messageSerieSynopsis");
+    let synopsisInput = document.getElementById("sinopsis");
+    const firstChar = synopsisInput.value.length > 0 ? synopsisInput.value[0] : "";
+
+    const validationLogic = () => {
+        if (synopsisInput.value === "") {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis no puede estar vacía";
+            errorStatesSerie.synopsis.error = true;
+        } else if (firstChar !== firstChar.toUpperCase()) {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
+            errorStatesSerie.synopsis.error = true;
+        } else if (synopsisInput.value.length > 500) {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis no puede superar los 500 caracteres";
+            errorStates.synopsis.error = true;
+        } else {
+            synopsisInput.classList.remove("is-invalid");
+            synopsisInput.classList.add("is-valid");
+            synopsisMessage.classList.remove("invalid-feedback");
+            synopsisMessage.classList.add("valid-feedback");
+            synopsisMessage.textContent = "Sinopsis válida";
+            errorStatesSerie.synopsis.error = false;
+        }
+    };
+    validationLogic();
+}
+
+function checkSerieCover() {
+    let coverInput = document.getElementById("portada");
+    let coverMessage = document.getElementById("messageSerieCover");
+    
+    if (coverInput.hasAttribute('required') && coverInput.files.length === 0) {
+        coverInput.classList.add("is-invalid");
+        coverMessage.classList.add("invalid-feedback");
+        coverMessage.textContent = "La imagen es obligatoria";
+        errorStatesSerie.cover.error = true;
+    } else {
+        coverInput.classList.remove("is-invalid");
+        coverInput.classList.add("is-valid");
+        coverMessage.classList.remove("invalid-feedback");
+        coverMessage.classList.add("valid-feedback");
+        coverMessage.textContent = "Imagen válida";
+        errorStatesSerie.cover.error = false;
+    }
+}
+
+async function checkSerieForm(event) {
+    
+    event.preventDefault();
+
+    let modal = document.getElementById("modal");
+    let modalText = document.getElementById("modal-text");
+    let modalTitle = document.getElementById("modalHead-text");
+    
+    modalTitle.textContent = "Errores en el formulario";
+    modalText.textContent = ""; 
+
+    let id = document.getElementById("serieIdInput").value;
+
+    await checkSerieTitle(id);
+    checkSerieSynopsis();
+    checkSerieGenre();
+    checkSerieAge();
+    checkSerieSeasons();
+    checkSeriePremiere();
+    checkSerieCover();
+
+    let hasErrors = Object.values(errorStatesSerie).some(status => status.error === true);
+
+    if (hasErrors) {
+        if (errorStatesSerie.title.error) {
+            modalText.innerHTML += errorStatesSerie.title.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.synopsis.error) {
+            modalText.innerHTML += errorStatesSerie.synopsis.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.genre.error) {
+            modalText.innerHTML += errorStatesSerie.genre.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.cover.error) {
+            modalText.innerHTML += errorStatesSerie.cover.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.age.error) {
+            modalText.innerHTML += errorStatesSerie.age.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.seasons.error) {
+            modalText.innerHTML += errorStatesSerie.seasons.errorMessage + "<br></br>";
+        }
+
+        if (errorStatesSerie.premiere.error) {
+            modalText.innerHTML += errorStatesSerie.premiere.errorMessage + "<br></br>";
+        }
+
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    } 
+    else {
+        document.getElementById("serieForm").submit();
+    }
+}
 
 //main_detalle
 
