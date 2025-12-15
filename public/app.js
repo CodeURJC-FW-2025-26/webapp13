@@ -592,44 +592,37 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
 }
 //Drag image and video update
 function addDragUpdate() {
-    let coverInputUpdateEp = document.getElementById("coverInputUpdateEp");
+const fileInputs = document.querySelectorAll('input[type="file"]')
 
-    coverInputUpdateEp.addEventListener('dragenter', (e) => {
-        coverInputUpdateEp.classList.add('highlighted');
+fileInputs.forEach(input => {
+    input.addEventListener('dragenter', (e) => {
+        e.preventDefault();
+        input.classList.add('highlighted');
     });
-    coverInputUpdateEp.addEventListener('dragover', (e) => {
+
+    input.addEventListener('dragover', (e) => {
         e.preventDefault();
     });
-    coverInputUpdateEp.addEventListener('drop', (e) => {
+
+    input.addEventListener('drop', (e) => {
         e.preventDefault();
-        coverInputUpdateEp.classList.remove('highlighted');
-        coverInputUpdateEp.files = e.dataTransfer.files;
-        previewCoverUpdateEp();
+        input.classList.remove('highlighted');
+
+        input.files = e.dataTransfer.files;
+
+        if (input.name === 'video') {
+            previewTrailerUpdateEp();
+        }
+
+        else {
+            previewCoverUpdateEp();
+        }
+    });
+
+    input.addEventListener('dragleave', () => {
+        input.classList.remove('highlighted');
     })
-    coverInputUpdateEp.addEventListener('dragleave', (e) => {
-        coverInputUpdateEp.classList.remove('highlighted');
-    });
-
-    let trailerInputUpdateEp = document.getElementById("trailerEpisodeInputUpdateEp");
-
-    trailerInputUpdateEp.addEventListener('dragenter', (e) => {
-        trailerInputUpdateEp.classList.add('highlighted');
-    });
-
-    trailerInputUpdateEp.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    trailerInputUpdateEp.addEventListener('drop', (e) => {
-        e.preventDefault();
-        trailerInputUpdateEp.classList.remove('highlighted');
-        trailerInputUpdateEp.files = e.dataTransfer.files;
-        previewTrailerUpdateEp();
-    })
-
-    trailerInputUpdateEp.addEventListener('dragleave', (e) => {
-        trailerInputUpdateEp.classList.remove('highlighted');
-    });
+});
 }
 function previewCoverUpdateEp() {
     let coverInput = document.getElementById("coverInputUpdateEp");
