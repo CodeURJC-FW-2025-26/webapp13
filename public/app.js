@@ -312,39 +312,39 @@ function checkSynopsis() {
     const validationLogic = () => {
 
 
-    if (synopsisInput.value === "") {
-        synopsisInput.classList.add("is-invalid");
-        synopsisMessage.classList.add("invalid-feedback");
-        synopsisMessage.textContent = "La sinopsis no puede estar vacía";
-        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-        errorStates.synopsis.error = true;
-    }
+        if (synopsisInput.value === "") {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis no puede estar vacía";
+            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+            errorStates.synopsis.error = true;
+        }
 
-    else if (firstChar !== firstChar.toUpperCase()) {
-        synopsisInput.classList.add("is-invalid");
-        synopsisMessage.classList.add("invalid-feedback");
-        synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
-        errorStates.synopsis.error = true;
-        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-    }
+        else if (firstChar !== firstChar.toUpperCase()) {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
+            errorStates.synopsis.error = true;
+            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+        }
 
-    else if (synopsisInput.value.length > 800) {
-        synopsisInput.classList.add("is-invalid");
-        synopsisMessage.classList.add("invalid-feedback");
-        synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
-        errorStates.synopsis.error = true;
-        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-    }
-    else {
-        synopsisInput.classList.remove("is-invalid");
-        synopsisInput.classList.add("is-valid");
-        synopsisMessage.classList.remove("invalid-feedback")
-        synopsisMessage.classList.add("valid-feedback")
-        synopsisMessage.textContent = "La sinopsis es válida.";
-        errorStates.synopsis.error = false;
-        errorStates.synopsis.errorMessage = synopsisMessage.textContent;
-    }
-};
+        else if (synopsisInput.value.length > 800) {
+            synopsisInput.classList.add("is-invalid");
+            synopsisMessage.classList.add("invalid-feedback");
+            synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
+            errorStates.synopsis.error = true;
+            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+        }
+        else {
+            synopsisInput.classList.remove("is-invalid");
+            synopsisInput.classList.add("is-valid");
+            synopsisMessage.classList.remove("invalid-feedback")
+            synopsisMessage.classList.add("valid-feedback")
+            synopsisMessage.textContent = "La sinopsis es válida.";
+            errorStates.synopsis.error = false;
+            errorStates.synopsis.errorMessage = synopsisMessage.textContent;
+        }
+    };
 
     setTimeout(validationLogic, 2000);
 }
@@ -409,32 +409,32 @@ function checkTimeEpisode() {
     const validationLogic = () => {
 
 
-    if (timeEpisodeInput.value === "") {
-        timeEpisodeInput.classList.add("is-invalid");
-        timeEpisodeMessage.classList.add("invalid-feedback");
-        timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
-        errorStates.timeEpisode.error = true;
-        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-    }
+        if (timeEpisodeInput.value === "") {
+            timeEpisodeInput.classList.add("is-invalid");
+            timeEpisodeMessage.classList.add("invalid-feedback");
+            timeEpisodeMessage.textContent = "El tiempo de episodio no puede estar vacío"
+            errorStates.timeEpisode.error = true;
+            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+        }
 
-    else if (isNaN(timeEpisodeInput.value)) {
-        timeEpisodeInput.classList.add("is-invalid");
-        timeEpisodeMessage.classList.add("invalid-feedback");
-        timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
-        errorStates.timeEpisode.error = true;
-        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-    }
+        else if (isNaN(timeEpisodeInput.value)) {
+            timeEpisodeInput.classList.add("is-invalid");
+            timeEpisodeMessage.classList.add("invalid-feedback");
+            timeEpisodeMessage.textContent = "El tiempo de episodio debe ser un número";
+            errorStates.timeEpisode.error = true;
+            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+        }
 
-    else {
-        timeEpisodeInput.classList.remove("is-invalid");
-        timeEpisodeInput.classList.add("is-valid");
-        timeEpisodeMessage.classList.remove("invalid-feedback")
-        timeEpisodeMessage.classList.add("valid-feedback")
-        timeEpisodeMessage.textContent = "El tiempo de episodio es correcto.";
-        errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
-        errorStates.timeEpisode.error = false;
-    }
-};
+        else {
+            timeEpisodeInput.classList.remove("is-invalid");
+            timeEpisodeInput.classList.add("is-valid");
+            timeEpisodeMessage.classList.remove("invalid-feedback")
+            timeEpisodeMessage.classList.add("valid-feedback")
+            timeEpisodeMessage.textContent = "El tiempo de episodio es correcto.";
+            errorStates.timeEpisode.errorMessage = timeEpisodeMessage.textContent;
+            errorStates.timeEpisode.error = false;
+        }
+    };
 
     setTimeout(validationLogic, 2000);
 }
@@ -492,10 +492,6 @@ function deleteCover() {
     output.style.display = 'none';
     checkCover();
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
 
 function checkTrailer() {
 
@@ -548,42 +544,6 @@ function deleteTrailer() {
     output.style.display = 'none';
     checkTrailer();
 }
-<<<<<<< HEAD
-=======
-//drag
-
-const fileInputs = document.querySelectorAll('input[type="file"]')
-
-fileInputs.forEach(input => {
-    input.addEventListener('dragenter', (e) => {
-        e.preventDefault();
-        input.classList.add('highlighted');
-    });
-
-    input.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    input.addEventListener('drop', (e) => {
-        e.preventDefault();
-        input.classList.remove('highlighted');
-
-        input.files = e.dataTransfer.files;
-
-        if (input.name === 'video') {
-            checkTrailer();
-        }
-
-        else {
-            checkCover();
-        }
-    });
-
-    input.addEventListener('dragleave', () => {
-        input.classList.remove('highlighted');
-    })
-});
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
 
 async function addEpisode(event, id) {
 
@@ -646,11 +606,7 @@ async function checkForm(event, id) {
     await checkTitle(id);
     checkSynopsis();
     await checkNumEpisode(id);
-<<<<<<< HEAD
     checkTimeEpisode();
-=======
-    checkTimeEpisode('timeEpisodeInput', 'messageTimeEpisode');
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
     checkCover();
     checkTrailer();
 
@@ -713,274 +669,13 @@ async function checkForm(event, id) {
 
 }
 
-<<<<<<< HEAD
 async function checkSerieForm(event) {
     
-=======
-//update episode
-
-//show the form in main_detalle
-async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsisEpisode, timeEpisode) {
-    let content = document.getElementById("episode_" + numEpisode)
-    content.innerHTML = `<div class="form-container">
-                <form enctype="multipart/form-data" onsubmit="checkFormUpdateEpisode(event,'${serieId}',${numEpisode})" novalidate>
-                    <h3>Editar Episodio</h3>
-
-                    <div class="form-group" id="title">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
-                            oninput="checkTitleUpdateEp('${serieId}','${numEpisode}')" id="titleInputUpdateEp" value="${titleEpisode}" required />
-                        <div id="messageTitleUpdateEp"></div>
-                    </div>
-
-                    <div class="form-group" id="synopsis">
-                        <label for="synopsis" class="form-label">Sinopsis</label>
-                        <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
-                            rows="3" id="synopsisInputUpdateEp" oninput="checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp')" required>${synopsisEpisode}</textarea>
-                        <div id="messageSynopsisUpdateEp"></div>
-                    </div>
-
-                    <div class="form-group" id="numEpisode">
-                        <label for="numEpisode" class="form-label">Número de episodio</label>
-                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInputUpdateEp"
-                            oninput="checkNumEpisodeUpdateEp('${serieId}','${numEpisode}')"value="${numEpisode}" required />
-                        <div id="messageNumEpisodeUpdateEp"></div>
-                    </div>
-
-                    <div class="form-group" id="timeEpisode">
-                        <label for="timeEpisode" class="form-label">Duración del episodio</label>
-                        <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-                            oninput="checkTimeEpisode('timeEpisodeInputUpdateEp','messageTimeEpisodeUpdateEp');" value="${timeEpisode}" id="timeEpisodeInputUpdateEp" required/>
-                        <div id="messageTimeEpisodeUpdateEp"></div>
-                    </div>
-
-                    <div class="form-group" id="cover">
-                        <label for="cover" class="form-label">Portada</label>
-                        <img id="coverPreviewUpdateEp" src="#" alt="..."
-                            style="display: none; max-width: 200px; max-height: 200px;">
-                        <br>
-                        <input type="file" name="image" class="form-control" id="coverInputUpdateEp" oninput="previewCoverUpdateEp()"/>
-                        <button class="btn-action" onclick="deleteCoverUpdateEp()" style="display: none;" type="reset"
-                            id="deleteCoverButtonUpdateEp" >
-                            Borrar imagen
-                        </button>
-                        <div id="messageCoverUpdateEp"></div>
-                    </div>
-
-                    <div class="form-group" id="trailerEpisode">
-                        <label for="trailer" class="form-label">Trailer del episodio</label>
-                        <video id="trailerPreviewUpdateEp" src="#" style="display: none; max-width: 200px; max-height: 200px;" controls loop></video>
-                        <br>
-                        <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdateEp" onchange="previewTrailerUpdateEp()" />
-
-                        <button class="btn-action" type="reset" onclick="deleteTrailerUpdateEp()" style="display: none;"
-                            id="deleteTrailerButtonUpdateEp">
-                            Borrar trailer
-                        </button>
-                        <div id="messageTrailerEpisodeUpdateEp"></div>
-                    </div>
-
-                        <div class="form-actions">
-                        <button type="submit" class="btn-default">
-                            Actualizar Episodio
-                        </button>
-                    </div>
-
-                    <div class="spinner" id="spinner-loader-UpdateEpisode"></div>
-                </form>
-            </div>`;
-
-    addDragUpdate();
-}
-//Drag image and video update
-function addDragUpdate() {
-const fileInputs = document.querySelectorAll('input[type="file"]')
-
-fileInputs.forEach(input => {
-    input.addEventListener('dragenter', (e) => {
-        e.preventDefault();
-        input.classList.add('highlighted');
-    });
-
-    input.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    input.addEventListener('drop', (e) => {
-        e.preventDefault();
-        input.classList.remove('highlighted');
-
-        input.files = e.dataTransfer.files;
-
-        if (input.name === 'video') {
-            previewTrailerUpdateEp();
-        }
-
-        else {
-            previewCoverUpdateEp();
-        }
-    });
-
-    input.addEventListener('dragleave', () => {
-        input.classList.remove('highlighted');
-    })
-});
-}
-function previewCoverUpdateEp() {
-    let coverInput = document.getElementById("coverInputUpdateEp");
-    let output = document.getElementById("coverPreviewUpdateEp");
-
-    const file = coverInput.files[0];
-    const reader = new FileReader();
-
-    if (coverInput.value !== "") {
-        reader.onload = function () {
-            output.src = reader.result;
-            output.style.display = 'block';
-        }
-
-        reader.readAsDataURL(file);
-    } else {
-        output.src = "";
-        output.style.display = 'none';
-    }
-}
-
-function previewTrailerUpdateEp() {
-    let trailerInput = document.getElementById("trailerEpisodeInputUpdateEp");
-    let output = document.getElementById("trailerPreviewUpdateEp");
-
-    let file = trailerInput.files[0];
-    const reader = new FileReader();
-
-    // 💡 CORRECCIÓN: Comprobar la longitud del array 'files'
-    if (trailerInput.files.length > 0) {
-
-        reader.onload = function () {
-            output.src = reader.result;
-            output.style.display = 'block';
-        }
-
-        reader.readAsDataURL(file);
-    }
-    else {
-        output.src = "";
-        output.style.display = 'none';
-    }
-}
-//VALIDATIONS FOR EDITING AN EPISODE
-async function checkTitleUpdateEp(id, numEpisode) {
-    let titleInput = document.getElementById("titleInputUpdateEp")
-    let titleMessage = document.getElementById("messageTitleUpdateEp")
-
-    const firstChar = titleInput.value[0]
-
-
-    if (titleInput.value === "") {
-        titleInput.classList.add("is-invalid");
-        titleMessage.classList.add("invalid-feedback");
-        titleMessage.textContent = "El título no puede estar vacío";
-        errorStates.title.error = true;
-        errorStates.title.errorMessage = titleMessage.textContent;
-    }
-
-    else if (firstChar !== firstChar.toUpperCase()) {
-        titleInput.classList.add("is-invalid");
-        titleMessage.classList.add("invalid-feedback");
-        titleMessage.textContent = "El título debe empezar por mayúscula";
-        errorStates.title.error = true;
-        errorStates.title.errorMessage = titleMessage.textContent;
-    }
-
-
-    else {
-
-        const response = await fetch(`/checkTitleUpdateEp/${id}/${titleInput.value}/${numEpisode}`);
-
-        if (response.ok) {
-            let okMessage = await response.json();
-            titleInput.classList.remove("is-invalid");
-            titleInput.classList.add("is-valid");
-            titleMessage.classList.remove("invalid-feedback")
-            titleMessage.classList.add("valid-feedback")
-            titleMessage.textContent = okMessage.error
-            errorStates.title.errorMessage = titleMessage.textContent;
-            errorStates.title.error = false;
-        }
-
-        else {
-            let errorMessage = await response.json();
-            titleInput.classList.add("is-invalid");
-            titleMessage.classList.add("invalid-feedback");
-            titleMessage.textContent = errorMessage.error;
-            errorStates.title.error = true;
-            errorStates.title.errorMessage = titleMessage.textContent;
-        }
-    }
-}
-
-
-//check numEpisode UpdateEpisode
-async function checkNumEpisodeUpdateEp(id, originalNum) {
-
-    let numEpisodeMessage = document.getElementById("messageNumEpisodeUpdateEp");
-    let numEpisodeInput = document.getElementById("numEpisodeInputUpdateEp");
-
-
-    if (numEpisodeInput.value === "") {
-        numEpisodeInput.classList.add("is-invalid");
-        numEpisodeMessage.classList.add("invalid-feedback");
-        numEpisodeMessage.textContent = "El número de episodio no puede estar vacío";
-        errorStates.numEpisode.error = true;
-        errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
-
-    }
-
-    else if (isNaN(numEpisodeInput.value)) {
-        numEpisodeInput.classList.add("is-invalid");
-        numEpisodeMessage.classList.add("invalid-feedback");
-        numEpisodeMessage.textContent = "El número de episodio debe ser un número";
-        errorStates.numEpisode.error = true;
-        errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
-
-    }
-    else {
-
-        const response = await fetch(`/checkNumberEpisodeUpdateEp/${id}/${numEpisodeInput.value}/${originalNum}`);
-
-        if (response.ok) {
-            let okMessage = await response.json();
-            numEpisodeInput.classList.remove("is-invalid");
-            numEpisodeInput.classList.add("is-valid");
-            numEpisodeMessage.classList.remove("invalid-feedback")
-            numEpisodeMessage.classList.add("valid-feedback")
-            numEpisodeMessage.textContent = okMessage.error;
-            errorStates.numEpisode.error = false;
-            errorStates.numEpisode.errorMessage = okMessage.error;
-        }
-        else {
-            let messageError = await response.json();
-            numEpisodeInput.classList.add("is-invalid")
-            numEpisodeMessage.classList.add("invalid-feedback")
-            numEpisodeMessage.textContent = messageError.error;
-            errorStates.numEpisode.error = true;
-            errorStates.numEpisode.errorMessage = numEpisodeMessage.textContent;
-        }
-    }
-};
-
-
-
-//check the Update Episode form
-async function checkFormUpdateEpisode(event, id, numEpisode) {
-
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
     event.preventDefault();
 
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
-<<<<<<< HEAD
     
     modalTitle.textContent = "Errores en el formulario";
     modalText.textContent = ""; 
@@ -997,21 +692,6 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
 
     let hasErrors = Object.values(errorStatesSerie).some(status => status.error === true);
 
-=======
-    let spinner = document.getElementById("spinner-loader-UpdateEpisode");
-
-    spinner.style.display = "block";
-    modalTitle.textContent = "Error";
-    modalText.textContent = "";
-    await checkTitleUpdateEp(id, numEpisode);
-    checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp'); //reused function
-    await checkNumEpisodeUpdateEp(id, numEpisode)
-    checkTimeEpisode('timeEpisodeInputUpdateEp', 'messageTimeEpisodeUpdateEp');//reused function
-    previewCoverUpdateEp();
-    previewTrailerUpdateEp();
-
-    let hasErrors = Object.values(errorStates).some(status => status.error === true);
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
     if (hasErrors) {
         if (errorStatesSerie.title.error) {
             modalText.innerHTML += errorStatesSerie.title.errorMessage + "<br></br>";
@@ -1045,96 +725,9 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
         errorModal.show();
     } 
     else {
-<<<<<<< HEAD
         document.getElementById("serieForm").submit();
     }
 }
-=======
-        await updateEpisode(event, id, numEpisode);
-        let inputs = document.getElementsByTagName("input");
-        document.getElementById("synopsisInput").value = "";
-
-        for (let i = 0; i < inputs.length; i++) {
-            inputs[i].value = "";
-        }
-        setTimeout(() => {
-            spinner.style.display = "none";
-        }, 4000)
-    }
-}
-//update_serie
-async function updateEpisode(event, id, originalNum) {
-
-    const formData = new FormData(event.target);
-    const numEpisodeValue = document.getElementById("numEpisodeInputUpdateEp").value;
-    const response = await fetch(`/processUpdateEpisode/${id}/${originalNum}`, {
-        method: "POST",
-        body: formData,
-    });
-
-    let data = await response.json();
-    if (data.error) {
-        let modal = document.getElementById("modal");
-        let modalText = document.getElementById("modal-text");
-        let modalTitle = document.getElementById("modalHead-text");
-        modalTitle.textContent = "Error";
-        modalText.innerHTML = `${data.message}`;
-        let errorModal = new bootstrap.Modal(modal);
-        errorModal.show();
-    }
-
-    else {
-        // Generamos un timestamp único en el momento de la actualización
-        const timestamp = Date.now();
-
-        const content = document.getElementById("episode_" + originalNum);
-
-        content.innerHTML = `
-        <div class="row episode-row" id="episode_${data.numEpisode}">
-        <div class="col-12">
-            <h3>${data.numEpisode} ${data.titleEpisode}</h3>
-            <p>${data.timeEpisode} minutos</p>
-            <h5>Sinopsis:</h5>
-            <p class="Text_synopsis">${data.synopsisEpisode}</p>
-            
-            <img class="visual" src="/episode/${id}/${data.numEpisode}/image?t=${timestamp}"> 
-            
-            <br></br>
-            
-            <video class="visual" src="/episode/${id}/${data.numEpisode}/video?t=${timestamp}" controls loop></video>
-            
-            <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
-            <div class="form-actions">
-                <button class="btn-action"
-                    onclick="showFormUpdateEpisode('${id}','${data.numEpisode}','${data.titleEpisode}','${data.synopsisEpisode}','${data.timeEpisode}')">Editar episodio
-                </button>
-                <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar episodio</button>
-            </div>
-        </div>
-        </div>
-        `;
-    }
-}
-//delete image update 
-function deleteCoverUpdateEp() {
-    let coverInput = document.getElementById("coverInputUpdateEp");
-    let output = document.getElementById("coverPreviewUpdateEp");
-
-    coverInput.value = "";
-    output.src = "";
-    output.style.display = 'none';
-}
-//delete image update
-function deleteTrailer() {
-    let trailerInput = document.getElementById("trailerEpisodeInputUpdateEp");
-    let output = document.getElementById("trailerPreviewUpdateEp");
-
-    trailerInput.value = "";
-    output.src = "";
-    output.style.display = 'none';
-}
-
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
 
 //delete Episode
 async function deleteEpisode(idSerie, numEpisode) {
@@ -1212,14 +805,4 @@ async function deleteSerie(idSerie) {
             errorModal.show();
         }
     }, 1000);
-}
-
-function deleteCoverSerie() {
-    let coverInput = document.getElementById("inputSerieCover");
-    let output = document.getElementById("coverPreview");
-
-    coverInput.value = "";
-    output.src = "";
-    output.style.display = 'none';
-    checkCover();
 }

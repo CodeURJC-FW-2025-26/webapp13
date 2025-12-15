@@ -47,19 +47,8 @@
                             <div class="spinner" id="spinner-loader_{{numEpisode}}"></div>
 
                             <div class="form-actions">
-<<<<<<< HEAD
                                 <a href="/update_episode/{{../serie._id}}/{{numEpisode}}" class="btn-action">Editar
                                     episodio</a>
-=======
-                                <button class="btn-action" onclick="showFormUpdateEpisode(
-                                        '{{serie._id}}',
-                                        '{{numEpisode}}',
-                                        '{{titleEpisode}}',
-                                        '{{synopsisEpisode}}', 
-                                        '{{timeEpisode}}'
-                                    )">Editar episodio
-                                </button>
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
                                 <button class="btn-action"
                                     onclick="deleteEpisode('{{serie._id}}','{{numEpisode}}')">Borrar
                                     episodio</button>
@@ -74,7 +63,7 @@
                             <i class="bi bi-trash"></i>
                             <span class="btn-text">Borrar Serie</span>
                         </button>
-                        <a href="/serie_action/{{serie._id}}" class="btn-interactive">
+                        <a href="/serie_action/{{serie._id}}/true" class="btn-interactive">
                             <i class="bi bi-pencil-fill"></i>
                             <span class="btn-text">Editar</span>
                         </a>
@@ -103,12 +92,7 @@
                     <div class="form-group" id="synopsis">
                         <label for="synopsis" class="form-label">Sinopsis</label>
                         <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
-<<<<<<< HEAD
                             rows="3" id="synopsisInput" oninput="checkSynopsis()" required></textarea>
-=======
-                            rows="3" id="synopsisInput" oninput="checkSynopsis('synopsisInput', 'messageSynopsis')"
-                            required></textarea>
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
                         <div id="messageSynopsis"></div>
                     </div>
 
@@ -122,12 +106,7 @@
                     <div class="form-group" id="timeEpisode">
                         <label for="timeEpisode" class="form-label">Duración del episodio</label>
                         <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-<<<<<<< HEAD
                             oninput="checkTimeEpisode()" required id="timeEpisodeInput" />
-=======
-                            oninput="checkTimeEpisode('timeEpisodeInput','messageTimeEpisode')" required
-                            id="timeEpisodeInput" />
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
                         <div id="messageTimeEpisode"></div>
                     </div>
 
@@ -148,19 +127,11 @@
                     <div class="form-group" id="trailerEpisode">
                         <label for="trailerEpisode" class="form-label">Trailer del episodio</label>
                         <video id="trailerPreview" src="#" style="display: none; max-width: 200px; max-height: 200px;"
-<<<<<<< HEAD
                             oninput="checkTrailer()" controls loop></video>
                         <br>
                         <input type="file" name="trailerEpisode" class="form-control"
                             placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
                             onchange="checkTrailer(event)" required />
-=======
-                            controls loop></video>
-                        <br>
-                        <input type="file" name="trailerEpisode" class="form-control"
-                            placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
-                            oninput="checkTrailer()" required />
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
                         <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
                             id="deleteTrailerButton">
                             Borrar trailer

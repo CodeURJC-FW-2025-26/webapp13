@@ -90,9 +90,9 @@ router.get('/main_detalle/:id', async (req, res) => {
 
 });
 
-router.get('/serie_action/:id/', async (req, res) => {
+router.get('/serie_action/:id/:mode', async (req, res) => {
     const id = req.params.id;
-
+    const mode = req.params.mode;
     //genres
     const genres = [
         { value: "Acción", label: "Acción" },
@@ -106,20 +106,38 @@ router.get('/serie_action/:id/', async (req, res) => {
         { value: "Documental", label: "Documental" }
     ];
 
-    let genreOptions = '<option value="">Selecciona un género</option>';
-    const serie = await catalog.getSerie(id);
+    if (mode === "true") {
+        //
+        let genreOptions = '<option value="">Selecciona un género</option>';
+        const serie = await catalog.getSerie(id);
 
-    //loop through the array
+        //loop through the array
+        genres.forEach(genre => {
+            //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
+            const selected = serie.genre === genre.value ? 'selected' : '';
+            //genreOptions is the lines of the html
+            genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
+        }); //+= means ‘concatenate and assign’
+
+        return res.render('main_nuevo-elem', {
+            serie: serie,
+            addmode: false,
+            updatemode: true, //update true
+            genreOptions: genreOptions, //sent the lines of html
+        });
+    }
+
+    let genreOptions = '<option value="">Selecciona un género</option>';
     genres.forEach(genre => {
         //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
-        const selected = serie.genre === genre.value ? 'selected' : '';
-        //genreOptions is the lines of the html
-        genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
-    }); //+= means ‘concatenate and assign’
+        genreOptions += `<option value="${genre.value}">${genre.label}</option>`; //+= means ‘concatenate and assign’
+    });
 
-    res.render('update_serie', {
-        serie: serie,
-        genreOptions: genreOptions, //send the lines of html
+    return res.render('main_nuevo-elem', {
+        serie: null,
+        addmode: true,
+        updatemode: false,
+        genreOptions: genreOptions //sent the lines of html
     });
 });
 
@@ -216,69 +234,8 @@ router.get('/checkSerieTitle/:title', async (req, res) => {
     if (duplicate) {
         return res.status(400).json({ error: "El título de la serie ya existe" });
     }
-<<<<<<< HEAD
     
     return res.status(200).json({ message: "Título disponible" });
-=======
-});
-router.get('/checkNumberEpisodeUpdateEp/:id/:numEpisode/:originalNum', async (req, res) => {
-    const { id, numEpisode, originalNum } = req.params;
-    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, parseInt(numEpisode), parseInt(originalNum))) {
-        res.status(409).json({ error: "El número de episodio coincide con otro episodio." });
-    } else {
-        res.json({ error: "Número de episodio disponible." });
-    }
-});
-
-//updateEpisode
-router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
-
-    const { title, synopsis, timeEpisode, numEpisode } = req.body;
-    const { id, originalNum } = req.params;
-    const epNum = parseInt(numEpisode);
-    const epNumog = parseInt(originalNum);
-    const epTime = parseInt(timeEpisode);
-
-    const serie = await catalog.getSerie(id);
-
-    let errorMessage = "";
-
-    if (await catalog.checkDuplicatedTitleEpisodeUpdate(id, title, epNumog)) {
-        errorMessage = "El título está duplicado.";
-    }
-
-    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, epNum, epNumog)) {
-        errorMessage += (errorMessage ? "<br>" : "") + "El número de episodio está duplicado.";
-    }
-    if (errorMessage) {
-        return res.status(409).json({ error: true, message: errorMessage });
-    } else if (!errorMessage) {
-
-        const episodeIndex = serie.episodes.findIndex(ep => ep.numEpisode === epNumog);
-
-        let updatedEpisode = {
-            titleEpisode: title,
-            synopsisEpisode: synopsis,
-            numEpisode: epNum,
-            timeEpisode: epTime,
-            imageFilenamedetalle: serie.episodes[episodeIndex].imageFilenamedetalle,
-            trailerEpisode: serie.episodes[episodeIndex].trailerEpisode
-        };
-
-        // If a new image or trailer is uploaded, update them
-        if (req.files['image'] && req.files['image'][0]) {
-            updatedEpisode.imageFilenamedetalle = req.files['image'][0].filename;
-        }
-
-        if (req.files['trailerEpisode'] && req.files['trailerEpisode'][0]) {
-            updatedEpisode.trailerEpisode = req.files['trailerEpisode'][0].filename;
-        }
-
-        await catalog.updateEpisode(id, epNumog, updatedEpisode);
-        res.json(updatedEpisode)
-    }
-
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
 });
 
 //new episode
@@ -293,7 +250,6 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
 
     if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
         errorMesagge = "El título está duplicado.";
-<<<<<<< HEAD
         if (await catalog.checkDuplicatedNumEpisode(id, epNum))
             errorMesagge += "<br>El número de episodio está duplicado."
         res.status(409).json({ error: true, message: errorMesagge });
@@ -301,17 +257,6 @@ router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 
 
 
     if (!errorMesagge) {
-=======
-    }
-
-    if (await catalog.checkDuplicatedNumEpisode(id, epNum)) {
-        errorMesagge += (errorMesagge ? "<br>" : "") + "El número de episodio está duplicado.";
-    }
-
-    if (errorMesagge) {
-        return res.status(409).json({ error: true, message: errorMesagge });
-    } else if (!errorMesagge) {
->>>>>>> 8db8028d9021e416159331a00b59c4caf1b68fbb
 
         let newEpisode = {
             numEpisode: epNum,
