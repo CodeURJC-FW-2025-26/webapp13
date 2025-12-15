@@ -46,7 +46,7 @@
             {
                 "numEpisode": 1,
                 "titleEpisode": "Rebirth",
-                "synopsisEpisode": "En el mundo de los Shinigami, uno llamado Ryuk está inquieto. Mientras tanto, el brillante estudiante de bachillerato Light Yagami observa la podredumbre en el mundo humano. Un cuaderno cae a mano de Light: el 'Death Note', que permite matar a quien escribas su nombre (si conoces su rostro). Light primero lo prueba con un criminal en un caso de rehenes; luego experimenta con un matón local y comienza a tomar decisiones sobre 'qué hacer con este poder'. Ryuk aparece y explica las reglas del cuaderno, y Light decide asumir que él 'limpiará' el mundo y será un nuevo dios.",
+                "synopsisEpisode": "En el mundo de los Shinigami, uno llamado Ryuk está inquieto. Mientras tanto, el brillante estudiante de bachillerato Light Yagami observa la podredumbre en el mundo humano. Un cuaderno cae a mano de Light: el Death Note, que permite matar a quien escribas su nombre (si conoces su rostro). Light primero lo prueba con un criminal en un caso de rehenes; luego experimenta con un matón local y comienza a tomar decisiones sobre qué hacer con este poder. Ryuk aparece y explica las reglas del cuaderno, y Light decide asumir que él limpiará el mundo y será un nuevo dios.",
                 "timeEpisode": 22,
                 "imageFilenamedetalle": "death_note_detalle.jpg",
                 "trailerEpisode": "death_note_trailer.mp4"
@@ -80,7 +80,7 @@
         "episodes": [
             {
                 "numEpisode": 1,
-                "titleEpisode": "I'm Luffy! The Man Who Will Become the Pirate King!",
+                "titleEpisode": "Im Luffy! The Man Who Will Become the Pirate King!",
                 "synopsisEpisode": "El joven Luffy es encontrado flotando en el mar dentro de un barril por un barco de crucero. Luego un grupo de piratas liderados por Alvida ataca ese barco. Luffy, que ha llegado al mar con un sueño de convertirse en rey de los piratas, se enfrenta a los invasores, y conoce al chico de labores Koby que estaba bajo el yugo de Alvida. Juntos inician la aventura rumbo al mar de East Blue.",
                 "timeEpisode": 24, 
                 "imageFilenamedetalle": "one_piece_detalle.jpg",
@@ -96,7 +96,7 @@
             },
             {
                 "numEpisode": 3,
-                "titleEpisode": "Morgan vs. Luffy! Who's the Mysterious Pretty Girl?",
+                "titleEpisode": "Morgan vs. Luffy! Whos the Mysterious Pretty Girl?",
                 "synopsisEpisode": "Luffy se enfrenta al malvado capitán Morgan mientras se hace amigo de Coby, que sueña con unirse a la Marina. Este episodio muestra la primera gran aventura de Luffy y el comienzo de su tripulación.",
                 "imageFilenamedetalle": "one_piece_detalle.jpg",
                 "timeEpisode": 24,
@@ -145,13 +145,13 @@
         "ageClassification": 18,
         "seasons": 11,
         "genre": "Terror",
-        "synopsis": "The Walking Dead sigue a un grupo de supervivientes en un mundo postapocalíptico lleno de zombis, conocidos como 'caminantes'. Liderados por Rick Grimes, luchan por sobrevivir enfrentando tanto a los muertos como a otros humanos peligrosos. La serie explora la moral, la supervivencia y la transformación de las personas ante el caos.",
+        "synopsis": "The Walking Dead sigue a un grupo de supervivientes en un mundo postapocalíptico lleno de zombis, conocidos como caminantes. Liderados por Rick Grimes, luchan por sobrevivir enfrentando tanto a los muertos como a otros humanos peligrosos. La serie explora la moral, la supervivencia y la transformación de las personas ante el caos.",
         "imageFilename": "the_walking_dead.jpg",
         "episodes": [
             {
                 "numEpisode": 1,
                 "titleEpisode": "Days Gone Bye",
-                "synopsisEpisode": "El sheriff adjunto Rick Grimes despierta de un coma para descubrir que el mundo ha sido invadido por zombi ('walkers'). Tras encontrar destrucción en la carretera y un gasolinera abandonada, Rick intenta encontrar supervivientes y adaptarse a la nueva realidad apocalíptica.",
+                "synopsisEpisode": "El sheriff adjunto Rick Grimes despierta de un coma para descubrir que el mundo ha sido invadido por zombi (walkers). Tras encontrar destrucción en la carretera y un gasolinera abandonada, Rick intenta encontrar supervivientes y adaptarse a la nueva realidad apocalíptica.",
                 "timeEpisode": 67,
                 "imageFilenamedetalle": "the_walking_dead_detalle.jpg",
                 "trailerEpisode": "YTDown.com_YouTube_The-Walking-Dead-Trailer-First-Season_Media_sfAc2U20uyg_001_720p.mp4"
@@ -307,7 +307,7 @@
             {
                 "numEpisode": 3,
                 "titleEpisode": "The One with the Thumb",
-                "synopsisEpisode": "Monica sale con el 'hombre perfecto' pero descubre un hábito desagradable. Chandler comienza a fumar nuevamente. Phoebe encuentra un pulgar en una lata de refresco.",
+                "synopsisEpisode": "Monica sale con el hombre perfecto pero descubre un hábito desagradable. Chandler comienza a fumar nuevamente. Phoebe encuentra un pulgar en una lata de refresco.",
                 "imageFilenamedetalle": "friends_detalle.jpg",
                 "timeEpisode": 22,
                 "trailerEpisode": "YTDown.com_YouTube_F-R-I-E-N-D-S-Season-1-Trailer_Media_Zg2LCD5QOJs_001_360p.mp4"
@@ -333,7 +333,7 @@
             },
             {
                 "numEpisode": 2,
-                "titleEpisode": "Cat's in the Bag...",
+                "titleEpisode": "Cats in the Bag...",
                 "synopsisEpisode": "Walter y Jesse intentan deshacerse de los dos cuerpos en su roulotte, pero las cosas se complican cuando uno de ellos no está realmente muerto. Mientras tanto, Skyler comienza a sospechar del comportamiento de Walter.",
                 "imageFilenamedetalle": "breaking_bad_detalle.jpg",
                 "timeEpisode": 48,
@@ -341,7 +341,7 @@
             },
             {
                 "numEpisode": 3,
-                "titleEpisode": "...And the Bag's in the River",
+                "titleEpisode": "...And the Bags in the River",
                 "synopsisEpisode": "Walter enfrenta una decisión moral sobre si matar o no a Krazy-8, mientras recuerda momentos de su pasado que influyeron en su vida. Jesse limpia meticulosamente la roulotte.",
                 "imageFilenamedetalle": "breaking_bad_detalle.jpg",
                 "timeEpisode": 48,
@@ -474,7 +474,7 @@
             {
                 "numEpisode": 2,
                 "titleEpisode": "Fifteen Million Merits",
-                "synopsisEpisode": "En un futuro distópico, las personas pedalean bicicletas estacionarias para generar energía y ganar 'méritos'. Un hombre usa todos sus ahorros para ayudar a una mujer con talento musical a participar en un show de talentos.",
+                "synopsisEpisode": "En un futuro distópico, las personas pedalean bicicletas estacionarias para generar energía y ganar méritos. Un hombre usa todos sus ahorros para ayudar a una mujer con talento musical a participar en un show de talentos.",
                 "imageFilenamedetalle": "black_mirror_detalle.jpg",
                 "timeEpisode": 62,
                 "trailerEpisode": "YTDown.com_YouTube_Media_rqJfoH1vfOg_001_1080p.mp4"
@@ -670,13 +670,13 @@
         "ageClassification": 16,
         "seasons": 8,
         "genre": "Policial",
-        "synopsis": "S.W.A.T. sigue a un equipo de élite del departamento de policía de Los Ángeles especializado en operaciones tácticas y rescates de alto riesgo. Liderados por el sargento Daniel 'Hondo' Harrelson, enfrentan criminales peligrosos.",
+        "synopsis": "S.W.A.T. sigue a un equipo de élite del departamento de policía de Los Ángeles especializado en operaciones tácticas y rescates de alto riesgo. Liderados por el sargento Daniel Hondo Harrelson, enfrentan criminales peligrosos.",
         "imageFilename": "s_w_a_t.jpg",
         "episodes": [
             {
                 "numEpisode": 1,
                 "titleEpisode": "Piloto",
-                "synopsisEpisode": "Después de una misión controvertida, el sargento Daniel 'Hondo' Harrelson es ascendido para liderar un equipo de élite del SWAT en Los Ángeles, donde debe equilibrar la lealtad a sus colegas y las demandas de la comunidad a la que sirve.",
+                "synopsisEpisode": "Después de una misión controvertida, el sargento Daniel Hondo Harrelson es ascendido para liderar un equipo de élite del SWAT en Los Ángeles, donde debe equilibrar la lealtad a sus colegas y las demandas de la comunidad a la que sirve.",
                 "imageFilenamedetalle": "s_w_a_t_detalle.jpg",
                 "timeEpisode": 43,
                 "trailerEpisode": "YTDown.com_YouTube_Media_zzES5iaEZhE_001_1080p.mp4"

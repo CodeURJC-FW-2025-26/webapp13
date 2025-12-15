@@ -80,34 +80,6 @@ export async function deleteEpisode(id, numEpisode) {
     );
 }
 
-export function getNextEpisode(serie, numEpisode) {
-
-    const targetEpisodeNum = parseInt(numEpisode);
-
-    // Get index of the episode(index = number)
-    const index = serie.episodes.findIndex(e => e.numEpisode === targetEpisodeNum);
-    //return to the first episode
-    if (index === serie.episodes.length - 1) {
-        return serie.episodes[0];
-    }
-
-    // Return the next episode in the array
-    return serie.episodes[index + 1];
-}
-
-export function getPreviusEpisode(serie, numEpisode) {
-    const targetEpisodeNum = parseInt(numEpisode);
-    //get index of the episode
-    const index = serie.episodes.findIndex(e => e.numEpisode === targetEpisodeNum)
-    //return to last episode
-    if (index === 0) {
-        return serie.episodes[serie.episodes.length - 1]
-    }
-    //return to the previus episode
-    return serie.episodes[index - 1]
-
-}
-
 export async function updateSerie(id, update_serie) {
     await series.replaceOne(
         { _id: new ObjectId(id) }, update_serie);
@@ -136,16 +108,6 @@ export async function updateEpisode(id, numEpisode, update_ep) {
     return result;
 };
 
-//genre-buttons
-/**
- * 
- * Returns all genres in each series that are different.
- * @returns {obPromise<Array<string>>ject} A promise that returns an array with the genres of the series contained in the database.
- * @throws {Error} Throws an error if the database connection or query fails.
- */
-export async function getGenres() {
-    return await series.distinct("genre");
-};
 
 
 export async function checkDuplicatedTitleEpisode(id, title) {
@@ -159,7 +121,61 @@ export async function checkDuplicatedNumEpisode(id, numEpisode) {
     let query = await series.findOne({ _id: new ObjectId(id), "episodes.numEpisode": numEpisode })
     return !!query;
 }
+/**
+Checks for episode title duplication across all episodes in a series,
+excluding the episode currently being updated (identified by its original number).
+ */
+export async function checkDuplicatedTitleEpisodeUpdate(id, title, epNum) {
+    const query = await series.findOne({
+        _id: new ObjectId(id),
+        episodes: {
+            $elemMatch: {
+                titleEpisode: title,
+                numEpisode: { $ne: epNum }
+            }
+        }
+    });
 
+    return !!query;
+}
+
+/**
+Checks for episode number duplication across all episodes in a series.
+Returns false immediately if the number was not modified (newNum === originalNum).
+ */
+export async function checkDuplicatedNumEpisodeUpdate(id, newNum, originalNum) {
+    const targetNewNum = parseInt(newNum);
+    const origNum = parseInt(originalNum);
+
+    const query = await series.findOne({
+        _id: new ObjectId(id),
+        episodes: {
+            $elemMatch: {
+                numEpisode: targetNewNum,
+            }
+        }
+    });
+
+    if (!query) return false;
+
+    return query.episodes.some(ep => ep.numEpisode === targetNewNum && ep.numEpisode !== origNum);
+}
+
+
+
+
+
+
+//genre-buttons
+/**
+ * 
+ * Returns all genres in each series that are different.
+ * @returns {obPromise<Array<string>>ject} A promise that returns an array with the genres of the series contained in the database.
+ * @throws {Error} Throws an error if the database connection or query fails.
+ */
+export async function getGenres() {
+    return await series.distinct("genre");
+};
 
 //pagination
 
