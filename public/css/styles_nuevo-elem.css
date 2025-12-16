@@ -160,3 +160,45 @@ h1{
     font-size: 2rem;
     display: block;
 }
+#coverInputSerie.highlighted {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 20px rgba(0, 123, 256, 0.5);
+    transform: scale(1.1);
+}
+/*spinner*/
+.spinnerSerie {
+    margin: 30px auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    animation: spin 1.0s linear infinite;
+    border-bottom-color: red;
+    text-align: center;
+    display: none;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#deleteCoverButtonSerie {
+    background-color: #e50914;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: block; 
+
+}
+
+#deleteCoverButtonSerie:hover {
+    background-color: #f40612;
+}

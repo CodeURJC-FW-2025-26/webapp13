@@ -80,16 +80,16 @@ async function checkSerieTitle(id) {
             titleMessage.classList.add("invalid-feedback");
             titleMessage.textContent = "El título no puede estar vacío";
             errorStatesSerie.title.error = true;
-        } 
+        }
         else if (firstChar !== firstChar.toUpperCase()) {
             titleInput.classList.add("is-invalid");
             titleMessage.classList.add("invalid-feedback");
             titleMessage.textContent = "El título debe empezar por mayúscula";
             errorStatesSerie.title.error = true;
-        } 
+        }
         else {
             const response = await fetch(`/checkSerieTitle/${titleInput.value}?id=${serieId}`);
-            
+
             if (response.ok) {
                 let okMessage = await response.json();
                 titleInput.classList.remove("is-invalid");
@@ -111,6 +111,7 @@ async function checkSerieTitle(id) {
 }
 
 function checkSerieGenre() {
+
     let genreMessage = document.getElementById("messageSerieGenre");
     let genreInput = document.getElementById("genre");
 
@@ -120,11 +121,17 @@ function checkSerieGenre() {
         genreMessage.textContent = "Selecciona un género";
         errorStatesSerie.genre.error = true;
     } else {
+
         genreInput.classList.remove("is-invalid");
         genreInput.classList.add("is-valid");
-        genreMessage.textContent = "";
+        genreMessage.classList.remove("invalid-feedback")
+        genreMessage.classList.add("valid-feedback")
+        genreMessage.textContent = "El genero es valido";
         errorStatesSerie.genre.error = false;
+        errorStatesSerie.genre.errorMessage = genreMessage.textContent;
+
     }
+
 }
 
 function checkSerieAge() {
@@ -137,16 +144,21 @@ function checkSerieAge() {
         ageMessage.classList.add("invalid-feedback");
         ageMessage.textContent = "La edad es obligatoria";
         errorStatesSerie.age.error = true;
+        errorStatesSerie.age.errorMessage = ageMessage.textContent;
     } else if (value < 1 || value > 18) {
         ageInput.classList.add("is-invalid");
         ageMessage.classList.add("invalid-feedback");
         ageMessage.textContent = "La edad debe estar entre 0 y 18";
         errorStatesSerie.age.error = true;
+        errorStatesSerie.age.errorMessage = ageMessage.textContent;
     } else {
         ageInput.classList.remove("is-invalid");
         ageInput.classList.add("is-valid");
-        ageMessage.textContent = "";
+        ageMessage.classList.remove("invalid-feedback")
+        ageMessage.classList.add("valid-feedback")
+        ageMessage.textContent = "La edad es valida";
         errorStatesSerie.age.error = false;
+        errorStatesSerie.age.errorMessage = ageMessage.textContent;
     }
 }
 
@@ -168,8 +180,13 @@ function checkSerieSeasons() {
     } else {
         seasonInput.classList.remove("is-invalid");
         seasonInput.classList.add("is-valid");
-        seasonMessage.textContent = "";
+        seasonMessage.classList.remove("invalid-feedback");
+        seasonMessage.classList.add("valid-feedback");
+        seasonMessage.textContent = "Número de temporadas válidas";
         errorStatesSerie.seasons.error = false;
+        errorStatesSerie.seasons.errorMessage = seasonMessage.textContent;
+
+
     }
 }
 
@@ -192,8 +209,12 @@ function checkSeriePremiere() {
     } else {
         yearInput.classList.remove("is-invalid");
         yearInput.classList.add("is-valid");
-        yearMessage.textContent = "";
+        yearMessage.classList.remove("invalid-feedback")
+        yearMessage.classList.add("valid-feedback")
+        yearMessage.textContent = "El año es valido";
         errorStatesSerie.premiere.error = false;
+        errorStatesSerie.premiere.errorMessage = yearMessage.textContent;
+
     }
 }
 
@@ -231,80 +252,65 @@ function checkSerieSynopsis() {
 }
 
 function checkSerieCover() {
-    let coverInput = document.getElementById("cover");
-    let coverMessage = document.getElementById("messageSerieCover");
-    
-    if (coverInput.hasAttribute('required') && coverInput.files.length === 0) {
-        coverInput.classList.add("is-invalid");
-        coverMessage.classList.add("invalid-feedback");
-        coverMessage.textContent = "La imagen es obligatoria";
-        errorStatesSerie.cover.error = true;
-    } else {
+    let coverInput = document.getElementById("coverInputSerie");
+    let coverMessage = document.getElementById("messageCoverSerie");
+    let deleteButton = document.getElementById("deleteCoverButtonSerie");
+    let output = document.getElementById("coverPreviewSerie");
+
+    if (coverInput.files && coverInput.files[0]) {
+        const file = coverInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
         coverInput.classList.remove("is-invalid");
         coverInput.classList.add("is-valid");
         coverMessage.classList.remove("invalid-feedback");
         coverMessage.classList.add("valid-feedback");
-        coverMessage.textContent = "Imagen válida";
-        errorStatesSerie.cover.error = false;
+        coverMessage.textContent = "La imagen se ha subido correctamente.";
+        deleteButton.style.display = "block";
+
+        errorStates.cover.error = false;
+        errorStates.cover.errorMessage = "";
+    }
+    else {
+        output.src = "";
+        output.style.display = 'none';
+        deleteButton.style.display = "none";
+        coverInput.classList.remove("is-invalid");
+        coverInput.classList.add("is-valid");
+        coverMessage.classList.remove("invalid-feedback");
+        coverMessage.classList.add("valid-feedback");
+        coverMessage.textContent = "No has seleccionado imagen. Se ha puesto una imagen por defecto";
+        errorStates.cover.error = false;
+        errorStates.cover.errorMessage = "";
     }
 }
 
-const $id = id => document.getElementById(id);
-
-function previewSerieCover() {
-    checkSerieCover();
-    const input = $id("portada");
-    if (!input.files?.[0]) return;
-    
-    const reader = new FileReader();
-    reader.onload = e => {
-        $id("serieCoverPreview").src = e.target.result;
-        $id("preview-container").style.display = "block";
-        $id("upload-text").style.display = "none";
-        $id("drop-zone-serie").style.borderStyle = "solid";
-    };
-    reader.readAsDataURL(input.files[0]);
-    $id("imageDeletedFlag").value = "false";
-}
-
 function deleteSerieCover() {
-    $id("portada").value = "";
-    $id("preview-container").style.display = "none";
-    $id("upload-text").style.display = "block";
-    $id("drop-zone-serie").style.borderStyle = "dashed";
-    $id("imageDeletedFlag").value = "true";
-    checkSerieCover();
-}
+    let coverInput = document.getElementById("coverInput");
+    let output = document.getElementById("coverPreview");
 
-function setupDragAndDrop() {
-    const zone = $id("drop-zone-serie");
-    if (!zone) return;
-    
-    const evts = (types, fn) => types.forEach(t => zone.addEventListener(t, fn));
-    evts(['dragenter', 'dragover', 'dragleave', 'drop'], e => (e.preventDefault(), e.stopPropagation()));
-    evts(['dragenter', 'dragover'], () => zone.classList.add('dragover'));
-    evts(['dragleave', 'drop'], () => zone.classList.remove('dragover'));
-    
-    zone.addEventListener('drop', e => {
-        if (e.dataTransfer.files[0]) {
-            $id("portada").files = e.dataTransfer.files;
-            previewSerieCover();
-        }
-    });
+    coverInput.value = "";
+    output.src = "";
+    output.style.display = 'none';
+    checkCover();
 }
 
 async function checkSerieForm(event) {
-    
+
     event.preventDefault();
 
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
-    let spinner = document.getElementById("form-spinner");
-   
+    let spinner = document.getElementById("spinner-loader-serie");
+
     spinner.style.display = "block";
     modalTitle.textContent = "Errores";
-    modalText.textContent = ""; 
+    modalText.textContent = "";
 
     let id = document.getElementById("serieIdInput").value;
 
@@ -353,9 +359,45 @@ async function checkSerieForm(event) {
 
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
-    } 
+    }
     else {
-        document.getElementById("serieForm").submit();
+        await addSerie(event);
+        let inputs = document.getElementsByTagName("input");
+        document.getElementById("synopsisInput").value = "";
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+
+        checkSerieCover();
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+    }
+
+}
+
+async function addSerie(event) {
+    const formData = new FormData(event.target);
+    const response = await fetch(`/serie/new`, {
+        method: "POST",
+        body: formData,
+    });
+
+    let data = await response.json();
+    if (data.error) {
+        let modal = document.getElementById("modal");
+        let modalText = document.getElementById("modal-text");
+        let modalTitle = document.getElementById("modalHead-text");
+        modalTitle.textContent = "Error";
+        modalText.innerHTML = `${data.message}`;
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }
+
+    else {
+        window.location.href = `/main_detalle/${data.id}`;
     }
 }
 
@@ -550,47 +592,41 @@ function checkTimeEpisode(inputID, messageID) {
 
 
 function checkCover() {
-
     let coverInput = document.getElementById("coverInput");
     let coverMessage = document.getElementById("messageCover");
     let deleteButton = document.getElementById("deleteCoverButton");
     let output = document.getElementById("coverPreview");
 
-
-    const file = coverInput.files[0];
-    const reader = new FileReader()
-
-
-    if (coverInput.value !== "") {
+    if (coverInput.files && coverInput.files[0]) {
+        const file = coverInput.files[0];
+        const reader = new FileReader();
         reader.onload = function () {
-
             output.src = reader.result;
             output.style.display = 'block';
         }
-
         reader.readAsDataURL(file);
-
         coverInput.classList.remove("is-invalid");
         coverInput.classList.add("is-valid");
-        coverMessage.classList.remove("invalid-feedback")
-        coverMessage.classList.add("valid-feedback")
+        coverMessage.classList.remove("invalid-feedback");
+        coverMessage.classList.add("valid-feedback");
         coverMessage.textContent = "La imagen se ha subido correctamente.";
         deleteButton.style.display = "block";
-        errorStates.cover.error = false;
-        errorStates.cover.errorMessage = coverMessage.textContent;
-    }
 
+        errorStates.cover.error = false;
+        errorStates.cover.errorMessage = "";
+    }
     else {
-        coverInput.classList.add("is-invalid");
-        coverMessage.classList.add("invalid-feedback");
         output.src = "";
         output.style.display = 'none';
-        coverMessage.textContent = "La foto no se ha subido correctamente";
         deleteButton.style.display = "none";
-        errorStates.cover.error = true;
-        errorStates.cover.errorMessage = coverMessage.textContent;
+        coverInput.classList.remove("is-invalid");
+        coverInput.classList.add("is-valid");
+        coverMessage.classList.remove("invalid-feedback");
+        coverMessage.classList.add("valid-feedback");
+        coverMessage.textContent = "No has seleccionado imagen. Se ha puesto una imagen por defecto";
+        errorStates.cover.error = false;
+        errorStates.cover.errorMessage = "";
     }
-
 }
 
 function deleteCover() {
@@ -675,7 +711,7 @@ fileInputs.forEach(input => {
 
         input.files = e.dataTransfer.files;
 
-        if (input.name === 'video') {
+        if (input.name === 'trailerEpisode') {
             checkTrailer();
         }
 
@@ -813,77 +849,71 @@ async function checkForm(event, id) {
             spinner.style.display = "none";
         }, 2000)
     }
-
-
 }
 
 //update episode
 
 //show the form in main_detalle
+// refreshCounter increases each time an episode is updated,
+// ensuring the image and video URLs change so the browser reloads them
+// instead of using a cached version.
+
+let refreshCounter = 1;
 async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsisEpisode, timeEpisode) {
-    let content = document.getElementById("episode_" + numEpisode)
+    refreshCounter++;
+
+    let content = document.getElementById("episode_" + numEpisode);
+
     content.innerHTML = `<div class="form-container">
                 <form enctype="multipart/form-data" onsubmit="checkFormUpdateEpisode(event,'${serieId}',${numEpisode})" novalidate>
                     <h3>Editar Episodio</h3>
 
                     <div class="form-group" id="title">
                         <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control" name="title" placeholder="Nombre del episodio"
-                            oninput="checkTitleUpdateEp('${serieId}','${numEpisode}')" id="titleInputUpdateEp" value="${titleEpisode}" required />
+                        <input type="text" class="form-control" name="title" oninput="checkTitleUpdateEp('${serieId}','${numEpisode}')" id="titleInputUpdateEp" value="${titleEpisode}" required />
                         <div id="messageTitleUpdateEp"></div>
                     </div>
 
                     <div class="form-group" id="synopsis">
                         <label for="synopsis" class="form-label">Sinopsis</label>
-                        <textarea class="form-control" name="synopsis" placeholder="Breve descripción del episodio"
-                            rows="3" id="synopsisInputUpdateEp" oninput="checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp')" required>${synopsisEpisode}</textarea>
+                        <textarea class="form-control" name="synopsis" rows="3" id="synopsisInputUpdateEp" oninput="checkSynopsis('synopsisInputUpdateEp', 'messageSynopsisUpdateEp')" required>${synopsisEpisode}</textarea>
                         <div id="messageSynopsisUpdateEp"></div>
                     </div>
 
                     <div class="form-group" id="numEpisode">
                         <label for="numEpisode" class="form-label">Número de episodio</label>
-                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInputUpdateEp"
-                            oninput="checkNumEpisodeUpdateEp('${serieId}','${numEpisode}')"value="${numEpisode}" required />
+                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInputUpdateEp" oninput="checkNumEpisodeUpdateEp('${serieId}','${numEpisode}')" value="${numEpisode}" required />
                         <div id="messageNumEpisodeUpdateEp"></div>
                     </div>
 
                     <div class="form-group" id="timeEpisode">
-                        <label for="timeEpisode" class="form-label">Duración del episodio</label>
-                        <input type="number" class="form-control" name="timeEpisode" placeholder="Ejemplo: 18 minutos"
-                            oninput="checkTimeEpisode('timeEpisodeInputUpdateEp','messageTimeEpisodeUpdateEp');" value="${timeEpisode}" id="timeEpisodeInputUpdateEp" required/>
+                        <label for="timeEpisode" class="form-label">Duración</label>
+                        <input type="number" class="form-control" name="timeEpisode" oninput="checkTimeEpisode('timeEpisodeInputUpdateEp','messageTimeEpisodeUpdateEp');" value="${timeEpisode}" id="timeEpisodeInputUpdateEp" required/>
                         <div id="messageTimeEpisodeUpdateEp"></div>
                     </div>
 
                     <div class="form-group" id="cover">
-                        <label for="cover" class="form-label">Portada</label>
-                        <img id="coverPreviewUpdateEp" src="#" alt="..."
-                            style="display: none; max-width: 200px; max-height: 200px;">
-                        <br>
-                        <input type="file" name="image" class="form-control" id="coverInputUpdateEp" oninput="previewCoverUpdateEp()"/>
-                        <button class="btn-action" onclick="deleteCoverUpdateEp()" style="display: none;" type="reset"
-                            id="deleteCoverButtonUpdateEp" >
-                            Borrar imagen
-                        </button>
-                        <div id="messageCoverUpdateEp"></div>
-                    </div>
+                    <label for="cover" class="form-label">Portada actual</label>
+                    <img id="coverPreviewUpdateEp"
+                         src="/episode/${serieId}/${numEpisode}/image?r=${refreshCounter}"
+                         alt="Portada"
+                         style="display: block; max-width: 200px; max-height: 200px; margin-bottom: 10px;">
+                    <input type="file" name="image" class="form-control" id="coverInputUpdateEp" oninput="previewCoverUpdateEp()"/>
+                    <button class="btn-action" onclick="deleteCoverUpdateEp()" type="button" id="deleteCoverButtonUpdateEp">Borrar imagen</button>
+                </div>
 
                     <div class="form-group" id="trailerEpisode">
-                        <label for="trailer" class="form-label">Trailer del episodio</label>
-                        <video id="trailerPreviewUpdateEp" src="#" style="display: none; max-width: 200px; max-height: 200px;" controls loop></video>
-                        <br>
-                        <input type="file" name="trailerEpisode" class="form-control" placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInputUpdateEp" onchange="previewTrailerUpdateEp()" />
+                    <label for="trailer" class="form-label">Trailer actual</label>
+                    <video id="trailerPreviewUpdateEp"
+                           src="/episode/${serieId}/${numEpisode}/video?r=${refreshCounter}"
+                           style="display: block; max-width: 200px; max-height: 200px;"
+                           controls loop></video>
+                    <input type="file" name="trailerEpisode" class="form-control" id="trailerEpisodeInputUpdateEp" onchange="previewTrailerUpdateEp()" />
+                    <button class="btn-action" type="button" onclick="deleteTrailerUpdateEp()" id="deleteTrailerButtonUpdateEp">Borrar trailer</button>
+                </div>
 
-                        <button class="btn-action" type="reset" onclick="deleteTrailerUpdateEp()" style="display: none;"
-                            id="deleteTrailerButtonUpdateEp">
-                            Borrar trailer
-                        </button>
-                        <div id="messageTrailerEpisodeUpdateEp"></div>
-                    </div>
-
-                        <div class="form-actions">
-                        <button type="submit" class="btn-default">
-                            Actualizar Episodio
-                        </button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-default">Actualizar Episodio</button>
                     </div>
 
                     <div class="spinner" id="spinner-loader-UpdateEpisode"></div>
@@ -894,80 +924,77 @@ async function showFormUpdateEpisode(serieId, numEpisode, titleEpisode, synopsis
 }
 //Drag image and video update
 function addDragUpdate() {
-const fileInputs = document.querySelectorAll('input[type="file"]')
+    const fileInputs = document.querySelectorAll('input[type="file"]')
 
-fileInputs.forEach(input => {
-    input.addEventListener('dragenter', (e) => {
-        e.preventDefault();
-        input.classList.add('highlighted');
+    fileInputs.forEach(input => {
+        input.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            input.classList.add('highlighted');
+        });
+
+        input.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        input.addEventListener('drop', (e) => {
+            e.preventDefault();
+            input.classList.remove('highlighted');
+
+            input.files = e.dataTransfer.files;
+
+            if (input.name === 'video') {
+                previewTrailerUpdateEp();
+            }
+
+            else {
+                previewCoverUpdateEp();
+            }
+        });
+
+        input.addEventListener('dragleave', () => {
+            input.classList.remove('highlighted');
+        })
     });
-
-    input.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    input.addEventListener('drop', (e) => {
-        e.preventDefault();
-        input.classList.remove('highlighted');
-
-        input.files = e.dataTransfer.files;
-
-        if (input.name === 'video') {
-            previewTrailerUpdateEp();
-        }
-
-        else {
-            previewCoverUpdateEp();
-        }
-    });
-
-    input.addEventListener('dragleave', () => {
-        input.classList.remove('highlighted');
-    })
-});
 }
+
+
+
 function previewCoverUpdateEp() {
     let coverInput = document.getElementById("coverInputUpdateEp");
     let output = document.getElementById("coverPreviewUpdateEp");
+    let deleteBtn = document.getElementById("deleteCoverButtonUpdateEp");
 
-    const file = coverInput.files[0];
-    const reader = new FileReader();
-
-    if (coverInput.value !== "") {
-        reader.onload = function () {
-            output.src = reader.result;
+    if (coverInput.files && coverInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            output.src = e.target.result;
             output.style.display = 'block';
+            deleteBtn.style.display = 'block';
         }
-
-        reader.readAsDataURL(file);
-    } else {
-        output.src = "";
-        output.style.display = 'none';
+        reader.readAsDataURL(coverInput.files[0]);
     }
 }
 
 function previewTrailerUpdateEp() {
     let trailerInput = document.getElementById("trailerEpisodeInputUpdateEp");
     let output = document.getElementById("trailerPreviewUpdateEp");
+    let deleteBtn = document.getElementById("deleteTrailerButtonUpdateEp");
 
-    let file = trailerInput.files[0];
-    const reader = new FileReader();
-
-    // 💡 CORRECCIÓN: Comprobar la longitud del array 'files'
-    if (trailerInput.files.length > 0) {
-
+    if (trailerInput.value !== "") {
+        const reader = new FileReader();
         reader.onload = function () {
             output.src = reader.result;
             output.style.display = 'block';
+            deleteBtn.style.display = 'block';
         }
-
-        reader.readAsDataURL(file);
-    }
-    else {
+        reader.readAsDataURL(trailerInput.files[0]);
+    } else {
         output.src = "";
         output.style.display = 'none';
+        deleteBtn.style.display = 'none';
     }
 }
+
 //VALIDATIONS FOR EDITING AN EPISODE
 async function checkTitleUpdateEp(id, numEpisode) {
     let titleInput = document.getElementById("titleInputUpdateEp")
@@ -1134,16 +1161,26 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
     }
 }
 //update_serie
-async function updateEpisode(event, id, originalNum) {
+// refreshCounterUpdateEp increases each time an episode is updated,
+// ensuring the image and video URLs change so the browser reloads them
+// instead of using a cached version.
 
+async function updateEpisode(event, id, originalNum) {
     const formData = new FormData(event.target);
-    const numEpisodeValue = document.getElementById("numEpisodeInputUpdateEp").value;
-    const response = await fetch(`/processUpdateEpisode/${id}/${originalNum}`, {
+
+    // Generamos el timestamp para evitar problemas de caché
+    const t = Date.now();
+
+    const previewImg = document.getElementById("coverPreviewUpdateEp");
+    const deleteCoverValue = (previewImg.style.display === 'none');
+
+    const response = await fetch(`/processUpdateEpisode/${id}/${originalNum}/?deleteCover=${deleteCoverValue}`, {
         method: "POST",
         body: formData,
     });
 
     let data = await response.json();
+
     if (data.error) {
         let modal = document.getElementById("modal");
         let modalText = document.getElementById("modal-text");
@@ -1152,57 +1189,57 @@ async function updateEpisode(event, id, originalNum) {
         modalText.innerHTML = `${data.message}`;
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();
-    }
-
-    else {
-        // Generamos un timestamp único en el momento de la actualización
-        const timestamp = Date.now();
-
+    } else {
         const content = document.getElementById("episode_" + originalNum);
 
         content.innerHTML = `
         <div class="row episode-row" id="episode_${data.numEpisode}">
-        <div class="col-12">
-            <h3>${data.numEpisode} ${data.titleEpisode}</h3>
-            <p>${data.timeEpisode} minutos</p>
-            <h5>Sinopsis:</h5>
-            <p class="Text_synopsis">${data.synopsisEpisode}</p>
-            
-            <img class="visual" src="/episode/${id}/${data.numEpisode}/image?t=${timestamp}"> 
-            
-            <br></br>
-            
-            <video class="visual" src="/episode/${id}/${data.numEpisode}/video?t=${timestamp}" controls loop></video>
-            
-            <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
-            <div class="form-actions">
-                <button class="btn-action"
-                    onclick="showFormUpdateEpisode('${id}','${data.numEpisode}','${data.titleEpisode}','${data.synopsisEpisode}','${data.timeEpisode}')">Editar episodio
-                </button>
-                <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar episodio</button>
+            <div class="col-12">
+                <h3>${data.numEpisode} ${data.titleEpisode}</h3>
+                <p>${data.timeEpisode} minutos</p>
+                <h5>Sinopsis:</h5>
+                <p class="Text_synopsis">${data.synopsisEpisode}</p>
+
+                <img class="visual" src="/episode/${id}/${data.numEpisode}/image?t=${t}"> 
+                <br><br>
+                <video class="visual" src="/episode/${id}/${data.numEpisode}/video?t=${t}" controls loop></video>
+
+                <div class="spinner" id="spinner-loader_${data.numEpisode}"></div>
+                <div class="form-actions">
+                    <button class="btn-action"
+                        onclick="showFormUpdateEpisode('${id}','${data.numEpisode}','${data.titleEpisode}','${data.synopsisEpisode}','${data.timeEpisode}')">
+                        Editar episodio
+                    </button>
+                    <button class="btn-action" onclick="deleteEpisode('${id}','${data.numEpisode}')">Borrar episodio</button>
+                </div>
             </div>
-        </div>
-        </div>
-        `;
+        </div>`;
     }
 }
 //delete image update 
 function deleteCoverUpdateEp() {
     let coverInput = document.getElementById("coverInputUpdateEp");
     let output = document.getElementById("coverPreviewUpdateEp");
+    let deleteBtn = document.getElementById("deleteCoverButtonUpdateEp");
+    let deleteFlag = document.getElementById("deleteImageFlag");
 
     coverInput.value = "";
     output.src = "";
     output.style.display = 'none';
+    deleteBtn.style.display = 'none';
+
+    if (deleteFlag) deleteFlag.value = "true";
 }
 //delete image update
-function deleteTrailer() {
+function deleteTrailerUpdateEp() {
     let trailerInput = document.getElementById("trailerEpisodeInputUpdateEp");
     let output = document.getElementById("trailerPreviewUpdateEp");
+    let deleteBtn = document.getElementById("deleteTrailerButtonUpdateEp");
 
     trailerInput.value = "";
     output.src = "";
     output.style.display = 'none';
+    deleteBtn.style.display = 'none';
 }
 
 
@@ -1301,4 +1338,308 @@ function deleteCoverSerie() {
     output.src = "";
     output.style.display = 'none';
     checkCover();
+}
+
+//Update serie
+
+async function checkTitleSerieUpdate(id) {
+    let titleMessage = document.getElementById('messageTitleSerieUpdate');
+    let titleInput = document.getElementById('titleInputSerieUpdate');
+
+    const firstChar = titleInput.value[0];
+
+    if (titleInput.value === "") {
+        titleInput.classList.add("is-invalid");
+        titleMessage.classList.add("invalid-feedback");
+        titleMessage.textContent = "El título no puede estar vacío";
+        errorStatesSerie.title.error = true;
+        errorStatesSerie.title.errorMessage = titleMessage.textContent;
+    }
+
+    else if (firstChar !== firstChar.toUpperCase()) {
+        titleInput.classList.add("is-invalid");
+        titleMessage.classList.add("invalid-feedback");
+        titleMessage.textContent = "El título debe empezar por mayúscula";
+        errorStatesSerie.title.error = true;
+        errorStatesSerie.title.errorMessage = titleMessage.textContent;
+    }
+
+    else {
+
+        const response = await fetch(`/checkTitleSerieUpdate/${id}/${titleInput.value}`);
+
+        if (response.ok) {
+            let okMessage = await response.json();
+            titleInput.classList.remove("is-invalid");
+            titleInput.classList.add("is-valid");
+            titleMessage.classList.remove("invalid-feedback")
+            titleMessage.classList.add("valid-feedback")
+            titleMessage.textContent = okMessage.error
+            errorStatesSerie.title.errorMessage = titleMessage.textContent;
+            errorStatesSerie.title.error = false;
+        }
+
+        else {
+            let errorMessage = await response.json();
+            titleInput.classList.add("is-invalid");
+            titleMessage.classList.add("invalid-feedback");
+            titleMessage.textContent = errorMessage.error;
+            errorStatesSerie.title.error = true;
+            errorStatesSerie.title.errorMessage = titleMessage.textContent;
+        }
+    }
+};
+
+
+
+function checkSynopsisSerie(inputID, messageID) {
+    let synopsisInput = document.getElementById(inputID);
+    let synopsisMessage = document.getElementById(messageID);
+    const firstChar = synopsisInput.value[0];
+
+    if (synopsisInput.value === "") {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis no puede estar vacía";
+        errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
+        errorStatesSerie.synopsis.error = true;
+    }
+
+    else if (firstChar !== firstChar.toUpperCase()) {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
+        errorStatesSerie.synopsis.error = true;
+        errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
+    }
+
+    else if (synopsisInput.value.length > 800) {
+        synopsisInput.classList.add("is-invalid");
+        synopsisMessage.classList.add("invalid-feedback");
+        synopsisMessage.textContent = "La sinopsis no puede superar los 800 caracteres";
+        errorStatesSerie.synopsis.error = true;
+        errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
+    }
+    else {
+        synopsisInput.classList.remove("is-invalid");
+        synopsisInput.classList.add("is-valid");
+        synopsisMessage.classList.remove("invalid-feedback")
+        synopsisMessage.classList.add("valid-feedback")
+        synopsisMessage.textContent = "La sinopsis es válida.";
+        errorStatesSerie.synopsis.error = false;
+        errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
+    }
+};
+
+function checkSerieGenreUpdate() {
+    let genreMessage = document.getElementById('messageGenreSerieUpdate');
+    let genreInput = document.getElementById('inputGenreSerieUpdate');
+
+    if (genreInput.value === "") {
+        genreInput.classList.add("is-invalid");
+        genreMessage.classList.add("invalid-feedback");
+        genreMessage.textContent = "El genero no puede estar vacío";
+        errorStatesSerie.genre.error = true;
+        errorStatesSerie.genre.errorMessage = genreMessage.textContent;
+    }
+
+    else {
+
+        genreInput.classList.remove("is-invalid");
+        genreInput.classList.add("is-valid");
+        genreMessage.classList.remove("invalid-feedback")
+        genreMessage.classList.add("valid-feedback")
+        genreMessage.textContent = "Genero válido."
+        errorStatesSerie.genre.errorMessage = genreMessage.textContent;
+        errorStatesSerie.genre.error = false;
+    }
+};
+
+
+function checkAgeClassificationUpdate() {
+    let ageClassificationMessage = document.getElementById('messageAgeClassificationSerieUpdate');
+    let ageClassificationInput = document.getElementById('inputAgeClassificationSerieUpdate');
+
+    if (ageClassificationInput.value === "") {
+        ageClassificationInput.classList.add("is-invalid");
+        ageClassificationMessage.classList.add("invalid-feedback");
+        ageClassificationMessage.textContent = "La edad no puede estar vacía";
+        errorStatesSerie.age.error = true;
+        errorStatesSerie.age.errorMessage = ageClassificationMessage.textContent;
+    }
+
+    else {
+
+        ageClassificationInput.classList.remove("is-invalid");
+        ageClassificationInput.classList.add("is-valid");
+        ageClassificationMessage.classList.remove("invalid-feedback")
+        ageClassificationMessage.classList.add("valid-feedback")
+        ageClassificationMessage.textContent = "Edad válida."
+        errorStatesSerie.age.errorMessage = ageClassificationMessage.textContent;
+        errorStatesSerie.age.error = false;
+    }
+};
+
+
+function checkSeasonUpdate() {
+    let seasonMessage = document.getElementById('messageSeasonsSerieUpdate');
+    let seasonInput = document.getElementById('inputSeasonsUpdate');
+
+    if (seasonInput.value === "") {
+        seasonInput.classList.add("is-invalid");
+        seasonMessage.classList.add("invalid-feedback");
+        seasonMessage.textContent = "El número de temporadas no puede estar vacío";
+        errorStatesSerie.seasons.error = true;
+        errorStatesSerie.seasons.errorMessage = seasonMessage.textContent;
+    }
+
+    else {
+
+        seasonInput.classList.remove("is-invalid");
+        seasonInput.classList.add("is-valid");
+        seasonMessage.classList.remove("invalid-feedback")
+        seasonMessage.classList.add("valid-feedback")
+        seasonMessage.textContent = "El número de temporada es válido."
+        errorStatesSerie.seasons.errorMessage = seasonMessage.textContent;
+        errorStatesSerie.seasons.error = false;
+    }
+}
+
+function checkPremiereUpdate() {
+    let premiereMessage = document.getElementById('messagePremiereSerieUpdate');
+    let premiereInput = document.getElementById('inputPremiereSerieUpdate');
+
+    if (premiereInput.value === "") {
+        premiereInput.classList.add("is-invalid");
+        premiereMessage.classList.add("invalid-feedback");
+        premiereMessage.textContent = "El año de estreno no puede estar vacío";
+        errorStatesSerie.premiere.error = true;
+        errorStatesSerie.premiere.errorMessage = premiereMessage.textContent;
+    }
+
+    else {
+
+        premiereInput.classList.remove("is-invalid");
+        premiereInput.classList.add("is-valid");
+        premiereMessage.classList.remove("invalid-feedback")
+        premiereMessage.classList.add("valid-feedback")
+        premiereMessage.textContent = "El año de estreno es válido."
+        errorStatesSerie.premiere.errorMessage = premiereMessage.textContent;
+        errorStatesSerie.premiere.error = false;
+    }
+
+}
+
+function checkSerieCoverUpdate() {
+    let coverInput = document.getElementById("inputSerieCoverUpdate");
+    let coverMessage = document.getElementById("messageCoverSerieUpdate");
+    let deleteButton = document.getElementById("deleteImageSerieUpdate");
+    let output = document.getElementById("coverPreviewSerieUpdate");
+
+    const file = coverInput.files[0];
+    const reader = new FileReader()
+
+    if (coverInput.value !== "") {
+        reader.onload = function () {
+
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+
+        coverInput.classList.remove("is-invalid");
+        coverInput.classList.add("is-valid");
+        coverMessage.classList.remove("invalid-feedback")
+        coverMessage.classList.add("valid-feedback")
+        coverMessage.textContent = "La imagen se ha subido correctamente.";
+        deleteButton.style.display = "block";
+        errorStatesSerie.cover.error = false;
+        errorStatesSerie.cover.errorMessage = coverMessage.textContent;
+    }
+
+    else {
+        coverInput.classList.remove("is-invalid");
+        coverInput.classList.add("is-valid");
+        coverMessage.classList.remove("invalid-feedback")
+        coverMessage.classList.add("valid-feedback")
+        coverMessage.textContent = "Si no se sube una imagen se pondrá la de la serie.";
+        deleteButton.style.display = "none";
+        errorStatesSerie.cover.error = false;
+        errorStatesSerie.cover.errorMessage = coverMessage.textContent;
+    }
+}
+
+function deleteCoverSerieUpdate() {
+    let coverInput = document.getElementById("inputSerieCoverUpdate");
+    let output = document.getElementById("coverPreviewSerieUpdate");
+
+    coverInput.value = "";
+    output.src = "";
+    output.style.display = 'none';
+    checkSerieCoverUpdate();
+}
+
+async function updateSerie(event, id) {
+
+    const formData = new FormData(event.target);
+    const response = await fetch(`/processUpdateSerie/${id}`, {
+        method: "POST",
+        body: formData,
+    })
+
+    let data = await response.json();
+    if (data.error) {
+        let modal = document.getElementById("modal");
+        let modalText = document.getElementById("modal-text");
+        let modalTitle = document.getElementById("modalHead-text");
+        modalTitle.textContent = "Error";
+        modalText.innerHTML = `${data.message}`;
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }
+}
+
+async function checkSerieFormUpdate(event, id) {
+
+    event.preventDefault();
+
+    let modal = document.getElementById("modal");
+    let modalText = document.getElementById("modal-text");
+    let modalTitle = document.getElementById("modalHead-text");
+    let spinner = document.getElementById("spinner-loader-update-serie");
+
+    spinner.style.display = "block";
+    modalTitle.textContent = "Errores";
+    modalText.textContent = "";
+
+    await checkTitleSerieUpdate(id);
+    checkSynopsisSerie('inputSynopsisSerieUpdate', 'messageSynopsisSerieUpdate')
+    checkSerieGenreUpdate();
+    checkAgeClassificationUpdate();
+    checkSeasonUpdate();
+    checkPremiereUpdate();
+    checkSerieCoverUpdate();
+
+    let hasErrors = Object.values(errorStatesSerie).some(status => status.error === true);
+
+    if (hasErrors) {
+        for (const key in errorStatesSerie) {
+            if (errorStatesSerie[key].error)
+                modalText.innerHTML += `${errorStatesSerie[key].errorMessage}<br>`;
+        }
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+        
+        let errorModal = new bootstrap.Modal(modal);
+        errorModal.show();
+    }
+    else {
+        await updateSerie(event, id);
+        window.location.href = `/main_detalle/${id}`;
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
+    }
 }

@@ -21,63 +21,72 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="form-container">
-                    <form onsubmit="updateSerie()" enctype="multipart/form-data" novalidate>
+                    <form onsubmit="checkSerieFormUpdate(event,'{{serie._id}}')" enctype="multipart/form-data"
+                        novalidate>
                         <h1>
                             Editar Serie
                         </h1>
                         <div class="form-group">
                             <label for="title" class="form-label">Título</label>
-                            <input type="text" class="form-control" id="titleInputSerie" name="title" value="{{serie.title}}"
-                                placeholder="Nombre de la serie"required />
-                            <div id="messageTitleSerie"></div>
+                            <input type="text" class="form-control" id="titleInputSerieUpdate" name="title"
+                                value="{{serie.title}}" placeholder="Nombre de la serie"
+                                oninput="checkTitleSerieUpdate('{{serie._id}}')" required />
+                            <div id="messageTitleSerieUpdate"></div>
 
                         </div>
 
                         <div class="form-group">
                             <label for="synopsis" class="form-label">Sinopsis</label>
-                            <textarea class="form-control" id="synopsis" name="synopsis"
-                                placeholder="Breve descripción de la serie" rows="3" oninput="checkSynopis()"
+                            <textarea class="form-control" id="inputSynopsisSerieUpdate" name="synopsis"
+                                placeholder="Breve descripción de la serie" rows="3"
+                                oninput="checkSynopsisSerie('inputSynopsisSerieUpdate','messageSynopsisSerieUpdate')"
                                 required>{{serie.synopsis}}</textarea>
-                            <div id="messageSynopsisSerie"></div>
+                            <div id="messageSynopsisSerieUpdate"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="genre" class="form-label">Género</label>
-                            <select id="inputGenreSerie" name="genre" class="form-select" required>
+                            <select id="inputGenreSerieUpdate" name="genre" class="form-select"
+                                oninput="checkSerieGenreUpdate()" required>
                                 {{{genreOptions}}}
                             </select>
-                            <div id="messageGenreSerie"></div>
+                            <div id="messageGenreSerieUpdate"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="cover" class="form-label">Portada</label>
-                            <img id="coverPreview" src="#" alt="..."
+                            <img id="coverPreviewSerieUpdate" src="#" alt="..."
                                 style="display: none; max-width: 200px; max-height: 200px;">
-                            <input type="file" name="image" class="form-control" id="inputSerieCover" required />
-                            <button type="reset" id="deleteImageSerie" onclick="deleteCoverSerie()"></button>
-                            <div id="messageCoverSerie"></div>
+                            <input type="file" name="image" class="form-control" id="inputSerieCoverUpdate"
+                                oninput="checkSerieCoverUpdate()" required />
+                            <button type="button" id="deleteImageSerieUpdate" class="btn btn-default"
+                                onclick="deleteCoverSerieUpdate()" style="display: none;">Borrar
+                                Imagen</button>
+                            <div id="messageCoverSerieUpdate"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="age" class="form-label">Edad Requerida</label>
-                            <input type="number" class="form-control" name="ageClasification"
-                                id="inputAgeClassification" placeholder="Edad requerida"
-                                value="{{serie.ageClassification}}" required />
-                            <div id="messageAgeClassificationSerie"></div>
+                            <label for="ageClassification" class="form-label">Edad Requerida</label>
+                            <input type="number" class="form-control" name="ageClassification"
+                                id="inputAgeClassificationSerieUpdate" placeholder="Edad requerida"
+                                value="{{serie.ageClassification}}" oninput="checkAgeClassificationUpdate()" required />
+                            <div id="messageAgeClassificationSerieUpdate"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="seasons" class="form-label">Temporadas</label>
-                            <input type="number" class="form-control" name="seasons" id="inputSeasons"
-                                value="{{serie.seasons}}" placeholder="Número de temporadas" required />
-                            <div id="messageSeasonsSerie"></div>
+                            <input type="number" class="form-control" name="seasons" id="inputSeasonsUpdate"
+                                value="{{serie.seasons}}" placeholder="Número de temporadas"
+                                oninput="checkSeasonUpdate()" required />
+                            <div id="messageSeasonsSerieUpdate"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="year" class="form-label">Año de estreno</label>
-                            <input type="number" class="form-control" name="premiere" id="inputPremiere"
-                                value="{{serie.premiere}}" placeholder="Año en el que se estrenó" required />
-                            <div id="messagePremiereSerie"></div>
+                            <input type="number" class="form-control" name="premiere" id="inputPremiereSerieUpdate"
+                                value="{{serie.premiere}}" placeholder="Año en el que se estrenó"
+                                oninput="checkPremiereUpdate()" required />
+                            <div id="messagePremiereSerieUpdate"></div>
                         </div>
 
                         <div class="form-actions">
@@ -86,12 +95,16 @@
                                 Actualizar Serie
                             </button>
                         </div>
+                        <div class="spinner" id="spinner-loader-update-serie"></div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{>footer}}
+    {{>modal}}
+    <script src="/app.js"></script>
 </body>
+{{>footer}}
 
 </html>

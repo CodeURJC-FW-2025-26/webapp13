@@ -52,7 +52,9 @@
                                         '{{numEpisode}}',
                                         '{{titleEpisode}}',
                                         '{{synopsisEpisode}}', 
-                                        '{{timeEpisode}}'
+                                        '{{timeEpisode}}',
+                                        '{{imageFilenamedetalle}}', 
+                                        '{{trailerEpisode}}'
                                     )">Editar episodio
                                 </button>
                                 <button class="btn-action"
@@ -105,8 +107,8 @@
 
                     <div class="form-group" id="numEpisode">
                         <label for="numEpisode" class="form-label">Número de episodio</label>
-                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput"
-                            oninput="checkNumEpisode('{{serie._id}}')" required />
+                        <input type="number" class="form-control" name="numEpisode" id="numEpisodeInput" 
+                            placeholder="Ejemplo: 3" oninput="checkNumEpisode('{{serie._id}}')" required />
                         <div id="messageNumEpisode"></div>
                     </div>
 
@@ -123,9 +125,8 @@
                         <img id="coverPreview" src="#" alt="..."
                             style="display: none; max-width: 200px; max-height: 200px;">
                         <br>
-                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"
-                            required />
-                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="reset"
+                        <input type="file" name="image" class="form-control" id="coverInput" oninput="checkCover()"/>
+                        <button class="btn-action" onclick="deleteCover()" style="display: none;" type="button"
                             id="deleteCoverButton">
                             Borrar imagen
                         </button>
@@ -140,7 +141,7 @@
                         <input type="file" name="trailerEpisode" class="form-control"
                             placeholder="Selecciona el trailer del episodio" id="trailerEpisodeInput"
                             oninput="checkTrailer()" required />
-                        <button class="btn-action" type="reset" onclick="deleteTrailer()" style="display: none;"
+                        <button class="btn-action" type="button" onclick="deleteTrailer()" style="display: none;"
                             id="deleteTrailerButton">
                             Borrar trailer
                         </button>

@@ -20,7 +20,7 @@
     <div class="col-12 col-md-8 col-lg-6"> 
       <div class="form-container">
         
-        <form id="serieForm" action="/serie/new" method="POST" enctype="multipart/form-data" onsubmit="checkSerieForm(event)" novalidate>
+        <form id="serieForm" action="/serie/new" method="POST" enctype="multipart/form-data" onsubmit="checkSerieForm(event )" novalidate>
           
           <input type="hidden" id="serieIdInput" value="">
 
@@ -29,77 +29,63 @@
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="title" name="title" 
-                   value="" placeholder="Nombre de la serie" required 
-                   onblur="checkSerieTitle('')" /> 
+                  value="" placeholder="Nombre de la serie" required 
+                  oninput="checkSerieTitle()" /> 
             <div id="messageSerieTitle" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
             <textarea class="form-control" id="synopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required
-            onblur="checkSerieSynopsis()"></textarea> 
+            oninput="checkSerieSynopsis()"></textarea> 
             <div id="messageSerieSynopsis" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
               <label for="genero" class="form-label">Género</label>
-              <select id="genre" name="genre" class="form-select" required onblur="checkSerieGenre()" onchange="checkSerieGenre()">
+              <select id="genre" name="genre" class="form-select" required onchange="checkSerieGenre()">
                   {{{genreOptions}}}
               </select>
               <div id="messageSerieGenre" class="invalid-feedback"></div>
           </div>
 
-          <div class="form-group">
-              <label class="form-label">Portada</label>
-              
-              <input type="hidden" name="imageDeletedFlag" id="imageDeletedFlag" value="false">
-
-              <div class="drop-zone" id="drop-zone-serie">
-                  
-                  <div class="upload-text" id="upload-text">
-                      <i class="bi bi-cloud-arrow-up fs-1"></i>
-                      <p>Arrastra la imagen aquí o haz clic para seleccionar</p>
-                  </div>
-
-                  <input type="file" name="image" id="cover" accept="image/*" onchange="previewSerieCover()" required /> 
-
-                  <div class="preview-container" id="preview-container">
-                      <img id="serieCoverPreview" src="" alt="Previsualización">
-                      <br>
-                      <button type="button" class="btn btn-danger btn-sm mt-2" id="btnDeleteCover" onclick="deleteSerieCover()">
-                          <i class="bi bi-trash"> Eliminar imagen </i>
-                      </button>
-                  </div>
-              </div>
-              
-              <div id="messageSerieCover" class="invalid-feedback text-center"></div>
+          <div class="form-group" id="cover">
+              <label for="cover" class="form-label">Portada</label>
+              <img id="coverPreviewSerie" src="#" alt="..."
+                  style="display: none; max-width: 200px; max-height: 200px;">
+              <br>
+              <input type="file" name="image" class="form-control" id="coverInputSerie" oninput="checkSerieCover()"/>
+              <button class="btn-default" onclick="deleteSerieCover()" style="display: none;" type="button"
+                  id="deleteCoverButtonSerie">
+                  Borrar imagen
+              </button>
+              <div id="messageCoverSerie"></div>
           </div>
           <div class="form-group">
             <label for="edad" class="form-label">Edad Requerida</label>
             <input type="number" class="form-control" name="ageClasification" id="age" 
-                   value="" placeholder="Edad requerida" required onblur="checkSerieAge()"/> 
+                  value="" placeholder="Edad requerida" required oninput="checkSerieAge()"/> 
             <div id="messageSerieAge" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
             <input type="number" class="form-control" name="seasons" id="seasons" 
-                   value="" placeholder="Número de temporadas" required onblur="checkSerieSeasons()"/> 
+                   value="" placeholder="Número de temporadas" required oninput="checkSerieSeasons()"/> 
             <div id="messageSerieSeasons" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
             <input type="number" class="form-control" name="premiere" id="year" 
-                   value="" placeholder="Año en el que se estrenó" required onblur="checkSeriePremiere()"/> 
+                   value="" placeholder="Año en el que se estrenó" required oninput="checkSeriePremiere()"/> 
             <div id="messageSeriePremiere" class="invalid-feedback"></div>
           </div>
           
           <div class="form-actions">
             
-            <div id="form-spinner" class="spinner-border text-primary" role="status" style="display: none; margin-right: 10px;">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
+            <div class="spinnerSerie" id="spinner-loader-serie"></div>
+
             
             <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
             <button type="submit" class="btn btn-default">Crear Serie</button>   

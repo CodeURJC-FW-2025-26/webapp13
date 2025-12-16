@@ -1,9 +1,7 @@
 import express from 'express';
 import multer from 'multer';
-import fs from 'node:fs/promises';
 
 import * as catalog from './catalog.js';
-import { title } from 'node:process';
 
 const router = express.Router();
 export default router;
@@ -90,9 +88,9 @@ router.get('/main_detalle/:id', async (req, res) => {
 
 });
 
-router.get('/serie_action/:id/:mode', async (req, res) => {
+router.get('/serie_action/:id/', async (req, res) => {
     const id = req.params.id;
-    const mode = req.params.mode;
+
     //genres
     const genres = [
         { value: "Acción", label: "Acción" },
@@ -106,40 +104,23 @@ router.get('/serie_action/:id/:mode', async (req, res) => {
         { value: "Documental", label: "Documental" }
     ];
 
-    if (mode === "true") {
-        //
-        let genreOptions = '<option value="">Selecciona un género</option>';
-        const serie = await catalog.getSerie(id);
-
-        //loop through the array
-        genres.forEach(genre => {
-            //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
-            const selected = serie.genre === genre.value ? 'selected' : '';
-            //genreOptions is the lines of the html
-            genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
-        }); //+= means ‘concatenate and assign’
-
-        return res.render('main_nuevo-elem', {
-            serie: serie,
-            addmode: false,
-            updatemode: true, //update true
-            genreOptions: genreOptions, //sent the lines of html
-        });
-    }
-
     let genreOptions = '<option value="">Selecciona un género</option>';
+    const serie = await catalog.getSerie(id);
+
+    //loop through the array
     genres.forEach(genre => {
         //if serie.genre = genre.value (true) then const selected = 'selected') / (false) then const selected = ''
-        genreOptions += `<option value="${genre.value}">${genre.label}</option>`; //+= means ‘concatenate and assign’
-    });
+        const selected = serie.genre === genre.value ? 'selected' : '';
+        //genreOptions is the lines of the html
+        genreOptions += `<option value="${genre.value}" ${selected}>${genre.label}</option>`
+    }); //+= means ‘concatenate and assign’
 
-    return res.render('main_nuevo-elem', {
-        serie: null,
-        addmode: true,
-        updatemode: false,
-        genreOptions: genreOptions //sent the lines of html
+    res.render('update_serie', {
+        serie: serie,
+        genreOptions: genreOptions, //send the lines of html
     });
 });
+
 
 router.get('/serie/:id/image', async (req, res) => {
 
@@ -196,45 +177,94 @@ router.get('/deleteEpisode/:id/:numEpisode', async (req, res) => {
     }
 });
 
-//update the episode. Call the html
-router.get('/update_episode/:id/:numEpisode', async (req, res) => {
-    const id = req.params.id;
-    const serie = await catalog.getSerie(id);
-    const numEpisode = parseInt(req.params.numEpisode);
+//check title Update Episode
+router.get('/checkTitleUpdateEp/:id/:title/:originalNum', async (req, res) => {
+    const { id, title, originalNum } = req.params;
 
-    //if numEpisode > 0 then update episode
-    if (numEpisode > 0) {
-        const episode = await catalog.getEpisode(serie, numEpisode);
-        return res.render('update_episode', {
-            serie: serie,
-            episode: episode,
-            updatemode: true, //update
-            addmode: false, //add
-        });
+    const allEpisodes = await catalog.getEpisodes(id);
+
+    const duplicate = allEpisodes.find(ep => ep.titleEpisode === title && ep.numEpisode !== parseInt(originalNum));
+
+    if (duplicate) {
+        res.status(409).json({ error: "El título del episodio ya existe en otro episodio" });
+    } else {
+        res.json({ error: "Título disponible." });
     }
-    //if not then create episode
-    return res.render('update_episode', {
-        serie: serie,
-        updatemode: false, //update
-        addmode: true, //add
-    });
+});
+router.get('/checkNumberEpisodeUpdateEp/:id/:numEpisode/:originalNum', async (req, res) => {
+    const { id, numEpisode, originalNum } = req.params;
+    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, parseInt(numEpisode), parseInt(originalNum))) {
+        res.status(409).json({ error: "El número de episodio coincide con otro episodio." });
+    } else {
+        res.json({ error: "Número de episodio disponible." });
+    }
+});
+
+//updateEpisode
+router.post('/processUpdateEpisode/:id/:originalNum', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
+    const { title, synopsis, timeEpisode, numEpisode } = req.body;
+    const { id, originalNum } = req.params;
+    const deleteCover = req.query.deleteCover; //String "true" or "false"
+
+    let errorMessage = "";
+
+    if (await catalog.checkDuplicatedTitleEpisodeUpdate(id, title, originalNum)) {
+        errorMessage = "El título está duplicado.";
+    }
+
+    if (await catalog.checkDuplicatedNumEpisodeUpdate(id, numEpisode, originalNum)) {
+        errorMessage += (errorMessage ? "<br>" : "") + "El número de episodio está duplicado.";
+    }
+
+    if (errorMessage) {
+        return res.status(409).json({ error: true, message: errorMessage });
+    }
+
+    else {
+        let finalImage = await catalog.getEpisodeImage(id, originalNum);
+
+        //Checks if a new image file was uploaded
+        if (req.files['image'] && req.files['image'][0]) {
+            //"NEW image: replaces the old one"
+            finalImage = req.files['image'][0].filename;
+        }
+        else if (deleteCover === "true") {
+            //delete: Defect Image
+            finalImage = "ImageDefect.jpg";
+        }
+
+
+        let updatedEpisode = {
+            titleEpisode: title,
+            synopsisEpisode: synopsis,
+            numEpisode: parseInt(numEpisode),
+            timeEpisode: parseInt(timeEpisode),
+            imageFilenamedetalle: finalImage,
+            trailerEpisode: (req.files['trailerEpisode'] && req.files['trailerEpisode'][0])
+                ? req.files['trailerEpisode'][0].filename
+                : await catalog.getEpisodeTrailer(id, originalNum)
+        };
+
+        await catalog.updateEpisode(id, originalNum, updatedEpisode);
+        res.json(updatedEpisode);
+    }
 });
 
 router.get('/checkSerieTitle/:title', async (req, res) => {
     const { title } = req.params;
-    const { id } = req.query; 
+    const { id } = req.query;
 
     const allSeries = await catalog.getSeries();
-    
-    const duplicate = allSeries.find(s => 
-        s.title.toLowerCase() === title.toLowerCase() && 
+
+    const duplicate = allSeries.find(s =>
+        s.title.toLowerCase() === title.toLowerCase() &&
         String(s._id) !== String(id)
     );
 
     if (duplicate) {
         return res.status(400).json({ error: "El título de la serie ya existe" });
     }
-    
+
     return res.status(200).json({ message: "Título disponible" });
 });
 
@@ -242,39 +272,40 @@ router.get('/checkSerieTitle/:title', async (req, res) => {
 router.post('/processNewEpisode/:id', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
     const { title, synopsis, timeEpisode, numEpisode } = req.body;
     const id = req.params.id;
-    const serie = await catalog.getSerie(id);
     let epNum = parseInt(numEpisode);
     let epTime = parseInt(timeEpisode);
-
     let errorMesagge;
 
     if (await catalog.checkDuplicatedTitleEpisode(id, title)) {
         errorMesagge = "El título está duplicado.";
         if (await catalog.checkDuplicatedNumEpisode(id, epNum))
-            errorMesagge += "<br>El número de episodio está duplicado."
-        res.status(409).json({ error: true, message: errorMesagge });
+            errorMesagge += "<br>El número de episodio está duplicado.";
+        return res.status(409).json({ error: true, message: errorMesagge });
     }
 
-
     if (!errorMesagge) {
+        // 1. Lógica para la Imagen (con valor por defecto)
+        let imageName = "ImageDefect.jpg";
+        if (req.files && req.files['image'] && req.files['image'][0]) {
+            imageName = req.files['image'][0].filename;
+        }
 
         let newEpisode = {
             numEpisode: epNum,
             titleEpisode: title,
             synopsisEpisode: synopsis,
             timeEpisode: epTime,
-            imageFilenamedetalle: req.files['image'][0].filename,
+            imageFilenamedetalle: imageName,
             trailerEpisode: req.files['trailerEpisode'][0].filename
         };
 
         await catalog.addEpisode(id, newEpisode);
-
-        res.json(newEpisode)
+        res.json(newEpisode);
     }
 });
 
 //Check title
-router.get('/checkTitle/:id/:title', async (req, res) => {
+router.get('/checkTitleEpisode/:id/:title', async (req, res) => {
 
     const id = req.params.id;
 
@@ -452,38 +483,38 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
     for (const field of requiredFields) {
         if (!req.body[field]) {
 
-            return res.render('error', { message: `Todos los campos son obligatorios`, boolean_serie2: true });
+            res.status(409).json({ error: `Todos los campos son obligatorios` });
         }
     }
     //synopsis length
     const characterSynopsis = req.body.synopsis.trim(); //delete spaces between words
 
     if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie2: true });
+        res.status(409).json({ error: `La sinopsis no puede exceder los 800 caracteres (actual: ${characterSynopsis.length}).` });
     }
 
     // Check if the first character is uppercase
     const firstChar = req.body.title.charAt(0);
 
     if (firstChar !== firstChar.toUpperCase()) {
-        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_serie2: true });
+        res.status(409).json({ error: 'El título debe comenzar con una letra mayúscula.' });
     }
     //duplicated title
     if (duplicate) {
-        return res.render('error', { message: 'Ya hay un título igual en el catálogo', boolean_serie2: true });
+        res.status(409).json({ error: 'Ya hay un título igual en el catálogo' });
     }
     //validations
 
     if (isNaN(seasons) || seasons < 1 || seasons > 20) {
-        return res.render('error', { message: 'El número de temporadas debe estar entre 1 y 20.', boolean_serie2: true });
+        res.status(409).json({ error: 'El número de temporadas debe estar entre 1 y 20.' });
     }
 
     if (isNaN(ageClasification) || ageClasification < 0 || ageClasification > 18) {
-        return res.render('error', { message: 'La clasificación de edad debe ser un estar entre 0 y 18.', boolean_serie2: true });
+        res.status(409).json({ error: 'La clasificación de edad debe ser un estar entre 0 y 18.' });
     }
 
     if (isNaN(premiere) || premiere < 1900 || premiere > currentYear + 1) {
-        return res.render('error', { message: `El año de estreno debe estar entre 1900 y 2026.`, boolean_serie2: true });
+        res.status(409).json({ error: `El año de estreno debe estar entre 1900 y 2026.` });
     }
 
     //get image
@@ -507,11 +538,50 @@ router.post('/serie/new', upload.single('image'), async (req, res) => {
     };
 
     const result = await catalog.addSerie(serie);
-    res.render('saved_serie', {
-        boolean_serie1: true,
-        serie: {
-            _id: result.insertedId,
-            serie
-        }
+    res.json({
+        id: result.insertedId
     })
 });
+//update serie
+router.get('/checkTitleSerieUpdate/:id/:title', async (req, res) => {
+    const id = req.params.id;
+
+    const title = req.params.title;
+
+    const serie = await catalog.getSerie(id);
+
+    // 409 means Conflic
+    if (await catalog.checkDuplicatedTitleSerieUpdate(id, title))
+        res.status(409).json({ error: "La serie ya existe." });
+    else
+        res.json({ error: "Título disponible." })
+});
+
+
+router.post('/processUpdateSerie/:id', upload.single('image'), async (req, res) => {
+    const id = req.params.id;
+
+    const { title, synopsis, genre, ageClassification, seasons, premiere } = req.body;
+
+    const serie = await catalog.getSerie(id);
+
+    if (await catalog.checkDuplicatedTitleSerieUpdate(id, title))
+        res.status(409).json({ error: true, message: "La serie ya existe" });
+    else {
+        let image = req.file ? req.file.filename : serie.imageFilename;
+
+        let updatedSerie = {
+            title: title,
+            synopsis: synopsis,
+            genre: genre,
+            ageClassification: parseInt(ageClassification),
+            seasons: parseInt(seasons),
+            premiere: parseInt(premiere),
+            imageFilename: image,
+            episodes: await catalog.getEpisodes(id),
+        }
+        await catalog.updateSerie(id, updatedSerie);
+        res.json(updatedSerie);
+    }
+
+})

@@ -125,13 +125,24 @@ export async function checkDuplicatedNumEpisode(id, numEpisode) {
 Checks for episode title duplication across all episodes in a series,
 excluding the episode currently being updated (identified by its original number).
  */
+/**
+ * Checks for episode title duplication across all episodes in a series,
+ * excluding the episode currently being updated.
+ */
+/**
+ * Checks for episode title duplication across all episodes in a series,
+ * excluding the episode currently being updated.
+ */
 export async function checkDuplicatedTitleEpisodeUpdate(id, title, epNum) {
+    // Convierte epNum a número para comparar correctamente
+    const currentNum = parseInt(epNum);
+    
     const query = await series.findOne({
         _id: new ObjectId(id),
         episodes: {
             $elemMatch: {
                 titleEpisode: title,
-                numEpisode: { $ne: epNum }
+                numEpisode: { $ne: currentNum } // Usa el número, no el string
             }
         }
     });
@@ -140,25 +151,43 @@ export async function checkDuplicatedTitleEpisodeUpdate(id, title, epNum) {
 }
 
 /**
-Checks for episode number duplication across all episodes in a series.
-Returns false immediately if the number was not modified (newNum === originalNum).
+ * Checks for episode number duplication across all episodes in a series.
+ * Returns false immediately if the number was not modified (newNum === originalNum).
  */
 export async function checkDuplicatedNumEpisodeUpdate(id, newNum, originalNum) {
     const targetNewNum = parseInt(newNum);
     const origNum = parseInt(originalNum);
 
+    // Si el número no cambió, no es duplicado
+    if (targetNewNum === origNum) {
+        return false;
+    }
+
+    // Busca si existe algún episodio con el nuevo número
     const query = await series.findOne({
         _id: new ObjectId(id),
         episodes: {
             $elemMatch: {
-                numEpisode: targetNewNum,
+                numEpisode: targetNewNum
             }
         }
     });
 
-    if (!query) return false;
+    return !!query; // Si encuentra algo, es duplicado
+}
 
-    return query.episodes.some(ep => ep.numEpisode === targetNewNum && ep.numEpisode !== origNum);
+export async function checkDuplicatedTitleSerie(id, title) {
+
+    let query = await series.findOne({ _id: new ObjectId(id), "title": title });
+
+    return !!query;
+}
+
+export async function checkDuplicatedTitleSerieUpdate(id, title) {
+
+    let query = await series.findOne({ _id: { $ne: new ObjectId(id) }, "title": title });
+
+    return !!query;
 }
 
 
@@ -231,4 +260,24 @@ export async function getSeriesContext(query, from) {
     };
 
 }
+
+//get the image of the episode
+export async function getEpisodeImage(serieId, numEpisode) {
+
+    const serie = await getSerie(serieId);
+    const episode = serie.episodes.find(ep => ep.numEpisode === parseInt(numEpisode));
+
+    return episode.imageFilenamedetalle;
+}
+export async function getEpisodeTrailer(serieId, numEpisode) {
+
+    const serie = await getSerie(serieId);
+
+
+    const episode = serie.episodes.find(ep => ep.numEpisode === parseInt(numEpisode));
+
+    return episode.trailerEpisode;
+}
+
+
 
