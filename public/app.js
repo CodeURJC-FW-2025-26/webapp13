@@ -68,7 +68,7 @@ window.addEventListener('scroll', () => {
 
 async function checkSerieTitle(id) {
     let titleMessage = document.getElementById("messageSerieTitle");
-    let titleInput = document.getElementById("titulo");
+    let titleInput = document.getElementById("title");
 
     const serieId = id;
 
@@ -112,7 +112,7 @@ async function checkSerieTitle(id) {
 
 function checkSerieGenre() {
     let genreMessage = document.getElementById("messageSerieGenre");
-    let genreInput = document.getElementById("genero");
+    let genreInput = document.getElementById("genre");
 
     if (genreInput.value === "") {
         genreInput.classList.add("is-invalid");
@@ -129,7 +129,7 @@ function checkSerieGenre() {
 
 function checkSerieAge() {
     let ageMessage = document.getElementById("messageSerieAge");
-    let ageInput = document.getElementById("edad");
+    let ageInput = document.getElementById("age");
     let value = parseInt(ageInput.value);
 
     if (ageInput.value === "" || isNaN(value)) {
@@ -152,7 +152,7 @@ function checkSerieAge() {
 
 function checkSerieSeasons() {
     let seasonMessage = document.getElementById("messageSerieSeasons");
-    let seasonInput = document.getElementById("temporadas");
+    let seasonInput = document.getElementById("seasons");
     let value = parseInt(seasonInput.value);
 
     if (seasonInput.value === "" || isNaN(value)) {
@@ -175,7 +175,7 @@ function checkSerieSeasons() {
 
 function checkSeriePremiere() {
     let yearMessage = document.getElementById("messageSeriePremiere");
-    let yearInput = document.getElementById("año");
+    let yearInput = document.getElementById("year");
     let value = parseInt(yearInput.value);
     const currentYear = new Date().getFullYear();
 
@@ -199,7 +199,7 @@ function checkSeriePremiere() {
 
 function checkSerieSynopsis() {
     let synopsisMessage = document.getElementById("messageSerieSynopsis");
-    let synopsisInput = document.getElementById("sinopsis");
+    let synopsisInput = document.getElementById("synopsis");
     const firstChar = synopsisInput.value.length > 0 ? synopsisInput.value[0] : "";
 
     const validationLogic = () => {
@@ -231,7 +231,7 @@ function checkSerieSynopsis() {
 }
 
 function checkSerieCover() {
-    let coverInput = document.getElementById("portada");
+    let coverInput = document.getElementById("cover");
     let coverMessage = document.getElementById("messageSerieCover");
     
     if (coverInput.hasAttribute('required') && coverInput.files.length === 0) {
@@ -249,6 +249,50 @@ function checkSerieCover() {
     }
 }
 
+const $id = id => document.getElementById(id);
+
+function previewSerieCover() {
+    checkSerieCover();
+    const input = $id("portada");
+    if (!input.files?.[0]) return;
+    
+    const reader = new FileReader();
+    reader.onload = e => {
+        $id("serieCoverPreview").src = e.target.result;
+        $id("preview-container").style.display = "block";
+        $id("upload-text").style.display = "none";
+        $id("drop-zone-serie").style.borderStyle = "solid";
+    };
+    reader.readAsDataURL(input.files[0]);
+    $id("imageDeletedFlag").value = "false";
+}
+
+function deleteSerieCover() {
+    $id("portada").value = "";
+    $id("preview-container").style.display = "none";
+    $id("upload-text").style.display = "block";
+    $id("drop-zone-serie").style.borderStyle = "dashed";
+    $id("imageDeletedFlag").value = "true";
+    checkSerieCover();
+}
+
+function setupDragAndDrop() {
+    const zone = $id("drop-zone-serie");
+    if (!zone) return;
+    
+    const evts = (types, fn) => types.forEach(t => zone.addEventListener(t, fn));
+    evts(['dragenter', 'dragover', 'dragleave', 'drop'], e => (e.preventDefault(), e.stopPropagation()));
+    evts(['dragenter', 'dragover'], () => zone.classList.add('dragover'));
+    evts(['dragleave', 'drop'], () => zone.classList.remove('dragover'));
+    
+    zone.addEventListener('drop', e => {
+        if (e.dataTransfer.files[0]) {
+            $id("portada").files = e.dataTransfer.files;
+            previewSerieCover();
+        }
+    });
+}
+
 async function checkSerieForm(event) {
     
     event.preventDefault();
@@ -256,8 +300,10 @@ async function checkSerieForm(event) {
     let modal = document.getElementById("modal");
     let modalText = document.getElementById("modal-text");
     let modalTitle = document.getElementById("modalHead-text");
-    
-    modalTitle.textContent = "Errores en el formulario";
+    let spinner = document.getElementById("form-spinner");
+   
+    spinner.style.display = "block";
+    modalTitle.textContent = "Errores";
     modalText.textContent = ""; 
 
     let id = document.getElementById("serieIdInput").value;
@@ -300,6 +346,10 @@ async function checkSerieForm(event) {
         if (errorStatesSerie.premiere.error) {
             modalText.innerHTML += errorStatesSerie.premiere.errorMessage + "<br></br>";
         }
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000)
 
         let errorModal = new bootstrap.Modal(modal);
         errorModal.show();

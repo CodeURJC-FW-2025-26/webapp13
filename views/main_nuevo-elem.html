@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/styles_nuevo-elem.css" /> 
     <link rel="stylesheet" href="/css/style_footer.css">
     <link rel="stylesheet" href="/css/style_header.css">
+    <link rel="stylesheet" href="/css/style_modal.css">
     <link rel="shortcut icon" href="/images/logo/logo.ico" type="image/x-icon">
     <title>Notfilm</title>
 </head>
@@ -18,6 +19,7 @@
   <div class="row justify-content-center"> 
     <div class="col-12 col-md-8 col-lg-6"> 
       <div class="form-container">
+        
         <form id="serieForm" action="/serie/new" method="POST" enctype="multipart/form-data" onsubmit="checkSerieForm(event)" novalidate>
           
           <input type="hidden" id="serieIdInput" value="">
@@ -26,7 +28,7 @@
           
           <div class="form-group">
             <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="title" 
+            <input type="text" class="form-control" id="title" name="title" 
                    value="" placeholder="Nombre de la serie" required 
                    onblur="checkSerieTitle('')" /> 
             <div id="messageSerieTitle" class="invalid-feedback"></div>
@@ -34,57 +36,85 @@
 
           <div class="form-group">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required
+            <textarea class="form-control" id="synopsis" name="synopsis" placeholder="Breve descripción de la serie" rows="3" required
             onblur="checkSerieSynopsis()"></textarea> 
             <div id="messageSerieSynopsis" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
               <label for="genero" class="form-label">Género</label>
-              <select id="genero" name="genre" class="form-select" required onblur="checkSerieGenre()" onchange="checkSerieGenre()">
+              <select id="genre" name="genre" class="form-select" required onblur="checkSerieGenre()" onchange="checkSerieGenre()">
                   {{{genreOptions}}}
               </select>
               <div id="messageSerieGenre" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
-            <label for="portada" class="form-label">Portada</label>
-            <input type="file" name="image" class="form-control" id="portada" required onchange="checkSerieCover()" /> 
-            <div id="messageSerieCover" class="invalid-feedback"></div>
-          </div>
+              <label class="form-label">Portada</label>
+              
+              <input type="hidden" name="imageDeletedFlag" id="imageDeletedFlag" value="false">
 
+              <div class="drop-zone" id="drop-zone-serie">
+                  
+                  <div class="upload-text" id="upload-text">
+                      <i class="bi bi-cloud-arrow-up fs-1"></i>
+                      <p>Arrastra la imagen aquí o haz clic para seleccionar</p>
+                  </div>
+
+                  <input type="file" name="image" id="cover" accept="image/*" onchange="previewSerieCover()" required /> 
+
+                  <div class="preview-container" id="preview-container">
+                      <img id="serieCoverPreview" src="" alt="Previsualización">
+                      <br>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" id="btnDeleteCover" onclick="deleteSerieCover()">
+                          <i class="bi bi-trash"> Eliminar imagen </i>
+                      </button>
+                  </div>
+              </div>
+              
+              <div id="messageSerieCover" class="invalid-feedback text-center"></div>
+          </div>
           <div class="form-group">
             <label for="edad" class="form-label">Edad Requerida</label>
-            <input type="number" class="form-control" name="ageClasification" id="edad" 
+            <input type="number" class="form-control" name="ageClasification" id="age" 
                    value="" placeholder="Edad requerida" required onblur="checkSerieAge()"/> 
             <div id="messageSerieAge" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
             <label for="temporadas" class="form-label">Temporadas</label>
-            <input type="number" class="form-control" name="seasons" id="temporadas" 
+            <input type="number" class="form-control" name="seasons" id="seasons" 
                    value="" placeholder="Número de temporadas" required onblur="checkSerieSeasons()"/> 
             <div id="messageSerieSeasons" class="invalid-feedback"></div>
           </div>
 
           <div class="form-group">
             <label for="año" class="form-label">Año de estreno</label>
-            <input type="number" class="form-control" name="premiere" id="año" 
+            <input type="number" class="form-control" name="premiere" id="year" 
                    value="" placeholder="Año en el que se estrenó" required onblur="checkSeriePremiere()"/> 
             <div id="messageSeriePremiere" class="invalid-feedback"></div>
           </div>
           
           <div class="form-actions">
+            
+            <div id="form-spinner" class="spinner-border text-primary" role="status" style="display: none; margin-right: 10px;">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            
             <button type="button" class="btn btn-volver" onclick="location.href='/'">Cancelar</button> 
             <button type="submit" class="btn btn-default">Crear Serie</button>   
           </div>
+
         </form>
       </div>
     </div>
   </div>
 </div>
+
 {{>modal}}
+
 <script src="/app.js"></script>
+
 {{>footer}}
 </body>
 </html>
