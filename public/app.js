@@ -279,24 +279,27 @@ function checkSerieCover() {
         output.src = "";
         output.style.display = 'none';
         deleteButton.style.display = "none";
-        coverInput.classList.remove("is-invalid");
-        coverInput.classList.add("is-valid");
-        coverMessage.classList.remove("invalid-feedback");
-        coverMessage.classList.add("valid-feedback");
-        coverMessage.textContent = "No has seleccionado imagen. Se ha puesto una imagen por defecto";
+        coverInput.classList.add("is-invalid");
+        coverInput.classList.remove("is-valid");
+        coverMessage.classList.add("invalid-feedback");
+        coverMessage.classList.remove("valid-feedback");
+        coverMessage.textContent = "No has seleccionado imagen.";
         errorStates.cover.error = false;
         errorStates.cover.errorMessage = "";
     }
 }
 
 function deleteSerieCover() {
-    let coverInput = document.getElementById("coverInput");
-    let output = document.getElementById("coverPreview");
+    const coverInput = document.getElementById("coverInputSerie");
+    const preview = document.getElementById("coverPreviewSerie");
+    const deleteButton = document.getElementById("deleteCoverButtonSerie");
 
     coverInput.value = "";
-    output.src = "";
-    output.style.display = 'none';
-    checkCover();
+    preview.src = "";
+    preview.style.display = "none";
+
+
+    checkSerieCover();
 }
 
 async function checkSerieForm(event) {
@@ -632,7 +635,7 @@ function checkCover() {
 function deleteCover() {
     let coverInput = document.getElementById("coverInput");
     let output = document.getElementById("coverPreview");
-
+    console.log("aqui")
     coverInput.value = "";
     output.src = "";
     output.style.display = 'none';
@@ -1330,15 +1333,7 @@ async function deleteSerie(idSerie) {
     }, 1000);
 }
 
-function deleteCoverSerie() {
-    let coverInput = document.getElementById("inputSerieCover");
-    let output = document.getElementById("coverPreview");
 
-    coverInput.value = "";
-    output.src = "";
-    output.style.display = 'none';
-    checkCover();
-}
 
 //Update serie
 
