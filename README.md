@@ -310,10 +310,9 @@ La aplicación estará lista para usar.
 
 - # Héctor Moreno García
   - Desarrollo de la Funcionalidad de la Página de Detalle:
-    Implementado diversas funcionalidades para la gestión dinámica del contenido de la aplicación. Se implementó la funcionalidad completa de gestión de series y episodios dentro de la aplicación, incluyendo la eliminación de episodios y series, así como la actualización de episodios existentes. Estas acciones se realizaron de forma dinámica mediante peticiones asíncronas, permitiendo modificar el contenido sin necesidad de recargar la página.
-
+   Se desarrollaron diversas funcionalidades para la gestión dinámica del contenido de la aplicación. En concreto, se implementó el scroll infinito para la carga progresiva de series, mejorando el rendimiento y la experiencia de usuario. Asimismo, se desarrolló la funcionalidad de creación de episodios, permitiendo añadir nuevos contenidos de forma asíncrona, y la edición de series, posibilitando la actualización de su información sin necesidad de recargar la página. Todas estas acciones se realizaron mediante peticiones asíncronas, garantizando una interacción fluida y eficiente.
   - Colaboración en el Proyecto:
-Se brindó apoyo al equipo en la implementación de la página de crear nuevo elemento de la entidad principal, ayudando en la creación de los formularios HTML y en la integración de la funcionalidad para la gestion dinamica.
+Se colaboró en el desarrollo de la página de creación de nuevos elementos de la entidad principal, participando en la elaboración de los formularios HTML y en la integración de la lógica necesaria para la gestión dinámica de los datos, asegurando su correcta validación y comunicación con el servidor.
 
   - Listado de Commit:
   1. FIX update_episode FIX create_serie FIX forms ADD update_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/27152bd0d07a4ec3e53bcab5e1f55d5ecad3e793): Solucionado problema con el los formularios de crear y editar episodio. Arreglado formulario de crear serie. La parte de update_serie la hizo mi compañero Daniel Marcos Serrano, aunque hice yo el commit.
