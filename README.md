@@ -295,10 +295,18 @@ La aplicación estará lista para usar.
 
 
   - Listado de Commit:
-
+    1.add spinner and fix infinite scroll(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/3a605b838bc8274acc4ea40acb9f0efe5a67ba97): Anadido el scroll infinito y arreglado spinner.
+    2.add create episodes with AJAX(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/956590520f63169ffd7c15f50d491c28d71b657c): Añadido el crear episodios(entidad secundaria)
+    3.add validations logic(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/adb0c163cccbb972bbc3bee8f55eda629d08b684): Añadido validaciones para los formularios
+    4.Fix validations on server(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/1f226e0e5a63139e00f90084820cef85825299dc): Arregladas las validaciones
+    5.add update_serie():Añadido parte de la funcionalidad de editar elementos de la entidad secundario
 
   - Lista de archivos:
-
+  1. app.js(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/public/app.js)
+  2. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
+  4. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  5. index(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
 
 - # Héctor Moreno García
   - Desarrollo de la Funcionalidad de la Página de Detalle:
@@ -319,4 +327,4 @@ Se brindó apoyo al equipo en la implementación de la página de crear nuevo el
   2. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
   3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
   4. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
-  5. main_nuevo-elemento(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  5. main_nuevo-elemento(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/index.html)
