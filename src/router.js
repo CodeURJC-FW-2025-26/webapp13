@@ -87,7 +87,35 @@ router.get('/main_detalle/:id', async (req, res) => {
     res.render('main_detalle_notfilm', { serie, listEpisode });
 
 });
+router.get('/serie/new', async (req, res) => {
 
+    // Lista de géneros
+    const genres = [
+        { value: "Acción", label: "Acción" },
+        { value: "Anime", label: "Anime" },
+        { value: "Policial", label: "Policial" },
+        { value: "Comedia", label: "Comedia" },
+        { value: "Drama", label: "Drama" },
+        { value: "Thriller", label: "Thriller" },
+        { value: "Terror", label: "Terror" },
+        { value: "Ciencia ficción", label: "Ciencia Ficción" },
+        { value: "Documental", label: "Documental" }
+    ];
+
+    // Generar opciones del select
+    let genreOptions = '<option value="">Selecciona un género</option>';
+
+    genres.forEach(genre => {
+        genreOptions += `
+            <option value="${genre.value}">
+                ${genre.label}
+            </option>`;
+    });
+
+    res.render('main_nuevo-elem', {
+        genreOptions
+    });
+});
 router.get('/serie_action/:id/', async (req, res) => {
     const id = req.params.id;
 
@@ -330,70 +358,6 @@ router.get('/checkNumberEpisode/:id/:numEpisode', async (req, res) => {
         res.json({ error: "Número de episodio disponible." })
 
 })
-
-
-//update serie
-router.post('/update_serie/:id', upload.single('image'), async (req, res) => {
-    //select params
-    const id = req.params.id;
-    let serie = await catalog.getSerie(id);
-    const { title, genre, synopsis, ageClasification, seasons, premiere } = req.body;
-    const age = parseInt(ageClasification);
-    const numSeasons = parseInt(seasons);
-    const year = parseInt(premiere);
-
-    //not null
-    if (!title || !genre || !synopsis || isNaN(age) || isNaN(numSeasons) || isNaN(year)) {
-        return res.render('error', { message: 'Todos los campos del formulario son obligatorios .', boolean_serie1: true, serie });
-    }
-
-    const allSeries = await catalog.getSeries();
-    //duplicated title
-    const duplicate = allSeries.find(s => s.title === title && String(s._id) !== String(id));
-    if (duplicate) {
-        return res.render('error', { message: 'Titulo duplicado.', boolean_serie1: true, serie });
-    }
-
-    // Check if the first character is uppercase
-    const firstChar = req.body.title.charAt(0);
-
-    if (firstChar !== firstChar.toUpperCase()) {
-        return res.render('error', { message: 'El título debe comenzar con una letra mayúscula.', boolean_serie1: true, serie });
-    }
-    //synopsis length
-    const characterSynopsis = synopsis.trim(); //delete spaces between words
-
-    if (characterSynopsis.length > 800) {
-        return res.render('error', { message: `La sinopsis no puede exceder los 600 caracteres (actual: ${characterSynopsis.length}).`, boolean_serie1: true, serie });
-    }
-    //get the image of the serie
-    const current_serie = await catalog.getSerie(id);
-    const existingImage = current_serie.imageFilename;
-
-    //get the new image
-    let imageFilename;
-    //if upload image then new image
-    if (req.file) {
-        imageFilename = req.file.filename;  //new image
-    } else {
-        imageFilename = existingImage; //old image remains
-    }
-
-    //update serie
-    const update_serie = {
-        title,
-        genre,
-        synopsis,
-        ageClassification: age,
-        seasons: numSeasons,
-        premiere: year,
-        imageFilename,
-        episodes: current_serie.episodes,
-    };
-    //function updateSerie
-    await catalog.updateSerie(id, update_serie);
-    res.render('saved_serie', { message: 'Se ha actualizado la serie correctamente', boolean_serie1: true, serie });
-});
 
 //update episode
 router.post('/form_update_episode/:id/:numEpisode', upload.fields([{ name: 'imageFilenamedetalle', maxCount: 1 }, { name: 'trailerEpisode', maxCount: 1 }]), async (req, res) => {
