@@ -284,7 +284,8 @@ La aplicación estará lista para usar.
    14. main_detalle_notfilm: Vista de detalle de serie y episodio en la web. En ella se puede crear, borrar y editar episodios. También se puede borrar y acceder al cuestionario de editar series
    15. main_nuevo-elem.html: Vista para crear una nueva serie en la aplicación web.
    16.app.js(en public): Gestiona la lógica del lado cliente de la aplicación web, controlando la interacción del usuario con la página sin necesidad de recargarla.
-   17. update_serie.: Vista para editar una serie existente en la aplicación web. 
+   17. update_serie.: Vista para editar una serie existente en la aplicación web.
+   18. moreSerie: Carga las proximas series al hacer el scroll
 
 # VIDEO DE LA DEMO
 
