@@ -204,7 +204,7 @@ Se brindó apoyo al equipo en la implementación de la página de detalle, ayuda
 
   - Listado de Commit:
   1. UPDATE catalog, all css, main_detalle and index ADD html error, update_serie and update_episode(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/4610100d2fdbbc4f7716bb86f8ae301b2161b7c6): Añadido el html error, update_serie y update_episode. Además, se actualizao el routerm css, main_detalle, index y el catalog para implemetar gran parte de la funcionalidad de la web.
-  2. UPDATE error, saved_serie ADD style_confirmacion(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/95215dd20a15595710387a0431f6a30132d84d26): Se arreglor los fallos de los formularios y se mejoro el funcionamiento de error.html y saved_serie.html
+  2. UPDATE error, saved_serie ADD style_confirmacion(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/95215dd20a15595710387a0431f6a30132d84d26): Se arreglo los fallos de los formularios y se mejoro el funcionamiento de error.html y saved_serie.html
   3. ADD trailers to json and UPDATE router and ctalog.(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/e2a07e4c403cbefb81e554234f7f5562b436c3e8): se añadieron los trailer al json y se actualizo el router y el catalog.
   4. UPGRADE index, main_detalle, data and ADD photos and videos(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/56b56ab020a2e9b7618eedc1c8de99d7b1ec3c42): Se actualizo el index el main_detalle, el data y se añadieron las fotos y algunos videos.
   5. UPGRADE update_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/85551c2c36b43779caff4bf2dce7d2c7e9360dea): Se añadio la funcionalidada por primera vez a un formulario
@@ -241,3 +241,82 @@ Se implementó la página de nuevo elemento de forma que todas las series mostra
   3. main_nuevo-elem (https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_nuevo-elem.html)
   4. saved_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/saved_serie.html)
   5. error(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/error.html)
+
+  # PRACTICA 3
+- Requisitos
+
+  - Node.js v22.21.0
+  
+  - MongoDB v8.2.1
+
+-Instalación y ejecución
+
+  1. Ve a la sección Releases del repositorio en GitHub y descarga el release “Práctica 2”.
+  
+  2. Descarga el archivo .zip y extrae su contenido en la carpeta que desees.
+  
+  3. Abre una terminal y accede al directorio del proyecto: cd ruta/del/proyecto
+  
+  4. Si aún no tienes Node.js o MongoDB instalados, instálalos.
+  
+  5. Instala las dependencias del proyecto: npm install
+  
+  6. Ejecuta la aplicación: npm run watch
+     
+Si todo va bien, verás un mensaje similar a: Web ready in http://localhost:3000/
+Abre tu navegador y entra en http://localhost:3000/
+La aplicación estará lista para usar.
+
+-Descripcion de ficheros
+   1. Imagen: Contine las imagenes que se usan al iniciar la web.
+   2. Video: Contiene los videos que se usan al inicial la web.
+   3. data: Contiene la informacion que se sube a la base de datos al iniciar la aplicacion
+   4. Los css: Encargados de dar estilo a la pagina.
+   5. Imagen( en public ): Contiene el logo de la pagina web
+   6. app.js: Este fichero se encarga de inicializar y configurar la aplicación web.
+   7. catalog: Este fichero se encarga de gestionar la colección de series de la base de datos y provee funciones para interactuar con los datos.
+   8. load_data.js: Este fichero se encarga de cargar datos de demostración en la aplicación.
+   9. router: Este fichero se encarga de definir y gestionar todas las rutas de la aplicación web y de manejar la interacción del usuario con los datos.
+   10. uploads: Carpeta donde se suben las imagenes y videos que se utilizaran al iniciar la aplicacion. Ademas, todas las nuevas fotos se guardan en esta carpeta.
+   11. footer: Es el footer de la pagina web.
+   12. header: Es el header de la pagina web.
+   13. index: Vista principal del catálogo de series.
+   14. main_detalle_notfilm: Vista de detalle de serie y episodio en la web. En ella se puede crear, borrar y editar episodios. También se puede borrar y acceder al cuestionario de editar series
+   15. main_nuevo-elem.html: Vista para crear una nueva serie en la aplicación web.
+   16.app.js(en public): Gestiona la lógica del lado cliente de la aplicación web, controlando la interacción del usuario con la página sin necesidad de recargarla.
+   17. update_serie.: Vista para editar una serie existente en la aplicación web. 
+
+# VIDEO DE LA DEMO
+
+
+
+# PARTICIPACIÓN
+- # Daniel Marcos Serrano
+
+
+  - Listado de Commit:
+
+
+  - Lista de archivos:
+
+
+- # Héctor Moreno García
+  - Desarrollo de la Funcionalidad de la Página de Detalle:
+    Implementado diversas funcionalidades para la gestión dinámica del contenido de la aplicación. Se implementó la funcionalidad completa de gestión de series y episodios dentro de la aplicación, incluyendo la eliminación de episodios y series, así como la actualización de episodios existentes. Estas acciones se realizaron de forma dinámica mediante peticiones asíncronas, permitiendo modificar el contenido sin necesidad de recargar la página.
+
+  - Colaboración en el Proyecto:
+Se brindó apoyo al equipo en la implementación de la página de crear nuevo elemento de la entidad principal, ayudando en la creación de los formularios HTML y en la integración de la funcionalidad para la gestion dinamica.
+
+  - Listado de Commit:
+  1. FIX update_episode FIX create_serie FIX forms ADD update_serie(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/27152bd0d07a4ec3e53bcab5e1f55d5ecad3e793): Solucionado problema con el los formularios de crear y editar episodio. Arreglado formulario de crear serie. La parte de update_serie la hizo mi compañero Daniel Marcos Serrano, aunque hice yo el commit.
+  2. UPDATE main_serie, app.js, style_detalle ADD modal.html AND style_modal.css(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/e4d2c6a59310a5c74b9827925f66213f0bcab005): Se añadieron los modals a la pagina de detalle de la entidad primaria
+  3. UPDATE app.js AND router AND main_detalle AND modal ADD deleted serie UPDATE css modal.(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/61dc1365dbf96d9cc13123b108be56a63e876a80): Añadido la funcionalidad de borrar elemento de la entidad principal
+  4. FiX create episode(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/8db8028d9021e416159331a00b59c4caf1b68fbb): Se soluciono un problema al crear eìsodios.
+  5. UPDATE fix update and deleted duplicated deleteEpisode in app.js(https://github.com/CodeURJC-FW-2025-26/webapp13/commit/8efe9635c74ff435c75f031dc24a83fab739e69b): Se asoluciono un problema con el formulario de editar y se elimino una duplicación de codigo.
+
+  - Lista de archivos:
+  1. app.js(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/public/app.js)
+  2. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
+  4. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  5. main_nuevo-elemento(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
