@@ -80,12 +80,14 @@ async function checkSerieTitle(id) {
             titleMessage.classList.add("invalid-feedback");
             titleMessage.textContent = "El título no puede estar vacío";
             errorStatesSerie.title.error = true;
+            errorStatesSerie.title.errorMessage = titleMessage.textContent;
         }
         else if (firstChar !== firstChar.toUpperCase()) {
             titleInput.classList.add("is-invalid");
             titleMessage.classList.add("invalid-feedback");
             titleMessage.textContent = "El título debe empezar por mayúscula";
             errorStatesSerie.title.error = true;
+            errorStatesSerie.title.errorMessage = titleMessage.textContent
         }
         else {
             const response = await fetch(`/checkSerieTitle/${titleInput.value}?id=${serieId}`);
@@ -98,12 +100,14 @@ async function checkSerieTitle(id) {
                 titleMessage.classList.add("valid-feedback");
                 titleMessage.textContent = okMessage.message;
                 errorStatesSerie.title.error = false;
+                errorStatesSerie.title.errorMessage = titleMessage.textContent
             } else {
                 let errorMessage = await response.json();
                 titleInput.classList.add("is-invalid");
                 titleMessage.classList.add("invalid-feedback");
                 titleMessage.textContent = errorMessage.error;
                 errorStatesSerie.title.error = true;
+                errorStatesSerie.title.errorMessage = titleMessage.textContent
             }
         }
     };
@@ -229,16 +233,19 @@ function checkSerieSynopsis() {
             synopsisMessage.classList.add("invalid-feedback");
             synopsisMessage.textContent = "La sinopsis no puede estar vacía";
             errorStatesSerie.synopsis.error = true;
+            errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
         } else if (firstChar !== firstChar.toUpperCase()) {
             synopsisInput.classList.add("is-invalid");
             synopsisMessage.classList.add("invalid-feedback");
             synopsisMessage.textContent = "La sinopsis debe empezar por mayúscula";
             errorStatesSerie.synopsis.error = true;
+            errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
         } else if (synopsisInput.value.length > 500) {
             synopsisInput.classList.add("is-invalid");
             synopsisMessage.classList.add("invalid-feedback");
             synopsisMessage.textContent = "La sinopsis no puede superar los 500 caracteres";
-            errorStates.synopsis.error = true;
+            errorStatesSerie.synopsis.error = true;
+            errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
         } else {
             synopsisInput.classList.remove("is-invalid");
             synopsisInput.classList.add("is-valid");
@@ -246,6 +253,7 @@ function checkSerieSynopsis() {
             synopsisMessage.classList.add("valid-feedback");
             synopsisMessage.textContent = "Sinopsis válida";
             errorStatesSerie.synopsis.error = false;
+            errorStatesSerie.synopsis.errorMessage = synopsisMessage.textContent;
         }
     };
     validationLogic();
@@ -635,7 +643,6 @@ function checkCover() {
 function deleteCover() {
     let coverInput = document.getElementById("coverInput");
     let output = document.getElementById("coverPreview");
-    console.log("aqui")
     coverInput.value = "";
     output.src = "";
     output.style.display = 'none';
@@ -1171,7 +1178,7 @@ async function checkFormUpdateEpisode(event, id, numEpisode) {
 async function updateEpisode(event, id, originalNum) {
     const formData = new FormData(event.target);
 
-    // Generamos el timestamp para evitar problemas de caché
+    
     const t = Date.now();
 
     const previewImg = document.getElementById("coverPreviewUpdateEp");
