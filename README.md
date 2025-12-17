@@ -288,7 +288,7 @@ La aplicación estará lista para usar.
 
 # VIDEO DE LA DEMO
 
-
+https://youtu.be/qHkOhmUs0ig
 
 # PARTICIPACIÓN
 - # Daniel Marcos Serrano
@@ -327,3 +327,26 @@ Se colaboró en el desarrollo de la página de creación de nuevos elementos de 
   3. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/main_detalle_notfilm.html)
   4. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
   5. main_nuevo-elemento(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/index.html)
+
+
+# Jaime Bergad Lario
+
+- Desarrollo de la Lógica del Formulario de Series: Se implementó el sistema de validación en el cliente, integrando comprobaciones síncronas y asíncronas con la interfaz visual de Bootstrap. Se desarrolló la gestión interactiva de la imagen de portada, incorporando las funcionalidades de drag & drop, previsualización y borrado. Asimismo, se orquestó el envío de datos mediante peticiones asíncronas (AJAX), gestionando el feedback al usuario a través de spinners y modales de error para garantizar una navegación fluida y sin recargas. A su vez se creó el video explicativo de la web relacionado a esta práctica.
+
+- Listado de Commit:
+
+1. ADDED AJAX and Form validations https://github.com/CodeURJC-FW-2025-26/webapp13/commit/b26b8af015fae9d8705ee6193fe0f9314b1e5eb1
+2. ADDED cover functionalitys and fixed validations https://github.com/CodeURJC-FW-2025-26/webapp13/commit/d65a21ec4112e0155ac881ac064e622a368cfa69
+3. Added validations and AJAX https://github.com/CodeURJC-FW-2025-26/webapp13/commit/8645735552bffb6e361f090d2f76aa49b1370849
+4. ADDED form functionalitys
+ https://github.com/CodeURJC-FW-2025-26/webapp13/commit/5f6b8a419902779fdfea666e234068a0e413eeb3
+5. Update MainNuevoElem https://github.com/CodeURJC-FW-2025-26/webapp13/commit/c552722c077352f0431b85193d6fc4c7dc7c4179
+
+  
+- Lista de archivos:
+
+  1. app.js(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/public/app.js)
+  2. router(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
+  3. main_nuevo-elemento(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/index.html)
+  4. main_detalle_notfilm(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/views/
+  5. catalog(https://github.com/CodeURJC-FW-2025-26/webapp13/blob/main/src/router.js)
